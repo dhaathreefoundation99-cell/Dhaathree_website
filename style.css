@@ -1688,3 +1688,41 @@
 .grad-orange {
   background: linear-gradient(135deg, #c47d1a, #F5A623);
 }
+
+/* ── FOOTER SOCIAL ICONS ── */
+.footer-social-icons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+  margin-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 24px;
+}
+
+.footer-social-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: background 0.25s, transform 0.25s, color 0.25s;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-social-icon:hover {
+  background: var(--lime);
+  color: var(--dark);
+  transform: translateY(-3px);
+}
+
+.footer-social-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
