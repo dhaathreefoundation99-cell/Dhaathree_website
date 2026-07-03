@@ -1,0 +1,467 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Dashboard | Dhaathree Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&family=Noto+Sans+Telugu:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<!-- Google Identity Services client script -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="gallery.js" defer></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+      <img src="logo.jpeg" alt="Dhaathree Foundation Logo"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+           id="navLogoImg"/>
+      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">ధ</div>
+      <div class="nav-brand">
+        <span class="en">Dhaathree Foundation</span>
+        <span class="te">మీ సాధికారత కొరకై...</span>
+      </div>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="impact.html">Impact</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="campaigns.html">Campaigns</a></li>
+    <li><a href="get-involved.html">Get Involved</a></li>
+    <li><a href="media.html">Media</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="campaigns.html" class="nav-cta">Support a Cause</a>
+
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+    <a href="about.html" onclick="toggleMobileMenu()">About</a>
+    <a href="impact.html" onclick="toggleMobileMenu()">Impact</a>
+    <a href="projects.html" onclick="toggleMobileMenu()">Projects</a>
+    <a href="campaigns.html" onclick="toggleMobileMenu()">Campaigns</a>
+    <a href="get-involved.html" onclick="toggleMobileMenu()">Get Involved</a>
+    <a href="media.html" onclick="toggleMobileMenu()">Media</a>
+    <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
+    <a href="campaigns.html" class="mobile-cta" onclick="toggleMobileMenu()">Support a Cause</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="crumb"><a href="index.html">Home</a> / Admin</div>
+  <h1>Admin Dashboard</h1>
+  <p>Securely upload and manage wing gallery photos across all Dhaathree wings.</p>
+</div>
+
+<section class="admin-section">
+
+  <!-- LOGIN CARD -->
+  <div class="admin-card" id="loginCard">
+    <div class="logo-wrap">
+      <img src="logo.jpeg" alt="Logo" onerror="this.style.opacity='0.3';" />
+    </div>
+    <h2>Administrator Access</h2>
+    <p>Please authenticate using Google Sign-in to access the photo uploader panel.</p>
+    
+    <div class="admin-login-options">
+      <!-- Google Sign-in Button Wrapper -->
+      <div id="g_id_onload"
+           data-client_id="231215173796-ljkudf2hqmitkj5j7maduoi0rlo4l9a7.apps.googleusercontent.com"
+           data-callback="handleCredentialResponse"
+           data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+           data-type="standard"
+           data-size="large"
+           data-theme="outline"
+           data-text="signin_with"
+           data-shape="rectangular"
+           data-logo_alignment="left">
+      </div>
+
+      <p style="margin: 8px 0; font-size: 0.8rem; font-weight: 600; color: var(--muted);">OR</p>
+
+      <!-- Offline/Local Bypass Button -->
+      <button class="admin-local-bypass-btn" id="localBypassBtn">Bypass Sign-In (Local Test Mode)</button>
+    </div>
+
+    <div class="admin-warning">
+      <strong>⚠️ Google Sign-In Local Origin Note:</strong>
+      Google Sign-In requires an HTTP/HTTPS server origin (like <code>http://localhost:8000</code>). 
+      If you are launching this page directly via a file path (<code>file://</code>) in your browser, Google authentication will not function. 
+      Use <strong>Local Test Mode</strong> to bypass sign-in and manage photos directly, or run a local server (e.g. <code>python -m http.server</code>).
+    </div>
+  </div>
+
+  <!-- DASHBOARD CONTAINER -->
+  <div class="admin-dashboard" id="dashboardContainer" style="display: none;">
+    <div class="admin-header">
+      <div class="admin-title">
+        <h2>Photo Management Console</h2>
+        <p>Upload new photos and delete existing ones from the browser database.</p>
+      </div>
+      <div class="admin-user-profile">
+        <img id="profilePic" src="logo.jpeg" alt="Profile" />
+        <div class="admin-user-info">
+          <span class="name" id="profileName">Administrator</span>
+          <span class="email" id="profileEmail">dhaathreefoundation99@gmail.com</span>
+          <button class="admin-logout-btn" onclick="signOutAdmin()">Sign Out</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" id="tabPhotosBtn" onclick="switchTab('photos')">Manage Photos</button>
+      <button class="admin-tab" id="tabVolunteersBtn" onclick="switchTab('volunteers')">Volunteer Applications (<span id="volCount">0</span>)</button>
+    </div>
+
+    <!-- Photos Management Tab Content -->
+    <div id="photosTabContent">
+      <!-- Dropdown Selector -->
+      <div class="admin-controls">
+        <div class="admin-wing-select-group">
+          <label for="wingSelect">Select Dhaathree Wing to Manage:</label>
+          <select class="admin-select" id="wingSelect">
+            <option value="akshara">Akshara Dhaathree (Education & Literacy)</option>
+            <option value="aahara" selected>Aahara Dhaathree (Food Support)</option>
+            <option value="arogya">Arogya Dhaathree (Health Care)</option>
+            <option value="vidya">Vidya Dhaathree (Knowledge & Skill)</option>
+            <option value="vikasa">Vikasa Dhaathree (Development)</option>
+            <option value="vana">Vana Dhaathree (Environment)</option>
+            <option value="mahila">Mahila Dhaathree (Women Empowerment)</option>
+            <option value="dharma">Dharma Dhaathree (Social Values)</option>
+            <option value="sramika">Sramika Dhaathree (Workers Support)</option>
+            <option value="general">General Services (Community Support)</option>
+            <option value="media">Media & Gallery Page</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Upload Dropzone (styled by style.css) -->
+      <div class="photo-upload-zone" id="uploadZone">
+        <div class="upload-icon">📸</div>
+        <p class="upload-text">Drag & drop photos here or <span class="browse-link">browse</span> to upload</p>
+        <p class="upload-subtext">Supported formats: JPG, PNG, WEBP</p>
+        <input type="file" id="fileInput" accept="image/*" multiple style="display: none;" />
+      </div>
+
+      <!-- Gallery Grid (styled by style.css) -->
+      <div class="photo-gallery-grid" id="photoGallery" data-wing-id="aahara">
+        <!-- Loaded dynamically via gallery.js -->
+      </div>
+    </div>
+
+    <!-- Volunteer Applications Tab Content -->
+    <div id="volunteersTabContent" style="display: none;">
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Date of Birth</th>
+              <th>Contact Info</th>
+              <th>Occupation</th>
+              <th>Address</th>
+              <th>Message</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="volunteersTableBody">
+            <!-- Loaded dynamically from API -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="logo.jpeg" alt="Logo" onerror="this.style.display='none';" />
+      <div>
+        <div class="fn">Dhaathree Foundation</div>
+        <div class="te">మీ సాధికారత కొరకై...</div>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="impact.html">Impact</a>
+      <a href="campaigns.html">Campaigns</a>
+      <a href="get-involved.html">Get Involved</a>
+      <a href="media.html">Media</a>
+      <a href="contact.html">Contact</a>
+      <span class="footer-social-divider" style="color: rgba(255,255,255,0.15); margin: 0 4px;">|</span>
+      <a href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" title="YouTube" style="display: inline-flex; align-items: center; gap: 4px;">▶️ YouTube</a>
+      <a href="https://www.instagram.com/dhaatreefoundation?utm_source=qr&igsh=MTNkbmZnbm8wbjVzMw==" target="_blank" title="Instagram" style="display: inline-flex; align-items: center; gap: 4px;">📸 Instagram</a>
+      <a href="https://www.threads.net/@dhaatreefoundation" target="_blank" title="Threads" style="display: inline-flex; align-items: center; gap: 4px;">🧵 Threads</a>
+      <a href="https://whatsapp.com/channel/0029VbCc2KSH5JLySeJeJc3v" target="_blank" title="WhatsApp Channel" style="display: inline-flex; align-items: center; gap: 4px;">💬 WhatsApp</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    © 2024 Dhaathree Foundation · Regd. No. 103/2019 · All rights reserved · Made with ❤️ for community empowerment
+  </div>
+</footer>
+
+<script>
+  let activeUser = null;
+  const ALLOWED_EMAIL = "dhaathreefoundation99@gmail.com";
+
+  function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Decode JWT Payload for Google authentication token
+  function decodeJwtResponse(token) {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      return JSON.parse(jsonPayload);
+    } catch (e) {
+      console.error("JWT decoding failed", e);
+      return null;
+    }
+  }
+
+  // Initialize page on load
+  document.addEventListener('DOMContentLoaded', () => {
+    // Check if session exists in localStorage and matches allowed email
+    const storedUser = localStorage.getItem('dhaathree_admin_user');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      if (user.email === ALLOWED_EMAIL) {
+        activeUser = user;
+        showDashboard();
+      } else {
+        localStorage.removeItem('dhaathree_admin_user');
+      }
+    }
+    
+    // Bind local test bypass mode button (forces allowed email for local testing)
+    document.getElementById('localBypassBtn').addEventListener('click', () => {
+      activeUser = {
+        name: 'Local Administrator',
+        email: ALLOWED_EMAIL,
+        picture: 'logo.jpeg' // Use fallback logo
+      };
+      localStorage.setItem('dhaathree_admin_user', JSON.stringify(activeUser));
+      showDashboard();
+    });
+
+    // Bind dropdown selection change
+    document.getElementById('wingSelect').addEventListener('change', (e) => {
+      const selectedWing = e.target.value;
+      const galleryGrid = document.getElementById('photoGallery');
+      if (galleryGrid) {
+        galleryGrid.setAttribute('data-wing-id', selectedWing);
+        if (typeof galleryGrid.refreshGallery === 'function') {
+          galleryGrid.refreshGallery();
+        }
+      }
+    });
+
+    // Scroll animation for uploader card
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.admin-card, .admin-dashboard').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  });
+
+  // Google Sign-In callback
+  function handleCredentialResponse(response) {
+    const payload = decodeJwtResponse(response.credential);
+    if (payload) {
+      // Validate email
+      if (payload.email !== ALLOWED_EMAIL) {
+        alert("Unauthorized Access!\nOnly " + ALLOWED_EMAIL + " is permitted to access this panel.");
+        return;
+      }
+      
+      activeUser = {
+        name: payload.name,
+        email: payload.email,
+        picture: payload.picture
+      };
+      localStorage.setItem('dhaathree_admin_user', JSON.stringify(activeUser));
+      showDashboard();
+    }
+  }
+
+  // Switch panels and setup uploader
+  function showDashboard() {
+    if (!activeUser) return;
+    
+    // Update profile views
+    document.getElementById('profilePic').src = activeUser.picture;
+    document.getElementById('profilePic').onerror = function() {
+      this.src = 'logo.jpeg';
+    };
+    document.getElementById('profileName').textContent = activeUser.name;
+    document.getElementById('profileEmail').textContent = activeUser.email;
+    
+    // Swap panels
+    document.getElementById('loginCard').style.display = 'none';
+    document.getElementById('dashboardContainer').style.display = 'block';
+    
+    // Trigger gallery initial load
+    const wingSelect = document.getElementById('wingSelect');
+    const galleryGrid = document.getElementById('photoGallery');
+    if (galleryGrid) {
+      galleryGrid.setAttribute('data-wing-id', wingSelect.value);
+      if (window.DhaathreeGallery && typeof window.DhaathreeGallery.initGallery === 'function') {
+        window.DhaathreeGallery.initGallery();
+      }
+    }
+
+    // Load initial volunteer applications count
+    updateVolunteerCount();
+  }
+
+  // Sign out function
+  function signOutAdmin() {
+    activeUser = null;
+    localStorage.removeItem('dhaathree_admin_user');
+    
+    // Switch panels
+    document.getElementById('loginCard').style.display = 'block';
+    document.getElementById('dashboardContainer').style.display = 'none';
+  }
+
+  // Switch tabs in admin console
+  function switchTab(tabName) {
+    const tabPhotosBtn = document.getElementById('tabPhotosBtn');
+    const tabVolunteersBtn = document.getElementById('tabVolunteersBtn');
+    const photosContent = document.getElementById('photosTabContent');
+    const volunteersContent = document.getElementById('volunteersTabContent');
+    
+    if (tabName === 'photos') {
+      tabPhotosBtn.classList.add('active');
+      tabVolunteersBtn.classList.remove('active');
+      photosContent.style.display = 'block';
+      volunteersContent.style.display = 'none';
+    } else {
+      tabPhotosBtn.classList.remove('active');
+      tabVolunteersBtn.classList.add('active');
+      photosContent.style.display = 'none';
+      volunteersContent.style.display = 'block';
+      loadVolunteers();
+    }
+  }
+
+  // Update volunteer applications count badge
+  async function updateVolunteerCount() {
+    try {
+      const res = await fetch('/api/volunteers');
+      if (res.ok) {
+        const volunteers = await res.json();
+        document.getElementById('volCount').textContent = volunteers.length || 0;
+      }
+    } catch (err) {
+      console.error('Failed to load initial volunteer count:', err);
+    }
+  }
+
+  // Load volunteer applications from database
+  async function loadVolunteers() {
+    const tableBody = document.getElementById('volunteersTableBody');
+    if (!tableBody) return;
+    
+    tableBody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 30px;">Loading volunteer applications...</td></tr>';
+    
+    try {
+      const res = await fetch('/api/volunteers');
+      if (!res.ok) {
+        throw new Error('Failed to fetch volunteer data from server');
+      }
+      const volunteers = await res.json();
+      
+      // Update badge count
+      document.getElementById('volCount').textContent = volunteers.length;
+      
+      tableBody.innerHTML = '';
+      if (volunteers.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--muted); font-style: italic; padding: 40px 0;">No volunteer applications found.</td></tr>';
+        return;
+      }
+      
+      volunteers.forEach(v => {
+        const formattedDate = new Date(v.timestamp).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${formattedDate}</strong></td>
+          <td>${v.name}</td>
+          <td>${v.dob}</td>
+          <td>
+            <div>📧 <a href="mailto:${v.email}">${v.email}</a></div>
+            <div style="margin-top: 4px;">📞 <a href="tel:${v.phone}">${v.phone}</a></div>
+          </td>
+          <td><span style="background: rgba(91,45,142,0.08); color: var(--purple); padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">${v.occupation}</span></td>
+          <td>
+            <div>${v.city}</div>
+            <div style="font-size: 0.8rem; color: var(--muted);">${v.district}, ${v.state}</div>
+          </td>
+          <td style="max-width: 200px; word-wrap: break-word;">${v.message || '<span style="color: #aaa; font-style: italic;">No message</span>'}</td>
+          <td style="text-align: center;">
+            <button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')">🗑</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    } catch (err) {
+      console.error(err);
+      tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--magenta); padding: 30px;">Error loading applications: ${err.message}</td></tr>`;
+    }
+  }
+
+  // Delete volunteer application
+  async function deleteVolunteer(id) {
+    if (!confirm('Are you sure you want to remove this volunteer application?')) return;
+    
+    try {
+      const res = await fetch(`/api/volunteers/${id}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) {
+        throw new Error('Failed to delete application');
+      }
+      loadVolunteers();
+    } catch (err) {
+      alert('Error removing application: ' + err.message);
+    }
+  }
+</script>
+</body>
+</html>
