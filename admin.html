@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -120,6 +120,7 @@
     <div class="admin-tabs">
       <button class="admin-tab active" id="tabPhotosBtn" onclick="switchTab('photos')">Manage Photos</button>
       <button class="admin-tab" id="tabVolunteersBtn" onclick="switchTab('volunteers')">Volunteer Applications (<span id="volCount">0</span>)</button>
+      <button class="admin-tab" id="tabConnectionsBtn" onclick="switchTab('connections')">Connections & Subscribers (<span id="connCount">0</span>)</button>
     </div>
 
     <!-- Photos Management Tab Content -->
@@ -175,6 +176,26 @@
             </tr>
           </thead>
           <tbody id="volunteersTableBody">
+            <!-- Loaded dynamically from API -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Connections & Subscribers Tab Content -->
+    <div id="connectionsTabContent" style="display: none;">
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="connectionsTableBody">
             <!-- Loaded dynamically from API -->
           </tbody>
         </table>
@@ -348,8 +369,9 @@
       }
     }
 
-    // Load initial volunteer applications count
+    // Load initial counts
     updateVolunteerCount();
+    updateConnectionCount();
   }
 
   // Sign out function
@@ -366,20 +388,30 @@
   function switchTab(tabName) {
     const tabPhotosBtn = document.getElementById('tabPhotosBtn');
     const tabVolunteersBtn = document.getElementById('tabVolunteersBtn');
+    const tabConnectionsBtn = document.getElementById('tabConnectionsBtn');
     const photosContent = document.getElementById('photosTabContent');
     const volunteersContent = document.getElementById('volunteersTabContent');
+    const connectionsContent = document.getElementById('connectionsTabContent');
     
+    // Reset all tabs
+    tabPhotosBtn.classList.remove('active');
+    tabVolunteersBtn.classList.remove('active');
+    tabConnectionsBtn.classList.remove('active');
+    photosContent.style.display = 'none';
+    volunteersContent.style.display = 'none';
+    connectionsContent.style.display = 'none';
+
     if (tabName === 'photos') {
       tabPhotosBtn.classList.add('active');
-      tabVolunteersBtn.classList.remove('active');
       photosContent.style.display = 'block';
-      volunteersContent.style.display = 'none';
-    } else {
-      tabPhotosBtn.classList.remove('active');
+    } else if (tabName === 'volunteers') {
       tabVolunteersBtn.classList.add('active');
-      photosContent.style.display = 'none';
       volunteersContent.style.display = 'block';
       loadVolunteers();
+    } else if (tabName === 'connections') {
+      tabConnectionsBtn.classList.add('active');
+      connectionsContent.style.display = 'block';
+      loadConnections();
     }
   }
 
@@ -469,6 +501,86 @@
       loadVolunteers();
     } catch (err) {
       alert('Error removing application: ' + err.message);
+    }
+  }
+
+  // Update newsletter connections count badge
+  async function updateConnectionCount() {
+    try {
+      const res = await fetch('/api/connections');
+      if (res.ok) {
+        const connections = await res.json();
+        document.getElementById('connCount').textContent = connections.length || 0;
+      }
+    } catch (err) {
+      console.error('Failed to load initial connections count:', err);
+    }
+  }
+
+  // Load connections from database
+  async function loadConnections() {
+    const tableBody = document.getElementById('connectionsTableBody');
+    if (!tableBody) return;
+    
+    tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 30px;">Loading connections...</td></tr>';
+    
+    try {
+      const res = await fetch('/api/connections');
+      if (!res.ok) {
+        throw new Error('Failed to fetch connections from server');
+      }
+      const connections = await res.json();
+      
+      // Update badge count
+      document.getElementById('connCount').textContent = connections.length;
+      
+      tableBody.innerHTML = '';
+      if (connections.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--muted); font-style: italic; padding: 40px 0;">No connections found.</td></tr>';
+        return;
+      }
+      
+      connections.forEach(c => {
+        const formattedDate = new Date(c.timestamp).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${formattedDate}</strong></td>
+          <td>${c.name}</td>
+          <td>📧 <a href="mailto:${c.email}">${c.email}</a></td>
+          <td>📞 <a href="tel:${c.phone}">${c.phone}</a></td>
+          <td style="text-align: center;">
+            <button class="admin-delete-app-btn" title="Remove Connection" onclick="deleteConnection('${c._id}')">🗑</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    } catch (err) {
+      console.error(err);
+      tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--magenta); padding: 30px;">Error loading connections: ${err.message}</td></tr>`;
+    }
+  }
+
+  // Delete connection
+  async function deleteConnection(id) {
+    if (!confirm('Are you sure you want to remove this connection?')) return;
+    
+    try {
+      const res = await fetch(`/api/connections/${id}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) {
+        throw new Error('Failed to delete connection');
+      }
+      loadConnections();
+    } catch (err) {
+      alert('Error removing connection: ' + err.message);
     }
   }
 </script>

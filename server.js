@@ -71,6 +71,15 @@ const volunteerSchema = new mongoose.Schema({
 
 const Volunteer = mongoose.model('Volunteer', volunteerSchema);
 
+const connectionSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true },
+  timestamp: { type: Date, default: Date.now }
+});
+
+const Connection = mongoose.model('Connection', connectionSchema);
+
 // ── API ROUTES ──
 
 // 1. GET ALL PHOTOS FOR A WING
@@ -235,6 +244,53 @@ app.delete('/api/volunteers/:id', async (req, res) => {
       return res.status(404).json({ error: 'Application not found.' });
     }
     res.json({ message: 'Volunteer application removed successfully.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 7. SUBMIT A CONNECTION SUBSCRIPTION
+app.post('/api/connections', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const { name, email, phone } = req.body;
+    if (!name || !email || !phone) {
+      return res.status(400).json({ error: 'All fields are required.' });
+    }
+    const newConnection = new Connection({ name, email, phone });
+    await newConnection.save();
+    res.status(201).json({ message: 'Subscribed successfully!' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 8. GET ALL CONNECTIONS (Admin only check done in frontend session)
+app.get('/api/connections', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const connections = await Connection.find().sort({ timestamp: -1 });
+    res.json(connections);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 9. DELETE A CONNECTION
+app.delete('/api/connections/:id', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const result = await Connection.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({ error: 'Connection record not found.' });
+    }
+    res.json({ message: 'Connection removed successfully.' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

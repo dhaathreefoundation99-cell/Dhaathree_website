@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -205,6 +205,92 @@
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(el);
   });
+
+  // Popup Modal Logic
+  let captchaAnswer = 0;
+
+  function initCaptcha() {
+    const num1 = Math.floor(Math.random() * 9) + 1;
+    const num2 = Math.floor(Math.random() * 9) + 1;
+    captchaAnswer = num1 + num2;
+    document.getElementById('captchaLabel').innerText = `What is ${num1} + ${num2}?`;
+  }
+
+  function openConnectModal() {
+    initCaptcha();
+    document.getElementById('connectModal').classList.add('active');
+  }
+
+  window.closeConnectModal = function() {
+    document.getElementById('connectModal').classList.remove('active');
+    sessionStorage.setItem('connectedPopupShown', 'true');
+  }
+
+  window.submitConnectForm = async function(e) {
+    e.preventDefault();
+    const name = document.getElementById('connectName').value.trim();
+    const email = document.getElementById('connectEmail').value.trim();
+    const phone = document.getElementById('connectPhone').value.trim();
+    const captchaVal = parseInt(document.getElementById('connectCaptcha').value);
+
+    if (captchaVal !== captchaAnswer) {
+      alert('Incorrect captcha sum. Please try again.');
+      initCaptcha();
+      document.getElementById('connectCaptcha').value = '';
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/connections', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone })
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit.');
+      }
+
+      alert('Thank you for connecting with us!');
+      closeConnectModal();
+    } catch (err) {
+      alert('Error: ' + err.message);
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    if (!sessionStorage.getItem('connectedPopupShown')) {
+      setTimeout(openConnectModal, 2500); // 2.5 second delay
+    }
+  });
 </script>
+
+<!-- CONNECT POPUP MODAL -->
+<div class="connect-modal-overlay" id="connectModal">
+  <div class="connect-modal-card">
+    <button class="connect-modal-close" onclick="closeConnectModal()" aria-label="Close">✕</button>
+    <div class="connect-modal-title">Subscribe and Stay Connected With Us</div>
+    <div class="connect-modal-desc">Be the first to know about our moving stories, new projects and opportunities. Join our community of changemakers today!</div>
+    
+    <form class="connect-modal-form" id="connectForm" onsubmit="submitConnectForm(event)">
+      <label for="connectName">Name</label>
+      <input type="text" id="connectName" required placeholder="Enter your name" />
+      
+      <label for="connectEmail">Email</label>
+      <input type="email" id="connectEmail" required placeholder="Enter your email" />
+      
+      <label for="connectPhone">Phone Number</label>
+      <input type="tel" id="connectPhone" required placeholder="Enter your contact number" />
+      
+      <label for="connectCaptcha" id="captchaLabel">What is 3 + 1?</label>
+      <div class="connect-modal-captcha-row">
+        <input type="number" id="connectCaptcha" required placeholder="Enter sum" style="margin-bottom:0;" />
+      </div>
+      
+      <button type="submit" class="connect-modal-btn">Submit</button>
+    </form>
+  </div>
+</div>
 </body>
 </html>
