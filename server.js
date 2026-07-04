@@ -16,13 +16,16 @@ const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
   secure: false, // true for port 465, false for port 587 (uses STARTTLS)
+  family: 4, // Force IPv4 to prevent IPv6 routing timeouts on Render
   auth: {
     user: process.env.EMAIL_USER || 'dhaathreefoundation99@gmail.com',
     pass: process.env.EMAIL_PASS
   },
   tls: {
     rejectUnauthorized: false
-  }
+  },
+  connectionTimeout: 15000,
+  greetingTimeout: 15000
 });
 
 const app = express();
