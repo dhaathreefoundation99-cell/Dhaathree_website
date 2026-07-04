@@ -9,6 +9,17 @@ const path = require('path');
 // Load environment variables
 dotenv.config();
 
+const nodemailer = require('nodemailer');
+
+// Configure Nodemailer Transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER || 'dhaathreefoundation99@gmail.com',
+    pass: process.env.EMAIL_PASS
+  }
+});
+
 const app = express();
 
 // Middlewares
@@ -66,6 +77,7 @@ const volunteerSchema = new mongoose.Schema({
   district: { type: String, required: true },
   state: { type: String, required: true },
   message: { type: String },
+  status: { type: String, default: 'Pending' },
   timestamp: { type: Date, default: Date.now }
 });
 
@@ -244,6 +256,85 @@ app.delete('/api/volunteers/:id', async (req, res) => {
       return res.status(404).json({ error: 'Application not found.' });
     }
     res.json({ message: 'Volunteer application removed successfully.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Helper to send approval email
+async function sendApprovalEmail(volunteerEmail, volunteerName, volunteerPhone) {
+  if (!process.env.EMAIL_PASS) {
+    console.warn('⚠️ WARNING: EMAIL_PASS is not configured in your .env file. Email approval notification was skipped.');
+    return false;
+  }
+  
+  const baseUrl = process.env.BASE_URL || 'http://localhost:8000';
+  const downloadLink = `${baseUrl}/download-id-card.html?name=${encodeURIComponent(volunteerName)}&phone=${encodeURIComponent(volunteerPhone)}`;
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER || 'dhaathreefoundation99@gmail.com',
+    to: volunteerEmail,
+    subject: '🎉 Congratulations! You are selected as a Dhaathree Volunteer!',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 25px; border: 1px solid #e0e0e0; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h2 style="color: #056b32; margin-top: 10px; font-family: Georgia, serif;">Dhaathree Foundation</h2>
+          <p style="font-size: 0.9rem; color: #777; margin-top: -5px; font-style: italic;">మీ సాధికారత కొరకై... (For Your Empowerment)</p>
+        </div>
+        <hr style="border: 0; border-top: 1px solid #eeeeee; margin-bottom: 20px;" />
+        <p style="font-size: 1.05rem; color: #333333; line-height: 1.5;">Dear <strong>${volunteerName}</strong>,</p>
+        <p style="font-size: 1rem; color: #444444; line-height: 1.6;">
+          Congratulations! We are thrilled to inform you that your application has been approved, and you are officially selected as a volunteer with <strong>Dhaathree Foundation</strong>.
+        </p>
+        <p style="font-size: 1rem; color: #444444; line-height: 1.6;">
+          Please download your Volunteer ID Card using the link below:
+        </p>
+        <div style="text-align: center; margin: 35px 0;">
+          <a href="${downloadLink}" target="_blank" style="background-color: #056b32; color: #ffffff; padding: 14px 28px; border-radius: 30px; font-weight: bold; text-decoration: none; font-size: 1rem; display: inline-block; box-shadow: 0 4px 10px rgba(5, 107, 50, 0.2);">Download Volunteer ID Card</a>
+        </div>
+        <p style="font-size: 0.85rem; color: #888888; text-align: center; line-height: 1.4;">
+          If the button doesn't work, copy and paste this link in your browser:<br/>
+          <a href="${downloadLink}" style="color: #056b32; word-break: break-all;">${downloadLink}</a>
+        </p>
+        <hr style="border: 0; border-top: 1px solid #eeeeee; margin-top: 30px; margin-bottom: 20px;" />
+        <p style="font-size: 0.95rem; color: #333333; line-height: 1.5; margin-bottom: 5px;">Best Regards,</p>
+        <p style="font-size: 0.95rem; color: #056b32; font-weight: bold; margin-top: 0;">Dr. Swathi Chakrapani</p>
+        <p style="font-size: 0.85rem; color: #777777; margin-top: -10px;">Founder, Dhaathree Foundation</p>
+      </div>
+    `
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`✉️ Approval email successfully sent to: ${volunteerEmail}`);
+    return true;
+  } catch (err) {
+    console.error('❌ Failed to send volunteer approval email:', err.message);
+    return false;
+  }
+}
+
+// 6.5. APPROVE A VOLUNTEER APPLICATION
+app.post('/api/volunteers/:id/approve', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const volunteer = await Volunteer.findById(req.params.id);
+    if (!volunteer) {
+      return res.status(404).json({ error: 'Volunteer application not found.' });
+    }
+
+    volunteer.status = 'Approved';
+    await volunteer.save();
+
+    // Trigger the email approval process
+    const emailSent = await sendApprovalEmail(volunteer.email, volunteer.name, volunteer.phone);
+
+    res.json({ 
+      message: 'Volunteer application approved successfully!', 
+      emailSent: emailSent 
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

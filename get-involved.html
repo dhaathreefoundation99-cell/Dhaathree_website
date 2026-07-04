@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -215,24 +215,7 @@
   </div>
 </footer>
 
-<!-- ID CARD MODAL -->
-<div class="id-card-modal" id="idCardModal">
-  <div class="id-card-modal-content">
-    <h3>Congratulations! 🎉</h3>
-    <p>Your volunteer application was submitted successfully. Here is your official Dhaathree Foundation Volunteer ID Card. Download it below!</p>
-    
-    <div class="id-card-preview-container">
-      <img id="idCardPreview" class="id-card-preview-img" src="" alt="ID Card Preview">
-    </div>
-    
-    <div class="id-card-modal-actions">
-      <button class="id-card-download-btn" id="idCardDownloadBtn">
-        <span>📥</span> Download ID Card
-      </button>
-      <button class="id-card-close-btn" onclick="closeIdCardModal()">Close</button>
-    </div>
-  </div>
-</div>
+
 
 <script>
   function toggleMobileMenu() {
@@ -373,8 +356,8 @@
           volOtherOccupation.required = false;
         }
 
-        // Generate and show ID Card
-        generateIDCard(finalName, finalPhone);
+        // Show success alert message (card will be sent on email approval)
+        alert("Success!\nYour volunteer application has been submitted successfully. Once the administrator reviews and approves your application, you will receive an email congratulations note with a link to download your official Volunteer ID Card.");
       } catch (err) {
         alert('Error submitting application: ' + err.message);
       } finally {
@@ -384,92 +367,7 @@
     });
   }
 
-  // Generate volunteer ID card dynamically on canvas and display in modal
-  function generateIDCard(rawName, rawPhone) {
-    // Clean name and phone to remove any accidental leading colons or spaces
-    const name = rawName.trim().replace(/^[:\s]+/, '');
-    const phone = rawPhone.trim().replace(/^[:\s]+/, '');
 
-    const previewImg = document.getElementById('idCardPreview');
-    if (previewImg) {
-      previewImg.src = ''; // Clear previous preview
-    }
-
-    const img = new Image();
-    img.src = 'id-card-template.jpg';
-    img.crossOrigin = 'anonymous';
-
-    img.onload = function() {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-
-      // Set canvas size to match image dimensions
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-
-      // Draw the template
-      ctx.drawImage(img, 0, 0);
-
-      const W = canvas.width;
-      const H = canvas.height;
-
-      // Draw Name & Contact info with perfect vertical alignment matching Designation
-      ctx.fillStyle = '#056b32';
-      ctx.font = `bold ${Math.round(H * 0.046)}px 'Inter', Arial, sans-serif`;
-      ctx.textBaseline = 'middle';
-
-      const valueX = W * 0.565;  // Align values vertically with a neat space after the template's black colons
-
-      // Name row (shifted up to H * 0.40 to sit beautifully above the line)
-      ctx.fillText(name, valueX, H * 0.40);
-
-      // Contact No row (shifted up to H * 0.61 to sit beautifully above the line)
-      ctx.fillText(phone, valueX, H * 0.61);
-
-      // Convert to image
-      try {
-        const idCardUrl = canvas.toDataURL('image/jpeg', 0.95);
-        if (previewImg) {
-          previewImg.src = idCardUrl;
-        }
-
-        // Set up download click
-        const downloadBtn = document.getElementById('idCardDownloadBtn');
-        if (downloadBtn) {
-          downloadBtn.onclick = function() {
-            const a = document.createElement('a');
-            a.href = idCardUrl;
-            a.download = `Dhaathree_Volunteer_ID_${name.replace(/\s+/g, '_')}.jpg`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-          };
-        }
-
-        // Show Modal
-        const modal = document.getElementById('idCardModal');
-        if (modal) {
-          modal.style.display = 'flex';
-        }
-      } catch (err) {
-        console.error('Canvas export error:', err);
-        alert('Volunteer form submitted successfully, but we could not generate your downloadable ID card due to a canvas error.');
-      }
-    };
-
-    img.onerror = function() {
-      console.error('Failed to load ID card template.');
-      alert('Volunteer form submitted successfully, but we could not load the ID card template. You are successfully registered.');
-    };
-  }
-
-  // Close ID card modal helper
-  function closeIdCardModal() {
-    const modal = document.getElementById('idCardModal');
-    if (modal) {
-      modal.style.display = 'none';
-    }
-  }
 </script>
 </body>
 </html>

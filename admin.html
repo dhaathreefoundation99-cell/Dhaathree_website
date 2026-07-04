@@ -172,6 +172,7 @@
               <th>Occupation</th>
               <th>Address</th>
               <th>Message</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -433,7 +434,7 @@
     const tableBody = document.getElementById('volunteersTableBody');
     if (!tableBody) return;
     
-    tableBody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 30px;">Loading volunteer applications...</td></tr>';
+    tableBody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 30px;">Loading volunteer applications...</td></tr>';
     
     try {
       const res = await fetch('/api/volunteers');
@@ -447,7 +448,7 @@
       
       tableBody.innerHTML = '';
       if (volunteers.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--muted); font-style: italic; padding: 40px 0;">No volunteer applications found.</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="9" style="text-align: center; color: var(--muted); font-style: italic; padding: 40px 0;">No volunteer applications found.</td></tr>';
         return;
       }
       
@@ -459,6 +460,16 @@
           hour: '2-digit',
           minute: '2-digit'
         });
+        
+        const statusVal = v.status || 'Pending';
+        const statusBadge = statusVal === 'Approved' 
+          ? `<span style="background: rgba(5,107,50,0.1); color: #056b32; padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">Approved</span>`
+          : `<span style="background: rgba(245,166,35,0.1); color: #c47d1a; padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">Pending</span>`;
+
+        const actionHtml = statusVal === 'Approved'
+          ? `<button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')">🗑</button>`
+          : `<button class="admin-approve-btn" style="background:#056b32; color:white; border:none; padding: 6px 12px; border-radius: 20px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-right:6px; transition: background 0.2s;" onclick="approveVolunteer('${v._id}', '${v.name.replace(/'/g, "\\'")}', event)">Approve ✓</button>
+             <button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')">🗑</button>`;
         
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -475,15 +486,16 @@
             <div style="font-size: 0.8rem; color: var(--muted);">${v.district}, ${v.state}</div>
           </td>
           <td style="max-width: 200px; word-wrap: break-word;">${v.message || '<span style="color: #aaa; font-style: italic;">No message</span>'}</td>
-          <td style="text-align: center;">
-            <button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')">🗑</button>
+          <td>${statusBadge}</td>
+          <td style="text-align: center; white-space: nowrap;">
+            ${actionHtml}
           </td>
         `;
         tableBody.appendChild(tr);
       });
     } catch (err) {
       console.error(err);
-      tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--magenta); padding: 30px;">Error loading applications: ${err.message}</td></tr>`;
+      tableBody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--magenta); padding: 30px;">Error loading applications: ${err.message}</td></tr>`;
     }
   }
 
@@ -501,6 +513,36 @@
       loadVolunteers();
     } catch (err) {
       alert('Error removing application: ' + err.message);
+    }
+  }
+
+  // Approve volunteer application
+  async function approveVolunteer(id, name, event) {
+    if (!confirm(`Are you sure you want to approve ${name} and send their Volunteer ID card email?`)) return;
+    
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = 'Approving...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`/api/volunteers/${id}/approve`, {
+        method: 'POST'
+      });
+      if (!res.ok) {
+        throw new Error('Failed to approve volunteer');
+      }
+      const data = await res.json();
+      if (data.emailSent) {
+        alert(`Volunteer approved successfully! Notification email with ID Card link has been sent.`);
+      } else {
+        alert(`Volunteer approved, but email notification failed. Please verify your SMTP settings in .env.`);
+      }
+      loadVolunteers();
+    } catch (err) {
+      alert('Error approving volunteer: ' + err.message);
+      btn.textContent = originalText;
+      btn.disabled = false;
     }
   }
 
