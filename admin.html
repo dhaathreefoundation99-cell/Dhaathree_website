@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&family=Noto+Sans+Telugu:wght@400;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css"/>
 <!-- Google Identity Services client script -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://accounts.google.com/gsi/client" defer></script>
 <script src="gallery.js" defer></script>
 </head>
 <body>
@@ -70,20 +70,8 @@
     <p>Please authenticate using Google Sign-in to access the photo uploader panel.</p>
     
     <div class="admin-login-options">
-      <!-- Google Sign-in Button Wrapper -->
-      <div id="g_id_onload"
-           data-client_id="231215173796-ljkudf2hqmitkj5j7maduoi0rlo4l9a7.apps.googleusercontent.com"
-           data-callback="handleCredentialResponse"
-           data-auto_prompt="false">
-      </div>
-      <div class="g_id_signin"
-           data-type="standard"
-           data-size="large"
-           data-theme="outline"
-           data-text="signin_with"
-           data-shape="rectangular"
-           data-logo_alignment="left">
-      </div>
+      <!-- Dynamic Google Sign-in Button Container -->
+      <div id="googleBtnContainer" style="display: flex; justify-content: center; margin: 15px auto;"></div>
 
       <p style="margin: 8px 0; font-size: 0.8rem; font-weight: 600; color: var(--muted);">OR</p>
 
@@ -269,8 +257,34 @@
     }
   }
 
+  // Fetch Google Client ID and initialize dynamically
+  async function loadConfigAndInitGoogle() {
+    try {
+      const res = await fetch('/api/config');
+      if (!res.ok) throw new Error("Server configuration error");
+      const config = await res.json();
+      
+      if (config.googleClientId) {
+        google.accounts.id.initialize({
+          client_id: config.googleClientId,
+          callback: handleCredentialResponse
+        });
+        
+        google.accounts.id.renderButton(
+          document.getElementById("googleBtnContainer"),
+          { theme: "outline", size: "large", text: "signin_with", shape: "rectangular", logo_alignment: "left" }
+        );
+      } else {
+        console.warn("⚠️ Google Client ID is missing in backend .env configuration.");
+      }
+    } catch (err) {
+      console.error("Failed to load Google client credentials dynamically:", err);
+    }
+  }
+
   // Initialize page on load
   document.addEventListener('DOMContentLoaded', () => {
+    loadConfigAndInitGoogle();
     // Check if session exists in localStorage and matches allowed email
     const storedUser = localStorage.getItem('dhaathree_admin_user');
     if (storedUser) {

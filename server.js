@@ -387,6 +387,13 @@ app.delete('/api/connections/:id', async (req, res) => {
   }
 });
 
+// 10. GET PUBLIC CONFIGURATION
+app.get('/api/config', (req, res) => {
+  res.json({
+    googleClientId: process.env.GOOGLE_CLIENT_ID || ''
+  });
+});
+
 // Fallback to serve index.html for undefined frontend routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
