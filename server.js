@@ -9,24 +9,7 @@ const path = require('path');
 // Load environment variables
 dotenv.config();
 
-const nodemailer = require('nodemailer');
-
-// Configure Nodemailer Transporter
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false, // true for port 465, false for port 587 (uses STARTTLS)
-  family: 4, // Force IPv4 to prevent IPv6 routing timeouts on Render
-  auth: {
-    user: process.env.EMAIL_USER || 'dhaathreefoundation99@gmail.com',
-    pass: process.env.EMAIL_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  },
-  connectionTimeout: 15000,
-  greetingTimeout: 15000
-});
+// Nodemailer and SMTP setups are removed. Using Brevo HTTP API instead.
 
 const app = express();
 
@@ -269,21 +252,30 @@ app.delete('/api/volunteers/:id', async (req, res) => {
   }
 });
 
-// Helper to send approval email
+// Helper to send approval email via Brevo HTTP API (Port 443 HTTPS - Works on Render Free Tier!)
 async function sendApprovalEmail(volunteerEmail, volunteerName, volunteerPhone) {
-  if (!process.env.EMAIL_PASS) {
-    console.warn('⚠️ WARNING: EMAIL_PASS is not configured in your .env file. Email approval notification was skipped.');
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) {
+    console.warn('⚠️ WARNING: BREVO_API_KEY is not configured in your environment. Email approval notification was skipped.');
     return false;
   }
   
   const baseUrl = process.env.BASE_URL || 'http://localhost:8000';
   const downloadLink = `${baseUrl}/download-id-card.html?name=${encodeURIComponent(volunteerName)}&phone=${encodeURIComponent(volunteerPhone)}`;
 
-  const mailOptions = {
-    from: process.env.EMAIL_USER || 'dhaathreefoundation99@gmail.com',
-    to: volunteerEmail,
-    subject: '🎉 Congratulations! You are selected as a Dhaathree Volunteer!',
-    html: `
+  const emailData = {
+    sender: {
+      name: "Dr. Swathi Chakrapani (Dhaathree Foundation)",
+      email: "dhaathreefoundation99@gmail.com"
+    },
+    to: [
+      {
+        email: volunteerEmail,
+        name: volunteerName
+      }
+    ],
+    subject: "🎉 Congratulations! You are selected as a Dhaathree Volunteer!",
+    htmlContent: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 25px; border: 1px solid #e0e0e0; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
         <div style="text-align: center; margin-bottom: 20px;">
           <h2 style="color: #056b32; margin-top: 10px; font-family: Georgia, serif;">Dhaathree Foundation</h2>
@@ -313,11 +305,25 @@ async function sendApprovalEmail(volunteerEmail, volunteerName, volunteerPhone) 
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    console.log(`✉️ Approval email successfully sent to: ${volunteerEmail}`);
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': apiKey,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(emailData)
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || `HTTP ${response.status}`);
+    }
+
+    console.log(`✉️ Approval email successfully sent via Brevo to: ${volunteerEmail}`);
     return true;
   } catch (err) {
-    console.error('❌ Failed to send volunteer approval email:', err.message);
+    console.error('❌ Failed to send volunteer approval email via Brevo:', err.message);
     return false;
   }
 }
