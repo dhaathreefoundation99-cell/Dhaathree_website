@@ -173,6 +173,9 @@ function initGallery() {
     // Trigger file selection
     uploadZone.addEventListener('click', () => fileInput.click());
 
+    // Stop click events bubbling up when fileInput is clicked/triggered to prevent mobile click loops
+    fileInput.addEventListener('click', (e) => e.stopPropagation());
+
     // Input change
     fileInput.addEventListener('change', (e) => {
       if (e.target.files.length > 0) {

@@ -1296,6 +1296,13 @@
   gap: 12px;
   border-bottom: 2px solid var(--cream);
   margin-bottom: 30px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-tabs::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for a cleaner look */
 }
 
 .admin-tab {
@@ -1308,6 +1315,7 @@
   cursor: pointer;
   position: relative;
   transition: color 0.2s;
+  flex-shrink: 0;
 }
 
 .admin-tab::after {
@@ -2029,4 +2037,20 @@
   font-size: 0.88rem;
   color: var(--muted);
   font-weight: 500;
+}
+
+/* Responsive columns grid for Admin page sections */
+.admin-two-cols {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 30px;
+  margin-top: 20px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .admin-two-cols {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
