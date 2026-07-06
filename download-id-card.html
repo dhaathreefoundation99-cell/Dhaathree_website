@@ -170,7 +170,6 @@
 
     const img = new Image();
     img.src = 'id-card-template.jpg';
-    img.crossOrigin = 'anonymous';
     img.onload = () => {
       templateImgLoaded = true;
       tryRenderCard();
@@ -178,7 +177,6 @@
 
     const sigImg = new Image();
     sigImg.src = 'president-signature.png';
-    sigImg.crossOrigin = 'anonymous';
     sigImg.onload = () => {
       signatureImgLoaded = true;
       tryRenderCard();
@@ -193,7 +191,7 @@
 
     const volPhotoImg = new Image();
     volPhotoImg.src = photo || 'logo.jpeg'; // Fallback to logo if not provided
-    volPhotoImg.crossOrigin = 'anonymous';
+    volPhotoImg.crossOrigin = 'anonymous'; // Keep only for cross-origin Cloudinary photos
     volPhotoImg.onload = () => {
       photoImgLoaded = true;
       tryRenderCard();
@@ -202,41 +200,6 @@
       console.warn("Volunteer photo failed to load, falling back to logo.");
       volPhotoImg.src = 'logo.jpeg'; // Fallback
     };
-
-    function processSignature(image) {
-      const tempCanvas = document.createElement('canvas');
-      const tempCtx = tempCanvas.getContext('2d');
-      tempCanvas.width = image.naturalWidth;
-      tempCanvas.height = image.naturalHeight;
-      
-      tempCtx.drawImage(image, 0, 0);
-      
-      try {
-        const imgData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
-        const data = imgData.data;
-        
-        // Convert signature background to transparent
-        for (let i = 0; i < data.length; i += 4) {
-          const r = data[i];
-          const g = data[i+1];
-          const b = data[i+2];
-          
-          const brightness = (r + g + b) / 3;
-          
-          if (brightness > 180) {
-            data[i+3] = 0; // Fully transparent
-          } else if (brightness > 130) {
-            const factor = (180 - brightness) / 50; // Smooth blend
-            data[i+3] = Math.round(data[i+3] * factor);
-          }
-        }
-        tempCtx.putImageData(imgData, 0, 0);
-        return tempCanvas;
-      } catch (e) {
-        console.error("Signature transparency filtering failed:", e);
-        return image; // Fallback to raw signature if getImageData fails
-      }
-    }
 
     function tryRenderCard() {
       if (!templateImgLoaded || !signatureImgLoaded || !photoImgLoaded) return;
@@ -270,11 +233,11 @@
         ctx.save();
         ctx.beginPath();
         
-        const px = 122;
-        const py = 250;
-        const pw = 230;
-        const ph = 230;
-        const radius = 20; // Matches rounded corner of card photo container
+        const px = 108;
+        const py = 246;
+        const pw = 248;
+        const ph = 266;
+        const radius = 24; // Matches rounded corner of card photo container
         
         ctx.moveTo(px + radius, py);
         ctx.lineTo(px + pw - radius, py);
@@ -292,16 +255,18 @@
         ctx.restore();
       }
 
-      // Draw President Signature if loaded successfully
+      // Draw President Signature with multiply blending (removes background box)
       if (sigImg.complete && sigImg.naturalWidth > 0) {
-        const processedSig = processSignature(sigImg);
+        ctx.save();
+        ctx.globalCompositeOperation = 'multiply'; // Blends away the signature background completely
         
-        const sigW = W * 0.18; // Width matching tested overlay
+        const sigW = W * 0.16; // Width matching tested overlay
         const sigH = sigW * (sigImg.naturalHeight / sigImg.naturalWidth);
-        const sigX = W * 0.76;
-        const sigY = H * 0.76;
+        const sigX = W * 0.81;
+        const sigY = H * 0.82;
 
-        ctx.drawImage(processedSig, sigX, sigY, sigW, sigH);
+        ctx.drawImage(sigImg, sigX, sigY, sigW, sigH);
+        ctx.restore();
       }
 
       try {
