@@ -19,15 +19,22 @@
       <img src="logo.jpeg" alt="Dhaathree Foundation Logo"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
            id="navLogoImg"/>
-      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">Ã Â°Â§</div>
+      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">ధ</div>
       <div class="nav-brand">
         <span class="en">Dhaathree Foundation</span>
-        <span class="te">à°®à±€ à°¸à°¾à°§à°¿à°•à°¾à°°à°¤ à°•à±Šà°°à°•à±ˆ...</span>
+        <span class="te">మీ సాధికారత కొరకై...</span>
       </div>
     </a>
   </div>
-  <ul class="nav-links">    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="nav-dropdown">
+      <a href="about.html" class="dropdown-trigger">About <span class="nav-arrow">▼</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="partners.html">Partners & Sponsors</a></li>
+      </ul>
+    </li>
     <li><a href="impact.html">Impact</a></li>
     <li><a href="projects.html">Projects</a></li>
     <li><a href="get-involved.html">Get Involved</a></li>
@@ -39,13 +46,17 @@
         <li><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li>
       </ul>
     </li>
-    <li><a href="contact.html">Contact</a></li></ul>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
   <a href="get-involved.html" class="nav-cta">Support a Cause</a>
 
-  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">ÃƒÂ¢Ã‹Å“Ã‚Â°</button>
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
 
-  <div class="mobile-menu" id="mobileMenu">    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
     <a href="about.html" onclick="toggleMobileMenu()">About</a>
+    <a href="about.html" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- About Us</a>
+    <a href="partners.html" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Partners & Sponsors</a>
     <a href="impact.html" onclick="toggleMobileMenu()">Impact</a>
     <a href="projects.html" onclick="toggleMobileMenu()">Projects</a>
     <a href="get-involved.html" onclick="toggleMobileMenu()">Get Involved</a>
@@ -54,7 +65,8 @@
     <a href="resource-center.html?doc=registration" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Registration Certificate</a>
     <a href="resource-center.html?doc=annual_report" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Annual Activity Report</a>
     <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
-    <a href="get-involved.html" class="mobile-cta" onclick="toggleMobileMenu()">Get Involved</a></div>
+    <a href="get-involved.html" class="mobile-cta" onclick="toggleMobileMenu()">Get Involved</a>
+  </div>
 </nav>
 
 <div class="page-hero">
@@ -84,7 +96,7 @@
     </div>
 
     <div class="admin-warning">
-      <strong>ÃƒÂ¢Ã…Â¡Ã‚Â ÃƒÂ¯Ã‚Â¸Ã‚Â Google Sign-In Local Origin Note:</strong>
+      <strong>⚠️ Google Sign-In Local Origin Note:</strong>
       Google Sign-In requires an HTTP/HTTPS server origin (like <code>http://localhost:8000</code>). 
       If you are launching this page directly via a file path (<code>file://</code>) in your browser, Google authentication will not function. 
       Use <strong>Local Test Mode</strong> to bypass sign-in and manage photos directly, or run a local server (e.g. <code>python -m http.server</code>).
@@ -142,7 +154,7 @@
 
       <!-- Upload Dropzone (styled by style.css) -->
       <div class="photo-upload-zone" id="uploadZone">
-        <div class="upload-icon">ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã‚Â¸</div>
+        <div class="upload-icon">📸</div>
         <p class="upload-text">Drag & drop photos here or <span class="browse-link">browse</span> to upload</p>
         <p class="upload-subtext">Supported formats: JPG, PNG, WEBP</p>
         <input type="file" id="fileInput" accept="image/*" multiple style="display: none;" />
@@ -331,7 +343,7 @@
       </a>
     </div>
   <div class="footer-copy">
-    Ãƒâ€šÃ‚Â© 2024 Dhaathree Foundation Ãƒâ€šÃ‚Â· Regd. No. 103/2019 Ãƒâ€šÃ‚Â· All rights reserved Ãƒâ€šÃ‚Â· Made with ÃƒÂ¢Ã‚ÂÃ‚Â¤ÃƒÂ¯Ã‚Â¸Ã‚Â for community empowerment
+    © 2024 Dhaathree Foundation · Regd. No. 103/2019 · All rights reserved · Made with ❤️ for community empowerment
   </div>
 </footer>
 
@@ -376,7 +388,7 @@
           { theme: "outline", size: "large", text: "signin_with", shape: "rectangular", logo_alignment: "left" }
         );
       } else {
-        console.warn("ÃƒÂ¢Ã…Â¡Ã‚Â ÃƒÂ¯Ã‚Â¸Ã‚Â Google Client ID is missing in backend .env configuration.");
+        console.warn("⚠️ Google Client ID is missing in backend .env configuration.");
       }
     } catch (err) {
       console.error("Failed to load Google client credentials dynamically:", err);
@@ -733,10 +745,10 @@
         tr.innerHTML = `
           <td><strong>${formattedDate}</strong></td>
           <td>${c.name}</td>
-          <td>ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã‚Â§ <a href="mailto:${c.email}">${c.email}</a></td>
-          <td>ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã…Â¾ <a href="tel:${c.phone}">${c.phone}</a></td>
+          <td>📧 <a href="mailto:${c.email}">${c.email}</a></td>
+          <td>📞 <a href="tel:${c.phone}">${c.phone}</a></td>
           <td style="text-align: center;">
-            <button class="admin-delete-app-btn" title="Remove Connection" onclick="deleteConnection('${c._id}')">ÃƒÂ°Ã…Â¸Ã¢â‚¬â€Ã¢â‚¬Ëœ</button>
+            <button class="admin-delete-app-btn" title="Remove Connection" onclick="deleteConnection('${c._id}')">🗑</button>
           </td>
         `;
         tableBody.appendChild(tr);
