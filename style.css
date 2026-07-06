@@ -1948,3 +1948,77 @@
 .nav-dropdown:hover .nav-arrow {
   transform: rotate(180deg);
 }
+
+/* ── SPONSORS SECTION ── */
+.sponsors {
+  padding: 80px 10%;
+  background: #ffffff;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.sponsors .section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+}
+
+.sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (max-width: 991px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .sponsors-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sponsor-card {
+  background: var(--cream);
+  border: 1px solid rgba(0,0,0,0.04);
+  border-radius: 16px;
+  padding: 30px 24px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+}
+
+.sponsor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(91,45,142,0.08);
+  border-color: var(--lime);
+}
+
+.sponsor-logo {
+  font-size: 2.8rem;
+  margin-bottom: 16px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.sponsor-card:hover .sponsor-logo {
+  transform: scale(1.15);
+}
+
+.sponsor-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: var(--dark);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.sponsor-card p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-weight: 500;
+}

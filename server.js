@@ -102,6 +102,15 @@ const resourceSchema = new mongoose.Schema({
 const Resource = mongoose.model('Resource', resourceSchema);
 Resource.collection.dropIndexes().catch(() => {});
 
+const sponsorSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  description: { type: String },
+  logoUrl: { type: String, required: true },
+  logoCloudinaryId: { type: String, required: true },
+  timestamp: { type: Date, default: Date.now }
+});
+const Sponsor = mongoose.model('Sponsor', sponsorSchema);
+
 // ── API ROUTES ──
 
 // 1. GET ALL PHOTOS FOR A WING
@@ -429,6 +438,81 @@ app.delete('/api/connections/:id', async (req, res) => {
       return res.status(404).json({ error: 'Connection record not found.' });
     }
     res.json({ message: 'Connection removed successfully.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 9.5. GET ALL SPONSORS
+app.get('/api/sponsors', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const sponsors = await Sponsor.find().sort({ timestamp: 1 });
+    res.json(sponsors);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 9.6. ADD A SPONSOR (with logo image upload)
+app.post('/api/sponsors', upload.single('logo'), async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const { name, description } = req.body;
+    if (!name) {
+      return res.status(400).json({ error: 'Sponsor name is required.' });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ error: 'Sponsor logo photo is required.' });
+    }
+
+    // Upload logo to Cloudinary
+    const fileStr = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+    const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+      folder: 'dhaathree_foundation/sponsors',
+      resource_type: 'image'
+    });
+
+    const newSponsor = new Sponsor({
+      name,
+      description,
+      logoUrl: uploadResponse.secure_url,
+      logoCloudinaryId: uploadResponse.public_id
+    });
+    await newSponsor.save();
+    res.status(201).json({ message: 'Sponsor added successfully!', sponsor: newSponsor });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 9.7. DELETE A SPONSOR (with Cloudinary cleanup)
+app.delete('/api/sponsors/:id', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+
+    const sponsor = await Sponsor.findById(req.params.id);
+    if (!sponsor) {
+      return res.status(404).json({ error: 'Sponsor not found.' });
+    }
+
+    // Delete image from Cloudinary
+    if (sponsor.logoCloudinaryId) {
+      await cloudinary.uploader.destroy(sponsor.logoCloudinaryId).catch(err => {
+        console.warn('Failed to delete sponsor logo from Cloudinary:', err.message);
+      });
+    }
+
+    // Delete record from database
+    await Sponsor.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Sponsor removed successfully.' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
