@@ -1337,6 +1337,46 @@
   width: 100%;
 }
 
+@media (max-width: 768px) {
+  .admin-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-bottom: none;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    background: white;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  }
+
+  .admin-tab {
+    width: 100%;
+    text-align: left;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 0;
+    margin: 0;
+    font-size: 0.95rem;
+    flex-shrink: unset;
+    box-sizing: border-box;
+  }
+
+  .admin-tab:last-child {
+    border-bottom: none;
+  }
+
+  .admin-tab::after {
+    display: none !important;
+  }
+
+  .admin-tab.active {
+    background: rgba(91, 45, 142, 0.04);
+    font-weight: 700;
+  }
+}
+
 /* ── ADMIN TABLES ── */
 .admin-table-wrapper {
   overflow-x: auto;
