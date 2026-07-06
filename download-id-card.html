@@ -260,10 +260,10 @@
         ctx.save();
         ctx.globalCompositeOperation = 'multiply'; // Blends away the signature background completely
         
-        const sigW = W * 0.16; // Width matching tested overlay
+        const sigW = W * 0.19; // Width matching tested overlay
         const sigH = sigW * (sigImg.naturalHeight / sigImg.naturalWidth);
-        const sigX = W * 0.81;
-        const sigY = H * 0.82;
+        const sigX = W * 0.74;
+        const sigY = H * 0.78;
 
         ctx.drawImage(sigImg, sigX, sigY, sigW, sigH);
         ctx.restore();
