@@ -16,71 +16,75 @@
       <img src="logo.jpeg" alt="Dhaathree Foundation Logo"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
            id="navLogoImg"/>
-      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">ధ</div>
+      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">à°§</div>
       <div class="nav-brand">
         <span class="en">Dhaathree Foundation</span>
         <span class="te">మీ సాధికారత కొరకై...</span>
       </div>
     </a>
   </div>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
+  <ul class="nav-links">    <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="impact.html">Impact</a></li>
     <li><a href="projects.html">Projects</a></li>
-    <li><a href="campaigns.html">Campaigns</a></li>
     <li><a href="get-involved.html" class="active">Get Involved</a></li>
     <li><a href="media.html">Media</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <a href="campaigns.html" class="nav-cta">Support a Cause</a>
+    <li class="nav-dropdown">
+      <a href="resource-center.html" class="dropdown-trigger">Resource Center <span class="nav-arrow">▼</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="resource-center.html?doc=registration">Registration Certificate</a></li>
+        <li><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li>
+      </ul>
+    </li>
+    <li><a href="contact.html">Contact</a></li></ul>
+  <a href="get-involved.html" class="nav-cta">Support a Cause</a>
 
-  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">â˜°</button>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+  <div class="mobile-menu" id="mobileMenu">    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
     <a href="about.html" onclick="toggleMobileMenu()">About</a>
     <a href="impact.html" onclick="toggleMobileMenu()">Impact</a>
     <a href="projects.html" onclick="toggleMobileMenu()">Projects</a>
-    <a href="campaigns.html" onclick="toggleMobileMenu()">Campaigns</a>
     <a href="get-involved.html" class="active" onclick="toggleMobileMenu()">Get Involved</a>
     <a href="media.html" onclick="toggleMobileMenu()">Media</a>
+    <a href="resource-center.html" onclick="toggleMobileMenu()">Resource Center</a>
+    <a href="resource-center.html?doc=registration" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Registration Certificate</a>
+    <a href="resource-center.html?doc=annual_report" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Annual Activity Report</a>
     <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
-    <a href="campaigns.html" class="mobile-cta" onclick="toggleMobileMenu()">Support a Cause</a>
-  </div>
+    <a href="get-involved.html" class="mobile-cta" onclick="toggleMobileMenu()">Get Involved</a></div>
 </nav>
 
 <div class="page-hero">
   <div class="crumb"><a href="index.html">Home</a> / Get Involved</div>
   <h1>Ways You Can Get Involved</h1>
-  <p>There are many ways to be part of the Dhaathree journey — find the one that fits you.</p>
+  <p>There are many ways to be part of the Dhaathree journey â€” find the one that fits you.</p>
 </div>
 
 <section class="get-involved">
   <div class="involved-grid">
     <div class="involved-card">
-      <div class="involved-icon">🙋</div>
+      <div class="involved-icon">ðŸ™‹</div>
       <h3>Volunteer</h3>
       <p>Give your time and skills to support our on-ground programs.</p>
-      <a href="#volunteer" class="involved-link">Sign Up →</a>
+      <a href="#volunteer" class="involved-link">Sign Up â†’</a>
     </div>
     <div class="involved-card">
-      <div class="involved-icon">💳</div>
+      <div class="involved-icon">ðŸ’³</div>
       <h3>Donate</h3>
       <p>Your contribution directly funds education, nutrition, and care.</p>
-      <a href="campaigns.html" class="involved-link">Give Now →</a>
+      <a href="get-involved.html" class="involved-link">Give Now â†’</a>
     </div>
     <div class="involved-card">
-      <div class="involved-icon">🤝</div>
+      <div class="involved-icon">ðŸ¤</div>
       <h3>Partner With Us</h3>
       <p>CSR collaborations and institutional partnerships welcome.</p>
-      <a href="contact.html" class="involved-link">Connect →</a>
+      <a href="contact.html" class="involved-link">Connect â†’</a>
     </div>
     <div class="involved-card">
-      <div class="involved-icon">📢</div>
+      <div class="involved-icon">ðŸ“¢</div>
       <h3>Spread the Word</h3>
       <p>Follow, share, and amplify our work in your own community.</p>
-      <a href="media.html" class="involved-link">Follow Us →</a>
+      <a href="media.html" class="involved-link">Follow Us â†’</a>
     </div>
   </div>
 </section>
@@ -151,6 +155,11 @@
       </div>
 
       <div class="volunteer-form-group full-width">
+        <label for="volPhoto">Profile Photo (Passport size for ID Card) *</label>
+        <input type="file" id="volPhoto" accept="image/*" required style="font-family:'Inter', sans-serif; font-size:0.95rem;">
+      </div>
+
+      <div class="volunteer-form-group full-width">
         <label for="volMessage">Message</label>
         <textarea id="volMessage" rows="4" placeholder="Why do you want to volunteer?"></textarea>
       </div>
@@ -168,10 +177,10 @@
 </section>
 
 <section class="donate">
-  <span class="tag">🌟 Every Bit Counts</span>
+  <span class="tag">ðŸŒŸ Every Bit Counts</span>
   <h2>Ready to Help Today?</h2>
   <p>Whichever way you choose, your involvement creates real change.</p>
-  <a href="contact.html" class="donate-btn-main">Help Today →</a>
+  <a href="contact.html" class="donate-btn-main">Help Today â†’</a>
 </section>
 
 
@@ -190,9 +199,9 @@
         <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="impact.html">Impact</a>
-        <a href="campaigns.html">Campaigns</a>
         <a href="get-involved.html">Get Involved</a>
         <a href="media.html">Media</a>
+        <a href="resource-center.html">Resource Center</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
@@ -211,7 +220,7 @@
       </a>
     </div>
   <div class="footer-copy">
-    © 2024 Dhaathree Foundation · Regd. No. 103/2019 · All rights reserved · Made with ❤️ for community empowerment
+    Â© 2024 Dhaathree Foundation Â· Regd. No. 103/2019 Â· All rights reserved Â· Made with â¤ï¸ for community empowerment
   </div>
 </footer>
 
@@ -308,25 +317,26 @@
       submitBtn.textContent = 'SUBMITTING...';
       submitBtn.disabled = true;
 
-      const data = {
-        name: document.getElementById('volName').value,
-        dob: dobVal,
-        email: document.getElementById('volEmail').value,
-        phone: document.getElementById('volPhone').value,
-        occupation: selectedOccupation,
-        city: document.getElementById('volCity').value,
-        district: document.getElementById('volDistrict').value,
-        state: document.getElementById('volState').value,
-        message: document.getElementById('volMessage').value
-      };
+      const formData = new FormData();
+      formData.append('name', document.getElementById('volName').value);
+      formData.append('dob', dobVal);
+      formData.append('email', document.getElementById('volEmail').value);
+      formData.append('phone', document.getElementById('volPhone').value);
+      formData.append('occupation', selectedOccupation);
+      formData.append('city', document.getElementById('volCity').value);
+      formData.append('district', document.getElementById('volDistrict').value);
+      formData.append('state', document.getElementById('volState').value);
+      formData.append('message', document.getElementById('volMessage').value);
+
+      const photoFile = document.getElementById('volPhoto').files[0];
+      if (photoFile) {
+        formData.append('photo', photoFile);
+      }
 
       try {
         const response = await fetch('/api/volunteers', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
+          body: formData
         });
 
         const contentType = response.headers.get("content-type");
@@ -347,8 +357,8 @@
         }
 
         // Save name and phone to generate ID card
-        const finalName = data.name;
-        const finalPhone = data.phone;
+        const finalName = formData.get('name');
+        const finalPhone = formData.get('phone');
 
         e.target.reset();
         if (otherOccupationGroup) {

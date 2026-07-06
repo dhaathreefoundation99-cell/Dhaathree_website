@@ -75,24 +75,28 @@
       <img src="logo.jpeg" alt="Dhaathree Foundation Logo"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
            id="navLogoImg"/>
-      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">ధ</div>
+      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">à°§</div>
       <div class="nav-brand">
         <span class="en">Dhaathree Foundation</span>
         <span class="te">మీ సాధికారత కొరకై...</span>
       </div>
     </a>
   </div>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
+  <ul class="nav-links">    <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="impact.html">Impact</a></li>
     <li><a href="projects.html">Projects</a></li>
-    <li><a href="campaigns.html">Campaigns</a></li>
     <li><a href="get-involved.html">Get Involved</a></li>
     <li><a href="media.html">Media</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <a href="campaigns.html" class="nav-cta">Support a Cause</a>
+    <li class="nav-dropdown">
+      <a href="resource-center.html" class="dropdown-trigger">Resource Center <span class="nav-arrow">▼</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="resource-center.html?doc=registration">Registration Certificate</a></li>
+        <li><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li>
+      </ul>
+    </li>
+    <li><a href="contact.html">Contact</a></li></ul>
+  <a href="get-involved.html" class="nav-cta">Support a Cause</a>
 </nav>
 
 <section class="id-card-download-section">
@@ -103,7 +107,7 @@
     <img id="idCardImage" src="" alt="Volunteer ID Card" class="id-card-image-preview" />
     
     <div>
-      <button id="downloadBtn" class="id-card-btn-download">💾 Download ID Card</button>
+      <button id="downloadBtn" class="id-card-btn-download">ðŸ’¾ Download ID Card</button>
     </div>
   </div>
 </section>
@@ -119,15 +123,15 @@
       </div>
     </div>
     <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="projects.html">Projects</a>
-      <a href="impact.html">Impact</a>
-      <a href="campaigns.html">Campaigns</a>
-      <a href="get-involved.html">Get Involved</a>
-      <a href="media.html">Media</a>
-      <a href="contact.html">Contact</a>
-    </div>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="impact.html">Impact</a>
+        <a href="get-involved.html">Get Involved</a>
+        <a href="media.html">Media</a>
+        <a href="resource-center.html">Resource Center</a>
+        <a href="contact.html">Contact</a>
+      </div>
   </div>
   <div class="footer-social-icons">
     <a href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" class="footer-social-icon" aria-label="YouTube" title="YouTube">
@@ -144,7 +148,7 @@
     </a>
   </div>
   <div class="footer-copy">
-    © 2024 Dhaathree Foundation · Regd. No. 103/2019 · All rights reserved · Made with ❤️ for community empowerment
+    Â© 2024 Dhaathree Foundation Â· Regd. No. 103/2019 Â· All rights reserved Â· Made with â¤ï¸ for community empowerment
   </div>
 </footer>
 
@@ -153,17 +157,90 @@
   const urlParams = new URLSearchParams(window.location.search);
   const name = urlParams.get('name') || 'Volunteer';
   const phone = urlParams.get('phone') || 'N/A';
+  const photo = urlParams.get('photo') || '';
 
   // Load and render ID card
   window.addEventListener('DOMContentLoaded', () => {
     const previewImg = document.getElementById('idCardImage');
     const downloadBtn = document.getElementById('downloadBtn');
     
+    let templateImgLoaded = false;
+    let signatureImgLoaded = false;
+    let photoImgLoaded = false;
+
     const img = new Image();
     img.src = 'id-card-template.jpg';
     img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      templateImgLoaded = true;
+      tryRenderCard();
+    };
 
-    img.onload = function() {
+    const sigImg = new Image();
+    sigImg.src = 'president-signature.png';
+    sigImg.crossOrigin = 'anonymous';
+    sigImg.onload = () => {
+      signatureImgLoaded = true;
+      tryRenderCard();
+    };
+
+    // Fallback if signature fails to load, render template anyway
+    sigImg.onerror = () => {
+      console.warn("President signature failed to load, rendering without signature.");
+      signatureImgLoaded = true;
+      tryRenderCard();
+    };
+
+    const volPhotoImg = new Image();
+    volPhotoImg.src = photo || 'logo.jpeg'; // Fallback to logo if not provided
+    volPhotoImg.crossOrigin = 'anonymous';
+    volPhotoImg.onload = () => {
+      photoImgLoaded = true;
+      tryRenderCard();
+    };
+    volPhotoImg.onerror = () => {
+      console.warn("Volunteer photo failed to load, falling back to logo.");
+      volPhotoImg.src = 'logo.jpeg'; // Fallback
+    };
+
+    function processSignature(image) {
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCanvas.width = image.naturalWidth;
+      tempCanvas.height = image.naturalHeight;
+      
+      tempCtx.drawImage(image, 0, 0);
+      
+      try {
+        const imgData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+        const data = imgData.data;
+        
+        // Convert signature background to transparent
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i+1];
+          const b = data[i+2];
+          
+          const brightness = (r + g + b) / 3;
+          
+          if (brightness > 180) {
+            data[i+3] = 0; // Fully transparent
+          } else if (brightness > 130) {
+            const factor = (180 - brightness) / 50; // Smooth blend
+            data[i+3] = Math.round(data[i+3] * factor);
+          }
+        }
+        tempCtx.putImageData(imgData, 0, 0);
+        return tempCanvas;
+      } catch (e) {
+        console.error("Signature transparency filtering failed:", e);
+        return image; // Fallback to raw signature if getImageData fails
+      }
+    }
+
+    function tryRenderCard() {
+      if (!templateImgLoaded || !signatureImgLoaded || !photoImgLoaded) return;
+
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
 
@@ -175,7 +252,7 @@
       const W = canvas.width;
       const H = canvas.height;
 
-      // Styling parameters
+      // Draw texts
       ctx.fillStyle = '#056b32';
       ctx.font = `bold ${Math.round(H * 0.046)}px 'Inter', Arial, sans-serif`;
       ctx.textBaseline = 'middle';
@@ -187,6 +264,45 @@
 
       // Contact No row (H * 0.61)
       ctx.fillText(phone, valueX, H * 0.61);
+
+      // Draw Volunteer Profile Photo clipped to rounded rectangle
+      if (volPhotoImg.complete && volPhotoImg.naturalWidth > 0) {
+        ctx.save();
+        ctx.beginPath();
+        
+        const px = 122;
+        const py = 250;
+        const pw = 230;
+        const ph = 230;
+        const radius = 20; // Matches rounded corner of card photo container
+        
+        ctx.moveTo(px + radius, py);
+        ctx.lineTo(px + pw - radius, py);
+        ctx.quadraticCurveTo(px + pw, py, px + pw, py + radius);
+        ctx.lineTo(px + pw, py + ph - radius);
+        ctx.quadraticCurveTo(px + pw, py + ph, px + pw - radius, py + ph);
+        ctx.lineTo(px + radius, py + ph);
+        ctx.quadraticCurveTo(px, py + ph, px, py + ph - radius);
+        ctx.lineTo(px, py + radius);
+        ctx.quadraticCurveTo(px, py, px + radius, py);
+        ctx.closePath();
+        
+        ctx.clip();
+        ctx.drawImage(volPhotoImg, px, py, pw, ph);
+        ctx.restore();
+      }
+
+      // Draw President Signature if loaded successfully
+      if (sigImg.complete && sigImg.naturalWidth > 0) {
+        const processedSig = processSignature(sigImg);
+        
+        const sigW = W * 0.18; // Width matching tested overlay
+        const sigH = sigW * (sigImg.naturalHeight / sigImg.naturalWidth);
+        const sigX = W * 0.76;
+        const sigY = H * 0.76;
+
+        ctx.drawImage(processedSig, sigX, sigY, sigW, sigH);
+      }
 
       try {
         const idCardUrl = canvas.toDataURL('image/jpeg', 0.95);
@@ -203,7 +319,7 @@
       } catch (err) {
         console.error('Failed to generate image URL:', err);
       }
-    };
+    }
   });
 </script>
 </body>

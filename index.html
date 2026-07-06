@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -16,54 +16,58 @@
       <img src="logo.jpeg" alt="Dhaathree Foundation Logo"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
            id="navLogoImg"/>
-      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">ధ</div>
+      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">à°§</div>
       <div class="nav-brand">
         <span class="en">Dhaathree Foundation</span>
         <span class="te">మీ సాధికారత కొరకై...</span>
       </div>
     </a>
   </div>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
+  <ul class="nav-links">    <li><a href="index.html" class="active">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="impact.html">Impact</a></li>
     <li><a href="projects.html">Projects</a></li>
-    <li><a href="campaigns.html">Campaigns</a></li>
     <li><a href="get-involved.html">Get Involved</a></li>
     <li><a href="media.html">Media</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <a href="campaigns.html" class="nav-cta">Support a Cause</a>
+    <li class="nav-dropdown">
+      <a href="resource-center.html" class="dropdown-trigger">Resource Center <span class="nav-arrow">▼</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="resource-center.html?doc=registration">Registration Certificate</a></li>
+        <li><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li>
+      </ul>
+    </li>
+    <li><a href="contact.html">Contact</a></li></ul>
+  <a href="get-involved.html" class="nav-cta">Support a Cause</a>
 
-  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">â˜°</button>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" class="active" onclick="toggleMobileMenu()">Home</a>
+  <div class="mobile-menu" id="mobileMenu">    <a href="index.html" class="active" onclick="toggleMobileMenu()">Home</a>
     <a href="about.html" onclick="toggleMobileMenu()">About</a>
     <a href="impact.html" onclick="toggleMobileMenu()">Impact</a>
     <a href="projects.html" onclick="toggleMobileMenu()">Projects</a>
-    <a href="campaigns.html" onclick="toggleMobileMenu()">Campaigns</a>
     <a href="get-involved.html" onclick="toggleMobileMenu()">Get Involved</a>
     <a href="media.html" onclick="toggleMobileMenu()">Media</a>
+    <a href="resource-center.html" onclick="toggleMobileMenu()">Resource Center</a>
+    <a href="resource-center.html?doc=registration" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Registration Certificate</a>
+    <a href="resource-center.html?doc=annual_report" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Annual Activity Report</a>
     <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
-    <a href="campaigns.html" class="mobile-cta" onclick="toggleMobileMenu()">Support a Cause</a>
-  </div>
+    <a href="get-involved.html" class="mobile-cta" onclick="toggleMobileMenu()">Get Involved</a></div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-content">
     <div class="hero-text">
-      <span class="eyebrow">🕊 Empowering Communities Since 2019</span>
+      <span class="eyebrow">ðŸ•Š Empowering Communities Since 2019</span>
       <h1>Nurturing Lives,<br/><span>Building Futures</span></h1>
       <div class="hero-te">మీ సాధికారత కొరకై...</div>
       <p>
-        Dhaathree Foundation works at the grassroots of Andhra Pradesh — uplifting women, tribal communities, the elderly, and children through education, nutrition, and sustainable livelihoods.
+        Dhaathree Foundation works at the grassroots of Andhra Pradesh â€” uplifting women, tribal communities, the elderly, and children through education, nutrition, and sustainable livelihoods.
       </p>
-      <div class="hero-regd">📋 Regd. No. : 103/2019</div>
+      <div class="hero-regd">ðŸ“‹ Regd. No. : 103/2019</div>
       <div class="hero-btns">
         <a href="projects.html" class="btn-primary">Explore Our Work</a>
-        <a href="campaigns.html" class="btn-outline">Support a Cause</a>
+        <a href="get-involved.html" class="btn-outline">Get Involved</a>
       </div>
     </div>
     <div class="hero-logo-wrap">
@@ -94,15 +98,15 @@
     <p>Every initiative we run is rooted in community need and guided by the belief that empowerment begins at the grassroots.</p>
   </div>
   <div class="pillars-grid">
-    <div class="pillar-card c1"><div class="pillar-icon">📚</div><h3>Education</h3><p>Scholarships, coaching centres, and digital literacy programs for underprivileged children and youth.</p></div>
-    <div class="pillar-card c2"><div class="pillar-icon">👩</div><h3>Women's Development</h3><p>Skill-building, self-help groups, and entrepreneurship training for financial independence.</p></div>
-    <div class="pillar-card c3"><div class="pillar-icon">🏕</div><h3>Tribal Welfare</h3><p>Healthcare outreach, cultural preservation, and livelihood support for tribal communities.</p></div>
-    <div class="pillar-card c4"><div class="pillar-icon">🧓</div><h3>Elderly Care</h3><p>Regular health check-ups, community companionship, and assistance for senior citizens.</p></div>
-    <div class="pillar-card c5"><div class="pillar-icon">🥗</div><h3>Nutrition</h3><p>Mid-day meal drives and anemia prevention programs for children and adolescent girls.</p></div>
-    <div class="pillar-card c6"><div class="pillar-icon">🌱</div><h3>Sustainable Livelihoods</h3><p>Organic farming support, farmer cooperatives, and micro-enterprise funding.</p></div>
+    <div class="pillar-card c1"><div class="pillar-icon">ðŸ“š</div><h3>Education</h3><p>Scholarships, coaching centres, and digital literacy programs for underprivileged children and youth.</p></div>
+    <div class="pillar-card c2"><div class="pillar-icon">ðŸ‘©</div><h3>Women's Development</h3><p>Skill-building, self-help groups, and entrepreneurship training for financial independence.</p></div>
+    <div class="pillar-card c3"><div class="pillar-icon">ðŸ•</div><h3>Tribal Welfare</h3><p>Healthcare outreach, cultural preservation, and livelihood support for tribal communities.</p></div>
+    <div class="pillar-card c4"><div class="pillar-icon">ðŸ§“</div><h3>Elderly Care</h3><p>Regular health check-ups, community companionship, and assistance for senior citizens.</p></div>
+    <div class="pillar-card c5"><div class="pillar-icon">ðŸ¥—</div><h3>Nutrition</h3><p>Mid-day meal drives and anemia prevention programs for children and adolescent girls.</p></div>
+    <div class="pillar-card c6"><div class="pillar-icon">ðŸŒ±</div><h3>Sustainable Livelihoods</h3><p>Organic farming support, farmer cooperatives, and micro-enterprise funding.</p></div>
   </div>
   <div style="text-align:center; margin-top:40px;">
-    <a href="projects.html" class="btn-primary">View All Projects →</a>
+    <a href="projects.html" class="btn-primary">View All Projects â†’</a>
   </div>
 </section>
 
@@ -119,22 +123,22 @@
       <span class="tag">Our Story</span>
       <h2>Rooted in Seva, Driven by Purpose</h2>
       <p>Dhaathree Foundation was born from a simple but powerful conviction: every person deserves the chance to flourish. Founded in 2019 and registered under Regd. No. 103/2019, we began our journey in Madanapalle, Andhra Pradesh.</p>
-      <p>The word <em>Dhaathree</em> (ధాత్రి) means Earth — the sustainer of all life. Like the earth, we strive to nourish without discrimination.</p>
+      <p><p>The word <em>Dhaathree</em> (ధాత్రి) means Earth — the sustainer of all life. Like the earth, we strive to nourish without discrimination.</p>
       <div class="about-regd">
-        <span class="icon">🏛</span>
+        <span class="icon">ðŸ›</span>
         <div class="detail"><strong>Regd. No. 103/2019</strong>Registered NGO, Andhra Pradesh, India</div>
       </div>
-      <div style="margin-top:24px;"><a href="about.html" class="btn-outline">Read Our Full Story →</a></div>
+      <div style="margin-top:24px;"><a href="about.html" class="btn-outline">Read Our Full Story â†’</a></div>
     </div>
   </div>
 </section>
 
 <!-- DONATE CTA -->
 <section class="donate">
-  <span class="tag">🤝 Make a Difference</span>
+  <span class="tag">ðŸ¤ Make a Difference</span>
   <h2>Your Generosity Transforms Lives</h2>
   <p>Every rupee you give goes directly to feeding a child, educating a girl, or supporting an elder.</p>
-  <a href="campaigns.html" class="donate-btn-main">Create Change →</a>
+  <a href="get-involved.html" class="donate-btn-main">Join Our Movement ->†’</a>
 </section>
 
 
@@ -153,9 +157,9 @@
         <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="impact.html">Impact</a>
-        <a href="campaigns.html">Campaigns</a>
         <a href="get-involved.html">Get Involved</a>
         <a href="media.html">Media</a>
+        <a href="resource-center.html">Resource Center</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
@@ -174,7 +178,7 @@
       </a>
     </div>
   <div class="footer-copy">
-    © 2024 Dhaathree Foundation · Regd. No. 103/2019 · All rights reserved · Made with ❤️ for community empowerment
+    Â© 2024 Dhaathree Foundation Â· Regd. No. 103/2019 Â· All rights reserved Â· Made with â¤ï¸ for community empowerment
   </div>
 </footer>
 
@@ -269,7 +273,7 @@
 <!-- CONNECT POPUP MODAL -->
 <div class="connect-modal-overlay" id="connectModal">
   <div class="connect-modal-card">
-    <button class="connect-modal-close" onclick="closeConnectModal()" aria-label="Close">✕</button>
+    <button class="connect-modal-close" onclick="closeConnectModal()" aria-label="Close">âœ•</button>
     <div class="connect-modal-title">Subscribe and Stay Connected With Us</div>
     <div class="connect-modal-desc">Be the first to know about our moving stories, new projects and opportunities. Join our community of changemakers today!</div>
     

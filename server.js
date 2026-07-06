@@ -35,7 +35,11 @@ if (!mongoUri || mongoUri.includes('your_mongodb_atlas_connection_string')) {
   console.warn('Please update the .env file in the project folder with your real connection string.\n');
 } else {
   mongoose.connect(mongoUri)
-    .then(() => console.log('Connected to MongoDB Database successfully'))
+    .then(() => {
+      console.log('Connected to MongoDB Database successfully');
+      // Drop the old unique index on type if it exists to allow multiple certificates
+      mongoose.connection.db.collection('resources').dropIndex('type_1').catch(() => {});
+    })
     .catch(err => console.error('MongoDB database connection error:', err));
 }
 
@@ -68,6 +72,8 @@ const volunteerSchema = new mongoose.Schema({
   district: { type: String, required: true },
   state: { type: String, required: true },
   message: { type: String },
+  photoUrl: { type: String }, // Store profile picture url
+  photoCloudinaryId: { type: String }, // Store profile picture Cloudinary ID
   status: { type: String, default: 'Pending' },
   timestamp: { type: Date, default: Date.now }
 });
@@ -82,6 +88,19 @@ const connectionSchema = new mongoose.Schema({
 });
 
 const Connection = mongoose.model('Connection', connectionSchema);
+
+const resourceSchema = new mongoose.Schema({
+  type: { type: String, required: true }, // "registration" or "annual_report"
+  title: { type: String, required: true },
+  description: { type: String },
+  name: { type: String, required: true },
+  url: { type: String, required: true },
+  cloudinaryId: { type: String, required: true },
+  timestamp: { type: Date, default: Date.now }
+});
+
+const Resource = mongoose.model('Resource', resourceSchema);
+Resource.collection.dropIndexes().catch(() => {});
 
 // ── API ROUTES ──
 
@@ -174,8 +193,8 @@ app.delete('/api/photos/:id', async (req, res) => {
   }
 });
 
-// 4. SUBMIT A VOLUNTEER APPLICATION
-app.post('/api/volunteers', async (req, res) => {
+// 4. SUBMIT A VOLUNTEER APPLICATION (with profile photo upload)
+app.post('/api/volunteers', upload.single('photo'), async (req, res) => {
   try {
     if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({ error: 'Database connection offline. Please check your MONGODB_URI in the .env file.' });
@@ -185,6 +204,10 @@ app.post('/api/volunteers', async (req, res) => {
     // Server-side validation
     if (!name || !dob || !email || !phone || !occupation || !city || !district || !state) {
       return res.status(400).json({ error: 'All required fields (*) must be completed.' });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ error: 'Profile photo is required.' });
     }
 
     // Age validation (18+)
@@ -204,6 +227,13 @@ app.post('/api/volunteers', async (req, res) => {
       return res.status(400).json({ error: 'You must be 18 years or older to volunteer with Dhaathree Foundation.' });
     }
 
+    // Upload photo to Cloudinary
+    const fileStr = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+    const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+      folder: 'dhaathree_foundation/volunteers',
+      resource_type: 'image'
+    });
+
     const newVolunteer = new Volunteer({
       name,
       dob,
@@ -213,12 +243,15 @@ app.post('/api/volunteers', async (req, res) => {
       city,
       district,
       state,
-      message
+      message,
+      photoUrl: uploadResponse.secure_url,
+      photoCloudinaryId: uploadResponse.public_id
     });
 
     await newVolunteer.save();
     res.status(201).json({ message: 'Volunteer application submitted successfully!' });
   } catch (err) {
+    console.error('Error submitting volunteer application:', err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -253,7 +286,7 @@ app.delete('/api/volunteers/:id', async (req, res) => {
 });
 
 // Helper to send approval email via Brevo HTTP API (Port 443 HTTPS - Works on Render Free Tier!)
-async function sendApprovalEmail(volunteerEmail, volunteerName, volunteerPhone) {
+async function sendApprovalEmail(volunteerEmail, volunteerName, volunteerPhone, volunteerPhotoUrl) {
   const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
     console.warn('⚠️ WARNING: BREVO_API_KEY is not configured in your environment. Email approval notification was skipped.');
@@ -261,7 +294,7 @@ async function sendApprovalEmail(volunteerEmail, volunteerName, volunteerPhone) 
   }
   
   const baseUrl = process.env.BASE_URL || 'http://localhost:8000';
-  const downloadLink = `${baseUrl}/download-id-card.html?name=${encodeURIComponent(volunteerName)}&phone=${encodeURIComponent(volunteerPhone)}`;
+  const downloadLink = `${baseUrl}/download-id-card.html?name=${encodeURIComponent(volunteerName)}&phone=${encodeURIComponent(volunteerPhone)}&photo=${encodeURIComponent(volunteerPhotoUrl || '')}`;
 
   const emailData = {
     sender: {
@@ -343,7 +376,7 @@ app.post('/api/volunteers/:id/approve', async (req, res) => {
     await volunteer.save();
 
     // Trigger the email approval process
-    const emailSent = await sendApprovalEmail(volunteer.email, volunteer.name, volunteer.phone);
+    const emailSent = await sendApprovalEmail(volunteer.email, volunteer.name, volunteer.phone, volunteer.photoUrl);
 
     res.json({ 
       message: 'Volunteer application approved successfully!', 
@@ -396,6 +429,85 @@ app.delete('/api/connections/:id', async (req, res) => {
       return res.status(404).json({ error: 'Connection record not found.' });
     }
     res.json({ message: 'Connection removed successfully.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 11. GET ALL RESOURCES
+app.get('/api/resources', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const resources = await Resource.find();
+    res.json(resources);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 12. UPLOAD A RESOURCE (allows multiple, takes title and description)
+app.post('/api/resources/:type', upload.single('file'), async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const { type } = req.params;
+    if (type !== 'registration' && type !== 'annual_report') {
+      return res.status(400).json({ error: 'Invalid resource type. Must be registration or annual_report.' });
+    }
+    const { title, description } = req.body;
+    if (!title || !title.trim()) {
+      return res.status(400).json({ error: 'Title is required.' });
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded.' });
+    }
+
+    // 1. Convert and upload new file to Cloudinary
+    const fileStr = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+    const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+      folder: 'dhaathree_foundation/resources',
+      resource_type: 'raw'
+    });
+
+    // 2. Save new record in MongoDB
+    const newResource = new Resource({
+      type,
+      title: title.trim(),
+      description: (description || '').trim(),
+      name: req.file.originalname,
+      url: uploadResponse.secure_url,
+      cloudinaryId: uploadResponse.public_id
+    });
+
+    await newResource.save();
+    res.status(200).json(newResource);
+  } catch (err) {
+    console.error('Resource upload error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 13. DELETE A RESOURCE BY ID
+app.delete('/api/resources/:id', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const { id } = req.params;
+    const resource = await Resource.findById(id);
+    if (!resource) {
+      return res.status(404).json({ error: 'Resource not found.' });
+    }
+
+    // Delete from Cloudinary
+    await cloudinary.uploader.destroy(resource.cloudinaryId, { resource_type: 'raw' });
+
+    // Delete from MongoDB
+    await Resource.findByIdAndDelete(id);
+    res.json({ message: 'Resource deleted successfully.' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

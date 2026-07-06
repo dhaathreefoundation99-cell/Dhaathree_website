@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -16,38 +16,42 @@
       <img src="logo.jpeg" alt="Dhaathree Foundation Logo"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
            id="navLogoImg"/>
-      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">ధ</div>
+      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">à°§</div>
       <div class="nav-brand">
         <span class="en">Dhaathree Foundation</span>
         <span class="te">మీ సాధికారత కొరకై...</span>
       </div>
     </a>
   </div>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
+  <ul class="nav-links">    <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="impact.html">Impact</a></li>
     <li><a href="projects.html" class="active">Projects</a></li>
-    <li><a href="campaigns.html">Campaigns</a></li>
     <li><a href="get-involved.html">Get Involved</a></li>
     <li><a href="media.html">Media</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <a href="campaigns.html" class="nav-cta">Support a Cause</a>
+    <li class="nav-dropdown">
+      <a href="resource-center.html" class="dropdown-trigger">Resource Center <span class="nav-arrow">▼</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="resource-center.html?doc=registration">Registration Certificate</a></li>
+        <li><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li>
+      </ul>
+    </li>
+    <li><a href="contact.html">Contact</a></li></ul>
+  <a href="get-involved.html" class="nav-cta">Support a Cause</a>
 
-  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">â˜°</button>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+  <div class="mobile-menu" id="mobileMenu">    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
     <a href="about.html" onclick="toggleMobileMenu()">About</a>
     <a href="impact.html" onclick="toggleMobileMenu()">Impact</a>
     <a href="projects.html" class="active" onclick="toggleMobileMenu()">Projects</a>
-    <a href="campaigns.html" onclick="toggleMobileMenu()">Campaigns</a>
     <a href="get-involved.html" onclick="toggleMobileMenu()">Get Involved</a>
     <a href="media.html" onclick="toggleMobileMenu()">Media</a>
+    <a href="resource-center.html" onclick="toggleMobileMenu()">Resource Center</a>
+    <a href="resource-center.html?doc=registration" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Registration Certificate</a>
+    <a href="resource-center.html?doc=annual_report" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Annual Activity Report</a>
     <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
-    <a href="campaigns.html" class="mobile-cta" onclick="toggleMobileMenu()">Support a Cause</a>
-  </div>
+    <a href="get-involved.html" class="mobile-cta" onclick="toggleMobileMenu()">Get Involved</a></div>
 </nav>
 
 <div class="page-hero">
@@ -68,11 +72,11 @@
   <div class="wing-row">
     <a href="ananda-nilayam.html" class="wing-card">
       <div class="wing-text w_ananda">
-        <div class="wing-icon">🏡</div>
+        <div class="wing-icon">ðŸ¡</div>
         <h3>Ananda Nilayam</h3>
         <span class="wing-sub">Old Age Home &amp; Rehabilitation Wing</span>
         <p>Providing a safe, loving, and dignified shelter for the elderly, homeless, and vulnerable. Ananda Nilayam ensures access to proper nutrition, healthcare, and community care in a family environment.</p>
-        <span class="wing-more">Learn More →</span>
+        <span class="wing-more">Learn More â†’</span>
       </div>
     </a>
   </div>
@@ -80,11 +84,11 @@
   <div class="wing-row">
     <a href="akshara-dhaathree.html" class="wing-card">
       <div class="wing-text w1">
-        <div class="wing-icon">📖</div>
+        <div class="wing-icon">ðŸ“–</div>
         <h3>Akshara Dhaathree</h3>
         <span class="wing-sub">Education &amp; Literacy Wing</span>
-        <p>Spreading the light of education among children through learning support, mentoring, and skill development — with special focus on underprivileged students.</p>
-        <span class="wing-more">Learn More →</span>
+        <p>Spreading the light of education among children through learning support, mentoring, and skill development â€” with special focus on underprivileged students.</p>
+        <span class="wing-more">Learn More â†’</span>
       </div>
     </a>
   </div>
@@ -92,11 +96,11 @@
   <div class="wing-row">
     <a href="aahara-dhaathree.html" class="wing-card">
       <div class="wing-text w2">
-        <div class="wing-icon">🍲</div>
+        <div class="wing-icon">ðŸ²</div>
         <h3>Aahara Dhaathree</h3>
         <span class="wing-sub">Food Support Wing</span>
         <p>Providing food support and distribution programs to needy communities, reducing hunger and promoting food security for children, elders, and families.</p>
-        <span class="wing-more">Learn More →</span>
+        <span class="wing-more">Learn More â†’</span>
       </div>
     </a>
   </div>
@@ -104,11 +108,11 @@
   <div class="wing-row">
     <a href="arogya-dhaathree.html" class="wing-card">
       <div class="wing-text w3">
-        <div class="wing-icon">🩺</div>
+        <div class="wing-icon">ðŸ©º</div>
         <h3>Arogya Dhaathree</h3>
         <span class="wing-sub">Health Care Wing</span>
         <p>Improving community health and well-being through awareness programs, medical camps, and accessible healthcare for the vulnerable.</p>
-        <span class="wing-more">Learn More →</span>
+        <span class="wing-more">Learn More â†’</span>
       </div>
     </a>
   </div>
@@ -116,11 +120,11 @@
   <div class="wing-row">
     <a href="vidya-dhaathree.html" class="wing-card">
       <div class="wing-text w4">
-        <div class="wing-icon">🎓</div>
+        <div class="wing-icon">ðŸŽ“</div>
         <h3>Vidya Dhaathree</h3>
         <span class="wing-sub">Knowledge &amp; Skill Wing</span>
-        <p>Promoting learning beyond the classroom — workshops, skill-building, and practical training that help youth discover their abilities.</p>
-        <span class="wing-more">Learn More →</span>
+        <p>Promoting learning beyond the classroom â€” workshops, skill-building, and practical training that help youth discover their abilities.</p>
+        <span class="wing-more">Learn More â†’</span>
       </div>
     </a>
   </div>
@@ -128,11 +132,11 @@
   <div class="wing-row">
     <a href="vikasa-dhaathree.html" class="wing-card">
       <div class="wing-text w5">
-        <div class="wing-icon">🚀</div>
+        <div class="wing-icon">ðŸš€</div>
         <h3>Vikasa Dhaathree</h3>
         <span class="wing-sub">Development Wing</span>
-        <p>Driving overall community development — social, educational, and economic growth through inclusive, sustainable programs.</p>
-        <span class="wing-more">Learn More →</span>
+        <p>Driving overall community development â€” social, educational, and economic growth through inclusive, sustainable programs.</p>
+        <span class="wing-more">Learn More â†’</span>
       </div>
     </a>
   </div>
@@ -140,11 +144,11 @@
   <div class="wing-row">
     <a href="vana-dhaathree.html" class="wing-card">
       <div class="wing-text w6">
-        <div class="wing-icon">🌳</div>
+        <div class="wing-icon">ðŸŒ³</div>
         <h3>Vana Dhaathree</h3>
         <span class="wing-sub">Environment Wing</span>
         <p>Protecting nature through tree plantation drives, conservation awareness, and eco-friendly practices for a greener future.</p>
-        <span class="wing-more">Learn More →</span>
+        <span class="wing-more">Learn More â†’</span>
       </div>
     </a>
   </div>
@@ -152,11 +156,11 @@
   <div class="wing-row">
     <a href="mahila-dhaathree.html" class="wing-card">
       <div class="wing-text w7">
-        <div class="wing-icon">👩</div>
+        <div class="wing-icon">ðŸ‘©</div>
         <h3>Mahila Dhaathree</h3>
         <span class="wing-sub">Women Empowerment Wing</span>
         <p>Empowering women through education, skills, and leadership programs that build confidence, dignity, and self-reliance.</p>
-        <span class="wing-more">Learn More →</span>
+        <span class="wing-more">Learn More â†’</span>
       </div>
     </a>
   </div>
@@ -164,11 +168,11 @@
   <div class="wing-row">
     <a href="dharma-dhaathree.html" class="wing-card">
       <div class="wing-text w8">
-        <div class="wing-icon">🕊</div>
+        <div class="wing-icon">ðŸ•Š</div>
         <h3>Dharma Dhaathree</h3>
         <span class="wing-sub">Social Values Wing</span>
         <p>Promoting ethical living, kindness, and social responsibility through activities that strengthen community values and unity.</p>
-        <span class="wing-more">Learn More →</span>
+        <span class="wing-more">Learn More â†’</span>
       </div>
     </a>
   </div>
@@ -176,11 +180,11 @@
   <div class="wing-row">
     <a href="sramika-dhaathree.html" class="wing-card">
       <div class="wing-text w9">
-        <div class="wing-icon">🛠</div>
+        <div class="wing-icon">ðŸ› </div>
         <h3>Sramika Dhaathree</h3>
         <span class="wing-sub">Workers Support Wing</span>
         <p>Supporting workers' welfare and dignity through rights awareness, skill development, and opportunities for labour communities.</p>
-        <span class="wing-more">Learn More →</span>
+        <span class="wing-more">Learn More â†’</span>
       </div>
     </a>
   </div>
@@ -188,11 +192,11 @@
   <div class="wing-row">
     <a href="general-services.html" class="wing-card">
       <div class="wing-text w10">
-        <div class="wing-icon">🤲</div>
+        <div class="wing-icon">ðŸ¤²</div>
         <h3>General Services</h3>
         <span class="wing-sub">Community Support Wing</span>
         <p>Responding to diverse community needs with welfare, awareness, and volunteer-driven initiatives across every area of public welfare.</p>
-        <span class="wing-more">Learn More →</span>
+        <span class="wing-more">Learn More â†’</span>
       </div>
     </a>
   </div>
@@ -201,10 +205,10 @@
 </section>
 
 <section class="donate">
-  <span class="tag">🛠 Get Involved</span>
+  <span class="tag">ðŸ›  Get Involved</span>
   <h2>Want to Support a Project?</h2>
   <p>Choose a cause close to your heart and see your contribution at work.</p>
-  <a href="campaigns.html" class="donate-btn-main">View Active Campaigns →</a>
+  <a href="get-involved.html" class="donate-btn-main">Join Our Movement ->†’</a>
 </section>
 
 
@@ -223,9 +227,9 @@
         <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="impact.html">Impact</a>
-        <a href="campaigns.html">Campaigns</a>
         <a href="get-involved.html">Get Involved</a>
         <a href="media.html">Media</a>
+        <a href="resource-center.html">Resource Center</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
@@ -244,7 +248,7 @@
       </a>
     </div>
   <div class="footer-copy">
-    © 2024 Dhaathree Foundation · Regd. No. 103/2019 · All rights reserved · Made with ❤️ for community empowerment
+    Â© 2024 Dhaathree Foundation Â· Regd. No. 103/2019 Â· All rights reserved Â· Made with â¤ï¸ for community empowerment
   </div>
 </footer>
 
