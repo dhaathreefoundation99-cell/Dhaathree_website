@@ -93,11 +93,49 @@
       <p>CSR collaborations and institutional partnerships welcome.</p>
       <a href="contact.html" class="involved-link">Connect →</a>
     </div>
-    <div class="involved-card">
+    <div class="involved-card" style="position: relative;">
       <div class="involved-icon">📢</div>
       <h3>Spread the Word</h3>
       <p>Follow, share, and amplify our work in your own community.</p>
-      <a href="media.html" class="involved-link">Follow Us →</a>
+      <a href="javascript:void(0)" class="involved-link" id="spreadWordBtn">Follow Us →</a>
+      
+      <!-- Hidden Social Drawer -->
+      <div id="socialDrawer" style="display: none; margin-top: 15px; flex-direction: column; gap: 10px; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 15px; text-align: left;">
+        <style>
+          @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .social-drawer-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+          }
+          .social-drawer-link:hover {
+            transform: translateX(4px);
+          }
+        </style>
+        <a href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" class="social-drawer-link" style="color: #dc3545; animation: slideDown 0.2s ease;">
+          <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </a>
+        <a href="https://www.instagram.com/dhaatreefoundation?utm_source=qr&igsh=MTNkbmZnbm8wbjVzMw==" target="_blank" class="social-drawer-link" style="color: #c13584; animation: slideDown 0.3s ease;">
+          <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          Instagram
+        </a>
+        <a href="https://linkedin.com/company/dhaathree-foundation" target="_blank" class="social-drawer-link" style="color: #0077b5; animation: slideDown 0.4s ease;">
+          <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://whatsapp.com/channel/0029VbCc2KSH5JLySeJeJc3v" target="_blank" class="social-drawer-link" style="color: #25d366; animation: slideDown 0.5s ease;">
+          <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.167 1.45 4.823 1.452 5.53 0 10.029-4.5 10.032-10.03.001-2.679-1.04-5.198-2.934-7.094C16.619 1.588 14.107.545 11.43.545 5.9 5.545 1.401 10.043 1.4 15.572c-.001 1.733.457 3.42 1.32 4.935L1.7 22.3l1.895-1.616zM17.487 14.4c-.299-.149-1.765-.87-2.04-.97-.274-.1-.475-.149-.675.15-.199.3-.773.97-.948 1.171-.174.199-.348.224-.648.075-.3-.15-1.266-.467-2.41-1.485-.89-.793-1.49-1.773-1.665-2.07-.174-.3-.019-.462.13-.611.135-.134.3-.349.45-.523.15-.174.199-.299.299-.498.1-.2.05-.375-.025-.524-.075-.15-.675-1.625-.925-2.225-.244-.589-.493-.51-.675-.52-.172-.007-.368-.009-.565-.009-.199 0-.523.075-.797.374-.275.3-1.047 1.022-1.047 2.492 0 1.47 1.07 2.89 1.22 3.09.149.2 2.105 3.2 5.097 4.49.712.308 1.268.491 1.701.628.718.228 1.37.196 1.885.119.574-.087 1.765-.72 2.015-1.42.25-.7.25-1.3.175-1.42-.075-.125-.275-.199-.575-.349z"/></svg>
+          WhatsApp Channel
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -203,8 +241,43 @@
           <option value="" disabled selected>Select Donation Purpose</option>
           <option value="akshara">Akshara Dhaathree (Education & Literacy)</option>
           <option value="ananda">Ananda Nilayam (Old Age Home & Rehab)</option>
-          <option value="general">General Fund (Grassroots Empowerment)</option>
         </select>
+      </div>
+
+      <!-- Akshara Dhaathree Details Container -->
+      <div id="aksharaContainer" class="full-width" style="display: none; background: rgba(91,45,142,0.03); border: 1px solid rgba(91,45,142,0.1); padding: 20px; border-radius: 12px; margin-bottom: 15px; box-sizing: border-box;">
+        <h4 style="margin: 0 0 8px 0; color: #5B2D8E; font-size: 1.05rem; font-family: 'Playfair Display', serif;">Sponsor a Student's Education</h4>
+        <p style="margin: 0 0 15px 0; font-size: 0.9rem; color: #555; line-height: 1.45;">
+          "Sponsoring a student's education lights up a life forever." For just <strong>₹100 per student</strong>, you can provide books, school bags, and primary learning resources to empower a child's future.
+        </p>
+        <div class="volunteer-form-group" style="margin-bottom: 0; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+          <label for="studentCount" style="margin-bottom: 0; font-weight: 600; min-width: 140px; color: var(--dark);">Number of Students *</label>
+          <div style="display: flex; align-items: center; gap: 5px;">
+            <button type="button" onclick="adjustStudentCount(-1)" style="width: 36px; height: 36px; border-radius: 6px; border: 1px solid #ddd; background: white; font-weight: bold; cursor: pointer; transition: all 0.2s;">-</button>
+            <input type="number" id="studentCount" value="1" min="1" style="width: 60px; height: 36px; text-align: center; border: 1px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 1rem; box-sizing: border-box;" oninput="updateAksharaAmount()" />
+            <button type="button" onclick="adjustStudentCount(1)" style="width: 36px; height: 36px; border-radius: 6px; border: 1px solid #ddd; background: white; font-weight: bold; cursor: pointer; transition: all 0.2s;">+</button>
+          </div>
+          <span id="aksharaCalculatedTotal" style="font-weight: 700; color: #5B2D8E; font-size: 1.05rem; margin-left: 15px;">Total: ₹100</span>
+        </div>
+      </div>
+
+      <!-- Ananda Nilayam Details Container -->
+      <div id="anandaContainer" class="full-width" style="display: none; background: rgba(220,53,69,0.02); border: 1px solid rgba(220,53,69,0.08); padding: 20px; border-radius: 12px; margin-bottom: 15px; box-sizing: border-box;">
+        <h4 style="margin: 0 0 8px 0; color: #C13584; font-size: 1.05rem; font-family: 'Playfair Display', serif;">Celebrate Life's Special Moments with Love</h4>
+        <p style="margin: 0 0 15px 0; font-size: 0.9rem; color: #555; line-height: 1.45;">
+          Celebrate birthdays, marriage anniversaries, or special memories with our beloved elders at <strong>Ananda Nilayam Old Age Home & Rehab</strong>. Select one of the meal packages below:
+        </p>
+        <div class="volunteer-form-group" style="margin-bottom: 0;">
+          <label for="anandaMealPackage" style="font-weight: 600; display: block; margin-bottom: 6px; color: var(--dark);">Choose Meal Package *</label>
+          <select id="anandaMealPackage" onchange="updateAnandaAmount()" style="width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box;">
+            <option value="5000">Full Day (Breakfast, Lunch & Dinner) — ₹5,000</option>
+            <option value="2000">Only Breakfast — ₹2,000</option>
+            <option value="3000">Only Lunch — ₹3,000</option>
+            <option value="2000">Only Dinner — ₹2,000</option>
+            <option value="4000">Special Lunch — ₹4,000</option>
+            <option value="custom">Custom Donation Amount</option>
+          </select>
+        </div>
       </div>
 
       <!-- Donation Amount -->
@@ -249,43 +322,7 @@
         <textarea id="donorAddress" rows="3" placeholder="Enter detailed address" required></textarea>
       </div>
 
-      <!-- Occasion Toggle -->
-      <div class="volunteer-form-group full-width" style="display: flex; align-items: center; gap: 10px; margin-top: 10px; margin-bottom: 10px;">
-        <input type="checkbox" id="hasOccasion" style="width: auto; cursor: pointer;">
-        <label for="hasOccasion" style="margin-bottom: 0; cursor: pointer; font-weight: 500;">Is this donation for a special occasion?</label>
-      </div>
 
-      <!-- Occasion Details Container -->
-      <div id="occasionDetailsContainer" class="full-width" style="display: none; grid-template-columns: 1fr 1fr; gap: 20px; background: rgba(0,0,0,0.02); padding: 20px; border-radius: 12px; border: 1px dashed rgba(0,0,0,0.1); margin-bottom: 15px;">
-        <h4 style="grid-column: span 2; margin: 0; color: #5B2D8E; font-size: 1rem;">Occasion Celebrations</h4>
-        
-        <div class="volunteer-form-group" style="margin-bottom: 0;">
-          <label for="occasionDate">Date of Occasion</label>
-          <input type="date" id="occasionDate">
-        </div>
-
-        <div class="volunteer-form-group" style="margin-bottom: 0;">
-          <label for="occasionType">Type of Occasion</label>
-          <select id="occasionType">
-            <option value="" disabled selected>Select Occasion Type</option>
-            <option value="Birthday">Birthday</option>
-            <option value="Wedding Anniversary">Wedding Anniversary</option>
-            <option value="Memorial Day">Memorial Day</option>
-            <option value="Festival">Festival</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div class="volunteer-form-group" style="margin-bottom: 0;">
-          <label for="occasionName">Name of Person</label>
-          <input type="text" id="occasionName" placeholder="Name of Honoree">
-        </div>
-
-        <div class="volunteer-form-group" style="margin-bottom: 0;">
-          <label for="occasionPhone">Occasion Contact Number</label>
-          <input type="tel" id="occasionPhone" placeholder="Enter contact number">
-        </div>
-      </div>
 
       <!-- Captcha checkbox -->
       <div class="volunteer-form-group full-width" style="display: flex; align-items: center; gap: 10px; margin-top: 15px;">
@@ -521,33 +558,7 @@
     });
   }
 
-  // Occasion Details Toggle
-  const hasOccasion = document.getElementById('hasOccasion');
-  const occasionDetailsContainer = document.getElementById('occasionDetailsContainer');
-  const occasionDateInput = document.getElementById('occasionDate');
-  const occasionTypeInput = document.getElementById('occasionType');
-  const occasionNameInput = document.getElementById('occasionName');
-  const occasionPhoneInput = document.getElementById('occasionPhone');
 
-  if (hasOccasion && occasionDetailsContainer) {
-    hasOccasion.addEventListener('change', () => {
-      if (hasOccasion.checked) {
-        occasionDetailsContainer.style.display = 'grid';
-        occasionDateInput.required = true;
-        occasionTypeInput.required = true;
-        occasionNameInput.required = true;
-      } else {
-        occasionDetailsContainer.style.display = 'none';
-        occasionDateInput.required = false;
-        occasionTypeInput.required = false;
-        occasionNameInput.required = false;
-        occasionDateInput.value = '';
-        occasionTypeInput.value = '';
-        occasionNameInput.value = '';
-        occasionPhoneInput.value = '';
-      }
-    });
-  }
 
   // Donor form submission logic with Razorpay integration
   const donorForm = document.getElementById('donorForm');
@@ -582,10 +593,10 @@
         state: document.getElementById('donorState').value,
         address: document.getElementById('donorAddress').value,
         donationCause: document.getElementById('donorCause').value,
-        occasionDate: hasOccasion.checked ? occasionDateInput.value : '',
-        occasionType: hasOccasion.checked ? occasionTypeInput.value : '',
-        occasionName: hasOccasion.checked ? occasionNameInput.value : '',
-        occasionPhone: hasOccasion.checked ? occasionPhoneInput.value : ''
+        occasionDate: '',
+        occasionType: '',
+        occasionName: '',
+        occasionPhone: ''
       };
 
       try {
@@ -706,16 +717,107 @@
 
   function resetDonorForm() {
     donorForm.reset();
-    if (occasionDetailsContainer) {
-      occasionDetailsContainer.style.display = 'none';
-      occasionDateInput.required = false;
-      occasionTypeInput.required = false;
-      occasionNameInput.required = false;
+    const aksharaContainer = document.getElementById('aksharaContainer');
+    const anandaContainer = document.getElementById('anandaContainer');
+    const amtInput = document.getElementById('donorAmount');
+    if (aksharaContainer) aksharaContainer.style.display = 'none';
+    if (anandaContainer) anandaContainer.style.display = 'none';
+    if (amtInput) {
+      amtInput.readOnly = false;
+      amtInput.placeholder = 'Enter donation amount';
     }
     loadDonationSettings();
   }
 
+  // Toggle Social Drawer on Spread the Word card
+  const spreadWordBtn = document.getElementById('spreadWordBtn');
+  const socialDrawer = document.getElementById('socialDrawer');
+  if (spreadWordBtn && socialDrawer) {
+    spreadWordBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (socialDrawer.style.display === 'none' || socialDrawer.style.display === '') {
+        socialDrawer.style.display = 'flex';
+        spreadWordBtn.textContent = 'Close ×';
+      } else {
+        socialDrawer.style.display = 'none';
+        spreadWordBtn.textContent = 'Follow Us →';
+      }
+    });
+  }
 
+  // Dynamic calculations for Akshara Dhaathree & Ananda Nilayam
+  window.adjustStudentCount = function(val) {
+    const input = document.getElementById('studentCount');
+    if (!input) return;
+    let current = parseInt(input.value) || 1;
+    current += val;
+    if (current < 1) current = 1;
+    input.value = current;
+    window.updateAksharaAmount();
+  };
+
+  window.updateAksharaAmount = function() {
+    const input = document.getElementById('studentCount');
+    const display = document.getElementById('aksharaCalculatedTotal');
+    const amtInput = document.getElementById('donorAmount');
+    if (!input || !display || !amtInput) return;
+    
+    let count = parseInt(input.value) || 1;
+    if (count < 1) {
+      count = 1;
+      input.value = 1;
+    }
+    const total = count * 100;
+    display.textContent = `Total: ₹${total}`;
+    amtInput.value = total;
+    amtInput.readOnly = true;
+  };
+
+  window.updateAnandaAmount = function() {
+    const select = document.getElementById('anandaMealPackage');
+    const amtInput = document.getElementById('donorAmount');
+    if (!select || !amtInput) return;
+    
+    const val = select.value;
+    if (val === 'custom') {
+      amtInput.value = '';
+      amtInput.readOnly = false;
+      amtInput.placeholder = 'Enter custom donation amount';
+      amtInput.focus();
+    } else {
+      amtInput.value = val;
+      amtInput.readOnly = true;
+    }
+  };
+
+  // Purpose of Donation change handler
+  const donorCauseSelect = document.getElementById('donorCause');
+  if (donorCauseSelect) {
+    donorCauseSelect.addEventListener('change', () => {
+      const val = donorCauseSelect.value;
+      const aksharaContainer = document.getElementById('aksharaContainer');
+      const anandaContainer = document.getElementById('anandaContainer');
+      const amtInput = document.getElementById('donorAmount');
+      
+      if (val === 'akshara') {
+        if (aksharaContainer) aksharaContainer.style.display = 'block';
+        if (anandaContainer) anandaContainer.style.display = 'none';
+        window.updateAksharaAmount();
+      } else if (val === 'ananda') {
+        if (aksharaContainer) aksharaContainer.style.display = 'none';
+        if (anandaContainer) anandaContainer.style.display = 'block';
+        window.updateAnandaAmount();
+      } else {
+        if (aksharaContainer) aksharaContainer.style.display = 'none';
+        if (anandaContainer) anandaContainer.style.display = 'none';
+        if (amtInput) {
+          amtInput.value = '';
+          amtInput.readOnly = false;
+          amtInput.placeholder = 'Enter donation amount';
+        }
+      }
+    });
+  }
 </script>
 </body>
 </html>
