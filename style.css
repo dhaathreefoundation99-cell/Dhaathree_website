@@ -24,7 +24,7 @@
 
   /* ── NAV ── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 40px; left: 0; right: 0; z-index: 100;
     background: rgba(255,255,255,0.96);
     backdrop-filter: blur(8px);
     border-bottom: 3px solid var(--lime);
@@ -102,7 +102,7 @@
     min-height: 100vh;
     background: linear-gradient(135deg, #f0f7e6 0%, #e8f5e9 40%, #f3e5f5 100%);
     display: flex; align-items: center;
-    padding: 100px 5% 60px;
+    padding: 140px 5% 60px;
     position: relative; overflow: hidden;
   }
 
@@ -504,7 +504,7 @@
 
   /* ── WING DETAIL PAGE ── */
   .wing-detail-hero {
-    padding: 130px 5% 50px;
+    padding: 170px 5% 50px;
     text-align: center;
     position: relative; overflow: hidden;
   }
@@ -613,7 +613,7 @@
 
   .mobile-menu {
     display: none; flex-direction: column;
-    position: fixed; top: 68px; left: 0; right: 0;
+    position: fixed; top: 108px; left: 0; right: 0;
     background: white; z-index: 99;
     box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     border-top: 3px solid var(--lime);
@@ -791,7 +791,7 @@
 
 /* ── INNER PAGE HERO (for About/Impact/Projects/etc.) ── */
 .page-hero {
-  padding: 130px 5% 60px;
+  padding: 170px 5% 60px;
   background: linear-gradient(135deg, #f0f7e6 0%, #e8f5e9 40%, #f3e5f5 100%);
   text-align: center;
   position: relative; overflow: hidden;

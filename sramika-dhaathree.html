@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -10,6 +10,36 @@
 </head>
 <body>
 
+<!-- TOP UTILITY BAR -->
+<div class="top-utility-bar" style="background: #5B2D8E; color: white; padding: 0 5%; font-family: 'Inter', sans-serif; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; height: 40px; position: fixed; top: 0; left: 0; right: 0; z-index: 101; box-sizing: border-box; border-bottom: 1.5px solid rgba(255,255,255,0.1);">
+  <div style="font-weight: 600; color: #8DC63F; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">
+    Regd. No: 103/2019
+  </div>
+  <div style="display: flex; gap: 15px; align-items: center;">
+    <a href="tel:7981885165" title="Call Us: +91 7981885165" style="color: white; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.1); transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+      <svg style="width: 15px; height: 15px; fill: white;" viewBox="0 0 24 24"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm-5 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm5-5H7V4h10v13z"/></svg>
+    </a>
+    <a href="mailto:dhaathreefoundation99@gmail.com" title="Email Us: dhaathreefoundation99@gmail.com" style="color: white; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.1); transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+      <svg style="width: 16px; height: 16px; fill: white;" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </a>
+  </div>
+</div>
+  <div style="display: flex; gap: 20px; align-items: center;">
+    <a href="tel:7981885165" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 500; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+      <svg style="width: 15px; height: 15px; fill: white;" viewBox="0 0 24 24"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm-5 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm5-5H7V4h10v13z"/></svg>
+      7981885165
+    </a>
+    <a href="mailto:info@dhaathreefoundation.org" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 500; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+      <svg style="width: 16px; height: 16px; fill: white;" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      info@dhaathreefoundation.org
+    </a>
+  </div>
+</div>
+  <div style="font-weight: 600; color: #8DC63F; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">
+    Regd. No: 103/2019
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
@@ -17,17 +47,17 @@
       <img src="logo.jpeg" alt="Dhaathree Foundation Logo"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
            id="navLogoImg"/>
-      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">ధ</div>
+      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">?</div>
       <div class="nav-brand">
         <span class="en">Dhaathree Foundation</span>
-        <span class="te">మీ సాధికారత కొరకై...</span>
+        <span class="te">?? ???????? ?????...</span>
       </div>
     </a>
   </div>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li class="nav-dropdown">
-      <a href="about.html" class="dropdown-trigger">About <span class="nav-arrow">▼</span></a>
+      <a href="about.html" class="dropdown-trigger">About <span class="nav-arrow">?</span></a>
       <ul class="nav-dropdown-menu">
         <li><a href="about.html">About Us</a></li>
         <li><a href="partners.html">Partners & Sponsors</a></li>
@@ -38,7 +68,7 @@
     <li><a href="get-involved.html">Get Involved</a></li>
     <li><a href="media.html">Media</a></li>
     <li class="nav-dropdown">
-      <a href="resource-center.html" class="dropdown-trigger">Resource Center <span class="nav-arrow">▼</span></a>
+      <a href="resource-center.html" class="dropdown-trigger">Resource Center <span class="nav-arrow">?</span></a>
       <ul class="nav-dropdown-menu">
         <li><a href="resource-center.html?doc=registration">Registration Certificate</a></li>
         <li><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li>
@@ -48,7 +78,7 @@
   </ul>
   <a href="get-involved.html" class="nav-cta">Support a Cause</a>
 
-  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">?</button>
 
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" onclick="toggleMobileMenu()">Home</a>
@@ -69,14 +99,14 @@
 
 <div class="wing-detail-hero">
   <div class="crumb"><a href="index.html">Home</a> / <a href="projects.html">Projects</a> / Sramika Dhaathree</div>
-  <div class="wing-detail-icon">🛠</div>
+  <div class="wing-detail-icon">??</div>
   <h1>Sramika Dhaathree</h1>
   <span class="wing-sub">Workers Support Wing</span>
 </div>
 
 <div class="wing-detail-body">
   <p>Sramika Dhaathree supports workers and their welfare, recognizing the contribution of working communities. The wing promotes dignity and respect for labour, supporting awareness about rights and opportunities.</p>
-  <p>Skill development and empowerment activities are encouraged to help workers improve their quality of life, with a focus on social and economic support. Sramika Dhaathree values every worker's contribution — its aim is a fair, supportive society for labour communities.</p>
+  <p>Skill development and empowerment activities are encouraged to help workers improve their quality of life, with a focus on social and economic support. Sramika Dhaathree values every worker's contribution � its aim is a fair, supportive society for labour communities.</p>
 </div>
 
 <section class="wing-focus">
@@ -91,14 +121,14 @@
 </section>
 
 <section class="donate">
-  <span class="tag">🛠 Get Involved</span>
+  <span class="tag">?? Get Involved</span>
   <h2>Want to Support Sramika Dhaathree?</h2>
   <p>Choose a cause close to your heart and see your contribution at work.</p>
   <a href="get-involved.html" class="donate-btn-main">Join Our Movement -></a>
 </section>
 
 <div class="wing-back">
-  <a href="projects.html">← Back to All Projects</a>
+  <a href="projects.html">? Back to All Projects</a>
 </div>
 
 <!-- FOOTER -->
@@ -108,7 +138,7 @@
       <img src="logo.jpeg" alt="Logo" onerror="this.style.display='none';" />
       <div>
         <div class="fn">Dhaathree Foundation</div>
-        <div class="te">మీ సాధికారత కొరకై...</div>
+        <div class="te">?? ???????? ?????...</div>
       </div>
     </div>
     <div class="footer-links">
@@ -137,7 +167,7 @@
       </a>
     </div>
   <div class="footer-copy">
-    © 2024 Dhaathree Foundation · Regd. No. 103/2019 · All rights reserved · Made with ❤️ for community empowerment
+    � 2024 Dhaathree Foundation � Regd. No. 103/2019 � All rights reserved � Made with ?? for community empowerment
   </div>
 </footer>
 
