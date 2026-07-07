@@ -278,7 +278,7 @@
       <div id="aksharaContainer" class="full-width" style="display: none; background: rgba(91,45,142,0.03); border: 1px solid rgba(91,45,142,0.1); padding: 20px; border-radius: 12px; margin-bottom: 15px; box-sizing: border-box;">
         <h4 style="margin: 0 0 8px 0; color: #5B2D8E; font-size: 1.05rem; font-family: 'Playfair Display', serif;">Sponsor a Student's Education</h4>
         <p style="margin: 0 0 15px 0; font-size: 0.9rem; color: #555; line-height: 1.45;">
-          "Sponsoring a student's education lights up a life forever." For just <strong>₹100 per student</strong>, you can provide books, school bags, and primary learning resources to empower a child's future.
+          "Sponsoring a student's education lights up a life forever." For just <strong>₹1 per student</strong>, you can provide books, school bags, and primary learning resources to empower a child's future.
         </p>
         <div class="volunteer-form-group" style="margin-bottom: 0; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
           <label for="studentCount" style="margin-bottom: 0; font-weight: 600; min-width: 140px; color: var(--dark);">Number of Students *</label>
@@ -287,7 +287,7 @@
             <input type="number" id="studentCount" value="1" min="1" style="width: 60px; height: 36px; text-align: center; border: 1px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 1rem; box-sizing: border-box;" oninput="updateAksharaAmount()" />
             <button type="button" onclick="adjustStudentCount(1)" style="width: 36px; height: 36px; border-radius: 6px; border: 1px solid #ddd; background: white; font-weight: bold; cursor: pointer; transition: all 0.2s;">+</button>
           </div>
-          <span id="aksharaCalculatedTotal" style="font-weight: 700; color: #5B2D8E; font-size: 1.05rem; margin-left: 15px;">Total: ₹100</span>
+          <span id="aksharaCalculatedTotal" style="font-weight: 700; color: #5B2D8E; font-size: 1.05rem; margin-left: 15px;">Total: ₹1</span>
         </div>
       </div>
 
@@ -797,7 +797,7 @@
       count = 1;
       input.value = 1;
     }
-    const total = count * 100;
+    const total = count * 1;
     display.textContent = `Total: ₹${total}`;
     amtInput.value = total;
     amtInput.readOnly = true;

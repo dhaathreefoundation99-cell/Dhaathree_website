@@ -44,9 +44,9 @@ if (!mongoUri || mongoUri.includes('your_mongodb_atlas_connection_string')) {
       try {
         const existing = await Setting.findOne({ key: 'donation_amount' });
         if (!existing) {
-          const defaultAmt = new Setting({ key: 'donation_amount', value: '500' });
+          const defaultAmt = new Setting({ key: 'donation_amount', value: '1' });
           await defaultAmt.save();
-          console.log('Initialized default donation_amount to 500 INR');
+          console.log('Initialized default donation_amount to 1 INR');
         }
       } catch (err) {
         console.error('Failed to initialize settings:', err);
