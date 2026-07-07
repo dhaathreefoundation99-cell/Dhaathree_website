@@ -6,6 +6,7 @@
 <title>Get Involved | Dhaathree Foundation</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&family=Noto+Sans+Telugu:wght@400;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css"/>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 
@@ -84,7 +85,7 @@
       <div class="involved-icon">💳</div>
       <h3>Donate</h3>
       <p>Your contribution directly funds education, nutrition, and care.</p>
-      <a href="get-involved.html" class="involved-link">Give Now →</a>
+      <a href="#donate" class="involved-link">Give Now →</a>
     </div>
     <div class="involved-card">
       <div class="involved-icon">🤝</div>
@@ -188,6 +189,117 @@
   </div>
 </section>
 
+<!-- DONOR FORM SECTION -->
+<section class="volunteer-section" id="donate" style="margin-top: 40px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 60px;">
+  <div class="volunteer-form-box">
+    <h2>Donation Details</h2>
+    <p>Please share your details to register your support. Once submitted, our team will coordinate with you.</p>
+    
+    <form class="volunteer-form" id="donorForm">
+      <!-- Donation Cause Selection -->
+      <div class="volunteer-form-group full-width">
+        <label for="donorCause">Purpose of Donation *</label>
+        <select id="donorCause" required>
+          <option value="" disabled selected>Select Donation Purpose</option>
+          <option value="akshara">Akshara Dhaathree (Education & Literacy)</option>
+          <option value="ananda">Ananda Nilayam (Old Age Home & Rehab)</option>
+          <option value="general">General Fund (Grassroots Empowerment)</option>
+        </select>
+      </div>
+
+      <!-- Donation Amount -->
+      <div class="volunteer-form-group">
+        <label for="donorAmount">Donation Amount (₹) *</label>
+        <input type="number" id="donorAmount" min="1" required placeholder="Enter donation amount">
+      </div>
+
+      <!-- Donor Details -->
+      <div class="volunteer-form-group">
+        <label for="donorName">Donor Name *</label>
+        <input type="text" id="donorName" placeholder="Enter full name" required>
+      </div>
+
+      <div class="volunteer-form-group">
+        <label for="donorEmail">Email ID *</label>
+        <input type="email" id="donorEmail" placeholder="Enter email address" required>
+      </div>
+
+      <div class="volunteer-form-group">
+        <label for="donorPhone">Phone Number *</label>
+        <input type="tel" id="donorPhone" placeholder="Enter 10-digit mobile number" required>
+      </div>
+
+      <div class="volunteer-form-group">
+        <label for="donorCity">City *</label>
+        <input type="text" id="donorCity" placeholder="Enter City" required>
+      </div>
+
+      <div class="volunteer-form-group">
+        <label for="donorDistrict">District *</label>
+        <input type="text" id="donorDistrict" placeholder="Enter District" required>
+      </div>
+
+      <div class="volunteer-form-group">
+        <label for="donorState">State *</label>
+        <input type="text" id="donorState" placeholder="Enter State" required>
+      </div>
+
+      <div class="volunteer-form-group full-width">
+        <label for="donorAddress">Address *</label>
+        <textarea id="donorAddress" rows="3" placeholder="Enter detailed address" required></textarea>
+      </div>
+
+      <!-- Occasion Toggle -->
+      <div class="volunteer-form-group full-width" style="display: flex; align-items: center; gap: 10px; margin-top: 10px; margin-bottom: 10px;">
+        <input type="checkbox" id="hasOccasion" style="width: auto; cursor: pointer;">
+        <label for="hasOccasion" style="margin-bottom: 0; cursor: pointer; font-weight: 500;">Is this donation for a special occasion?</label>
+      </div>
+
+      <!-- Occasion Details Container -->
+      <div id="occasionDetailsContainer" class="full-width" style="display: none; grid-template-columns: 1fr 1fr; gap: 20px; background: rgba(0,0,0,0.02); padding: 20px; border-radius: 12px; border: 1px dashed rgba(0,0,0,0.1); margin-bottom: 15px;">
+        <h4 style="grid-column: span 2; margin: 0; color: #5B2D8E; font-size: 1rem;">Occasion Celebrations</h4>
+        
+        <div class="volunteer-form-group" style="margin-bottom: 0;">
+          <label for="occasionDate">Date of Occasion</label>
+          <input type="date" id="occasionDate">
+        </div>
+
+        <div class="volunteer-form-group" style="margin-bottom: 0;">
+          <label for="occasionType">Type of Occasion</label>
+          <select id="occasionType">
+            <option value="" disabled selected>Select Occasion Type</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Wedding Anniversary">Wedding Anniversary</option>
+            <option value="Memorial Day">Memorial Day</option>
+            <option value="Festival">Festival</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="volunteer-form-group" style="margin-bottom: 0;">
+          <label for="occasionName">Name of Person</label>
+          <input type="text" id="occasionName" placeholder="Name of Honoree">
+        </div>
+
+        <div class="volunteer-form-group" style="margin-bottom: 0;">
+          <label for="occasionPhone">Occasion Contact Number</label>
+          <input type="tel" id="occasionPhone" placeholder="Enter contact number">
+        </div>
+      </div>
+
+      <!-- Captcha checkbox -->
+      <div class="volunteer-form-group full-width" style="display: flex; align-items: center; gap: 10px; margin-top: 15px;">
+        <input type="checkbox" id="donorRobotCheck" required style="width: auto;">
+        <label for="donorRobotCheck" style="margin-bottom: 0;">I'm not a robot</label>
+      </div>
+
+      <div class="full-width" style="margin-top: 20px;">
+        <button type="submit" class="volunteer-submit-btn" style="background: linear-gradient(135deg,#5B2D8E,#8DC63F);">SUBMIT DONATION DETAILS</button>
+      </div>
+    </form>
+  </div>
+</section>
+
 <section class="donate">
   <span class="tag">🌟 Every Bit Counts</span>
   <h2>Ready to Help Today?</h2>
@@ -249,6 +361,26 @@
       btn.classList.add('active');
     });
   });
+
+  // Fetch and apply dynamic donation settings on load
+  async function loadDonationSettings() {
+    try {
+      const res = await fetch('/api/settings/donation_amount');
+      if (res.ok) {
+        const setting = await res.json();
+        const amtInput = document.getElementById('donorAmount');
+        if (amtInput && setting && setting.value) {
+          amtInput.value = setting.value;
+          amtInput.min = "1";
+        }
+      }
+    } catch (e) {
+      console.warn("Failed to load dynamic donation amount:", e);
+      const amtInput = document.getElementById('donorAmount');
+      if (amtInput) amtInput.value = "500";
+    }
+  }
+  loadDonationSettings();
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -387,6 +519,200 @@
         submitBtn.disabled = false;
       }
     });
+  }
+
+  // Occasion Details Toggle
+  const hasOccasion = document.getElementById('hasOccasion');
+  const occasionDetailsContainer = document.getElementById('occasionDetailsContainer');
+  const occasionDateInput = document.getElementById('occasionDate');
+  const occasionTypeInput = document.getElementById('occasionType');
+  const occasionNameInput = document.getElementById('occasionName');
+  const occasionPhoneInput = document.getElementById('occasionPhone');
+
+  if (hasOccasion && occasionDetailsContainer) {
+    hasOccasion.addEventListener('change', () => {
+      if (hasOccasion.checked) {
+        occasionDetailsContainer.style.display = 'grid';
+        occasionDateInput.required = true;
+        occasionTypeInput.required = true;
+        occasionNameInput.required = true;
+      } else {
+        occasionDetailsContainer.style.display = 'none';
+        occasionDateInput.required = false;
+        occasionTypeInput.required = false;
+        occasionNameInput.required = false;
+        occasionDateInput.value = '';
+        occasionTypeInput.value = '';
+        occasionNameInput.value = '';
+        occasionPhoneInput.value = '';
+      }
+    });
+  }
+
+  // Donor form submission logic with Razorpay integration
+  const donorForm = document.getElementById('donorForm');
+  if (donorForm) {
+    donorForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!document.getElementById('donorRobotCheck').checked) {
+        alert("Please confirm you are not a robot by checking the box.");
+        return;
+      }
+
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'INITIATING PAYMENT...';
+      submitBtn.disabled = true;
+
+      const amtVal = document.getElementById('donorAmount').value;
+      if (!amtVal || parseFloat(amtVal) < 1) {
+        alert("Please enter a valid donation amount of ₹1 or more.");
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        return;
+      }
+
+      const donorDetails = {
+        donorName: document.getElementById('donorName').value,
+        email: document.getElementById('donorEmail').value,
+        phone: document.getElementById('donorPhone').value,
+        city: document.getElementById('donorCity').value,
+        district: document.getElementById('donorDistrict').value,
+        state: document.getElementById('donorState').value,
+        address: document.getElementById('donorAddress').value,
+        donationCause: document.getElementById('donorCause').value,
+        occasionDate: hasOccasion.checked ? occasionDateInput.value : '',
+        occasionType: hasOccasion.checked ? occasionTypeInput.value : '',
+        occasionName: hasOccasion.checked ? occasionNameInput.value : '',
+        occasionPhone: hasOccasion.checked ? occasionPhoneInput.value : ''
+      };
+
+      try {
+        // Step 1: Create Order
+        const orderRes = await fetch('/api/payment/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: amtVal })
+        });
+
+        if (!orderRes.ok) {
+          const errData = await orderRes.json();
+          throw new Error(errData.error || 'Failed to create payment order');
+        }
+
+        const orderData = await orderRes.json();
+
+        // Step 2: Handle Checkout
+        if (orderData.mode === 'live') {
+          // Open Real Razorpay Modal
+          const options = {
+            key: orderData.keyId,
+            amount: orderData.amount,
+            currency: 'INR',
+            name: 'Dhaathree Foundation',
+            description: 'Donation for ' + donorDetails.donationCause,
+            image: 'logo.jpeg',
+            order_id: orderData.orderId,
+            handler: async function (response) {
+              submitBtn.textContent = 'VERIFYING PAYMENT...';
+              try {
+                const verifyRes = await fetch('/api/payment/verify', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_signature: response.razorpay_signature,
+                    donorDetails: donorDetails
+                  })
+                });
+
+                if (!verifyRes.ok) {
+                  const errData = await verifyRes.json();
+                  throw new Error(errData.error || 'Payment verification failed');
+                }
+
+                resetDonorForm();
+                alert(`Success!\nThank you for donating ₹${amtVal} to Dhaathree Foundation.\nTransaction ID: ${response.razorpay_payment_id}`);
+              } catch (err) {
+                alert('Payment verification error: ' + err.message);
+              } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+              }
+            },
+            prefill: {
+              name: donorDetails.donorName,
+              email: donorDetails.email,
+              contact: donorDetails.phone
+            },
+            notes: {
+              cause: donorDetails.donationCause,
+              city: donorDetails.city
+            },
+            theme: {
+              color: '#5B2D8E'
+            },
+            modal: {
+              ondismiss: function() {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+              }
+            }
+          };
+
+          const rzp = new Razorpay(options);
+          rzp.open();
+        } else {
+          // Simulated/Mock Checkout Sandbox Mode
+          submitBtn.textContent = 'PROCESSING MOCK PAYMENT...';
+          
+          setTimeout(async () => {
+            try {
+              const verifyRes = await fetch('/api/payment/verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_order_id: orderData.orderId,
+                  razorpay_payment_id: 'pay_mock_' + Math.random().toString(36).substring(2, 9),
+                  razorpay_signature: 'mock_signature',
+                  donorDetails: donorDetails
+                })
+              });
+
+              if (!verifyRes.ok) {
+                const errData = await verifyRes.json();
+                throw new Error(errData.error || 'Mock Payment failed');
+              }
+
+              resetDonorForm();
+              alert(`🎉 Sandbox Mock Success!\nThank you for donating ₹${amtVal} to Dhaathree Foundation.\n(Payment simulated successfully using sandbox mode)`);
+            } catch (err) {
+              alert('Mock checkout error: ' + err.message);
+            } finally {
+              submitBtn.textContent = originalText;
+              submitBtn.disabled = false;
+            }
+          }, 1500); // 1.5 seconds mock delay
+        }
+      } catch (err) {
+        alert('Payment initiation failed: ' + err.message);
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
+  function resetDonorForm() {
+    donorForm.reset();
+    if (occasionDetailsContainer) {
+      occasionDetailsContainer.style.display = 'none';
+      occasionDateInput.required = false;
+      occasionTypeInput.required = false;
+      occasionNameInput.required = false;
+    }
+    loadDonationSettings();
   }
 
 

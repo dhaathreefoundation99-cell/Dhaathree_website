@@ -35,10 +35,22 @@ if (!mongoUri || mongoUri.includes('your_mongodb_atlas_connection_string')) {
   console.warn('Please update the .env file in the project folder with your real connection string.\n');
 } else {
   mongoose.connect(mongoUri)
-    .then(() => {
+    .then(async () => {
       console.log('Connected to MongoDB Database successfully');
       // Drop the old unique index on type if it exists to allow multiple certificates
       mongoose.connection.db.collection('resources').dropIndex('type_1').catch(() => {});
+      
+      // Initialize default donation_amount setting
+      try {
+        const existing = await Setting.findOne({ key: 'donation_amount' });
+        if (!existing) {
+          const defaultAmt = new Setting({ key: 'donation_amount', value: '500' });
+          await defaultAmt.save();
+          console.log('Initialized default donation_amount to 500 INR');
+        }
+      } catch (err) {
+        console.error('Failed to initialize settings:', err);
+      }
     })
     .catch(err => console.error('MongoDB database connection error:', err));
 }
@@ -110,6 +122,32 @@ const sponsorSchema = new mongoose.Schema({
   timestamp: { type: Date, default: Date.now }
 });
 const Sponsor = mongoose.model('Sponsor', sponsorSchema);
+
+const donorSchema = new mongoose.Schema({
+  donorName: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true },
+  city: { type: String, required: true },
+  district: { type: String, required: true },
+  state: { type: String, required: true },
+  address: { type: String, required: true },
+  donationCause: { type: String, required: true }, // "akshara" or "ananda" or "general"
+  occasionDate: { type: String },
+  occasionName: { type: String },
+  occasionType: { type: String },
+  occasionPhone: { type: String },
+  paymentId: { type: String },
+  orderId: { type: String },
+  paymentStatus: { type: String, default: 'Pending' },
+  timestamp: { type: Date, default: Date.now }
+});
+const Donor = mongoose.model('Donor', donorSchema);
+
+const settingSchema = new mongoose.Schema({
+  key: { type: String, required: true, unique: true },
+  value: { type: String, required: true }
+});
+const Setting = mongoose.model('Setting', settingSchema);
 
 // ── API ROUTES ──
 
@@ -600,8 +638,207 @@ app.delete('/api/resources/:id', async (req, res) => {
 // 10. GET PUBLIC CONFIGURATION
 app.get('/api/config', (req, res) => {
   res.json({
-    googleClientId: process.env.GOOGLE_CLIENT_ID || ''
+    googleClientId: process.env.GOOGLE_CLIENT_ID || '',
+    razorpayKeyId: process.env.RAZORPAY_KEY_ID || '',
+    hasRazorpayKeys: !!(process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET)
   });
+});
+
+// 11. SUBMIT A DONATION RECORD
+app.post('/api/donors', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const { donorName, email, phone, city, district, state, address, donationCause, occasionDate, occasionName, occasionType, occasionPhone } = req.body;
+    if (!donorName || !email || !phone || !city || !district || !state || !address || !donationCause) {
+      return res.status(400).json({ error: 'Donor details and cause are required fields.' });
+    }
+    const newDonor = new Donor({
+      donorName,
+      email,
+      phone,
+      city,
+      district,
+      state,
+      address,
+      donationCause,
+      occasionDate,
+      occasionName,
+      occasionType,
+      occasionPhone
+    });
+    await newDonor.save();
+    res.status(201).json({ message: 'Donation record submitted successfully!' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 12. GET ALL DONOR RECORDS
+app.get('/api/donors', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const donors = await Donor.find().sort({ timestamp: -1 });
+    res.json(donors);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 13. DELETE A DONOR RECORD
+app.delete('/api/donors/:id', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const result = await Donor.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({ error: 'Donation record not found.' });
+    }
+    res.json({ message: 'Donation record deleted successfully.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 14. GET SETTING BY KEY
+app.get('/api/settings/:key', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const setting = await Setting.findOne({ key: req.params.key });
+    if (!setting) {
+      return res.status(404).json({ error: 'Setting not found.' });
+    }
+    res.json(setting);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 15. SAVE OR UPDATE SETTING
+app.post('/api/settings', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const { key, value } = req.body;
+    if (!key || !value) {
+      return res.status(400).json({ error: 'Key and value are required.' });
+    }
+    const setting = await Setting.findOneAndUpdate(
+      { key },
+      { value },
+      { new: true, upsert: true }
+    );
+    res.json({ message: 'Setting saved successfully!', setting });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 16. CREATE RAZORPAY PAYMENT ORDER
+app.post('/api/payment/order', async (req, res) => {
+  try {
+    const { amount } = req.body;
+    if (!amount) {
+      return res.status(400).json({ error: 'Amount is required.' });
+    }
+
+    const amountInPaise = Math.round(parseFloat(amount) * 100);
+    const keyId = process.env.RAZORPAY_KEY_ID;
+    const keySecret = process.env.RAZORPAY_KEY_SECRET;
+
+    if (keyId && keySecret) {
+      // Real Razorpay order creation using native fetch call to Razorpay REST API
+      const auth = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
+      const response = await fetch('https://api.razorpay.com/v1/orders', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Basic ${auth}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          amount: amountInPaise,
+          currency: 'INR',
+          receipt: 'receipt_' + Date.now()
+        })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error('Razorpay API Error: ' + errorText);
+      }
+
+      const order = await response.json();
+      res.json({
+        mode: 'live',
+        keyId: keyId,
+        orderId: order.id,
+        amount: amountInPaise
+      });
+    } else {
+      // Mock Sandbox Checkout Mode
+      res.json({
+        mode: 'mock',
+        orderId: 'order_mock_' + Math.random().toString(36).substring(2, 9),
+        amount: amountInPaise
+      });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 17. VERIFY PAYMENT AND REGISTER DONOR
+app.post('/api/payment/verify', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, donorDetails } = req.body;
+    if (!donorDetails) {
+      return res.status(400).json({ error: 'Donor details are required.' });
+    }
+
+    const keyId = process.env.RAZORPAY_KEY_ID;
+    const keySecret = process.env.RAZORPAY_KEY_SECRET;
+
+    if (keyId && keySecret) {
+      if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+        return res.status(400).json({ error: 'Missing signature verification parameters.' });
+      }
+
+      // Real signature verification using crypto
+      const crypto = require('crypto');
+      const expectedSignature = crypto
+        .createHmac('sha256', keySecret)
+        .update(razorpay_order_id + '|' + razorpay_payment_id)
+        .digest('hex');
+
+      if (expectedSignature !== razorpay_signature) {
+        return res.status(400).json({ error: 'Razorpay signature verification failed.' });
+      }
+    }
+
+    // Save paid donor record to DB
+    const newDonor = new Donor({
+      ...donorDetails,
+      orderId: razorpay_order_id || 'order_mock_' + Date.now(),
+      paymentId: razorpay_payment_id || 'pay_mock_' + Date.now(),
+      paymentStatus: (keyId && keySecret) ? 'Paid' : 'Mock Paid'
+    });
+
+    await newDonor.save();
+    res.json({ success: true, message: 'Donation registered successfully!' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // Fallback to serve index.html for undefined frontend routes
