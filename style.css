@@ -619,6 +619,8 @@
     border-top: 3px solid var(--lime);
     padding: 16px 5%;
     gap: 0;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
   }
 
   .mobile-menu.open { display: flex; }
@@ -763,7 +765,19 @@
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .hamburger { display: block; }
-    .nav-cta { display: none; }
+    .nav-cta {
+      display: block;
+      margin-left: auto;
+      margin-right: 12px;
+      padding: 7px 15px;
+      font-size: 0;
+      border-radius: 20px;
+    }
+    .nav-cta::after {
+      content: "Donate";
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
   }
 
 
