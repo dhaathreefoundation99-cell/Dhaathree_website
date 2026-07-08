@@ -400,7 +400,15 @@
     display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start;
   }
 
-  .contact-item .ci { font-size: 1.3rem; margin-top: 1px; }
+  .contact-item .ci {
+    font-size: 1.3rem;
+    width: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
   .contact-item .cd { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
   .contact-item .cd strong { color: var(--dark); display: block; }
 
@@ -578,30 +586,55 @@
   footer {
     background: var(--dark); color: rgba(255,255,255,0.6);
     padding: 40px 5% 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
 
   .footer-inner {
     max-width: 1100px; margin: 0 auto;
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex; justify-content: center; align-items: center;
     flex-wrap: wrap; gap: 20px;
+    width: 100%;
+    order: 2;
   }
 
-  .footer-brand { display: flex; align-items: center; gap: 12px; }
-  .footer-brand img { height: 44px; width: 44px; object-fit: contain; border-radius: 8px; background: #fff; border: 2px solid var(--lime); padding: 2px; }
+  .footer-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+  }
+  .footer-brand img { height: 50px; width: 50px; object-fit: contain; border-radius: 8px; background: #fff; border: 2px solid var(--lime); padding: 2px; }
+  .footer-brand div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 4px;
+  }
   .footer-brand .fn {
     font-family: 'Playfair Display', serif;
-    font-size: 1rem; font-weight: 700; color: #fff;
+    font-size: 1.05rem; font-weight: 700; color: #fff;
   }
   .footer-brand .te {
     font-family: 'Noto Sans Telugu', sans-serif;
-    font-size: 0.78rem; color: var(--lime);
+    font-size: 0.8rem; color: var(--lime);
   }
 
-  .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
-  .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--lime); }
+  .footer-links { display: none; }
 
-  .footer-copy { width: 100%; text-align: center; font-size: 0.75rem; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; }
+  .footer-copy {
+    width: 100%;
+    text-align: center;
+    font-size: 0.75rem;
+    margin-top: 10px;
+    border-top: none;
+    padding-top: 10px;
+    order: 3;
+  }
 
   /* ── RESPONSIVE ── */
   .hamburger {
@@ -792,7 +825,7 @@
     .about-inner { grid-template-columns: 1fr; }
     .about-visual { max-width: 320px; margin: 0 auto; }
     .contact-inner { grid-template-columns: 1fr; }
-    .footer-inner { flex-direction: column; align-items: flex-start; }
+    .footer-inner { flex-direction: column; align-items: center; }
     .campaigns-grid { grid-template-columns: 1fr; }
     .involved-grid { grid-template-columns: 1fr 1fr; }
     .media-grid { grid-template-columns: 1fr 1fr; }
@@ -1761,15 +1794,16 @@
   background: linear-gradient(135deg, #c47d1a, #F5A623);
 }
 
-/* ── FOOTER SOCIAL ICONS ── */
+/* 🔳 FOOTER SOCIAL ICONS 🔳 */
 .footer-social-icons {
   display: flex;
   gap: 16px;
   justify-content: center;
   width: 100%;
-  margin-top: 24px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding-top: 24px;
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
+  order: 1;
 }
 
 .footer-social-icon {
