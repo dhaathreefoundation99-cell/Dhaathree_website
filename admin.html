@@ -456,17 +456,7 @@
   // Initialize page on load
   document.addEventListener('DOMContentLoaded', () => {
     loadConfigAndInitGoogle();
-    // Check if session exists in localStorage and matches allowed email
-    const storedUser = localStorage.getItem('dhaathree_admin_user');
-    if (storedUser) {
-      const user = JSON.parse(storedUser);
-      if (user.email === ALLOWED_EMAIL && user.name !== 'Local Administrator') {
-        activeUser = user;
-        showDashboard();
-      } else {
-        localStorage.removeItem('dhaathree_admin_user');
-      }
-    }
+    
     
     
 
