@@ -98,21 +98,53 @@
 
   <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">&#9776;</button>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
-    <a href="about.html" onclick="toggleMobileMenu()">About</a>
-    <a href="about.html" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- About Us</a>
-    <a href="partners.html" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Partners & Sponsors</a>
-    <a href="impact.html" onclick="toggleMobileMenu()">Impact</a>
-    <a href="projects.html" onclick="toggleMobileMenu()">Projects</a>
-    <a href="get-involved.html" onclick="toggleMobileMenu()">Get Involved</a>
-    <a href="media.html" class="active" onclick="toggleMobileMenu()">Media</a>
-    <a href="resource-center.html" onclick="toggleMobileMenu()">Resource Center</a>
-    <a href="resource-center.html?doc=registration" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Registration Certificate</a>
-    <a href="resource-center.html?doc=annual_report" style="padding-left: 30px; font-size: 0.9rem;" onclick="toggleMobileMenu()">- Annual Activity Report</a>
-    <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
-    <a href="get-involved.html" class="mobile-cta" onclick="toggleMobileMenu()">Get Involved</a>
-  </div>
+      <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+      
+      <details class="mobile-menu-dropdown">
+        <summary>About <span class="arrow">&#9662;</span></summary>
+        <div class="dropdown-links">
+          <a href="about.html" onclick="toggleMobileMenu()">About Us</a>
+          <a href="partners.html" onclick="toggleMobileMenu()">Partners & Sponsors</a>
+        </div>
+      </details>
+      
+      <a href="impact.html" onclick="toggleMobileMenu()">Impact</a>
+      <a href="projects.html" onclick="toggleMobileMenu()">Projects</a>
+      <a href="get-involved.html" onclick="toggleMobileMenu()">Get Involved</a>
+      <a href="media.html" onclick="toggleMobileMenu()">Media</a>
+      
+      <details class="mobile-menu-dropdown">
+        <summary>Resource Center <span class="arrow">&#9662;</span></summary>
+        <div class="dropdown-links">
+          <a href="resource-center.html?doc=registration" onclick="toggleMobileMenu()">Registration Certificate</a>
+          <a href="resource-center.html?doc=annual_report" onclick="toggleMobileMenu()">Annual Activity Report</a>
+        </div>
+      </details>
+      
+      <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
+      <a href="get-involved.html" class="mobile-cta" onclick="toggleMobileMenu()">Get Involved</a>
+      
+      <script>
+        (function() {
+          const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+          document.querySelectorAll('#mobileMenu a').forEach(a => {
+            const href = a.getAttribute('href');
+            if (href) {
+              const cleanHref = href.split('?')[0];
+              const cleanPath = currentPath.split('?')[0];
+              if (cleanHref === cleanPath) {
+                a.classList.add('active');
+                const details = a.closest('details');
+                if (details) {
+                  details.setAttribute('open', '');
+                }
+              }
+            }
+          });
+        })();
+      </script>
+    </div>
 </nav>
 
 <div class="page-hero">

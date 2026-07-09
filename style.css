@@ -650,26 +650,117 @@
     background: white; z-index: 99;
     box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     border-top: 3px solid var(--lime);
-    padding: 16px 5%;
-    gap: 0;
+    padding: 20px 5%;
+    gap: 8px;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
   }
 
   .mobile-menu.open { display: flex; }
 
-  .mobile-menu a {
-    padding: 13px 0; border-bottom: 1px solid #f0f0f0;
-    text-decoration: none; color: var(--text);
-    font-size: 0.95rem; font-weight: 500;
+  /* Premium buttons style for mobile links and dropdown triggers */
+  .mobile-menu a,
+  .mobile-menu-dropdown summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 18px;
+    background: #f7faf6;
+    border: 1px solid rgba(141, 198, 63, 0.15);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    list-style: none;
   }
 
-  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu-dropdown summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-menu a:hover,
+  .mobile-menu-dropdown summary:hover {
+    background: #f1f8ee;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+  }
+
+  .mobile-menu a.active {
+    background: linear-gradient(135deg, var(--purple), var(--magenta));
+    color: white;
+    border-color: transparent;
+  }
+
+  .mobile-menu-dropdown {
+    display: block;
+    width: 100%;
+  }
+
+  .mobile-menu-dropdown .arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  
+  .mobile-menu-dropdown[open] summary .arrow {
+    transform: rotate(180deg);
+  }
+
+  .mobile-menu-dropdown[open] summary {
+    background: #f1f8ee;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px dashed rgba(141, 198, 63, 0.2);
+  }
+
+  .mobile-menu-dropdown .dropdown-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #fafdf9;
+    border: 1px solid rgba(141, 198, 63, 0.15);
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 10px;
+  }
+
+  .mobile-menu-dropdown .dropdown-links a {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.04);
+    padding: 11px 16px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .mobile-menu-dropdown .dropdown-links a::before {
+    content: "•";
+    color: var(--lime);
+    margin-right: 8px;
+    font-weight: bold;
+  }
+
+  .mobile-menu-dropdown .dropdown-links a:hover {
+    background: #f7faf6;
+    color: var(--purple);
+  }
 
   .mobile-menu .mobile-cta {
-    margin-top: 12px; background: linear-gradient(135deg, var(--purple), var(--magenta));
-    color: #fff; text-align: center; padding: 13px;
-    border-radius: 8px; font-weight: 600; border-bottom: none;
+    margin-top: 12px;
+    background: linear-gradient(135deg, var(--purple), var(--magenta));
+    color: #fff;
+    text-align: center;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(91,45,142,0.2);
+    border: none;
   }
 
   /* ── CAMPAIGNS ── */
@@ -825,7 +916,10 @@
     .about-inner { grid-template-columns: 1fr; }
     .about-visual { max-width: 320px; margin: 0 auto; }
     .contact-inner { grid-template-columns: 1fr; }
-    .footer-inner { flex-direction: column; align-items: center; }
+    .footer-inner { flex-direction: column; align-items: center; justify-content: center; }
+    .footer-brand { justify-content: center; }
+    .footer-social-icons { justify-content: center !important; }
+    .footer-copy { text-align: center !important; }
     .campaigns-grid { grid-template-columns: 1fr; }
     .involved-grid { grid-template-columns: 1fr 1fr; }
     .media-grid { grid-template-columns: 1fr 1fr; }
@@ -875,7 +969,7 @@
 /* active nav link state */
 .nav-links a.active { color: var(--purple); }
 .nav-links a.active::after { width: 100%; }
-.mobile-menu a.active { color: var(--purple); font-weight: 700; }
+.mobile-menu a.active { color: white !important; font-weight: 700; }
 
 /* ── PHOTO GALLERY AND UPLOADER ── */
 .photo-upload-zone {
@@ -1800,7 +1894,6 @@
   gap: 16px;
   justify-content: center;
   width: 100%;
-  margin-top: 0;
   border-top: none;
   padding-top: 0;
   order: 1;
@@ -2141,4 +2234,9 @@
     grid-template-columns: 1fr;
     gap: 20px;
   }
+}
+
+/* 🔳 GOOGLE MAP SECTION BACKGROUND 🔳 */
+.map-section {
+  background: #E8F2E1 !important;
 }
