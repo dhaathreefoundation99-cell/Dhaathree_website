@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -120,18 +120,6 @@
     <div class="admin-login-options">
       <!-- Dynamic Google Sign-in Button Container -->
       <div id="googleBtnContainer" style="display: flex; justify-content: center; margin: 15px auto;"></div>
-
-      <p style="margin: 8px 0; font-size: 0.8rem; font-weight: 600; color: var(--muted);">OR</p>
-
-      <!-- Offline/Local Bypass Button -->
-      <button class="admin-local-bypass-btn" id="localBypassBtn">Bypass Sign-In (Local Test Mode)</button>
-    </div>
-
-    <div class="admin-warning">
-      <strong>⚠️ Google Sign-In Local Origin Note:</strong>
-      Google Sign-In requires an HTTP/HTTPS server origin (like <code>http://localhost:8000</code>). 
-      If you are launching this page directly via a file path (<code>file://</code>) in your browser, Google authentication will not function. 
-      Use <strong>Local Test Mode</strong> to bypass sign-in and manage photos directly, or run a local server (e.g. <code>python -m http.server</code>).
     </div>
   </div>
 
@@ -472,7 +460,7 @@
     const storedUser = localStorage.getItem('dhaathree_admin_user');
     if (storedUser) {
       const user = JSON.parse(storedUser);
-      if (user.email === ALLOWED_EMAIL) {
+      if (user.email === ALLOWED_EMAIL && user.name !== 'Local Administrator') {
         activeUser = user;
         showDashboard();
       } else {
@@ -480,16 +468,7 @@
       }
     }
     
-    // Bind local test bypass mode button (forces allowed email for local testing)
-    document.getElementById('localBypassBtn').addEventListener('click', () => {
-      activeUser = {
-        name: 'Local Administrator',
-        email: ALLOWED_EMAIL,
-        picture: 'logo.jpeg' // Use fallback logo
-      };
-      localStorage.setItem('dhaathree_admin_user', JSON.stringify(activeUser));
-      showDashboard();
-    });
+    
 
     // Bind dropdown selection change
     document.getElementById('wingSelect').addEventListener('change', (e) => {
