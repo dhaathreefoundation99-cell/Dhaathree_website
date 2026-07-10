@@ -385,6 +385,11 @@
           <h3 style="margin: 0 0 5px 0; font-family: 'Playfair Display', serif; color: var(--dark); font-size: 1.3rem;">80G Tax Exemption Receipts</h3>
           <p style="margin: 0; color: var(--muted); font-size: 0.85rem;">Approve, reject, and number official 80G receipts for eligible donations (₹1000+).</p>
         </div>
+        <div>
+          <button onclick="resetReceiptNumbers()" style="background:#dc3545; color:white; border:none; padding: 8px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#bd2130';" onmouseout="this.style.background='#dc3545';">
+            Reset Receipt Numbers 🔄
+          </button>
+        </div>
       </div>
       
       <div class="admin-table-wrapper" style="overflow-x: auto;">
@@ -1487,6 +1492,23 @@
       alert('Error rejecting receipt: ' + err.message);
       btn.textContent = originalText;
       btn.disabled = false;
+    }
+  }
+
+  // Reset all approved receipt numbers to start numbering from 1
+  async function resetReceiptNumbers() {
+    if (!confirm('Are you sure you want to reset all approved receipt numbers? This will set all approved 80G receipts back to pending status and clear their receipt numbers so you can start numbering from 1 again. Donor records will NOT be deleted.')) return;
+
+    try {
+      const res = await fetch('/api/donors/reset-receipt-numbers', {
+        method: 'POST'
+      });
+      if (!res.ok) throw new Error('Reset failed');
+      const data = await res.json();
+      alert('Success! All approved receipt numbers have been cleared. You can now start approving requests from number 1.');
+      loadReceiptRequests();
+    } catch (err) {
+      alert('Error resetting receipt numbers: ' + err.message);
     }
   }
 </script>

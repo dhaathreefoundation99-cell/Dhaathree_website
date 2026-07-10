@@ -778,7 +778,11 @@
                 }
 
                 resetDonorForm();
-                alert("Success! Thank you for your support.");
+                if (donorDetails.request80G) {
+                  alert("Success! Thank you for your support.\nOnce the administrator reviews and approves your receipt request, you will receive an email containing a link to download your official 80G Tax Exemption Receipt.");
+                } else {
+                  alert("Success! Thank you for your support.");
+                }
               } catch (err) {
                 alert('Payment verification error: ' + err.message);
               } finally {
@@ -831,7 +835,11 @@
               }
 
               resetDonorForm();
-              alert("Sandbox Mock Payment Success!");
+              if (donorDetails.request80G) {
+                alert("Success! Thank you for your support.\nOnce the administrator reviews and approves your receipt request, you will receive an email containing a link to download your official 80G Tax Exemption Receipt.");
+              } else {
+                alert("Sandbox Mock Payment Success!");
+              }
             } catch (err) {
               alert('Mock checkout error: ' + err.message);
             } finally {
@@ -915,7 +923,7 @@
       count = 1;
       input.value = 1;
     }
-    const total = count * 1;
+    const total = count * 100;
     display.textContent = `Total: \u20B9${total}`;
     amtInput.value = total;
     amtInput.readOnly = true;

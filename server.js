@@ -1021,6 +1021,23 @@ app.get('/api/public/donors/:id', async (req, res) => {
   }
 });
 
+// 17.5. RESET ALL 80G RECEIPT NUMBERS
+app.post('/api/donors/reset-receipt-numbers', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    // Set status80G back to pending and clear receipt numbers
+    await Donor.updateMany(
+      { request80G: true },
+      { $set: { status80G: 'pending' }, $unset: { receiptNo80G: 1 } }
+    );
+    res.json({ success: true, message: 'Receipt numbers reset successfully! All requests are now pending.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Fallback to serve index.html for undefined frontend routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
