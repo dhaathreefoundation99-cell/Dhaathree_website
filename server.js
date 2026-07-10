@@ -139,6 +139,10 @@ const donorSchema = new mongoose.Schema({
   paymentId: { type: String },
   orderId: { type: String },
   paymentStatus: { type: String, default: 'Pending' },
+  amount: { type: Number, required: true },
+  request80G: { type: Boolean, default: false },
+  status80G: { type: String, default: 'none' }, // 'none', 'pending', 'approved', 'rejected'
+  receiptNo80G: { type: Number },
   timestamp: { type: Date, default: Date.now }
 });
 const Donor = mongoose.model('Donor', donorSchema);
@@ -650,9 +654,9 @@ app.post('/api/donors', async (req, res) => {
     if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({ error: 'Database connection offline.' });
     }
-    const { donorName, email, phone, city, district, state, address, donationCause, occasionDate, occasionName, occasionType, occasionPhone } = req.body;
-    if (!donorName || !email || !phone || !city || !district || !state || !address || !donationCause) {
-      return res.status(400).json({ error: 'Donor details and cause are required fields.' });
+    const { donorName, email, phone, city, district, state, address, donationCause, occasionDate, occasionName, occasionType, occasionPhone, amount, request80G } = req.body;
+    if (!donorName || !email || !phone || !city || !district || !state || !address || !donationCause || !amount) {
+      return res.status(400).json({ error: 'Donor details, cause, and amount are required fields.' });
     }
     const newDonor = new Donor({
       donorName,
@@ -666,7 +670,10 @@ app.post('/api/donors', async (req, res) => {
       occasionDate,
       occasionName,
       occasionType,
-      occasionPhone
+      occasionPhone,
+      amount,
+      request80G: request80G || false,
+      status80G: request80G ? 'pending' : 'none'
     });
     await newDonor.save();
     res.status(201).json({ message: 'Donation record submitted successfully!' });
@@ -831,11 +838,184 @@ app.post('/api/payment/verify', async (req, res) => {
       ...donorDetails,
       orderId: razorpay_order_id || 'order_mock_' + Date.now(),
       paymentId: razorpay_payment_id || 'pay_mock_' + Date.now(),
-      paymentStatus: (keyId && keySecret) ? 'Paid' : 'Mock Paid'
+      paymentStatus: (keyId && keySecret) ? 'Paid' : 'Mock Paid',
+      status80G: donorDetails.request80G ? 'pending' : 'none'
     });
 
     await newDonor.save();
     res.json({ success: true, message: 'Donation registered successfully!' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Helper to send 80G Approval email via Brevo HTTP API
+async function send80GReceiptEmail(donorEmail, donorName, donorId) {
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) {
+    console.warn('⚠️ WARNING: BREVO_API_KEY is not configured in your environment. Email approval notification was skipped.');
+    return false;
+  }
+  
+  const baseUrl = process.env.BASE_URL || 'http://localhost:8000';
+  const downloadLink = `${baseUrl}/download-receipt.html?id=${donorId}`;
+
+  const emailData = {
+    sender: {
+      name: "Dr. Swathi Chakrapani (Dhaathree Foundation)",
+      email: "dhaathreefoundation99@gmail.com"
+    },
+    to: [
+      {
+        email: donorEmail,
+        name: donorName
+      }
+    ],
+    subject: "💖 Thank you! Your Dhaathree Foundation 80G Receipt is Ready",
+    htmlContent: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 25px; border: 1px solid #e0e0e0; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h2 style="color: #5B2D8E; margin-top: 10px; font-family: Georgia, serif;">Dhaathree Foundation</h2>
+          <p style="font-size: 0.9rem; color: #777; margin-top: -5px; font-style: italic;">మీ సాధికారత కొరకై... (For Your Empowerment)</p>
+        </div>
+        <hr style="border: 0; border-top: 1px solid #eeeeee; margin-bottom: 20px;" />
+        <p style="font-size: 1.05rem; color: #333333; line-height: 1.5;">Dear <strong>${donorName}</strong>,</p>
+        <p style="font-size: 1rem; color: #444444; line-height: 1.6;">
+          Thank you for your generous contribution to <strong>Dhaathree Foundation</strong>. Your application for tax exemption under section 80G has been approved.
+        </p>
+        <p style="font-size: 1rem; color: #444444; line-height: 1.6;">
+          You can download your official 80G Donation Receipt by clicking the link below:
+        </p>
+        <div style="text-align: center; margin: 35px 0;">
+          <a href="${downloadLink}" target="_blank" style="background-color: #5B2D8E; color: #ffffff; padding: 14px 28px; border-radius: 30px; font-weight: bold; text-decoration: none; font-size: 1rem; display: inline-block; box-shadow: 0 4px 10px rgba(91, 45, 142, 0.2);">Download 80G Receipt</a>
+        </div>
+        <p style="font-size: 0.85rem; color: #888888; text-align: center; line-height: 1.4;">
+          If the button doesn't work, copy and paste this link in your browser:<br/>
+          <a href="${downloadLink}" style="color: #5B2D8E; word-break: break-all;">${downloadLink}</a>
+        </p>
+        <hr style="border: 0; border-top: 1px solid #eeeeee; margin-top: 30px; margin-bottom: 20px;" />
+        <p style="font-size: 0.95rem; color: #333333; line-height: 1.5; margin-bottom: 5px;">Best Regards,</p>
+        <p style="font-size: 0.95rem; color: #5B2D8E; font-weight: bold; margin-top: 0;">Dr. Swathi Chakrapani</p>
+        <p style="font-size: 0.85rem; color: #777777; margin-top: -10px;">Founder, Dhaathree Foundation</p>
+      </div>
+    `
+  };
+
+  try {
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': apiKey,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(emailData)
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || `HTTP ${response.status}`);
+    }
+
+    console.log(`✉️ 80G Receipt email successfully sent via Brevo to: ${donorEmail}`);
+    return true;
+  } catch (err) {
+    console.error('❌ Failed to send 80G Receipt approval email via Brevo:', err.message);
+    return false;
+  }
+}
+
+// 17.1. GET ALL 80G RECEIPT REQUESTS
+app.get('/api/donors/requests-80g', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const requests = await Donor.find({ request80G: true }).sort({ timestamp: -1 });
+    res.json(requests);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 17.2. APPROVE AN 80G RECEIPT REQUEST
+app.post('/api/donors/:id/approve-80g', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const donor = await Donor.findById(req.params.id);
+    if (!donor) {
+      return res.status(404).json({ error: 'Donor record not found.' });
+    }
+
+    if (donor.status80G === 'approved') {
+      return res.status(400).json({ error: 'Receipt already approved.' });
+    }
+
+    // Find highest receiptNo80G
+    const lastApproved = await Donor.findOne({ status80G: 'approved' }).sort({ receiptNo80G: -1 });
+    let nextNo = 1;
+    if (lastApproved && lastApproved.receiptNo80G) {
+      nextNo = lastApproved.receiptNo80G + 1;
+    }
+
+    donor.status80G = 'approved';
+    donor.receiptNo80G = nextNo;
+    await donor.save();
+
+    // Trigger email send
+    const emailSent = await send80GReceiptEmail(donor.email, donor.donorName, donor._id);
+
+    res.json({ success: true, message: '80G Receipt approved and numbered as ' + nextNo, receiptNo80G: nextNo, emailSent });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 17.3. REJECT AN 80G RECEIPT REQUEST
+app.post('/api/donors/:id/reject-80g', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const donor = await Donor.findById(req.params.id);
+    if (!donor) {
+      return res.status(404).json({ error: 'Donor record not found.' });
+    }
+
+    donor.status80G = 'rejected';
+    await donor.save();
+    res.json({ success: true, message: '80G Receipt request rejected.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 17.4. GET PUBLIC APPROVED RECEIPT DETAIL
+app.get('/api/public/donors/:id', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const donor = await Donor.findById(req.params.id);
+    if (!donor) {
+      return res.status(404).json({ error: 'Receipt record not found.' });
+    }
+
+    if (donor.status80G !== 'approved') {
+      return res.status(403).json({ error: 'This receipt has not been approved by the administrator.' });
+    }
+
+    res.json({
+      donorName: donor.donorName,
+      email: donor.email,
+      phone: donor.phone,
+      amount: donor.amount,
+      donationCause: donor.donationCause,
+      receiptNo80G: donor.receiptNo80G,
+      timestamp: donor.timestamp
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

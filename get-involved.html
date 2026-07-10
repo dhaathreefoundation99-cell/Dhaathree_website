@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -94,7 +94,7 @@
     </li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <a href="get-involved.html#donate" class="nav-cta">Support a Cause</a>
+  <a href="get-involved.html#donate" class="nav-cta">Donate Now</a>
 
   <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">&#9776;</button>
 
@@ -412,6 +412,12 @@
 
 
 
+      <!-- 80G Exemption Receipt Request (Hidden by default, shown for amounts >= 1000) -->
+      <div id="receipt80GContainer" class="volunteer-form-group full-width" style="display: none; align-items: center; gap: 10px; margin-top: 15px; background: rgba(141,198,63,0.05); padding: 12px 18px; border-radius: 8px; border: 1px solid rgba(141,198,63,0.2); box-sizing: border-box;">
+        <input type="checkbox" id="request80G" style="width: auto;">
+        <label for="request80G" style="margin-bottom: 0; font-weight: 600; color: var(--dark);">Request 80G Tax Exemption Receipt</label>
+      </div>
+
       <!-- Captcha checkbox -->
       <div class="volunteer-form-group full-width" style="display: flex; align-items: center; gap: 10px; margin-top: 15px;">
         <input type="checkbox" id="donorRobotCheck" required style="width: auto;">
@@ -718,6 +724,8 @@
         state: document.getElementById('donorState').value,
         address: document.getElementById('donorAddress').value,
         donationCause: document.getElementById('donorCause').value,
+        amount: parseFloat(amtVal),
+        request80G: document.getElementById('request80G').checked,
         occasionDate: '',
         occasionType: '',
         occasionName: '',
@@ -881,6 +889,21 @@
     window.updateAksharaAmount();
   };
 
+  window.update80GVisibility = function() {
+    const amtInput = document.getElementById('donorAmount');
+    const container = document.getElementById('receipt80GContainer');
+    const checkbox = document.getElementById('request80G');
+    if (!amtInput || !container) return;
+
+    const amt = parseFloat(amtInput.value) || 0;
+    if (amt >= 1) {
+      container.style.display = 'flex';
+    } else {
+      container.style.display = 'none';
+      if (checkbox) checkbox.checked = false;
+    }
+  };
+
   window.updateAksharaAmount = function() {
     const input = document.getElementById('studentCount');
     const display = document.getElementById('aksharaCalculatedTotal');
@@ -896,6 +919,7 @@
     display.textContent = `Total: \u20B9${total}`;
     amtInput.value = total;
     amtInput.readOnly = true;
+    window.update80GVisibility();
   };
 
   window.updateAnandaAmount = function() {
@@ -913,6 +937,7 @@
       amtInput.value = val;
       amtInput.readOnly = true;
     }
+    window.update80GVisibility();
   };
 
   // Purpose of Donation change handler
@@ -940,8 +965,16 @@
           amtInput.readOnly = false;
           amtInput.placeholder = 'Enter donation amount';
         }
+        window.update80GVisibility();
       }
     });
+  }
+
+  // Monitor custom donor amount input manually
+  const donorAmountInput = document.getElementById('donorAmount');
+  if (donorAmountInput) {
+    donorAmountInput.addEventListener('input', window.update80GVisibility);
+    donorAmountInput.addEventListener('change', window.update80GVisibility);
   }
 </script>
 </body>

@@ -48,7 +48,7 @@
     </li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <a href="get-involved.html#donate" class="nav-cta">Support a Cause</a>
+  <a href="get-involved.html#donate" class="nav-cta">Donate Now</a>
 
   <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
 
@@ -148,6 +148,7 @@
       <button class="admin-tab" id="tabResourcesBtn" onclick="switchTab('resources')">Manage Resources (<span id="resCount">0</span>)</button>
       <button class="admin-tab" id="tabSponsorsBtn" onclick="switchTab('sponsors')">Manage Sponsors (<span id="sponsCount">0</span>)</button>
       <button class="admin-tab" id="tabDonorsBtn" onclick="switchTab('donors')">Manage Donors (<span id="donorCount">0</span>)</button>
+      <button class="admin-tab" id="tabReceiptsBtn" onclick="switchTab('receipts')">80G Receipts (<span id="receiptsCount">0</span>)</button>
     </div>
 
     <!-- Photos Management Tab Content -->
@@ -360,6 +361,7 @@
                 <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Date</th>
                 <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Donor Details</th>
                 <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Location</th>
+                <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Amount (₹)</th>
                 <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Donation Purpose</th>
                 <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Occasion Details</th>
                 <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark); text-align: center;">Action</th>
@@ -373,6 +375,38 @@
       </div>
     </div>
   </div>
+  </div>
+
+  <!-- 80G Receipts Tab Content -->
+  <div id="receiptsTabContent" style="display: none;">
+    <div class="admin-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+        <div>
+          <h3 style="margin: 0 0 5px 0; font-family: 'Playfair Display', serif; color: var(--dark); font-size: 1.3rem;">80G Tax Exemption Receipts</h3>
+          <p style="margin: 0; color: var(--muted); font-size: 0.85rem;">Approve, reject, and number official 80G receipts for eligible donations (₹1000+).</p>
+        </div>
+      </div>
+      
+      <div class="admin-table-wrapper" style="overflow-x: auto;">
+        <table class="admin-table" style="width: 100%; border-collapse: collapse; text-align: left;">
+          <thead>
+            <tr style="background: #fdfaf6; border-bottom: 2px solid #f2e9fc;">
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Date</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Donor Details</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Location</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Amount (₹)</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Purpose</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Cheque/NEFT</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">80G Status</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark); text-align: center;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="receiptsTableBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
 </section>
@@ -542,6 +576,7 @@
     updateResourceCount();
     updateSponsorCount();
     updateDonorCount();
+    updateReceiptsCount();
   }
 
   // Sign out function
@@ -562,12 +597,14 @@
     const tabResourcesBtn = document.getElementById('tabResourcesBtn');
     const tabSponsorsBtn = document.getElementById('tabSponsorsBtn');
     const tabDonorsBtn = document.getElementById('tabDonorsBtn');
+    const tabReceiptsBtn = document.getElementById('tabReceiptsBtn');
     const photosContent = document.getElementById('photosTabContent');
     const volunteersContent = document.getElementById('volunteersTabContent');
     const connectionsContent = document.getElementById('connectionsTabContent');
     const resourcesContent = document.getElementById('resourcesTabContent');
     const sponsorsContent = document.getElementById('sponsorsTabContent');
     const donorsContent = document.getElementById('donorsTabContent');
+    const receiptsContent = document.getElementById('receiptsTabContent');
     
     // Reset all tabs
     tabPhotosBtn.classList.remove('active');
@@ -576,12 +613,14 @@
     tabResourcesBtn.classList.remove('active');
     tabSponsorsBtn.classList.remove('active');
     if (tabDonorsBtn) tabDonorsBtn.classList.remove('active');
+    if (tabReceiptsBtn) tabReceiptsBtn.classList.remove('active');
     photosContent.style.display = 'none';
     volunteersContent.style.display = 'none';
     connectionsContent.style.display = 'none';
     resourcesContent.style.display = 'none';
     sponsorsContent.style.display = 'none';
     if (donorsContent) donorsContent.style.display = 'none';
+    if (receiptsContent) receiptsContent.style.display = 'none';
 
     if (tabName === 'photos') {
       tabPhotosBtn.classList.add('active');
@@ -606,6 +645,10 @@
       if (tabDonorsBtn) tabDonorsBtn.classList.add('active');
       if (donorsContent) donorsContent.style.display = 'block';
       loadDonors();
+    } else if (tabName === 'receipts') {
+      if (tabReceiptsBtn) tabReceiptsBtn.classList.add('active');
+      if (receiptsContent) receiptsContent.style.display = 'block';
+      loadReceiptRequests();
     }
   }
 
@@ -1175,7 +1218,7 @@
     tbody.innerHTML = '';
 
     if (filtered.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="6" style="padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.85rem; font-style: italic;">No donation records match the filter criteria.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="7" style="padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.85rem; font-style: italic;">No donation records match the filter criteria.</td></tr>';
       return;
     }
 
@@ -1229,6 +1272,7 @@
             ${d.address}<br/>
             <span style="color: var(--muted); font-weight: 500;">${d.city}, ${d.district}, ${d.state}</span>
           </td>
+          <td style="padding: 12px; font-size: 0.88rem; font-weight: 700; color: var(--purple);">₹${d.amount || 'N/A'}</td>
           <td style="padding: 12px; font-size: 0.85rem;">${causeBadge}</td>
           <td style="padding: 12px;">${occasionHtml}</td>
           <td style="padding: 12px; text-align: center;">
@@ -1287,6 +1331,162 @@
     } finally {
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
+    }
+  }
+
+  // Update 80G Receipts Count Badge
+  async function updateReceiptsCount() {
+    try {
+      const res = await fetch('/api/donors/requests-80g');
+      if (res.ok) {
+        const requests = await res.json();
+        const pendingCount = requests.filter(r => r.status80G === 'pending').length;
+        const badge = document.getElementById('receiptsCount');
+        if (badge) badge.textContent = pendingCount || 0;
+      }
+    } catch (err) {
+      console.error('Failed to load initial receipts count:', err);
+    }
+  }
+
+  // Load 80G Receipt Requests List
+  async function loadReceiptRequests() {
+    const tbody = document.getElementById('receiptsTableBody');
+    if (!tbody) return;
+
+    tbody.innerHTML = '<tr><td colspan="8" style="padding: 20px; text-align: center; color: var(--muted); font-size: 0.9rem;">Loading 80G receipt requests...</td></tr>';
+
+    try {
+      const res = await fetch('/api/donors/requests-80g');
+      if (!res.ok) throw new Error('Failed to fetch 80G receipt requests');
+      const requests = await res.json();
+
+      tbody.innerHTML = '';
+      if (requests.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.85rem; font-style: italic;">No 80G receipt requests found.</td></tr>';
+        return;
+      }
+
+      // Update badge count with only pending ones
+      const pendingCount = requests.filter(r => r.status80G === 'pending').length;
+      const badge = document.getElementById('receiptsCount');
+      if (badge) badge.textContent = pendingCount || 0;
+
+      requests.forEach(r => {
+        let dateStr = 'N/A';
+        if (r.timestamp) {
+          const dateObj = new Date(r.timestamp);
+          dateStr = dateObj.toLocaleDateString('en-IN', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+          });
+        }
+
+        let statusText = 'Pending';
+        let statusStyle = 'background: rgba(245,166,35,0.1); color: #c47d1a;';
+        if (r.status80G === 'approved') {
+          statusText = `Approved (No. ${r.receiptNo80G})`;
+          statusStyle = 'background: rgba(5,107,50,0.1); color: #056b32;';
+        } else if (r.status80G === 'rejected') {
+          statusText = 'Rejected';
+          statusStyle = 'background: rgba(220,53,69,0.1); color: #dc3545;';
+        }
+
+        let actionHtml = '';
+        if (r.status80G === 'pending') {
+          actionHtml = `
+            <button onclick="approveReceipt('${r._id}', '${r.donorName.replace(/'/g, "\\'")}', event)" style="background:#056b32; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-right:6px; transition: all 0.2s;">Approve ✔</button>
+            <button onclick="rejectReceipt('${r._id}', '${r.donorName.replace(/'/g, "\\'")}', event)" style="background:#dc3545; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; transition: all 0.2s;">Reject ✖</button>
+          `;
+        } else if (r.status80G === 'approved') {
+          actionHtml = `
+            <a href="download-receipt.html?id=${r._id}" target="_blank" style="background:#5B2D8E; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; transition: all 0.2s;">Download Receipt 📥</a>
+          `;
+        } else {
+          actionHtml = '<span style="color:var(--muted); font-size:0.8rem; font-style:italic;">No Actions</span>';
+        }
+
+        const row = `
+          <tr style="border-bottom: 1px solid #f0edf5; vertical-align: top; transition: background 0.15s;" onmouseover="this.style.background='rgba(91,45,142,0.01)';" onmouseout="this.style.background='none';">
+            <td style="padding: 12px; font-size: 0.85rem; color: var(--muted); font-weight: 500; white-space: nowrap;">${dateStr}</td>
+            <td style="padding: 12px; font-size: 0.88rem;">
+              <strong style="color: var(--dark);">${r.donorName}</strong><br/>
+              <span style="color: var(--muted); font-size: 0.8rem;">✉ ${r.email}</span><br/>
+              <span style="color: var(--muted); font-size: 0.8rem;">☎ ${r.phone}</span>
+            </td>
+            <td style="padding: 12px; font-size: 0.83rem; color: var(--dark); line-height: 1.4;">
+              ${r.address}<br/>
+              <span style="color: var(--muted); font-weight: 500;">${r.city}, ${r.district}, ${r.state}</span>
+            </td>
+            <td style="padding: 12px; font-size: 0.88rem; font-weight: 700; color: var(--purple);">₹${r.amount || 'N/A'}</td>
+            <td style="padding: 12px; font-size: 0.85rem; text-transform: capitalize;">${r.donationCause}</td>
+            <td style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--muted);">E Cash</td>
+            <td style="padding: 12px; font-size: 0.85rem;">
+              <span style="${statusStyle} padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">${statusText}</span>
+            </td>
+            <td style="padding: 12px; text-align: center; white-space: nowrap;">
+              ${actionHtml}
+            </td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    } catch (err) {
+      console.error(err);
+      tbody.innerHTML = `<tr><td colspan="8" style="padding: 20px; text-align: center; color: #dc3545; font-size: 0.9rem;">Error: ${err.message}</td></tr>`;
+    }
+  }
+
+  // Approve 80G Receipt
+  async function approveReceipt(id, name, event) {
+    if (!confirm(`Are you sure you want to approve the 80G Tax Exemption Receipt for ${name}?`)) return;
+
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = 'Approving...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`/api/donors/${id}/approve-80g`, {
+        method: 'POST'
+      });
+      if (!res.ok) throw new Error('Failed to approve receipt');
+      const data = await res.json();
+      
+      if (data.emailSent) {
+        alert(`Receipt approved successfully as No. ${data.receiptNo80G}! Notification email with the download link has been sent.`);
+      } else {
+        alert(`Receipt approved as No. ${data.receiptNo80G}, but email notification failed. Please verify your SMTP settings in .env.`);
+      }
+      loadReceiptRequests();
+    } catch (err) {
+      alert('Error approving receipt: ' + err.message);
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  }
+
+  // Reject 80G Receipt
+  async function rejectReceipt(id, name, event) {
+    if (!confirm(`Are you sure you want to reject the 80G Tax Exemption Receipt for ${name}?`)) return;
+
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = 'Rejecting...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`/api/donors/${id}/reject-80g`, {
+        method: 'POST'
+      });
+      if (!res.ok) throw new Error('Failed to reject receipt');
+      alert(`Receipt request for ${name} rejected.`);
+      loadReceiptRequests();
+    } catch (err) {
+      alert('Error rejecting receipt: ' + err.message);
+      btn.textContent = originalText;
+      btn.disabled = false;
     }
   }
 </script>
