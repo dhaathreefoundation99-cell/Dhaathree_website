@@ -896,7 +896,7 @@
     if (!amtInput || !container) return;
 
     const amt = parseFloat(amtInput.value) || 0;
-    if (amt >= 1) {
+    if (amt >= 1000) {
       container.style.display = 'flex';
     } else {
       container.style.display = 'none';
