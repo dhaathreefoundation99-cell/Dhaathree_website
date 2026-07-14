@@ -12,6 +12,7 @@ dotenv.config();
 // Nodemailer and SMTP setups are removed. Using Brevo HTTP API instead.
 
 const app = express();
+const SENDER_EMAIL = process.env.SENDER_EMAIL || 'info@dhaathreefoundation.org';
 
 // Middlewares
 app.use(cors());
@@ -350,7 +351,7 @@ async function sendApprovalEmail(volunteerEmail, volunteerName, volunteerPhone, 
   const emailData = {
     sender: {
       name: "Dr. Swathi Chakrapani (Dhaathree Foundation)",
-      email: "dhaathreefoundation99@gmail.com"
+      email: SENDER_EMAIL
     },
     to: [
       {
@@ -863,7 +864,7 @@ async function send80GReceiptEmail(donorEmail, donorName, donorId) {
   const emailData = {
     sender: {
       name: "Dr. Swathi Chakrapani (Dhaathree Foundation)",
-      email: "dhaathreefoundation99@gmail.com"
+      email: SENDER_EMAIL
     },
     to: [
       {
