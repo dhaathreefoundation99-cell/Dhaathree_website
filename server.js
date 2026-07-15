@@ -257,14 +257,21 @@ app.delete('/api/photos/:id', async (req, res) => {
 
 // --- FEATURED HOME PAGE PHOTOS API ---
 
-// 1. GET ALL FEATURED PHOTOS
+// 1. GET ALL FEATURED PHOTOS (Returns a random selection of photos from the website gallery)
 app.get('/api/featured-photos', async (req, res) => {
   try {
     if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({ error: 'Database connection offline.' });
     }
-    const photos = await FeaturedPhoto.find().sort({ timestamp: -1 });
-    res.json(photos);
+    // Pull up to 15 random photos from the general website gallery
+    const photos = await Photo.aggregate([{ $sample: { size: 15 } }]);
+    const formattedPhotos = photos.map(p => ({
+      _id: p._id,
+      name: p.name,
+      url: p.url,
+      timestamp: p.timestamp
+    }));
+    res.json(formattedPhotos);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

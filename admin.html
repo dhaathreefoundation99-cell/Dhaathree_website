@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -176,7 +176,7 @@
 
       <!-- Upload Dropzone (styled by style.css) -->
       <div class="photo-upload-zone" id="uploadZone">
-        <div class="upload-icon">📸</div>
+        <div class="upload-icon">&#128228;</div>
         <p class="upload-text">Drag & drop photos here or <span class="browse-link">browse</span> to upload</p>
         <p class="upload-subtext">Supported formats: JPG, PNG, WEBP</p>
         <input type="file" id="fileInput" accept="image/*" multiple style="display: none;" />
@@ -192,183 +192,7 @@
     <div id="featuredTabContent" style="display: none;">
       <div class="admin-controls">
         <div style="flex: 1;">
-          <h3>Homepage Featured Photos</h3>
-          <p style="color: #666; font-size: 0.88rem; margin-top: 5px;">
-            These photos are displayed in the auto-scrolling gallery on the homepage. Please upload at least 5-10 photos for best results.
-          </p>
-        </div>
-      </div>
-
-      <!-- Upload Dropzone for Featured Photos -->
-      <div class="photo-upload-zone" id="featuredUploadZone">
-        <div class="upload-icon">📸</div>
-        <p class="upload-text">Drag & drop featured photos here or <span class="browse-link">browse</span> to upload</p>
-        <p class="upload-subtext">Supported formats: JPG, PNG, WEBP</p>
-        <input type="file" id="featuredFileInput" accept="image/*" multiple style="display: none;" />
-      </div>
-
-      <!-- Featured Photos Grid -->
-      <div class="photo-gallery-grid" id="featuredPhotoGallery">
-        <!-- Loaded dynamically -->
-      </div>
-    </div>
-
-    <!-- Volunteer Applications Tab Content -->
-    <div id="volunteersTabContent" style="display: none;">
-      <div class="admin-table-wrapper">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Photo</th>
-              <th>Name</th>
-              <th>Date of Birth</th>
-              <th>Contact Info</th>
-              <th>Occupation</th>
-              <th>Address</th>
-              <th>Message</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="volunteersTableBody">
-            <!-- Loaded dynamically from API -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Connections & Subscribers Tab Content -->
-    <div id="connectionsTabContent" style="display: none;">
-      <div class="admin-table-wrapper">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone Number</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="connectionsTableBody">
-            <!-- Loaded dynamically from API -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Resources Management Tab Content -->
-    <div id="resourcesTabContent" style="display: none;">
-      <div class="admin-two-cols">
-        
-        <!-- Upload Form Card -->
-        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02);">
-          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">📤 Upload New Document</h3>
-          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">Add a new PDF certificate or activity report to the Resource Center.</p>
-          
-          <form onsubmit="uploadResourceItem(event)" style="display: flex; flex-direction: column; gap: 15px;">
-            <div>
-              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Document Category:</label>
-              <select id="resCategory" required style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem;">
-                <option value="registration">Registration Certificate</option>
-                <option value="annual_report">Annual Activity Report</option>
-              </select>
-            </div>
-            <div>
-              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Document Title:</label>
-              <input type="text" id="resTitle" required placeholder="e.g. 12A Registration Certificate" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
-            </div>
-            <div>
-              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Description:</label>
-              <textarea id="resDescription" placeholder="Provide a brief description of this document..." style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box; min-height:80px; resize:vertical;"></textarea>
-            </div>
-            <div>
-              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Select PDF File:</label>
-              <input type="file" id="resFile" accept=".pdf" required style="font-size: 0.85rem;" />
-            </div>
-            <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px;">Upload Document</button>
-          </form>
-        </div>
-
-        <!-- Document List Card -->
-        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px;">
-          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">📂 Currently Uploaded Documents</h3>
-          
-          <div style="margin-bottom: 30px;">
-            <h4 style="font-size: 1.2rem; color: var(--purple); border-bottom: 2px solid #f2e9fc; padding-bottom: 6px; margin-bottom: 12px; font-family:'Playfair Display', serif;">Registration Certificates</h4>
-            <div id="regList" style="display: flex; flex-direction: column; gap: 12px;">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-
-          <div>
-            <h4 style="font-size: 1.2rem; color: var(--purple); border-bottom: 2px solid #f2e9fc; padding-bottom: 6px; margin-bottom: 12px; font-family:'Playfair Display', serif;">Annual Activity Reports</h4>
-            <div id="annualList" style="display: flex; flex-direction: column; gap: 12px;">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Sponsors Management Tab Content -->
-    <div id="sponsorsTabContent" style="display: none;">
-      <div class="admin-two-cols">
-        
-        <!-- Add Sponsor Form Card -->
-        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02);">
-          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">🤝 Add New Sponsor</h3>
-          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">Add a new partner organization or sponsor logo to the public Partners page.</p>
-          
-          <form onsubmit="addSponsorItem(event)" style="display: flex; flex-direction: column; gap: 15px;">
-            <div>
-              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor/Partner Name:</label>
-              <input type="text" id="sponsName" required placeholder="e.g. NABARD Foundation" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
-            </div>
-            <div>
-              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor Description / Profile:</label>
-              <textarea id="sponsDescription" placeholder="Provide details about the sponsor's contribution..." style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box; min-height:80px; resize:vertical;"></textarea>
-            </div>
-            <div>
-              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor Logo Image:</label>
-              <input type="file" id="sponsLogo" accept="image/*" required style="font-size: 0.85rem;" />
-            </div>
-            <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px;">Add Sponsor</button>
-          </form>
-        </div>
-
-        <!-- Sponsor List Card -->
-        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px;">
-          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">📂 Current Sponsors & Partners</h3>
-          <div id="sponsorsList" style="display: flex; flex-direction: column; gap: 12px;">
-            <!-- Dynamically populated -->
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Donors Management Tab Content -->
-    <div id="donorsTabContent" style="display: none;">
-      <!-- Donation Settings Card -->
-      <div class="admin-card" style="background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); margin-bottom: 20px;">
-        <h4 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.1rem; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;">⚙️ Donation Settings</h4>
-        <p style="color: var(--muted); font-size: 0.85rem; margin: 0 0 15px 0;">Configure the default donation amount suggested to public users. You can enter any amount (even 1 rupee).</p>
-        
-        <form onsubmit="saveDonationAmountSetting(event)" style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap;">
-          <div style="flex: 1; min-width: 200px;">
-            <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; color: var(--dark);">Default Suggestion (₹):</label>
-            <input type="number" id="defaultDonationAmountInput" min="1" required style="width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-family:'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box;" />
-          </div>
-          <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 11px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 0;">Save Settings</button>
-        </form>
-      </div>
-
-      <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px; margin-bottom: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
-          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin: 0; display: flex; align-items: center; gap: 8px;">💳 Donor Registrations</h3>
+          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin: 0; display: flex; align-items: center; gap: 8px;">&#128179; Donor Registrations</h3>
           
           <div style="display: flex; gap: 10px; align-items: center;">
             <label for="donorFilterCause" style="font-size: 0.85rem; font-weight: 600; color: var(--dark);">Filter by Cause:</label>
@@ -744,9 +568,9 @@
           : `<span style="background: rgba(245,166,35,0.1); color: #c47d1a; padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">Pending</span>`;
 
         const actionHtml = statusVal === 'Approved'
-          ? `<button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')">🗑</button>`
+          ? `<button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer(`${v._id}`)">&#10060;</button>`
           : `<button class="admin-approve-btn" style="background:#056b32; color:white; border:none; padding: 6px 12px; border-radius: 20px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-right:6px; transition: background 0.2s;" onclick="approveVolunteer('${v._id}', '${v.name.replace(/'/g, "\\'")}', event)">Approve ✔</button>
-             <button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')">🗑</button>`;
+             <button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer(`${v._id}`)">&#10060;</button>`;
         
         const photoHtml = v.photoUrl
           ? `<a href="${v.photoUrl}" target="_blank"><img src="${v.photoUrl}" alt="Photo" style="width:45px; height:45px; border-radius:50%; object-fit:cover; border:1px solid #ddd; display:block; margin:0 auto;" /></a>`
@@ -760,7 +584,7 @@
           <td>${v.dob}</td>
           <td>
             <div>✉ <a href="mailto:${v.email}">${v.email}</a></div>
-            <div style="margin-top: 4px;">📞 <a href="tel:${v.phone}">${v.phone}</a></div>
+            <div style="margin-top: 4px;">&#128222; <a href="tel:${v.phone}">${v.phone}</a></div>
           </td>
           <td><span style="background: rgba(91,45,142,0.08); color: var(--purple); padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">${v.occupation}</span></td>
           <td>
@@ -877,10 +701,10 @@
         tr.innerHTML = `
           <td><strong>${formattedDate}</strong></td>
           <td>${c.name}</td>
-          <td>📧 <a href="mailto:${c.email}">${c.email}</a></td>
-          <td>📞 <a href="tel:${c.phone}">${c.phone}</a></td>
+          <td>&#9993; <a href="mailto:${c.email}">${c.email}</a></td>
+          <td>&#128222; <a href="tel:${c.phone}">${c.phone}</a></td>
           <td style="text-align: center;">
-            <button class="admin-delete-app-btn" title="Remove Connection" onclick="deleteConnection('${c._id}')">🗑</button>
+            <button class="admin-delete-app-btn" title="Remove Connection" onclick="deleteConnection(`${c._id}`)">&#10060;</button>
           </td>
         `;
         tableBody.appendChild(tr);
@@ -1442,7 +1266,7 @@
           `;
         } else if (r.status80G === 'approved') {
           actionHtml = `
-            <a href="download-receipt.html?id=${r._id}" target="_blank" style="background:#5B2D8E; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; transition: all 0.2s;">Download Receipt 📥</a>
+            <a href="download-receipt.html?id=${r._id}" target="_blank" style="background:#5B2D8E; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; transition: all 0.2s;">Download Receipt &#128229;</a>
           `;
         } else {
           actionHtml = '<span style="color:var(--muted); font-size:0.8rem; font-style:italic;">No Actions</span>';

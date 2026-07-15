@@ -2241,51 +2241,7 @@
   background: #E8F2E1 !important;
 }
 
-/* Floating Mobile Donate Button Style */
-.floating-mobile-donate-btn {
-  display: none;
-  position: fixed;
-  bottom: 25px;
-  left: 50%;
-  right: auto;
-  transform: translate(-50%, 0);
-  background: linear-gradient(135deg, #5B2D8E, #e91e63);
-  color: white !important;
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-  z-index: 999;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  border: 2px solid rgba(255,255,255,0.85);
-  animation: floatBounce 2s infinite ease-in-out;
-  transition: transform 0.2s, box-shadow 0.2s;
-  font-family: 'Inter', sans-serif;
-  white-space: nowrap;
-}
 
-.floating-mobile-donate-btn:hover {
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  transform: translate(-50%, -2px) scale(1.03);
-}
-
-@keyframes floatBounce {
-  0%, 100% {
-    transform: translate(-50%, 0);
-  }
-  50% {
-    transform: translate(-50%, -8px);
-  }
-}
-
-@media (max-width: 900px) {
-  .floating-mobile-donate-btn {
-    display: flex;
-  }
-}
 
 /* Google Translate Gadget Styling */
 #google_translate_element {
@@ -2325,56 +2281,65 @@ body {
   top: 0px !important;
 }
 
-/* Featured Moments Homepage Marquee */
+/* --- FEATURED MOMENTS MARQUEE STYLING --- */
 .featured-marquee-section {
-  padding: 40px 0;
-  background: linear-gradient(to bottom, #fcfdfc, #f3f7f0);
+  padding: 40px 0 20px 0;
+  background: #fbfbfb;
   overflow: hidden;
-  position: relative;
-  border-top: 1px solid rgba(91,45,142,0.06);
-  border-bottom: 1px solid rgba(91,45,142,0.06);
+  width: 100%;
 }
+
 .featured-marquee-title {
   text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  font-weight: 900;
+  font-size: 2rem;
+  font-weight: 800;
   color: #5B2D8E;
   margin-bottom: 20px;
+  font-family: 'Playfair Display', serif;
 }
+
 .marquee-container {
-  display: flex;
   overflow: hidden;
   width: 100%;
   position: relative;
+  padding: 10px 0;
+  display: flex;
 }
+
 .marquee-track {
   display: flex;
   gap: 20px;
-  animation: marqueeScroll 35s linear infinite;
-  padding: 10px 0;
+  width: max-content;
+  animation: marqueeScroll 45s linear infinite;
 }
-.marquee-track:hover {
+
+.marquee-container:hover .marquee-track {
   animation-play-state: paused;
 }
+
 .marquee-card {
-  flex: 0 0 200px;
-  width: 200px;
-  height: 140px;
+  flex-shrink: 0;
+  width: 280px;
+  height: 200px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.06);
   border: 4px solid white;
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: white;
 }
+
 .marquee-card:hover {
-  transform: scale(1.06) translateY(-4px);
-  box-shadow: 0 10px 25px rgba(91,45,142,0.18);
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+  cursor: pointer;
 }
+
 .marquee-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 @keyframes marqueeScroll {
