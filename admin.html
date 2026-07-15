@@ -118,24 +118,8 @@
     <p>Please authenticate using Google Sign-in to access the photo uploader panel.</p>
     
     <div class="admin-login-options">
-      <!-- Google Sign-In HTML API Configuration -->
-      <div id="g_id_onload"
-           data-client_id="231215173796-ljkudf2hqmitkj5j7maduoi0rlo4l9a7.apps.googleusercontent.com"
-           data-context="signin"
-           data-ux_mode="popup"
-           data-callback="handleCredentialResponse"
-           data-auto_select="false"
-           data-auto_prompt="false">
-      </div>
-      <div class="g_id_signin"
-           style="display: flex; justify-content: center; margin: 15px auto;"
-           data-type="standard"
-           data-shape="rectangular"
-           data-theme="outline"
-           data-text="signin_with"
-           data-size="large"
-           data-logo_alignment="left">
-      </div>
+      <!-- Dynamic Google Sign-in Button Container -->
+      <div id="googleBtnContainer" style="display: flex; justify-content: center; margin: 15px auto;"></div>
       
       <!-- Local Preview Warning -->
       <div id="localWarning" style="display: none; background: #fff3cd; color: #856404; padding: 15px; border-radius: 8px; border: 1.5px solid #ffeeba; margin-top: 15px; font-size: 0.85rem; line-height: 1.4; text-align: left; font-family: 'Inter', sans-serif;">
@@ -343,11 +327,72 @@
     }
   }
 
+  // Fetch Google Client ID and initialize dynamically
+  async function loadConfigAndInitGoogle() {
+    if (window.location.protocol === 'file:') {
+      const warningEl = document.getElementById('localWarning');
+      if (warningEl) warningEl.style.display = 'block';
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/config');
+      if (!res.ok) throw new Error("Server configuration error");
+      const config = await res.json();
+      
+      // Fallback to authorized Client ID if config is missing/offline
+      const googleClientId = config.googleClientId || '231215173796-ljkudf2hqmitkj5j7maduoi0rlo4l9a7.apps.googleusercontent.com';
+      
+      google.accounts.id.initialize({
+        client_id: googleClientId,
+        callback: handleCredentialResponse,
+        auto_select: false // Never auto-sign in, always ask for selection
+      });
+      
+      google.accounts.id.renderButton(
+        document.getElementById("googleBtnContainer"),
+        { theme: "outline", size: "large", text: "signin_with", shape: "rectangular", logo_alignment: "left" }
+      );
+    } catch (err) {
+      console.error("Failed to load Google client credentials dynamically:", err);
+      const warningEl = document.getElementById('localWarning');
+      if (warningEl) {
+        warningEl.innerHTML = `
+          <strong>⚠️ Server Connection Offline</strong><br>
+          Could not connect to the backend server. Please make sure:
+          <ol style="margin: 8px 0 0 15px; padding: 0;">
+            <li>Your backend server is running (<code>npm start</code>).</li>
+            <li>You are opening <a href="http://localhost:5000/admin.html" target="_blank" style="color: #533f03; font-weight: 700; text-decoration: underline;">http://localhost:5000/admin.html</a> in your browser.</li>
+          </ol>
+        `;
+        warningEl.style.display = 'block';
+      }
+    }
+  }
+
   // Initialize page on load
   document.addEventListener('DOMContentLoaded', () => {
     if (window.location.protocol === 'file:') {
       const warningEl = document.getElementById('localWarning');
       if (warningEl) warningEl.style.display = 'block';
+      return;
+    }
+
+    // Poll for the google object to prevent ReferenceError due to script load latency
+    if (typeof google !== 'undefined' && google.accounts) {
+      loadConfigAndInitGoogle();
+    } else {
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (typeof google !== 'undefined' && google.accounts) {
+          clearInterval(interval);
+          loadConfigAndInitGoogle();
+        } else if (attempts > 30) {
+          clearInterval(interval);
+          console.error("Google Identity Services script failed to load in time.");
+        }
+      }, 100);
     }
     
     
