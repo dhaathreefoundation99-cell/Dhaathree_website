@@ -2240,3 +2240,87 @@
 .map-section {
   background: #E8F2E1 !important;
 }
+
+/* Floating Mobile Donate Button Style */
+.floating-mobile-donate-btn {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, 0);
+  background: linear-gradient(135deg, #5B2D8E, #e91e63);
+  color: white !important;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  z-index: 999;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  border: 2px solid rgba(255,255,255,0.85);
+  animation: floatBounce 2s infinite ease-in-out;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+}
+
+.floating-mobile-donate-btn:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transform: translate(-50%, -2px) scale(1.03);
+}
+
+@keyframes floatBounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -8px);
+  }
+}
+
+@media (max-width: 900px) {
+  .floating-mobile-donate-btn {
+    display: flex;
+  }
+}
+
+/* Google Translate Gadget Styling */
+#google_translate_element {
+  display: inline-block;
+  vertical-align: middle;
+}
+.goog-te-gadget {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0px !important;
+  color: transparent !important;
+}
+.goog-te-gadget .goog-te-combo {
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(91, 45, 142, 0.25);
+  background: white;
+  color: #5B2D8E;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.goog-te-gadget .goog-te-combo:hover {
+  border-color: #5B2D8E;
+  background: rgba(91, 45, 142, 0.02);
+}
+.goog-logo-link {
+  display: none !important;
+}
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+body {
+  top: 0px !important;
+}
