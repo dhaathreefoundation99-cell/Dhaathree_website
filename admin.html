@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -118,8 +118,34 @@
     <p>Please authenticate using Google Sign-in to access the photo uploader panel.</p>
     
     <div class="admin-login-options">
-      <!-- Dynamic Google Sign-in Button Container -->
-      <div id="googleBtnContainer" style="display: flex; justify-content: center; margin: 15px auto;"></div>
+      <!-- Google Sign-In HTML API Configuration -->
+      <div id="g_id_onload"
+           data-client_id="231215173796-ljkudf2hqmitkj5j7maduoi0rlo4l9a7.apps.googleusercontent.com"
+           data-context="signin"
+           data-ux_mode="popup"
+           data-callback="handleCredentialResponse"
+           data-auto_select="false"
+           data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+           style="display: flex; justify-content: center; margin: 15px auto;"
+           data-type="standard"
+           data-shape="rectangular"
+           data-theme="outline"
+           data-text="signin_with"
+           data-size="large"
+           data-logo_alignment="left">
+      </div>
+      
+      <!-- Local Preview Warning -->
+      <div id="localWarning" style="display: none; background: #fff3cd; color: #856404; padding: 15px; border-radius: 8px; border: 1.5px solid #ffeeba; margin-top: 15px; font-size: 0.85rem; line-height: 1.4; text-align: left; font-family: 'Inter', sans-serif;">
+        <strong>⚠️ Local File Preview Detected</strong><br>
+        The Google Sign-in system requires a web server to run. To access this panel locally:
+        <ol style="margin: 8px 0 0 15px; padding: 0;">
+          <li>Open your terminal and run <code>npm start</code></li>
+          <li>Navigate to <a href="http://localhost:5000/admin.html" target="_blank" style="color: #533f03; font-weight: 700; text-decoration: underline;">http://localhost:5000/admin.html</a></li>
+        </ol>
+      </div>
     </div>
   </div>
 
@@ -317,34 +343,12 @@
     }
   }
 
-  // Fetch Google Client ID and initialize dynamically
-  async function loadConfigAndInitGoogle() {
-    try {
-      const res = await fetch('/api/config');
-      if (!res.ok) throw new Error("Server configuration error");
-      const config = await res.json();
-      
-      if (config.googleClientId) {
-        google.accounts.id.initialize({
-          client_id: config.googleClientId,
-          callback: handleCredentialResponse
-        });
-        
-        google.accounts.id.renderButton(
-          document.getElementById("googleBtnContainer"),
-          { theme: "outline", size: "large", text: "signin_with", shape: "rectangular", logo_alignment: "left" }
-        );
-      } else {
-        console.warn("⚠️ Google Client ID is missing in backend .env configuration.");
-      }
-    } catch (err) {
-      console.error("Failed to load Google client credentials dynamically:", err);
-    }
-  }
-
   // Initialize page on load
   document.addEventListener('DOMContentLoaded', () => {
-    loadConfigAndInitGoogle();
+    if (window.location.protocol === 'file:') {
+      const warningEl = document.getElementById('localWarning');
+      if (warningEl) warningEl.style.display = 'block';
+    }
     
     
     
