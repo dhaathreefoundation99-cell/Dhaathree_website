@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -171,6 +171,15 @@
   </div>
 </section>
 
+<!-- FEATURED MOMENTS MARQUEE -->
+<section class="featured-marquee-section">
+  <div class="featured-marquee-title">Featured Moments 📸</div>
+  <div class="marquee-container">
+    <div class="marquee-track" id="featuredMarqueeTrack">
+      <!-- Photos loaded dynamically -->
+    </div>
+  </div>
+</section>
 
 <!-- STATS BAND -->
 <div class="stats-band" id="impact-preview">
@@ -401,6 +410,56 @@
   </div>
 </div>
 <a href="get-involved.html#donate" class="floating-mobile-donate-btn" aria-label="Donate Now">Donate Now &#128150;</a>
+<script>
+  // Load and render Featured Photos marquee
+  async function loadFeaturedPhotos() {
+    try {
+      const res = await fetch('/api/featured-photos');
+      if (!res.ok) throw new Error("Failed to fetch featured photos");
+      const photos = await res.json();
+      
+      const track = document.getElementById('featuredMarqueeTrack');
+      if (!track) return;
+      
+      if (!photos || photos.length === 0) {
+        // Fallback placeholder images if no photos uploaded yet
+        const placeholders = [
+          'logo.jpeg', 'logo.jpeg', 'logo.jpeg', 'logo.jpeg', 'logo.jpeg'
+        ];
+        renderMarquee(placeholders.map(p => ({ url: p })));
+        return;
+      }
+
+      renderMarquee(photos);
+    } catch (e) {
+      console.warn("Featured photos load error:", e);
+      const track = document.getElementById('featuredMarqueeTrack');
+      if (track) track.parentElement.parentElement.style.display = 'none';
+    }
+  }
+
+  function renderMarquee(photos) {
+    const track = document.getElementById('featuredMarqueeTrack');
+    if (!track) return;
+
+    // Ensure we have at least 10 items to make the scrolling smooth and continuous
+    let list = [...photos];
+    while (list.length < 10) {
+      list = list.concat(photos);
+    }
+
+    // Duplicate list for infinite scroll effect
+    const doubleList = [...list, ...list];
+    
+    track.innerHTML = doubleList.map(photo => `
+      <div class="marquee-card">
+        <img src="${photo.url}" alt="${photo.name || 'Featured Photo'}" onerror="this.src='logo.jpeg'"/>
+      </div>
+    `).join('');
+  }
+
+  window.addEventListener('DOMContentLoaded', loadFeaturedPhotos);
+</script>
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');

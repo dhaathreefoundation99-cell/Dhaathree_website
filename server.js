@@ -74,6 +74,16 @@ const photoSchema = new mongoose.Schema({
 
 const Photo = mongoose.model('Photo', photoSchema);
 
+// MongoDB Schema for Featured Homepage Photos
+const featuredPhotoSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  url: { type: String, required: true },
+  cloudinaryId: { type: String, required: true },
+  timestamp: { type: Date, default: Date.now }
+});
+
+const FeaturedPhoto = mongoose.model('FeaturedPhoto', featuredPhotoSchema);
+
 // MongoDB Schema for Volunteer Applications
 const volunteerSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -240,6 +250,78 @@ app.delete('/api/photos/:id', async (req, res) => {
     await Photo.findByIdAndDelete(req.params.id);
 
     res.json({ message: 'Photo deleted successfully.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// --- FEATURED HOME PAGE PHOTOS API ---
+
+// 1. GET ALL FEATURED PHOTOS
+app.get('/api/featured-photos', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const photos = await FeaturedPhoto.find().sort({ timestamp: -1 });
+    res.json(photos);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 2. UPLOAD A FEATURED PHOTO
+app.post('/api/featured-photos', upload.single('file'), async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded.' });
+    }
+
+    // Convert file buffer to base64 Data URL
+    const fileStr = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+    
+    // Upload to Cloudinary under 'featured' folder
+    const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+      folder: 'dhaathree_foundation/featured'
+    });
+
+    // Save in MongoDB
+    const newPhoto = new FeaturedPhoto({
+      name: req.file.originalname,
+      url: uploadResponse.secure_url,
+      cloudinaryId: uploadResponse.public_id
+    });
+    
+    await newPhoto.save();
+
+    res.status(201).json(newPhoto);
+  } catch (err) {
+    console.error('Featured photo upload error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 3. DELETE A FEATURED PHOTO
+app.delete('/api/featured-photos/:id', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline.' });
+    }
+    const photo = await FeaturedPhoto.findById(req.params.id);
+    if (!photo) {
+      return res.status(404).json({ error: 'Featured photo not found.' });
+    }
+
+    // Delete from Cloudinary
+    await cloudinary.uploader.destroy(photo.cloudinaryId);
+
+    // Delete from MongoDB
+    await FeaturedPhoto.findByIdAndDelete(req.params.id);
+
+    res.json({ message: 'Featured photo deleted successfully.' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
