@@ -120,16 +120,6 @@
     <div class="admin-login-options">
       <!-- Dynamic Google Sign-in Button Container -->
       <div id="googleBtnContainer" style="display: flex; justify-content: center; margin: 15px auto;"></div>
-      
-      <!-- Local Preview Warning -->
-      <div id="localWarning" style="display: none; background: #fff3cd; color: #856404; padding: 15px; border-radius: 8px; border: 1.5px solid #ffeeba; margin-top: 15px; font-size: 0.85rem; line-height: 1.4; text-align: left; font-family: 'Inter', sans-serif;">
-        <strong>⚠️ Local File Preview Detected</strong><br>
-        The Google Sign-in system requires a web server to run. To access this panel locally:
-        <ol style="margin: 8px 0 0 15px; padding: 0;">
-          <li>Open your terminal and run <code>npm start</code></li>
-          <li>Navigate to <a href="http://localhost:5000/admin.html" target="_blank" style="color: #533f03; font-weight: 700; text-decoration: underline;">http://localhost:5000/admin.html</a></li>
-        </ol>
-      </div>
     </div>
   </div>
 
@@ -153,7 +143,6 @@
     <!-- Admin Tabs -->
     <div class="admin-tabs">
       <button class="admin-tab active" id="tabPhotosBtn" onclick="switchTab('photos')">Manage Photos</button>
-      <button class="admin-tab" id="tabFeaturedBtn" onclick="switchTab('featured')">Featured Photos</button>
       <button class="admin-tab" id="tabVolunteersBtn" onclick="switchTab('volunteers')">Volunteer Applications (<span id="volCount">0</span>)</button>
       <button class="admin-tab" id="tabConnectionsBtn" onclick="switchTab('connections')">Connections & Subscribers (<span id="connCount">0</span>)</button>
       <button class="admin-tab" id="tabResourcesBtn" onclick="switchTab('resources')">Manage Resources (<span id="resCount">0</span>)</button>
@@ -186,7 +175,7 @@
 
       <!-- Upload Dropzone (styled by style.css) -->
       <div class="photo-upload-zone" id="uploadZone">
-        <div class="upload-icon">&#128228;</div>
+        <div class="upload-icon">📸</div>
         <p class="upload-text">Drag & drop photos here or <span class="browse-link">browse</span> to upload</p>
         <p class="upload-subtext">Supported formats: JPG, PNG, WEBP</p>
         <input type="file" id="fileInput" accept="image/*" multiple style="display: none;" />
@@ -198,11 +187,162 @@
       </div>
     </div>
 
-    <!-- Featured Photos Management Tab Content -->
-    <div id="featuredTabContent" style="display: none;">
-      <div class="admin-controls">
-        <div style="flex: 1;">
-          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin: 0; display: flex; align-items: center; gap: 8px;">&#128179; Donor Registrations</h3>
+    <!-- Volunteer Applications Tab Content -->
+    <div id="volunteersTabContent" style="display: none;">
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Date of Birth</th>
+              <th>Contact Info</th>
+              <th>Occupation</th>
+              <th>Address</th>
+              <th>Message</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="volunteersTableBody">
+            <!-- Loaded dynamically from API -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Connections & Subscribers Tab Content -->
+    <div id="connectionsTabContent" style="display: none;">
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="connectionsTableBody">
+            <!-- Loaded dynamically from API -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Resources Management Tab Content -->
+    <div id="resourcesTabContent" style="display: none;">
+      <div class="admin-two-cols">
+        
+        <!-- Upload Form Card -->
+        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02);">
+          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">📄 Upload New Document</h3>
+          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">Add a new PDF certificate or activity report to the Resource Center.</p>
+          
+          <form onsubmit="uploadResourceItem(event)" style="display: flex; flex-direction: column; gap: 15px;">
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Document Category:</label>
+              <select id="resCategory" required style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem;">
+                <option value="registration">Registration Certificate</option>
+                <option value="annual_report">Annual Activity Report</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Document Title:</label>
+              <input type="text" id="resTitle" required placeholder="e.g. 12A Registration Certificate" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Description:</label>
+              <textarea id="resDescription" placeholder="Provide a brief description of this document..." style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box; min-height:80px; resize:vertical;"></textarea>
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Select PDF File:</label>
+              <input type="file" id="resFile" accept=".pdf" required style="font-size: 0.85rem;" />
+            </div>
+            <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px;">Upload Document</button>
+          </form>
+        </div>
+
+        <!-- Document List Card -->
+        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px;">
+          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">📁 Currently Uploaded Documents</h3>
+          
+          <div style="margin-bottom: 30px;">
+            <h4 style="font-size: 1.2rem; color: var(--purple); border-bottom: 2px solid #f2e9fc; padding-bottom: 6px; margin-bottom: 12px; font-family:'Playfair Display', serif;">Registration Certificates</h4>
+            <div id="regList" style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div>
+            <h4 style="font-size: 1.2rem; color: var(--purple); border-bottom: 2px solid #f2e9fc; padding-bottom: 6px; margin-bottom: 12px; font-family:'Playfair Display', serif;">Annual Activity Reports</h4>
+            <div id="annualList" style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Sponsors Management Tab Content -->
+    <div id="sponsorsTabContent" style="display: none;">
+      <div class="admin-two-cols">
+        
+        <!-- Add Sponsor Form Card -->
+        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02);">
+          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">🤝 Add New Sponsor</h3>
+          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">Add a new partner organization or sponsor logo to the public Partners page.</p>
+          
+          <form onsubmit="addSponsorItem(event)" style="display: flex; flex-direction: column; gap: 15px;">
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor/Partner Name:</label>
+              <input type="text" id="sponsName" required placeholder="e.g. NABARD Foundation" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor Description / Profile:</label>
+              <textarea id="sponsDescription" placeholder="Provide details about the sponsor's contribution..." style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box; min-height:80px; resize:vertical;"></textarea>
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor Logo Image:</label>
+              <input type="file" id="sponsLogo" accept="image/*" required style="font-size: 0.85rem;" />
+            </div>
+            <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px;">Add Sponsor</button>
+          </form>
+        </div>
+
+        <!-- Sponsor List Card -->
+        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px;">
+          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">📁 Current Sponsors & Partners</h3>
+          <div id="sponsorsList" style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Donors Management Tab Content -->
+    <div id="donorsTabContent" style="display: none;">
+      <!-- Donation Settings Card -->
+      <div class="admin-card" style="background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); margin-bottom: 20px;">
+        <h4 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.1rem; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;">⚙️ Donation Settings</h4>
+        <p style="color: var(--muted); font-size: 0.85rem; margin: 0 0 15px 0;">Configure the default donation amount suggested to public users. You can enter any amount (even 1 rupee).</p>
+        
+        <form onsubmit="saveDonationAmountSetting(event)" style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 200px;">
+            <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; color: var(--dark);">Default Suggestion (₹):</label>
+            <input type="number" id="defaultDonationAmountInput" min="1" required style="width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-family:'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box;" />
+          </div>
+          <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 11px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 0;">Save Settings</button>
+        </form>
+      </div>
+
+      <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin: 0; display: flex; align-items: center; gap: 8px;">💳 Donor Registrations</h3>
           
           <div style="display: flex; gap: 10px; align-items: center;">
             <label for="donorFilterCause" style="font-size: 0.85rem; font-weight: 600; color: var(--dark);">Filter by Cause:</label>
@@ -234,8 +374,6 @@
         </div>
       </div>
     </div>
-  </div>
-  </div>
 
   <!-- 80G Receipts Tab Content -->
   <div id="receiptsTabContent" style="display: none;">
@@ -273,6 +411,7 @@
       </div>
     </div>
   </div>
+  </div> <!-- Close dashboardContainer -->
 
 </section>
 
@@ -283,7 +422,7 @@
       <img src="logo.jpeg" alt="Logo" onerror="this.style.display='none';" />
       <div>
         <div class="fn">Dhaathree Foundation</div>
-        <div class="te">à°®à±€ à°¸à°¾à°§à°¿à°•à°¾à°°à°¤ à°•à±Šà°°à°•à±ˆ...</div>
+        <div class="te">మీ సాధికారత కొరకై...</div>
       </div>
     </div>
     </div>
@@ -300,7 +439,7 @@
       </a>
     </div>
   <div class="footer-copy">
-    © 2024 Dhaathree Foundation · Regd. No. 103/2019 · All rights reserved · Made with ❤️ for community empowerment
+    &copy; 2024 Dhaathree Foundation &bull; Regd. No. 103/2019 &bull; All rights reserved &bull; Made with &hearts; for community empowerment
   </div>
 </footer>
 
@@ -329,75 +468,45 @@
 
   // Fetch Google Client ID and initialize dynamically
   async function loadConfigAndInitGoogle() {
-    if (window.location.protocol === 'file:') {
-      const warningEl = document.getElementById('localWarning');
-      if (warningEl) warningEl.style.display = 'block';
-      return;
-    }
-
     try {
       const res = await fetch('/api/config');
       if (!res.ok) throw new Error("Server configuration error");
       const config = await res.json();
       
-      // Fallback to authorized Client ID if config is missing/offline
-      const googleClientId = config.googleClientId || '231215173796-ljkudf2hqmitkj5j7maduoi0rlo4l9a7.apps.googleusercontent.com';
-      
-      google.accounts.id.initialize({
-        client_id: googleClientId,
-        callback: handleCredentialResponse,
-        auto_select: false // Never auto-sign in, always ask for selection
-      });
-      
-      google.accounts.id.renderButton(
-        document.getElementById("googleBtnContainer"),
-        { theme: "outline", size: "large", text: "signin_with", shape: "rectangular", logo_alignment: "left" }
-      );
+      if (config.googleClientId) {
+        let attempts = 0;
+        const initInterval = setInterval(() => {
+          if (window.google && window.google.accounts && window.google.accounts.id) {
+            clearInterval(initInterval);
+            google.accounts.id.initialize({
+              client_id: config.googleClientId,
+              callback: handleCredentialResponse
+            });
+            
+            google.accounts.id.renderButton(
+              document.getElementById("googleBtnContainer"),
+              { theme: "outline", size: "large", text: "signin_with", shape: "rectangular", logo_alignment: "left" }
+            );
+          } else {
+            attempts++;
+            if (attempts > 100) { // 10 seconds timeout
+              clearInterval(initInterval);
+              console.error("Failed to load Google Identity Services SDK: timeout.");
+            }
+          }
+        }, 100);
+      } else {
+        console.warn("⚠️ Google Client ID is missing in backend .env configuration.");
+      }
     } catch (err) {
       console.error("Failed to load Google client credentials dynamically:", err);
-      const warningEl = document.getElementById('localWarning');
-      if (warningEl) {
-        warningEl.innerHTML = `
-          <strong>⚠️ Server Connection Offline</strong><br>
-          Could not connect to the backend server. Please make sure:
-          <ol style="margin: 8px 0 0 15px; padding: 0;">
-            <li>Your backend server is running (<code>npm start</code>).</li>
-            <li>You are opening <a href="http://localhost:5000/admin.html" target="_blank" style="color: #533f03; font-weight: 700; text-decoration: underline;">http://localhost:5000/admin.html</a> in your browser.</li>
-          </ol>
-        `;
-        warningEl.style.display = 'block';
-      }
     }
   }
 
   // Initialize page on load
   document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.protocol === 'file:') {
-      const warningEl = document.getElementById('localWarning');
-      if (warningEl) warningEl.style.display = 'block';
-      return;
-    }
-
-    // Poll for the google object to prevent ReferenceError due to script load latency
-    if (typeof google !== 'undefined' && google.accounts) {
-      loadConfigAndInitGoogle();
-    } else {
-      let attempts = 0;
-      const interval = setInterval(() => {
-        attempts++;
-        if (typeof google !== 'undefined' && google.accounts) {
-          clearInterval(interval);
-          loadConfigAndInitGoogle();
-        } else if (attempts > 30) {
-          clearInterval(interval);
-          console.error("Google Identity Services script failed to load in time.");
-        }
-      }, 100);
-    }
+    loadConfigAndInitGoogle();
     
-    
-    
-
     // Bind dropdown selection change
     document.getElementById('wingSelect').addEventListener('change', (e) => {
       const selectedWing = e.target.value;
@@ -421,6 +530,7 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.admin-card, .admin-dashboard').forEach(el => {
+      if (el.id === 'loginCard') return; // Skip login card fade-in
       el.style.opacity = '0';
       el.style.transform = 'translateY(24px)';
       el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
@@ -448,8 +558,6 @@
     }
   }
 
-
-
   // Switch panels and setup uploader
   function showDashboard() {
     if (!activeUser) return;
@@ -471,8 +579,8 @@
     const galleryGrid = document.getElementById('photoGallery');
     if (galleryGrid) {
       galleryGrid.setAttribute('data-wing-id', wingSelect.value);
-      if (window.DhaathreeGallery && typeof window.DhaathreeGallery.initGallery === 'function') {
-        window.DhaathreeGallery.initGallery();
+      if (typeof galleryGrid.refreshGallery === 'function') {
+        galleryGrid.refreshGallery();
       }
     }
 
@@ -498,7 +606,6 @@
   // Switch tabs in admin console
   function switchTab(tabName) {
     const tabPhotosBtn = document.getElementById('tabPhotosBtn');
-    const tabFeaturedBtn = document.getElementById('tabFeaturedBtn');
     const tabVolunteersBtn = document.getElementById('tabVolunteersBtn');
     const tabConnectionsBtn = document.getElementById('tabConnectionsBtn');
     const tabResourcesBtn = document.getElementById('tabResourcesBtn');
@@ -506,7 +613,6 @@
     const tabDonorsBtn = document.getElementById('tabDonorsBtn');
     const tabReceiptsBtn = document.getElementById('tabReceiptsBtn');
     const photosContent = document.getElementById('photosTabContent');
-    const featuredContent = document.getElementById('featuredTabContent');
     const volunteersContent = document.getElementById('volunteersTabContent');
     const connectionsContent = document.getElementById('connectionsTabContent');
     const resourcesContent = document.getElementById('resourcesTabContent');
@@ -516,7 +622,6 @@
     
     // Reset all tabs
     tabPhotosBtn.classList.remove('active');
-    if (tabFeaturedBtn) tabFeaturedBtn.classList.remove('active');
     tabVolunteersBtn.classList.remove('active');
     tabConnectionsBtn.classList.remove('active');
     tabResourcesBtn.classList.remove('active');
@@ -524,7 +629,6 @@
     if (tabDonorsBtn) tabDonorsBtn.classList.remove('active');
     if (tabReceiptsBtn) tabReceiptsBtn.classList.remove('active');
     photosContent.style.display = 'none';
-    if (featuredContent) featuredContent.style.display = 'none';
     volunteersContent.style.display = 'none';
     connectionsContent.style.display = 'none';
     resourcesContent.style.display = 'none';
@@ -535,10 +639,6 @@
     if (tabName === 'photos') {
       tabPhotosBtn.classList.add('active');
       photosContent.style.display = 'block';
-    } else if (tabName === 'featured') {
-      if (tabFeaturedBtn) tabFeaturedBtn.classList.add('active');
-      if (featuredContent) featuredContent.style.display = 'block';
-      loadFeaturedPhotosAdmin();
     } else if (tabName === 'volunteers') {
       tabVolunteersBtn.classList.add('active');
       volunteersContent.style.display = 'block';
@@ -617,9 +717,9 @@
           : `<span style="background: rgba(245,166,35,0.1); color: #c47d1a; padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">Pending</span>`;
 
         const actionHtml = statusVal === 'Approved'
-          ? `<button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer(`${v._id}`)">&#10060;</button>`
-          : `<button class="admin-approve-btn" style="background:#056b32; color:white; border:none; padding: 6px 12px; border-radius: 20px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-right:6px; transition: background 0.2s;" onclick="approveVolunteer('${v._id}', '${v.name.replace(/'/g, "\\'")}', event)">Approve ✔</button>
-             <button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer(`${v._id}`)">&#10060;</button>`;
+          ? `<button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')">🗑️</button>`
+          : `<button class="admin-approve-btn" style="background:#056b32; color:white; border:none; padding: 6px 12px; border-radius: 20px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-right:6px; transition: background 0.2s;" onclick="approveVolunteer('${v._id}', '${v.name.replace(/'/g, "\\'")}', event)">Approve ✓</button>
+             <button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')">🗑️</button>`;
         
         const photoHtml = v.photoUrl
           ? `<a href="${v.photoUrl}" target="_blank"><img src="${v.photoUrl}" alt="Photo" style="width:45px; height:45px; border-radius:50%; object-fit:cover; border:1px solid #ddd; display:block; margin:0 auto;" /></a>`
@@ -632,8 +732,8 @@
           <td>${v.name}</td>
           <td>${v.dob}</td>
           <td>
-            <div>✉ <a href="mailto:${v.email}">${v.email}</a></div>
-            <div style="margin-top: 4px;">&#128222; <a href="tel:${v.phone}">${v.phone}</a></div>
+            <div>✉️ <a href="mailto:${v.email}">${v.email}</a></div>
+            <div style="margin-top: 4px;">📞 <a href="tel:${v.phone}">${v.phone}</a></div>
           </td>
           <td><span style="background: rgba(91,45,142,0.08); color: var(--purple); padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">${v.occupation}</span></td>
           <td>
@@ -750,10 +850,10 @@
         tr.innerHTML = `
           <td><strong>${formattedDate}</strong></td>
           <td>${c.name}</td>
-          <td>&#9993; <a href="mailto:${c.email}">${c.email}</a></td>
-          <td>&#128222; <a href="tel:${c.phone}">${c.phone}</a></td>
+          <td>✉️ <a href="mailto:${c.email}">${c.email}</a></td>
+          <td>📞 <a href="tel:${c.phone}">${c.phone}</a></td>
           <td style="text-align: center;">
-            <button class="admin-delete-app-btn" title="Remove Connection" onclick="deleteConnection(`${c._id}`)">&#10060;</button>
+            <button class="admin-delete-app-btn" title="Remove Connection" onclick="deleteConnection('${c._id}')">🗑️</button>
           </td>
         `;
         tableBody.appendChild(tr);
@@ -827,9 +927,9 @@
               <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--muted); line-height: 1.4;">${r.description || 'No description provided.'}</p>
               <div style="font-size: 0.78rem; color: #888; display: flex; gap: 12px; align-items: center;">
                 <span>File: <code>${r.name}</code></span>
-                <span>•</span>
+                <span>&bull;</span>
                 <span>${formattedDate}</span>
-                <span>•</span>
+                <span>&bull;</span>
                 <a href="${r.url}" target="_blank" style="color: var(--purple); font-weight: 600; text-decoration: none;">View File</a>
               </div>
             </div>
@@ -1075,7 +1175,7 @@
     const tbody = document.getElementById('donorsTableBody');
     if (!tbody) return;
 
-    tbody.innerHTML = '<tr><td colspan="6" style="padding: 20px; text-align: center; color: var(--muted); font-size: 0.9rem;">Loading donor records...</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" style="padding: 20px; text-align: center; color: var(--muted); font-size: 0.9rem;">Loading donor records...</td></tr>';
 
     try {
       const res = await fetch('/api/donors');
@@ -1112,7 +1212,7 @@
       renderDonors();
     } catch (err) {
       console.error(err);
-      tbody.innerHTML = `<tr><td colspan="6" style="padding: 20px; text-align: center; color: #dc3545; font-size: 0.9rem;">Error: ${err.message}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="7" style="padding: 20px; text-align: center; color: #dc3545; font-size: 0.9rem;">Error: ${err.message}</td></tr>`;
     }
   }
 
@@ -1169,7 +1269,7 @@
             <strong>${d.occasionType || 'Special Occasion'}</strong><br/>
             <span style="color: var(--dark); font-weight: 500;">${d.occasionName || 'N/A'}</span><br/>
             <span style="color: var(--muted); font-size: 0.78rem;">Date: ${d.occasionDate || 'N/A'}</span>
-            ${d.occasionPhone ? `<br/><span style="color: var(--muted); font-size: 0.78rem;">☎ ${d.occasionPhone}</span>` : ''}
+            ${d.occasionPhone ? `<br/><span style="color: var(--muted); font-size: 0.78rem;">📞 ${d.occasionPhone}</span>` : ''}
           </div>
         `;
       }
@@ -1179,8 +1279,8 @@
           <td style="padding: 12px; font-size: 0.85rem; color: var(--muted); font-weight: 500; white-space: nowrap;">${dateStr}</td>
           <td style="padding: 12px; font-size: 0.88rem;">
             <strong style="color: var(--dark);">${d.donorName}</strong><br/>
-            <span style="color: var(--muted); font-size: 0.8rem;">✉ ${d.email}</span><br/>
-            <span style="color: var(--muted); font-size: 0.8rem;">☎ ${d.phone}</span>
+            <span style="color: var(--muted); font-size: 0.8rem;">✉️ ${d.email}</span><br/>
+            <span style="color: var(--muted); font-size: 0.8rem;">📞 ${d.phone}</span>
           </td>
           <td style="padding: 12px; font-size: 0.83rem; color: var(--dark); line-height: 1.4;">
             ${d.address}<br/>
@@ -1310,12 +1410,12 @@
         let actionHtml = '';
         if (r.status80G === 'pending') {
           actionHtml = `
-            <button onclick="approveReceipt('${r._id}', '${r.donorName.replace(/'/g, "\\'")}', event)" style="background:#056b32; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-right:6px; transition: all 0.2s;">Approve ✔</button>
-            <button onclick="rejectReceipt('${r._id}', '${r.donorName.replace(/'/g, "\\'")}', event)" style="background:#dc3545; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; transition: all 0.2s;">Reject ✖</button>
+            <button onclick="approveReceipt('${r._id}', '${r.donorName.replace(/'/g, "\\'")}', event)" style="background:#056b32; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-right:6px; transition: all 0.2s;">Approve ✓</button>
+            <button onclick="rejectReceipt('${r._id}', '${r.donorName.replace(/'/g, "\\'")}', event)" style="background:#dc3545; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; transition: all 0.2s;">Reject ✗</button>
           `;
         } else if (r.status80G === 'approved') {
           actionHtml = `
-            <a href="download-receipt.html?id=${r._id}" target="_blank" style="background:#5B2D8E; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; transition: all 0.2s;">Download Receipt &#128229;</a>
+            <a href="download-receipt.html?id=${r._id}" target="_blank" style="background:#5B2D8E; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; transition: all 0.2s;">Download Receipt 📄</a>
           `;
         } else {
           actionHtml = '<span style="color:var(--muted); font-size:0.8rem; font-style:italic;">No Actions</span>';
@@ -1326,8 +1426,8 @@
             <td style="padding: 12px; font-size: 0.85rem; color: var(--muted); font-weight: 500; white-space: nowrap;">${dateStr}</td>
             <td style="padding: 12px; font-size: 0.88rem;">
               <strong style="color: var(--dark);">${r.donorName}</strong><br/>
-              <span style="color: var(--muted); font-size: 0.8rem;">✉ ${r.email}</span><br/>
-              <span style="color: var(--muted); font-size: 0.8rem;">☎ ${r.phone}</span>
+              <span style="color: var(--muted); font-size: 0.8rem;">✉️ ${r.email}</span><br/>
+              <span style="color: var(--muted); font-size: 0.8rem;">📞 ${r.phone}</span>
             </td>
             <td style="padding: 12px; font-size: 0.83rem; color: var(--dark); line-height: 1.4;">
               ${r.address}<br/>
@@ -1420,136 +1520,6 @@
       alert('Error resetting receipt numbers: ' + err.message);
     }
   }
-
-  // --- FEATURED HOME PAGE PHOTOS MANAGEMENT ---
-
-  async function loadFeaturedPhotosAdmin() {
-    const gallery = document.getElementById('featuredPhotoGallery');
-    if (!gallery) return;
-
-    try {
-      const res = await fetch('/api/featured-photos');
-      if (!res.ok) throw new Error('Failed to fetch featured photos');
-      const photos = await res.json();
-
-      gallery.innerHTML = '';
-      if (photos.length === 0) {
-        gallery.innerHTML = `
-          <div class="no-photos-message" style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">
-            <p>No featured photos uploaded yet. Please upload at least 10 photos.</p>
-          </div>
-        `;
-        return;
-      }
-
-      photos.forEach(photo => {
-        const card = document.createElement('div');
-        card.className = 'gallery-card';
-        card.innerHTML = `
-          <img src="${photo.url}" alt="${photo.name}" />
-          <button class="delete-btn" onclick="deleteFeaturedPhoto('${photo._id}')" title="Delete Photo">×</button>
-        `;
-        gallery.appendChild(card);
-      });
-    } catch (err) {
-      console.error('Failed to load featured photos:', err);
-      gallery.innerHTML = `<p style="color: red; padding: 20px;">Error loading featured photos: ${err.message}</p>`;
-    }
-  }
-
-  async function deleteFeaturedPhoto(id) {
-    if (!confirm('Are you sure you want to delete this featured photo?')) return;
-
-    try {
-      const res = await fetch(`/api/featured-photos/${id}`, {
-        method: 'DELETE'
-      });
-      if (!res.ok) throw new Error('Failed to delete photo');
-      loadFeaturedPhotosAdmin();
-    } catch (err) {
-      alert('Error deleting photo: ' + err.message);
-    }
-  }
-
-  async function handleFeaturedUpload(filesList) {
-    const files = Array.from(filesList);
-    const zone = document.getElementById('featuredUploadZone');
-    const originalText = zone.querySelector('.upload-text').innerHTML;
-
-    zone.style.opacity = '0.7';
-    zone.style.pointerEvents = 'none';
-
-    try {
-      let count = 0;
-      for (let file of files) {
-        if (!file.type.startsWith('image/')) {
-          alert('Only image files are allowed!');
-          continue;
-        }
-        count++;
-        zone.querySelector('.upload-text').innerHTML = `Uploading photo ${count} of ${files.length}... Please wait.`;
-        
-        const formData = new FormData();
-        formData.append('file', file);
-
-        const res = await fetch('/api/featured-photos', {
-          method: 'POST',
-          body: formData
-        });
-        if (!res.ok) throw new Error('Upload failed');
-      }
-    } catch (err) {
-      alert('Failed to save image: ' + err.message);
-    } finally {
-      zone.querySelector('.upload-text').innerHTML = originalText;
-      zone.style.opacity = '1';
-      zone.style.pointerEvents = 'auto';
-    }
-    loadFeaturedPhotosAdmin();
-  }
-
-  // Setup featured upload events
-  function initFeaturedUpload() {
-    const zone = document.getElementById('featuredUploadZone');
-    const input = document.getElementById('featuredFileInput');
-    if (!zone || !input) return;
-
-    zone.addEventListener('click', () => input.click());
-    input.addEventListener('change', (e) => {
-      if (e.target.files.length > 0) {
-        handleFeaturedUpload(e.target.files);
-        input.value = '';
-      }
-    });
-
-    ['dragenter', 'dragover'].forEach(name => {
-      zone.addEventListener(name, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        zone.classList.add('dragover');
-      });
-    });
-
-    ['dragleave', 'drop'].forEach(name => {
-      zone.addEventListener(name, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        zone.classList.remove('dragover');
-      });
-    });
-
-    zone.addEventListener('drop', (e) => {
-      const files = e.dataTransfer.files;
-      if (files.length > 0) {
-        handleFeaturedUpload(files);
-      }
-    });
-  }
-
-  // Bind init functions
-  document.addEventListener('DOMContentLoaded', () => {
-    initFeaturedUpload();
-  });
 </script>
 </body>
 </html>
