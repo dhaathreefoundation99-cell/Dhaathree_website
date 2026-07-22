@@ -791,7 +791,7 @@
       if (data.emailSent) {
         alert(`Volunteer approved successfully! Notification email with ID Card link has been sent.`);
       } else {
-        alert(`Volunteer approved, but email notification failed. Please verify your SMTP settings in .env.`);
+        alert(`Volunteer approved, but email notification failed. Please verify your Brevo API key configuration in .env.`);
       }
       loadVolunteers();
     } catch (err) {
@@ -1471,7 +1471,7 @@
       if (data.emailSent) {
         alert(`Receipt approved successfully as No. ${data.receiptNo80G}! Notification email with the download link has been sent.`);
       } else {
-        alert(`Receipt approved as No. ${data.receiptNo80G}, but email notification failed. Please verify your SMTP settings in .env.`);
+        alert(`Receipt approved as No. ${data.receiptNo80G}, but email notification failed. Please verify your Brevo API key configuration in .env.`);
       }
       loadReceiptRequests();
     } catch (err) {

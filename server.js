@@ -1140,3 +1140,18 @@ app.listen(PORT, () => {
   console.log(`🚀 Dhaathree Server running on http://localhost:${PORT}`);
   console.log(`==================================================\n`);
 });
+
+// Self-ping to keep Render free tier server awake
+if (process.env.RENDER_EXTERNAL_HOSTNAME) {
+  const https = require('https');
+  const selfUrl = `https://${process.env.RENDER_EXTERNAL_HOSTNAME}/api/config`;
+  
+  // Ping every 10 minutes to prevent Render's 15-minute inactivity spin-down
+  setInterval(() => {
+    https.get(selfUrl, (res) => {
+      console.log(`[Keep-Alive] Self-ping status: ${res.statusCode}`);
+    }).on('error', (err) => {
+      console.error(`[Keep-Alive] Self-ping failed: ${err.message}`);
+    });
+  }, 10 * 60 * 1000);
+}
