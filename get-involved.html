@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -126,7 +126,7 @@
       </details>
       
       <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
-      <a href="get-involved.html" class="mobile-cta" onclick="toggleMobileMenu()">Get Involved</a>
+      <a href="get-involved.html#donate" class="mobile-cta" onclick="toggleMobileMenu()">Get Involved</a>
       
       <script>
         (function() {
@@ -367,39 +367,39 @@
       <form class="volunteer-form" id="donorForm" style="display: flex; flex-direction: column; gap: 18px; width: 100%;">
         
         <!-- Name Field -->
-        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
-          <label for="donorName" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">Name</label>
-          <input type="text" id="donorName" placeholder="Your Name" required style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        <div class="donation-form-row">
+          <label for="donorName">Name</label>
+          <input type="text" id="donorName" placeholder="Your Name" required />
         </div>
 
         <!-- Email Field -->
-        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
-          <label for="donorEmail" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">Email</label>
-          <input type="email" id="donorEmail" placeholder="Your Email" required style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        <div class="donation-form-row">
+          <label for="donorEmail">Email</label>
+          <input type="email" id="donorEmail" placeholder="Your Email" required />
         </div>
 
         <!-- Phone Field -->
-        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
-          <label for="donorPhone" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">Phone</label>
-          <input type="tel" id="donorPhone" placeholder="Your Phone Number" required style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        <div class="donation-form-row">
+          <label for="donorPhone">Phone</label>
+          <input type="tel" id="donorPhone" placeholder="Your Phone Number" required />
         </div>
 
         <!-- Amount Field -->
-        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
-          <label for="donorAmount" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">Amount</label>
-          <input type="number" id="donorAmount" min="1" placeholder="Your Donation" required style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        <div class="donation-form-row">
+          <label for="donorAmount">Amount</label>
+          <input type="number" id="donorAmount" min="1" placeholder="Your Donation" required />
         </div>
 
         <!-- PAN Field -->
-        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
-          <label for="donorPan" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">PAN</label>
-          <input type="text" id="donorPan" placeholder="Pan Number" style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        <div class="donation-form-row">
+          <label for="donorPan">PAN</label>
+          <input type="text" id="donorPan" placeholder="Pan Number" />
         </div>
 
         <!-- Address Field -->
-        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
-          <label for="donorAddress" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">Address</label>
-          <input type="text" id="donorAddress" placeholder="Address" required style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        <div class="donation-form-row">
+          <label for="donorAddress">Address</label>
+          <input type="text" id="donorAddress" placeholder="Address" required />
         </div>
 
         <!-- 80G Exemption Receipt Request -->

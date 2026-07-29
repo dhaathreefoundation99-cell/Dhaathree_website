@@ -85,7 +85,7 @@ foreach ($file in $files) {
     <a href="media.html"$a_media onclick="toggleMobileMenu()">Media</a>
     <a href="resource-center.html"$a_resource onclick="toggleMobileMenu()">Resource Center</a>
     <a href="contact.html"$a_contact onclick="toggleMobileMenu()">Contact</a>
-    <a href="get-involved.html" class="mobile-cta" onclick="toggleMobileMenu()">Support a Cause</a>
+    <a href="get-involved.html#donate" class="mobile-cta" onclick="toggleMobileMenu()">Support a Cause</a>
   </div>
 "@
         $content = $content -replace '(?s)<div class="mobile-menu" id="mobileMenu">.*?</div>', $newMobile
