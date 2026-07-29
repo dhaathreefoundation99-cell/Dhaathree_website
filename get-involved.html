@@ -1,6 +1,14 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SWNRVV5L38"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SWNRVV5L38');
+  </script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Get Involved | Dhaathree Foundation</title>
@@ -61,10 +69,9 @@
       <img src="logo.jpeg" alt="Dhaathree Foundation Logo"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
            id="navLogoImg"/>
-      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">à°§</div>
+      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">D</div>
       <div class="nav-brand">
         <span class="en">Dhaathree Foundation</span>
-        <span class="te">మీ సాధికారత కొరకై...</span>
       </div>
     </a>
   </div>
@@ -312,119 +319,123 @@
 </section>
 
 <!-- DONOR FORM SECTION -->
-<section class="volunteer-section" id="donate" style="display: none; margin-top: 40px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 60px;">
-  <div class="volunteer-form-box">
-    <h2>Donation Details</h2>
-    <p>Please share your details to register your support. Once submitted, our team will coordinate with you.</p>
+<section class="volunteer-section" id="donate" style="display: none; margin-top: 40px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 60px; background: #faf9fc;">
+  <div class="donation-layout-wrapper">
     
-    <form class="volunteer-form" id="donorForm">
-      <!-- Donation Cause Selection -->
-      <div class="volunteer-form-group full-width">
-        <label for="donorCause">Purpose of Donation *</label>
-        <select id="donorCause" required>
-          <option value="" disabled selected>Select Donation Purpose</option>
-          <option value="akshara">Akshara Dhaathree (Education & Literacy)</option>
-          <option value="ananda">Ananda Nilayam (Old Age Home & Rehab)</option>
-        </select>
-      </div>
-
-      <!-- Akshara Dhaathree Details Container -->
-      <div id="aksharaContainer" class="full-width" style="display: none; background: rgba(91,45,142,0.03); border: 1px solid rgba(91,45,142,0.1); padding: 20px; border-radius: 12px; margin-bottom: 15px; box-sizing: border-box;">
-        <h4 style="margin: 0 0 8px 0; color: #5B2D8E; font-size: 1.05rem; font-family: 'Playfair Display', serif;">Sponsor a Student's Education</h4>
-        <p style="margin: 0 0 15px 0; font-size: 0.9rem; color: #555; line-height: 1.45;">
-          "Sponsoring a student's education lights up a life forever." For just <strong>&#8377;1 per student</strong>, you can provide books, school bags, and primary learning resources to empower a child's future.
+    <!-- Bank Details Card (Left Column) -->
+    <div class="donation-bank-card">
+      <h3>BANK DETAILS</h3>
+      <table class="donation-bank-table">
+        <tr>
+          <td class="label-cell">Account Name</td>
+          <td class="value-cell" style="font-weight: 600;">Dhaathree Foundation</td>
+        </tr>
+        <tr>
+          <td class="label-cell">Account Number</td>
+          <td class="value-cell" style="font-weight: 700; letter-spacing: 0.5px;">XXXXXX1746</td>
+        </tr>
+        <tr>
+          <td class="label-cell">Bank Name</td>
+          <td class="value-cell">State Bank of India</td>
+        </tr>
+        <tr>
+          <td class="label-cell">Bank Branch</td>
+          <td class="value-cell">NTR Circle Branch, Madanapalle</td>
+        </tr>
+        <tr>
+          <td class="label-cell">IFSC Code</td>
+          <td class="value-cell" style="font-weight: 700; color: #5B2D8E;">SBIN0012727</td>
+        </tr>
+      </table>
+      
+      <div style="margin-top: 30px; text-align: center; border-top: 1px solid #f1f5f9; padding-top: 20px;">
+        <p style="font-size: 0.85rem; color: var(--muted); line-height: 1.45; margin: 0 0 15px 0;">
+          All donations are eligible for tax savings under section 80G.
         </p>
-        <div class="volunteer-form-group" style="margin-bottom: 0; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-          <label for="studentCount" style="margin-bottom: 0; font-weight: 600; min-width: 140px; color: var(--dark);">Number of Students *</label>
-          <div style="display: flex; align-items: center; gap: 5px;">
-            <button type="button" onclick="adjustStudentCount(-1)" style="width: 36px; height: 36px; border-radius: 6px; border: 1px solid #ddd; background: white; font-weight: bold; cursor: pointer; transition: all 0.2s;">-</button>
-            <input type="number" id="studentCount" value="1" min="1" style="width: 60px; height: 36px; text-align: center; border: 1px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 1rem; box-sizing: border-box;" oninput="updateAksharaAmount()" />
-            <button type="button" onclick="adjustStudentCount(1)" style="width: 36px; height: 36px; border-radius: 6px; border: 1px solid #ddd; background: white; font-weight: bold; cursor: pointer; transition: all 0.2s;">+</button>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 15px; opacity: 0.8;">
+          <span style="font-weight: 600; font-size: 0.78rem; color: #555; background: #f1f5f9; padding: 4px 10px; border-radius: 6px; border: 1px solid #e2e8f0;">UPI / IMPS</span>
+          <span style="font-weight: 600; font-size: 0.78rem; color: #555; background: #f1f5f9; padding: 4px 10px; border-radius: 6px; border: 1px solid #e2e8f0;">NEFT / RTGS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donation Form Card (Right Column) -->
+    <div class="donation-form-card">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--purple); margin: 0 0 10px 0; text-align: center;">Donation Details</h2>
+      <p style="color: var(--muted); font-size: 0.88rem; line-height: 1.45; text-align: center; margin: 0 0 25px 0;">Please register your donation details. Submitting this form helps us track your support and generate your tax receipt.</p>
+      
+      <form class="volunteer-form" id="donorForm" style="display: flex; flex-direction: column; gap: 18px; width: 100%;">
+        
+        <!-- Name Field -->
+        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+          <label for="donorName" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">Name</label>
+          <input type="text" id="donorName" placeholder="Your Name" required style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        </div>
+
+        <!-- Email Field -->
+        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+          <label for="donorEmail" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">Email</label>
+          <input type="email" id="donorEmail" placeholder="Your Email" required style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        </div>
+
+        <!-- Phone Field -->
+        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+          <label for="donorPhone" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">Phone</label>
+          <input type="tel" id="donorPhone" placeholder="Your Phone Number" required style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        </div>
+
+        <!-- Amount Field -->
+        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+          <label for="donorAmount" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">Amount</label>
+          <input type="number" id="donorAmount" min="1" placeholder="Your Donation" required style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        </div>
+
+        <!-- PAN Field -->
+        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+          <label for="donorPan" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">PAN</label>
+          <input type="text" id="donorPan" placeholder="Pan Number" style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        </div>
+
+        <!-- Address Field -->
+        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+          <label for="donorAddress" style="width: 80px; font-weight: 600; color: #1e3a8a; font-size: 0.95rem; text-align: left; flex-shrink: 0;">Address</label>
+          <input type="text" id="donorAddress" placeholder="Address" required style="flex: 1; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: white;" />
+        </div>
+
+        <!-- 80G Exemption Receipt Request -->
+        <div id="receipt80GContainer" style="display: none; align-items: center; gap: 10px; margin-top: 5px; width: 100%;">
+          <input type="checkbox" id="request80G" style="width: auto;">
+          <label for="request80G" style="margin-bottom: 0; font-size: 0.85rem; color: #555; font-weight: 600; cursor: pointer;">Request 80G Tax Exemption Receipt</label>
+        </div>
+
+        <!-- Privacy Policy checkbox -->
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-top: 5px;">
+          <input type="checkbox" id="donorPrivacyCheck" required style="width: auto; margin-top: 4px;">
+          <label for="donorPrivacyCheck" style="margin-bottom: 0; font-size: 0.82rem; line-height: 1.4; color: #555;">
+            I have read through the website's <a href="privacy-policy.html" target="_blank" style="color: var(--purple); text-decoration: underline;">Privacy Policy</a> & <a href="terms-and-conditions.html" target="_blank" style="color: var(--purple); text-decoration: underline;">Terms and Conditions</a> to make a donation.
+          </label>
+        </div>
+
+        <!-- Captcha checkbox -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <input type="checkbox" id="donorRobotCheck" required style="width: auto;">
+          <label for="donorRobotCheck" style="margin-bottom: 0; font-size: 0.85rem; color: #555;">I'm not a robot</label>
+        </div>
+
+        <div style="text-align: center; margin-top: 15px;">
+          <p style="font-size: 0.85rem; color: #1e3a8a; font-style: italic; margin-bottom: 12px;">All donations are eligible for tax savings under 80G.</p>
+          
+          <!-- Payment logos -->
+          <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <span style="font-size: 0.85rem; color: #777; font-weight: 500;">PhonePe &bull; GPay &bull; UPI &bull; RuPay</span>
           </div>
-          <span id="aksharaCalculatedTotal" style="font-weight: 700; color: #5B2D8E; font-size: 1.05rem; margin-left: 15px;">Total: &#8377;1</span>
+
+          <button type="submit" id="donateSubmitBtn" style="background: white; border: 1.5px solid #1e3a8a; color: #1e3a8a; padding: 10px 30px; border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='#1e3a8a'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='#1e3a8a';">Donate</button>
         </div>
-      </div>
-
-      <!-- Ananda Nilayam Details Container -->
-      <div id="anandaContainer" class="full-width" style="display: none; background: rgba(220,53,69,0.02); border: 1px solid rgba(220,53,69,0.08); padding: 20px; border-radius: 12px; margin-bottom: 15px; box-sizing: border-box;">
-        <h4 style="margin: 0 0 8px 0; color: #C13584; font-size: 1.05rem; font-family: 'Playfair Display', serif;">Celebrate Life's Special Moments with Love</h4>
-        <p style="margin: 0 0 15px 0; font-size: 0.9rem; color: #555; line-height: 1.45;">
-          Celebrate birthdays, marriage anniversaries, or special memories with our beloved elders at <strong>Ananda Nilayam Old Age Home & Rehab</strong>. Select one of the meal packages below:
-        </p>
-        <div class="volunteer-form-group" style="margin-bottom: 0;">
-          <label for="anandaMealPackage" style="font-weight: 600; display: block; margin-bottom: 6px; color: var(--dark);">Choose Meal Package *</label>
-          <select id="anandaMealPackage" onchange="updateAnandaAmount()" style="width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box;">
-            <option value="5000">Full Day (Breakfast, Lunch & Dinner) &mdash; &#8377;5,000</option>
-            <option value="2000">Only Breakfast &mdash; &#8377;2,000</option>
-            <option value="3000">Only Lunch &mdash; &#8377;3,000</option>
-            <option value="2000">Only Dinner &mdash; &#8377;2,000</option>
-            <option value="4000">Special Lunch &mdash; &#8377;4,000</option>
-            <option value="custom">Custom Donation Amount</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Donation Amount -->
-      <div class="volunteer-form-group">
-        <label for="donorAmount">Donation Amount (&#8377;) *</label>
-        <input type="number" id="donorAmount" min="1" required placeholder="Enter donation amount">
-      </div>
-
-      <!-- Donor Details -->
-      <div class="volunteer-form-group">
-        <label for="donorName">Donor Name *</label>
-        <input type="text" id="donorName" placeholder="Enter full name" required>
-      </div>
-
-      <div class="volunteer-form-group">
-        <label for="donorEmail">Email ID *</label>
-        <input type="email" id="donorEmail" placeholder="Enter email address" required>
-      </div>
-
-      <div class="volunteer-form-group">
-        <label for="donorPhone">Phone Number *</label>
-        <input type="tel" id="donorPhone" placeholder="Enter 10-digit mobile number" required>
-      </div>
-
-      <div class="volunteer-form-group">
-        <label for="donorCity">City *</label>
-        <input type="text" id="donorCity" placeholder="Enter City" required>
-      </div>
-
-      <div class="volunteer-form-group">
-        <label for="donorDistrict">District *</label>
-        <input type="text" id="donorDistrict" placeholder="Enter District" required>
-      </div>
-
-      <div class="volunteer-form-group">
-        <label for="donorState">State *</label>
-        <input type="text" id="donorState" placeholder="Enter State" required>
-      </div>
-
-      <div class="volunteer-form-group full-width">
-        <label for="donorAddress">Address *</label>
-        <textarea id="donorAddress" rows="3" placeholder="Enter detailed address" required></textarea>
-      </div>
-
-
-
-      <!-- 80G Exemption Receipt Request (Hidden by default, shown for amounts >= 1000) -->
-      <div id="receipt80GContainer" class="volunteer-form-group full-width" style="display: none; align-items: center; gap: 10px; margin-top: 15px; background: rgba(141,198,63,0.05); padding: 12px 18px; border-radius: 8px; border: 1px solid rgba(141,198,63,0.2); box-sizing: border-box;">
-        <input type="checkbox" id="request80G" style="width: auto;">
-        <label for="request80G" style="margin-bottom: 0; font-weight: 600; color: var(--dark);">Request 80G Tax Exemption Receipt</label>
-      </div>
-
-      <!-- Captcha checkbox -->
-      <div class="volunteer-form-group full-width" style="display: flex; align-items: center; gap: 10px; margin-top: 15px;">
-        <input type="checkbox" id="donorRobotCheck" required style="width: auto;">
-        <label for="donorRobotCheck" style="margin-bottom: 0;">I'm not a robot</label>
-      </div>
-
-      <div class="full-width" style="margin-top: 20px;">
-        <button type="submit" class="volunteer-submit-btn" style="background: linear-gradient(135deg,#5B2D8E,#8DC63F);">SUBMIT DONATION DETAILS</button>
-      </div>
-    </form>
-  </div>
+      </form>
+    </div>
+    
+  </div> <!-- Close donation-layout-wrapper -->
 </section>
 
 <section class="donate">
@@ -442,7 +453,6 @@
       <img src="logo.jpeg" alt="Logo" onerror="this.style.display='none';" />
       <div>
         <div class="fn">Dhaathree Foundation</div>
-        <div class="te">మీ సాధికారత కొరకై...</div>
       </div>
     </div>
     </div>
@@ -466,7 +476,7 @@
         <svg viewBox="0 0 24 24"><path fill="currentColor" d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.167 1.45 4.823 1.452 5.53 0 10.029-4.5 10.032-10.03.001-2.679-1.04-5.198-2.934-7.094C16.619 1.588 14.107.545 11.43.545 5.9 5.545 1.401 10.043 1.4 15.572c-.001 1.733.457 3.42 1.32 4.935L1.7 22.3l1.895-1.616zM17.487 14.4c-.299-.149-1.765-.87-2.04-.97-.274-.1-.475-.149-.675.15-.199.3-.773.97-.948 1.171-.174.199-.348.224-.648.075-.3-.15-1.266-.467-2.41-1.485-.89-.793-1.49-1.773-1.665-2.07-.174-.3-.019-.462.13-.611.135-.134.3-.349.45-.523.15-.174.199-.299.299-.498.1-.2.05-.375-.025-.524-.075-.15-.675-1.625-.925-2.225-.244-.589-.493-.51-.675-.52-.172-.007-.368-.009-.565-.009-.199 0-.523.075-.797.374-.275.3-1.047 1.022-1.047 2.492 0 1.47 1.07 2.89 1.22 3.09.149.2 2.105 3.2 5.097 4.49.712.308 1.268.491 1.701.628.718.228 1.37.196 1.885.119.574-.087 1.765-.72 2.015-1.42.25-.7.25-1.3.175-1.42-.075-.125-.275-.199-.575-.349z"/></svg>
       </a>
     </div>
-  <div class="footer-copy">&copy; 2024 Dhaathree Foundation &bull; Regd. No. 103/2019 &bull; All rights reserved &bull; Made with &hearts; for community empowerment</div>
+  <div class="footer-copy">&copy; 2026 Dhaathree Foundation &bull; Regd. No. 103/2019 &bull; All rights reserved &bull; <a href="privacy-policy.html" style="color: inherit; text-decoration: underline; white-space: nowrap; margin-left: 5px;">Privacy Policy</a> &bull; <a href="terms-and-conditions.html" style="color: inherit; text-decoration: underline; white-space: nowrap; margin-left: 5px;">Terms & Conditions</a></div>
 </footer>
 
 
@@ -693,6 +703,11 @@
     donorForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      if (!document.getElementById('donorPrivacyCheck').checked) {
+        alert("Please confirm you have read the Privacy Policy and Terms and Conditions.");
+        return;
+      }
+
       if (!document.getElementById('donorRobotCheck').checked) {
         alert("Please confirm you are not a robot by checking the box.");
         return;
@@ -715,11 +730,12 @@
         donorName: document.getElementById('donorName').value,
         email: document.getElementById('donorEmail').value,
         phone: document.getElementById('donorPhone').value,
-        city: document.getElementById('donorCity').value,
-        district: document.getElementById('donorDistrict').value,
-        state: document.getElementById('donorState').value,
+        city: '',
+        district: '',
+        state: '',
         address: document.getElementById('donorAddress').value,
-        donationCause: document.getElementById('donorCause').value,
+        pan: document.getElementById('donorPan').value,
+        donationCause: 'general',
         amount: parseFloat(amtVal),
         request80G: document.getElementById('request80G').checked,
         occasionDate: '',

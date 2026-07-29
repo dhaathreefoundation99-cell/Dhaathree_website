@@ -138,11 +138,12 @@ const donorSchema = new mongoose.Schema({
   donorName: { type: String, required: true },
   email: { type: String, required: true },
   phone: { type: String, required: true },
-  city: { type: String, required: true },
-  district: { type: String, required: true },
-  state: { type: String, required: true },
+  city: { type: String },
+  district: { type: String },
+  state: { type: String },
   address: { type: String, required: true },
-  donationCause: { type: String, required: true }, // "akshara" or "ananda" or "general"
+  pan: { type: String },
+  donationCause: { type: String, default: 'general' }, // "akshara" or "ananda" or "general"
   occasionDate: { type: String },
   occasionName: { type: String },
   occasionType: { type: String },
@@ -263,15 +264,20 @@ app.get('/api/featured-photos', async (req, res) => {
     if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({ error: 'Database connection offline.' });
     }
-    // Pull up to 15 random photos from the general website gallery
-    const photos = await Photo.aggregate([{ $sample: { size: 15 } }]);
-    const formattedPhotos = photos.map(p => ({
-      _id: p._id,
-      name: p.name,
-      url: p.url,
-      timestamp: p.timestamp
-    }));
-    res.json(formattedPhotos);
+    // 1. Try to fetch photos from the FeaturedPhoto collection
+    let photos = await FeaturedPhoto.find().sort({ timestamp: -1 });
+
+    // 2. If no featured photos exist, fall back to a random sample of general photos
+    if (!photos || photos.length === 0) {
+      const generalPhotos = await Photo.aggregate([{ $sample: { size: 15 } }]);
+      photos = generalPhotos.map(p => ({
+        _id: p._id,
+        name: p.name,
+        url: p.url,
+        timestamp: p.timestamp
+      }));
+    }
+    res.json(photos);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -744,9 +750,9 @@ app.post('/api/donors', async (req, res) => {
     if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({ error: 'Database connection offline.' });
     }
-    const { donorName, email, phone, city, district, state, address, donationCause, occasionDate, occasionName, occasionType, occasionPhone, amount, request80G } = req.body;
-    if (!donorName || !email || !phone || !city || !district || !state || !address || !donationCause || !amount) {
-      return res.status(400).json({ error: 'Donor details, cause, and amount are required fields.' });
+    const { donorName, email, phone, city, district, state, address, pan, donationCause, occasionDate, occasionName, occasionType, occasionPhone, amount, request80G } = req.body;
+    if (!donorName || !email || !phone || !address || !amount) {
+      return res.status(400).json({ error: 'Name, email, phone, address, and amount are required fields.' });
     }
     const newDonor = new Donor({
       donorName,
@@ -756,7 +762,8 @@ app.post('/api/donors', async (req, res) => {
       district,
       state,
       address,
-      donationCause,
+      pan,
+      donationCause: donationCause || 'general',
       occasionDate,
       occasionName,
       occasionType,
