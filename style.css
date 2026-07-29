@@ -2375,8 +2375,6 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
   padding: 40px;
   box-sizing: border-box;
-  position: sticky;
-  top: 100px;
 }
 
 .donation-bank-card h3 {
