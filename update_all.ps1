@@ -108,6 +108,12 @@ foreach ($file in $files) {
         $content = $content -replace '(?s)<div class="footer-links">.*?</div>', $newFooter
     }
 
+    # 4.5. Replace footer copy block (Privacy Policy and Terms & Conditions)
+    if ($content -match '(?s)<div class="footer-copy">.*?</div>') {
+        $newFooterCopyText = '<div class="footer-copy">&copy; 2026 Dhaathree Foundation &bull; Regd. No. 103/2019 &bull; All rights reserved &bull; <a href="privacy-policy.html" style="color: inherit; text-decoration: underline; white-space: nowrap; margin-left: 5px;">Privacy Policy</a> &bull; <a href="terms-and-conditions.html" style="color: inherit; text-decoration: underline; white-space: nowrap; margin-left: 5px;">Terms & Conditions</a></div>'
+        $content = $content -replace '(?s)<div class="footer-copy">.*?</div>', $newFooterCopyText
+    }
+
     # 5. Fix Support a Cause CTA
     $content = $content -replace 'class="nav-cta">Get Involved</a>', 'class="nav-cta">Support a Cause</a>'
 
