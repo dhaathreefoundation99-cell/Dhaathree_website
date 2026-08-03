@@ -726,8 +726,36 @@ app.get('/api/resources/view/:id', async (req, res) => {
     if (!fileRes.ok) {
       throw new Error(`Failed to fetch file from storage: ${fileRes.status}`);
     }
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `inline; filename="${resource.name}"`);
+
+    const ext = path.extname(resource.name).toLowerCase();
+    let contentType = 'application/octet-stream';
+    let disposition = 'attachment'; // default to download if not inlineable
+
+    if (ext === '.pdf') {
+      contentType = 'application/pdf';
+      disposition = 'inline';
+    } else if (ext === '.jpg' || ext === '.jpeg') {
+      contentType = 'image/jpeg';
+      disposition = 'inline';
+    } else if (ext === '.png') {
+      contentType = 'image/png';
+      disposition = 'inline';
+    } else if (ext === '.gif') {
+      contentType = 'image/gif';
+      disposition = 'inline';
+    } else if (ext === '.txt') {
+      contentType = 'text/plain';
+      disposition = 'inline';
+    } else if (ext === '.docx') {
+      contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+      disposition = 'attachment';
+    } else if (ext === '.doc') {
+      contentType = 'application/msword';
+      disposition = 'attachment';
+    }
+
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Content-Disposition', `${disposition}; filename="${resource.name}"`);
     const arrayBuffer = await fileRes.arrayBuffer();
     res.send(Buffer.from(arrayBuffer));
   } catch (err) {
@@ -750,7 +778,16 @@ app.get('/api/resources/download/:id', async (req, res) => {
     if (!fileRes.ok) {
       throw new Error(`Failed to fetch file from storage: ${fileRes.status}`);
     }
-    res.setHeader('Content-Type', 'application/pdf');
+
+    const ext = path.extname(resource.name).toLowerCase();
+    let contentType = 'application/octet-stream';
+    if (ext === '.pdf') contentType = 'application/pdf';
+    else if (ext === '.docx') contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    else if (ext === '.doc') contentType = 'application/msword';
+    else if (ext === '.jpg' || ext === '.jpeg') contentType = 'image/jpeg';
+    else if (ext === '.png') contentType = 'image/png';
+
+    res.setHeader('Content-Type', contentType);
     res.setHeader('Content-Disposition', `attachment; filename="${resource.name}"`);
     const arrayBuffer = await fileRes.arrayBuffer();
     res.send(Buffer.from(arrayBuffer));
