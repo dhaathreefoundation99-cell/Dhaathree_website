@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -341,10 +341,8 @@ function selectDocument(type) {
       `;
 
       docs.forEach(doc => {
-        const viewUrl = doc.url;
-        const downloadUrl = doc.url.includes('/raw/upload/') 
-          ? doc.url.replace('/raw/upload/', '/raw/upload/fl_attachment/') 
-          : doc.url;
+        const viewUrl = `/api/resources/view/${doc._id}`;
+        const downloadUrl = `/api/resources/download/${doc._id}`;
         
         // Show description only if provided, otherwise omit it completely (displaying title only)
         const descriptionHtml = doc.description && doc.description.trim()

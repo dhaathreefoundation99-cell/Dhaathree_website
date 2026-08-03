@@ -712,6 +712,54 @@ app.post('/api/resources/:type', upload.single('file'), async (req, res) => {
   }
 });
 
+// 12.5. VIEW A RESOURCE (Streams the file directly from Cloudinary to avoid CORS or Google Doc viewer logins)
+app.get('/api/resources/view/:id', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).send('Database connection offline.');
+    }
+    const resource = await Resource.findById(req.params.id);
+    if (!resource) {
+      return res.status(404).send('Resource not found.');
+    }
+    const fileRes = await fetch(resource.url);
+    if (!fileRes.ok) {
+      throw new Error(`Failed to fetch file from storage: ${fileRes.status}`);
+    }
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `inline; filename="${resource.name}"`);
+    const arrayBuffer = await fileRes.arrayBuffer();
+    res.send(Buffer.from(arrayBuffer));
+  } catch (err) {
+    console.error('Resource view error:', err);
+    res.status(500).send(err.message);
+  }
+});
+
+// 12.6. DOWNLOAD A RESOURCE (Streams the file to force save/download natively)
+app.get('/api/resources/download/:id', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).send('Database connection offline.');
+    }
+    const resource = await Resource.findById(req.params.id);
+    if (!resource) {
+      return res.status(404).send('Resource not found.');
+    }
+    const fileRes = await fetch(resource.url);
+    if (!fileRes.ok) {
+      throw new Error(`Failed to fetch file from storage: ${fileRes.status}`);
+    }
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${resource.name}"`);
+    const arrayBuffer = await fileRes.arrayBuffer();
+    res.send(Buffer.from(arrayBuffer));
+  } catch (err) {
+    console.error('Resource download error:', err);
+    res.status(500).send(err.message);
+  }
+});
+
 // 13. DELETE A RESOURCE BY ID
 app.delete('/api/resources/:id', async (req, res) => {
   try {
