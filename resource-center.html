@@ -353,7 +353,9 @@ function selectDocument(type) {
         let embedHtml = '';
         
         if (ext === 'pdf') {
-          embedHtml = `<iframe src="${viewUrl}#toolbar=0&navpanes=0" style="width: 100%; height: 420px; border: 1px solid #e8e8ed; border-radius: 12px; background: #f8fafc;" loading="lazy"></iframe>`;
+          embedHtml = `
+            <iframe src="${viewUrl}#toolbar=0&navpanes=0" style="width: 100%; height: 420px; border: 1px solid #e8e8ed; border-radius: 12px; background: #f8fafc;" loading="lazy"></iframe>
+          `;
         } else if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) {
           embedHtml = `<img src="${viewUrl}" style="width: 100%; height: 420px; object-fit: contain; border-radius: 12px; border: 1px solid #e8e8ed; background: #f8fafc;" />`;
         } else {
@@ -366,17 +368,17 @@ function selectDocument(type) {
         }
 
         htmlContent += `
-          <div style="background: white; border: 1px solid #e8e8ed; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 15px; transition: transform 0.25s ease;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div onclick="window.open('${viewUrl}', '_blank')" style="background: white; border: 1px solid #e8e8ed; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 15px; transition: transform 0.25s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
             ${embedHtml}
             <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 5px;">
               <h3 style="font-family:'Playfair Display', serif; font-size: 1.25rem; color: var(--dark); margin: 0; text-align: left;">${doc.title}</h3>
               ${descriptionHtml}
               <div style="display: flex; gap: 10px; align-items: center; justify-content: space-between; margin-top: 5px; border-top: 1px solid #f1f5f9; padding-top: 12px;">
-                <a href="${viewUrl}" target="_blank" style="text-decoration: none; color: var(--purple); font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px;">
+                <span style="color: var(--purple); font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px;">
                   <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
                   Open Fullscreen
-                </a>
-                <a href="${downloadUrl}" download target="_blank" style="text-decoration: none; background: white; border: 1.5px solid var(--purple); color: var(--purple); padding: 6px 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; border-radius: 6px; font-size: 0.8rem; transition: all 0.2s; white-space: nowrap;" onmouseover="this.style.background='var(--purple)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--purple)';">
+                </span>
+                <a href="${downloadUrl}" download target="_blank" onclick="event.stopPropagation();" style="text-decoration: none; background: white; border: 1.5px solid var(--purple); color: var(--purple); padding: 6px 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; border-radius: 6px; font-size: 0.8rem; transition: all 0.2s; white-space: nowrap;" onmouseover="this.style.background='var(--purple)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--purple)';">
                   <svg viewBox="0 0 24 24" style="width: 12px; height: 12px; fill: currentColor;"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
                   Download (↓)
                 </a>
