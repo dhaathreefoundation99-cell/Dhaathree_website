@@ -337,7 +337,7 @@ function selectDocument(type) {
             <h2 style="font-family:'Playfair Display', serif; font-size: 2.2rem; color: var(--dark); margin: 8px 0 16px 0;">${categoryHeader}</h2>
           </div>
           
-          <div style="display: flex; flex-direction: column; gap: 30px; width: 100%; max-width: 750px; margin: 0 auto;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; width: 100%; max-width: 1100px; margin: 0 auto;">
       `;
 
       docs.forEach(doc => {
@@ -346,22 +346,41 @@ function selectDocument(type) {
         
         // Show description only if provided, otherwise omit it completely (displaying title only)
         const descriptionHtml = doc.description && doc.description.trim()
-          ? `<p style="color: var(--muted); font-size: 0.98rem; line-height: 1.6; margin: 0; max-width: 600px;">${doc.description}</p>`
+          ? `<p style="color: var(--muted); font-size: 0.9rem; line-height: 1.5; margin: 0; text-align: left;">${doc.description}</p>`
           : '';
 
+        const ext = doc.name ? doc.name.split('.').pop().toLowerCase() : 'pdf';
+        let embedHtml = '';
+        
+        if (ext === 'pdf') {
+          embedHtml = `<iframe src="${viewUrl}#toolbar=0&navpanes=0" style="width: 100%; height: 420px; border: 1px solid #e8e8ed; border-radius: 12px; background: #f8fafc;" loading="lazy"></iframe>`;
+        } else if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) {
+          embedHtml = `<img src="${viewUrl}" style="width: 100%; height: 420px; object-fit: contain; border-radius: 12px; border: 1px solid #e8e8ed; background: #f8fafc;" />`;
+        } else {
+          embedHtml = `
+            <div style="width: 100%; height: 420px; border: 1px dashed #cbd5e1; border-radius: 12px; background: #f8fafc; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; padding: 20px; box-sizing: border-box;">
+              <span style="font-size: 3.5rem;">&#128196;</span>
+              <p style="font-size: 0.95rem; color: var(--muted); margin: 0; font-weight: 500; text-align: center;">Word Document (.${ext})<br>cannot be previewed inline.</p>
+              <a href="${downloadUrl}" download style="color: var(--purple); font-weight: 600; text-decoration: underline; font-size: 0.95rem;">Download Document</a>
+            </div>`;
+        }
+
         htmlContent += `
-          <div style="background: white; border: 1px solid #e8e8ed; border-radius: 20px; padding: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px; transition: transform 0.25s ease;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-            <h3 style="font-family:'Playfair Display', serif; font-size: 1.6rem; color: var(--dark); margin: 0;">${doc.title}</h3>
-            ${descriptionHtml}
-            <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap; justify-content: center;">
-              <a href="${viewUrl}" target="_blank" class="nav-cta" style="text-decoration: none; padding: 12px 25px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(91,45,142,0.12);">
-                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                View Certificate
-              </a>
-              <a href="${downloadUrl}" download target="_blank" style="text-decoration: none; background: white; border: 1.5px solid var(--purple); color: var(--purple); padding: 10.5px 25px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s;" onmouseover="this.style.background='var(--purple)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--purple)';">
-                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
-                Download (↓)
-              </a>
+          <div style="background: white; border: 1px solid #e8e8ed; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 15px; transition: transform 0.25s ease;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+            ${embedHtml}
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 5px;">
+              <h3 style="font-family:'Playfair Display', serif; font-size: 1.25rem; color: var(--dark); margin: 0; text-align: left;">${doc.title}</h3>
+              ${descriptionHtml}
+              <div style="display: flex; gap: 10px; align-items: center; justify-content: space-between; margin-top: 5px; border-top: 1px solid #f1f5f9; padding-top: 12px;">
+                <a href="${viewUrl}" target="_blank" style="text-decoration: none; color: var(--purple); font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px;">
+                  <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                  Open Fullscreen
+                </a>
+                <a href="${downloadUrl}" download target="_blank" style="text-decoration: none; background: white; border: 1.5px solid var(--purple); color: var(--purple); padding: 6px 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; border-radius: 6px; font-size: 0.8rem; transition: all 0.2s; white-space: nowrap;" onmouseover="this.style.background='var(--purple)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--purple)';">
+                  <svg viewBox="0 0 24 24" style="width: 12px; height: 12px; fill: currentColor;"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                  Download (↓)
+                </a>
+              </div>
             </div>
           </div>
         `;
