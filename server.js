@@ -53,15 +53,65 @@ if (!mongoUri || mongoUri.includes('your_mongodb_atlas_connection_string')) {
         console.error('Failed to initialize settings:', err);
       }
 
-      // Auto-migrate existing resources with their specific registration/certificate numbers
+      // Auto-migrate existing resources with their specific registration/certificate numbers and new Cloudinary images
       try {
         const ResourceModel = mongoose.model('Resource');
-        await ResourceModel.updateOne({ title: /Registration Certificate/i, certNumber: { $exists: false } }, { $set: { certNumber: '103/2019' } });
-        await ResourceModel.updateOne({ title: /80G Certificate/i, certNumber: { $exists: false } }, { $set: { certNumber: 'AAEAD6853B25HY02' } });
-        await ResourceModel.updateOne({ title: /PAN/i, certNumber: { $exists: false } }, { $set: { certNumber: 'AAEAD6853B' } });
-        console.log('Automated Resource certNumber migrations completed successfully');
+        await ResourceModel.updateMany({ title: /Registration/i }, { $set: { certNumber: '103/2019' } });
+        
+        await ResourceModel.updateMany({ title: /80G/i }, { 
+          $set: { 
+            certNumber: 'AAEAD6853B25HY02',
+            url: 'https://res.cloudinary.com/roomk6xj/image/upload/v1785845867/dhaathree_foundation/resources/jmx1kyyy9qlpz4ujfild.png',
+            cloudinaryId: 'dhaathree_foundation/resources/jmx1kyyy9qlpz4ujfild',
+            name: '80g_certificate.png'
+          } 
+        });
+        
+        await ResourceModel.updateMany({ title: /12A/i }, { 
+          $set: { 
+            certNumber: 'AAEAD6853B25HY01',
+            url: 'https://res.cloudinary.com/roomk6xj/image/upload/v1785845869/dhaathree_foundation/resources/ehhimdiiy6vnmtnzgi72.png',
+            cloudinaryId: 'dhaathree_foundation/resources/ehhimdiiy6vnmtnzgi72',
+            name: '12a_certificate.png'
+          } 
+        });
+        
+        await ResourceModel.updateMany({ title: /PAN/i }, { 
+          $set: { 
+            certNumber: 'AAEAD6853B',
+            url: 'https://res.cloudinary.com/roomk6xj/image/upload/v1785845870/dhaathree_foundation/resources/l8pmrgs7vaequdboluz6.png',
+            cloudinaryId: 'dhaathree_foundation/resources/l8pmrgs7vaequdboluz6',
+            name: 'pan_card.png'
+          } 
+        });
+        
+        await ResourceModel.updateMany({ title: /FCRA/i }, { 
+          $set: { 
+            certNumber: '010140481',
+            url: 'https://res.cloudinary.com/roomk6xj/image/upload/v1785845872/dhaathree_foundation/resources/lovjhfoavc494sorl2jc.png',
+            cloudinaryId: 'dhaathree_foundation/resources/lovjhfoavc494sorl2jc',
+            name: 'fcra_certificate.png'
+          } 
+        });
+        
+        await ResourceModel.updateMany({ title: /FSSAI/i }, { 
+          $set: { 
+            certNumber: '10124025000158',
+            url: 'https://res.cloudinary.com/roomk6xj/image/upload/v1785845873/dhaathree_foundation/resources/cokfppxfnunrxuguvwra.png',
+            cloudinaryId: 'dhaathree_foundation/resources/cokfppxfnunrxuguvwra',
+            name: 'fssai_license.png'
+          } 
+        });
+
+        await ResourceModel.updateMany({ title: /CSR/i }, { 
+          $set: { 
+            certNumber: 'CSR00014950'
+          } 
+        });
+        
+        console.log('Automated Resource certNumber and Cloudinary URL migrations completed successfully');
       } catch (migrationErr) {
-        console.error('Failed to migrate resource cert numbers:', migrationErr);
+        console.error('Failed to migrate resource details:', migrationErr);
       }
     })
     .catch(err => console.error('MongoDB database connection error:', err));

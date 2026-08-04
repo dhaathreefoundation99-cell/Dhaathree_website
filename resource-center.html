@@ -352,7 +352,13 @@ function selectDocument(type) {
         const ext = doc.name ? doc.name.split('.').pop().toLowerCase() : 'pdf';
         let embedHtml = '';
         
-        if (ext === 'pdf') {
+        if (type === 'registration' && doc.title.toLowerCase().includes('registration')) {
+          embedHtml = `
+            <div style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+              <img src="https://res.cloudinary.com/roomk6xj/image/upload/v1785844926/dhaathree_foundation/resources/kjjgi2cakeihq8h1rppf.jpg" style="width: 100%; height: auto; max-height: 520px; object-fit: contain; border-radius: 12px; border: 1px solid #e8e8ed; background: #f8fafc;" />
+              <img src="https://res.cloudinary.com/roomk6xj/image/upload/v1785844927/dhaathree_foundation/resources/to1kszrbuy35fvijzfjw.jpg" style="width: 100%; height: auto; max-height: 520px; object-fit: contain; border-radius: 12px; border: 1px solid #e8e8ed; background: #f8fafc;" />
+            </div>`;
+        } else if (ext === 'pdf') {
           // If the PDF was uploaded to Cloudinary as an image resource, we can render the first page as a JPG dynamically
           const pdfImgUrl = doc.url.includes('/image/upload/') 
             ? doc.url.replace(/\.pdf$/, '.jpg') 
@@ -372,8 +378,25 @@ function selectDocument(type) {
         // Show registration / certificate number directly below the title if present
         let regNoHtml = '';
         if (doc.certNumber && doc.certNumber.trim()) {
-          const isReg = doc.title.toLowerCase().includes('registration') || type === 'registration';
-          const prefix = isReg ? 'Regd. No' : 'Number';
+          let prefix = 'Number';
+          const titleLower = doc.title.toLowerCase();
+          
+          if (titleLower.includes('80g')) {
+            prefix = '80G Number';
+          } else if (titleLower.includes('12a')) {
+            prefix = '12A Number';
+          } else if (titleLower.includes('pan')) {
+            prefix = 'PAN';
+          } else if (titleLower.includes('fcra')) {
+            prefix = 'FCRA Reg. No';
+          } else if (titleLower.includes('fssai')) {
+            prefix = 'FSSAI License No';
+          } else if (titleLower.includes('csr')) {
+            prefix = 'CSR Reg. No';
+          } else if (titleLower.includes('registration') || type === 'registration') {
+            prefix = 'Regd. No';
+          }
+          
           regNoHtml = `<div style="text-align: left; font-size: 0.95rem; font-weight: 700; color: var(--purple); margin: 2px 0 6px 0; font-family:'Inter', sans-serif;">${prefix}: ${doc.certNumber}</div>`;
         }
 
