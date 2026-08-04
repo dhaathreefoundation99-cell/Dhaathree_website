@@ -52,6 +52,17 @@ if (!mongoUri || mongoUri.includes('your_mongodb_atlas_connection_string')) {
       } catch (err) {
         console.error('Failed to initialize settings:', err);
       }
+
+      // Auto-migrate existing resources with their specific registration/certificate numbers
+      try {
+        const ResourceModel = mongoose.model('Resource');
+        await ResourceModel.updateOne({ title: /Registration Certificate/i, certNumber: { $exists: false } }, { $set: { certNumber: '103/2019' } });
+        await ResourceModel.updateOne({ title: /80G Certificate/i, certNumber: { $exists: false } }, { $set: { certNumber: 'AAEAD6853B25HY02' } });
+        await ResourceModel.updateOne({ title: /PAN/i, certNumber: { $exists: false } }, { $set: { certNumber: 'AAEAD6853B' } });
+        console.log('Automated Resource certNumber migrations completed successfully');
+      } catch (migrationErr) {
+        console.error('Failed to migrate resource cert numbers:', migrationErr);
+      }
     })
     .catch(err => console.error('MongoDB database connection error:', err));
 }
@@ -116,6 +127,7 @@ const resourceSchema = new mongoose.Schema({
   type: { type: String, required: true }, // "registration" or "annual_report"
   title: { type: String, required: true },
   description: { type: String },
+  certNumber: { type: String }, // Registration / Certificate number (e.g. 103/2019)
   name: { type: String, required: true },
   url: { type: String, required: true },
   cloudinaryId: { type: String, required: true },
@@ -679,7 +691,7 @@ app.post('/api/resources/:type', upload.single('file'), async (req, res) => {
     if (type !== 'registration' && type !== 'annual_report') {
       return res.status(400).json({ error: 'Invalid resource type. Must be registration or annual_report.' });
     }
-    const { title, description } = req.body;
+    const { title, description, certNumber } = req.body;
     if (!title || !title.trim()) {
       return res.status(400).json({ error: 'Title is required.' });
     }
@@ -689,9 +701,11 @@ app.post('/api/resources/:type', upload.single('file'), async (req, res) => {
 
     // 1. Convert and upload new file to Cloudinary
     const fileStr = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+    const ext = path.extname(req.file.originalname).toLowerCase();
+    const isImageOrPdf = ['.jpg', '.jpeg', '.png', '.gif', '.pdf'].includes(ext);
     const uploadResponse = await cloudinary.uploader.upload(fileStr, {
       folder: 'dhaathree_foundation/resources',
-      resource_type: 'raw'
+      resource_type: isImageOrPdf ? 'image' : 'raw'
     });
 
     // 2. Save new record in MongoDB
@@ -699,6 +713,7 @@ app.post('/api/resources/:type', upload.single('file'), async (req, res) => {
       type,
       title: title.trim(),
       description: (description || '').trim(),
+      certNumber: (certNumber || '').trim(),
       name: req.file.originalname,
       url: uploadResponse.secure_url,
       cloudinaryId: uploadResponse.public_id

@@ -353,11 +353,11 @@ function selectDocument(type) {
         let embedHtml = '';
         
         if (ext === 'pdf') {
-          // Use Google Docs Viewer with embedded=true to render PDFs directly on mobile browsers
-          const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(doc.url)}&embedded=true`;
-          embedHtml = `
-            <iframe src="${googleViewerUrl}" style="width: 100%; height: 420px; border: 1px solid #e8e8ed; border-radius: 12px; background: #f8fafc;" loading="lazy"></iframe>
-          `;
+          // If the PDF was uploaded to Cloudinary as an image resource, we can render the first page as a JPG dynamically
+          const pdfImgUrl = doc.url.includes('/image/upload/') 
+            ? doc.url.replace(/\.pdf$/, '.jpg') 
+            : doc.url;
+          embedHtml = `<img src="${pdfImgUrl}" style="width: 100%; height: 420px; object-fit: contain; border-radius: 12px; border: 1px solid #e8e8ed; background: #f8fafc;" />`;
         } else if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) {
           embedHtml = `<img src="${viewUrl}" style="width: 100%; height: 420px; object-fit: contain; border-radius: 12px; border: 1px solid #e8e8ed; background: #f8fafc;" />`;
         } else {
@@ -369,11 +369,20 @@ function selectDocument(type) {
             </div>`;
         }
 
+        // Show registration / certificate number directly below the title if present
+        let regNoHtml = '';
+        if (doc.certNumber && doc.certNumber.trim()) {
+          const isReg = doc.title.toLowerCase().includes('registration') || type === 'registration';
+          const prefix = isReg ? 'Regd. No' : 'Number';
+          regNoHtml = `<div style="text-align: left; font-size: 0.95rem; font-weight: 700; color: var(--purple); margin: 2px 0 6px 0; font-family:'Inter', sans-serif;">${prefix}: ${doc.certNumber}</div>`;
+        }
+
         htmlContent += `
           <div onclick="window.open('${viewUrl}', '_blank')" style="background: white; border: 1px solid #e8e8ed; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 15px; transition: transform 0.25s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
             ${embedHtml}
             <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 5px;">
               <h3 style="font-family:'Playfair Display', serif; font-size: 1.25rem; color: var(--dark); margin: 0; text-align: left;">${doc.title}</h3>
+              ${regNoHtml}
               ${descriptionHtml}
               <div style="display: flex; gap: 10px; align-items: center; justify-content: space-between; margin-top: 5px; border-top: 1px solid #f1f5f9; padding-top: 12px;">
                 <span style="color: var(--purple); font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px;">

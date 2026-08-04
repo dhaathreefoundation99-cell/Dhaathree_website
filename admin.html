@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -263,12 +263,16 @@
               <input type="text" id="resTitle" required placeholder="e.g. 12A Registration Certificate" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
             </div>
             <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Certificate / Regd. Number (Optional):</label>
+              <input type="text" id="resCertNumber" placeholder="e.g. AAEAD6853B25HY02 or 103/2019" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
+            </div>
+            <div>
               <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Description:</label>
               <textarea id="resDescription" placeholder="Provide a brief description of this document..." style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box; min-height:80px; resize:vertical;"></textarea>
             </div>
             <div>
-              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Select PDF File:</label>
-              <input type="file" id="resFile" accept=".pdf" required style="font-size: 0.85rem;" />
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Select Certificate Image:</label>
+              <input type="file" id="resFile" accept=".jpg,.jpeg,.png" required style="font-size: 0.85rem;" />
             </div>
             <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px;">Upload Document</button>
           </form>
@@ -969,6 +973,7 @@
           <div style="background: #faf9fc; padding: 16px; border-radius: 12px; border: 1px solid #eee; display: flex; justify-content: space-between; align-items: start; gap: 15px;">
             <div style="flex: 1;">
               <h5 style="margin: 0 0 6px 0; font-size: 0.95rem; color: var(--dark); font-weight: 700;">${r.title}</h5>
+              ${r.certNumber ? `<div style="font-size: 0.8rem; font-weight: 600; color: var(--purple); margin: -2px 0 6px 0;">Number: ${r.certNumber}</div>` : ''}
               <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--muted); line-height: 1.4;">${r.description || 'No description provided.'}</p>
               <div style="font-size: 0.78rem; color: #888; display: flex; gap: 12px; align-items: center;">
                 <span>File: <code>${r.name}</code></span>
@@ -1010,17 +1015,19 @@
     e.preventDefault();
     const type = document.getElementById('resCategory').value;
     const title = document.getElementById('resTitle').value;
+    const certNumber = document.getElementById('resCertNumber').value;
     const description = document.getElementById('resDescription').value;
     const fileInput = document.getElementById('resFile');
 
     if (!fileInput.files[0]) {
-      alert('Please select a PDF document.');
+      alert('Please select a certificate image.');
       return;
     }
 
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
     formData.append('title', title);
+    formData.append('certNumber', certNumber);
     formData.append('description', description);
 
     const submitBtn = e.target.querySelector('button[type="submit"]');
@@ -1040,6 +1047,7 @@
       
       // Reset form fields
       document.getElementById('resTitle').value = '';
+      document.getElementById('resCertNumber').value = '';
       document.getElementById('resDescription').value = '';
       fileInput.value = '';
       
