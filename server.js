@@ -49,6 +49,13 @@ if (!mongoUri || mongoUri.includes('your_mongodb_atlas_connection_string')) {
           await defaultAmt.save();
           console.log('Initialized default donation_amount to 1 INR');
         }
+        
+        const existingThreshold = await Setting.findOne({ key: 'threshold_80g' });
+        if (!existingThreshold) {
+          const defaultThreshold = new Setting({ key: 'threshold_80g', value: '1000' });
+          await defaultThreshold.save();
+          console.log('Initialized default threshold_80g to 1000 INR');
+        }
       } catch (err) {
         console.error('Failed to initialize settings:', err);
       }
