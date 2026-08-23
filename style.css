@@ -2245,40 +2245,125 @@
 
 /* Google Translate Gadget Styling */
 #google_translate_element {
-  display: inline-block;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 140px;
   vertical-align: middle;
 }
 .goog-te-gadget {
   font-family: 'Inter', sans-serif !important;
   font-size: 0px !important;
   color: transparent !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 .goog-te-gadget .goog-te-combo {
+  display: inline-block !important;
+  visibility: visible !important;
+  margin: 0 !important;
   padding: 4px 10px;
   border-radius: 20px;
   border: 1.5px solid rgba(91, 45, 142, 0.25);
   background: white;
-  color: #5B2D8E;
+  color: #5B2D8E !important;
   font-family: 'Inter', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.78rem !important;
   font-weight: 600;
   outline: none;
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  width: 100%;
+  box-sizing: border-box;
 }
 .goog-te-gadget .goog-te-combo:hover {
   border-color: #5B2D8E;
   background: rgba(91, 45, 142, 0.02);
 }
-.goog-logo-link, .goog-te-gadget span {
+
+/* Simple/Mobile Translate Widget Styling */
+.goog-te-gadget-simple {
+  font-family: 'Inter', sans-serif !important;
+  background-color: white !important;
+  border: 1.5px solid rgba(91, 45, 142, 0.25) !important;
+  padding: 4px 10px !important;
+  border-radius: 20px !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  visibility: visible !important;
+  align-items: center !important;
+  gap: 4px !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+  margin: 0 !important;
+  line-height: normal !important;
+}
+.goog-te-gadget-simple:hover {
+  border-color: #5B2D8E !important;
+  background: rgba(91, 45, 142, 0.02) !important;
+}
+.goog-te-gadget-simple .goog-te-menu-value {
+  font-size: 0.78rem !important;
+  color: #5B2D8E !important;
+  font-weight: 600 !important;
+  font-family: 'Inter', sans-serif !important;
+  display: flex !important;
+  visibility: visible !important;
+  align-items: center !important;
+  gap: 4px !important;
+  margin: 0 !important;
+}
+.goog-te-gadget-simple .goog-te-menu-value span {
+  font-size: 0.78rem !important;
+  color: #5B2D8E !important;
+  display: inline-block !important;
+  visibility: visible !important;
+}
+
+/* Hide Google Logos and branding */
+.goog-logo-link, 
+.goog-te-gadget-icon {
   display: none !important;
 }
+
+/* Remove default simple widget border */
+.goog-te-gadget-simple * {
+  border: none !important;
+}
+
 .goog-te-banner-frame.skiptranslate {
   display: none !important;
 }
 body {
   top: 0px !important;
+}
+
+/* ── TOP UTILITY BAR RESPONSIVENESS ── */
+.top-utility-bar {
+  background: #E8F2E1;
+  color: #5B2D8E;
+  padding: 0 5%;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 101;
+  box-sizing: border-box;
+  border-bottom: 1.5px solid rgba(91,45,142,0.15);
+}
+
+@media (max-width: 767px) {
+  .contact-text {
+    display: none !important;
+  }
 }
 
 /* --- FEATURED MOMENTS MARQUEE STYLING --- */

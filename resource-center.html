@@ -60,15 +60,15 @@
 <body>
 
 <!-- TOP UTILITY BAR -->
-<div class="top-utility-bar" style="background: #E8F2E1; color: #5B2D8E; padding: 0 5%; font-family: 'Inter', sans-serif; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; height: 40px; position: fixed; top: 0; left: 0; right: 0; z-index: 101; box-sizing: border-box; border-bottom: 1.5px solid rgba(91,45,142,0.15);">
+<div class="top-utility-bar">
   <div style="display: flex; gap: 20px; align-items: center;">
     <a href="tel:7981885165" style="color: #5B2D8E; text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 500; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
       <svg style="width: 15px; height: 15px; fill: #5B2D8E;" viewBox="0 0 24 24"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm-5 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm5-5H7V4h10v13z"/></svg>
-      7981885165
+      <span class="contact-text">7981885165</span>
     </a>
     <a href="mailto:info@dhaathreefoundation.org" style="color: #5B2D8E; text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: 500; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
       <svg style="width: 16px; height: 16px; fill: #5B2D8E;" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      info@dhaathreefoundation.org
+      <span class="contact-text">info@dhaathreefoundation.org</span>
     </a>
   </div>
   <div style="display: flex; gap: 15px; align-items: center;">
@@ -397,7 +397,7 @@ function selectDocument(type) {
                 </span>
                 <a href="${downloadUrl}" download target="_blank" onclick="event.stopPropagation();" style="text-decoration: none; background: white; border: 1.5px solid var(--purple); color: var(--purple); padding: 6px 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; border-radius: 6px; font-size: 0.8rem; transition: all 0.2s; white-space: nowrap;" onmouseover="this.style.background='var(--purple)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--purple)';">
                   <svg viewBox="0 0 24 24" style="width: 12px; height: 12px; fill: currentColor;"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
-                  Download (↓)
+                  Download (?)
                 </a>
               </div>
             </div>
@@ -443,6 +443,6 @@ function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
 }
 </script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

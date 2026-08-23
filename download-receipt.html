@@ -372,7 +372,7 @@
       document.getElementById('receiptNo').textContent = donor.receiptNo80G || '1';
       document.getElementById('receiptDate').textContent = formattedDate;
       document.getElementById('donorNameField').innerHTML = `&nbsp;&nbsp;${donor.donorName}`;
-      document.getElementById('donorAmountField').innerHTML = `₹${donor.amount ? donor.amount.toLocaleString('en-IN') : '0'}/-`;
+      document.getElementById('donorAmountField').innerHTML = `?${donor.amount ? donor.amount.toLocaleString('en-IN') : '0'}/-`;
       document.getElementById('paymentDateField').innerHTML = `&nbsp;&nbsp;${formattedDate}`;
       
       // Set Amount in Words
