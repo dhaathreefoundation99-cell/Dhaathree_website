@@ -2271,7 +2271,7 @@
   border-color: #5B2D8E;
   background: rgba(91, 45, 142, 0.02);
 }
-.goog-logo-link {
+.goog-logo-link, .goog-te-gadget span {
   display: none !important;
 }
 .goog-te-banner-frame.skiptranslate {
