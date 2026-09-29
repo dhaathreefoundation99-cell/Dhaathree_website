@@ -1,0 +1,1729 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NMVKPSRG');</script>
+<!-- End Google Tag Manager -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SWNRVV5L38"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SWNRVV5L38');
+  </script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Dashboard | Dhaathree Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&family=Noto+Sans+Telugu:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+<!-- Google Identity Services client script -->
+<script src="https://accounts.google.com/gsi/client" defer></script>
+<script src="js/gallery.js" defer></script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NMVKPSRG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+      <img src="images/logo.jpeg" alt="Dhaathree Foundation Logo"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+           id="navLogoImg"/>
+      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">D</div>
+      <div class="nav-brand">
+        <span class="en">Dhaathree Foundation</span>
+      </div>
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="nav-dropdown">
+      <a href="about.html" class="dropdown-trigger">About <span class="nav-arrow">&#9662;</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+    </li>
+    <li><a href="impact.html">Impact</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="get-involved.html">Get Involved</a></li>
+    <li><a href="media.html">Media</a></li>
+    <li class="nav-dropdown">
+      <a href="resource-center.html" class="dropdown-trigger">Resource Center <span class="nav-arrow">&#9662;</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="resource-center.html?doc=registration">Registration Certificate</a></li>
+        <li><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li>
+      </ul>
+    </li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="get-involved.html#donate" class="nav-cta">Donate Now</a>
+
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">&#9776;</button>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+    
+    <details class="mobile-menu-dropdown">
+      <summary>About <span class="arrow">&#9662;</span></summary>
+      <div class="dropdown-links">
+        <a href="about.html" onclick="toggleMobileMenu()">About Us</a>
+      </div>
+    </details>
+    
+    <a href="impact.html" onclick="toggleMobileMenu()">Impact</a>
+    <a href="projects.html" onclick="toggleMobileMenu()">Projects</a>
+    <a href="get-involved.html" onclick="toggleMobileMenu()">Get Involved</a>
+    <a href="media.html" onclick="toggleMobileMenu()">Media</a>
+    
+    <details class="mobile-menu-dropdown">
+      <summary>Resource Center <span class="arrow">&#9662;</span></summary>
+      <div class="dropdown-links">
+        <a href="resource-center.html?doc=registration" onclick="toggleMobileMenu()">Registration Certificate</a>
+        <a href="resource-center.html?doc=annual_report" onclick="toggleMobileMenu()">Annual Activity Report</a>
+      </div>
+    </details>
+    
+    <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
+    <a href="get-involved.html#donate" class="mobile-cta" onclick="toggleMobileMenu()">Get Involved</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="crumb"><a href="index.html">Home</a> / Admin</div>
+  <h1>Admin Dashboard</h1>
+  <p>Securely upload and manage wing gallery photos across all Dhaathree wings.</p>
+</div>
+
+<section class="admin-section">
+
+  <!-- LOGIN CARD -->
+  <div class="admin-card" id="loginCard">
+    <div class="logo-wrap">
+      <img src="images/logo.jpeg" alt="Logo" onerror="this.style.opacity='0.3';" />
+    </div>
+    <h2>Administrator Access</h2>
+    <p>Please authenticate using Google Sign-in to access the photo uploader panel.</p>
+    
+    <div class="admin-login-options">
+      <!-- Dynamic Google Sign-in Button Container -->
+      <div id="googleBtnContainer" style="display: flex; justify-content: center; margin: 15px auto;"></div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD CONTAINER -->
+  <div class="admin-dashboard" id="dashboardContainer" style="display: none;">
+    <div class="admin-header">
+      <div class="admin-title">
+        <h2>Photo Management Console</h2>
+        <p>Upload new photos and delete existing ones from the browser database.</p>
+      </div>
+      <div class="admin-user-profile">
+        <img id="profilePic" src="images/logo.jpeg" alt="Profile" />
+        <div class="admin-user-info">
+          <span class="name" id="profileName">Administrator</span>
+          <span class="email" id="profileEmail">dhaathreefoundation99@gmail.com</span>
+          <button class="admin-logout-btn" onclick="signOutAdmin()">Sign Out</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" id="tabPhotosBtn" onclick="switchTab('photos')">Manage Photos</button>
+      <button class="admin-tab" id="tabVolunteersBtn" onclick="switchTab('volunteers')">Volunteer Applications (<span id="volCount">0</span>)</button>
+      <button class="admin-tab" id="tabConnectionsBtn" onclick="switchTab('connections')">Connections & Subscribers (<span id="connCount">0</span>)</button>
+      <button class="admin-tab" id="tabResourcesBtn" onclick="switchTab('resources')">Manage Resources (<span id="resCount">0</span>)</button>
+      <button class="admin-tab" id="tabSponsorsBtn" onclick="switchTab('sponsors')">Manage Sponsors (<span id="sponsCount">0</span>)</button>
+      <button class="admin-tab" id="tabDonorsBtn" onclick="switchTab('donors')">Manage Donors (<span id="donorCount">0</span>)</button>
+      <button class="admin-tab" id="tabReceiptsBtn" onclick="switchTab('receipts')">80G Receipts (<span id="receiptsCount">0</span>)</button>
+      <button class="admin-tab" id="tabFeaturedBtn" onclick="switchTab('featured')">Featured Photos (<span id="featuredCount">0</span>)</button>
+    </div>
+
+    <!-- Photos Management Tab Content -->
+    <div id="photosTabContent">
+      <!-- Dropdown Selector -->
+      <div class="admin-controls">
+        <div class="admin-wing-select-group">
+          <label for="wingSelect">Select Dhaathree Wing to Manage:</label>
+          <select class="admin-select" id="wingSelect">
+            <option value="ananda">Ananda Nilayam (Old Age Home & Rehabilitation)</option>
+            <option value="akshara">Akshara Dhaathree (Education & Literacy)</option>
+            <option value="aahara" selected>Aahara Dhaathree (Food Support)</option>
+            <option value="arogya">Arogya Dhaathree (Health Awareness &amp; Community Wellbeing)</option>
+            <option value="vidya">Vidya Dhaathree (Knowledge & Skill)</option>
+            <option value="vikasa">Vikasa Dhaathree (Development)</option>
+            <option value="vana">Vana Dhaathree (Environment)</option>
+            <option value="mahila">Mahila Dhaathree (Women Empowerment)</option>
+            <option value="sramika">Sramika Dhaathree (Workers Support)</option>
+            <option value="general">General Services (Community Support)</option>
+            <option value="media">Media & Gallery Page</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Upload Dropzone (styled by style.css) -->
+      <div class="photo-upload-zone" id="uploadZone">
+        <div class="upload-icon">📷</div>
+        <p class="upload-text">Drag & drop photos here or <span class="browse-link">browse</span> to upload</p>
+        <p class="upload-subtext">Supported formats: JPG, PNG, WEBP</p>
+        <input type="file" id="fileInput" accept="image/*" multiple style="display: none;" />
+      </div>
+      <p class="upload-subtext" style="text-align: center; margin: -10px 0 25px;">After uploading, fill in the caption under each photo (publication, date, English headline and a one-line summary) and click <strong>Save Caption</strong>. Captions appear under the image on the public page.</p>
+
+      <!-- Gallery Grid (styled by style.css) -->
+      <div class="photo-gallery-grid" id="photoGallery" data-wing-id="aahara">
+        <!-- Loaded dynamically via gallery.js -->
+      </div>
+    </div>
+
+    <!-- Volunteer Applications Tab Content -->
+    <div id="volunteersTabContent" style="display: none;">
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Date of Birth</th>
+              <th>Contact Info</th>
+              <th>Occupation</th>
+              <th>Address</th>
+              <th>Message</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="volunteersTableBody">
+            <!-- Loaded dynamically from API -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Connections & Subscribers Tab Content -->
+    <div id="connectionsTabContent" style="display: none;">
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="connectionsTableBody">
+            <!-- Loaded dynamically from API -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Resources Management Tab Content -->
+    <div id="resourcesTabContent" style="display: none;">
+      <div class="admin-two-cols">
+        
+        <!-- Upload Form Card -->
+        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02);">
+          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">📄 Upload New Document</h3>
+          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">Add a new PDF certificate or activity report to the Resource Center.</p>
+          
+          <form onsubmit="uploadResourceItem(event)" style="display: flex; flex-direction: column; gap: 15px;">
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Document Category:</label>
+              <select id="resCategory" required style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem;">
+                <option value="registration">Registration Certificate</option>
+                <option value="annual_report">Annual Activity Report</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Document Title:</label>
+              <input type="text" id="resTitle" required placeholder="e.g. 12A Registration Certificate" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Certificate / Regd. Number (Optional):</label>
+              <input type="text" id="resCertNumber" placeholder="e.g. AAEAD6853B25HY02 or 103/2019" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Description:</label>
+              <textarea id="resDescription" placeholder="Provide a brief description of this document..." style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box; min-height:80px; resize:vertical;"></textarea>
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Select Certificate Image:</label>
+              <input type="file" id="resFile" accept=".jpg,.jpeg,.png" required style="font-size: 0.85rem;" />
+            </div>
+            <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px;">Upload Document</button>
+          </form>
+        </div>
+
+        <!-- Document List Card -->
+        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px;">
+          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">📋 Currently Uploaded Documents</h3>
+          
+          <div style="margin-bottom: 30px;">
+            <h4 style="font-size: 1.2rem; color: var(--purple); border-bottom: 2px solid #f2e9fc; padding-bottom: 6px; margin-bottom: 12px; font-family:'Playfair Display', serif;">Registration Certificates</h4>
+            <div id="regList" style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div>
+            <h4 style="font-size: 1.2rem; color: var(--purple); border-bottom: 2px solid #f2e9fc; padding-bottom: 6px; margin-bottom: 12px; font-family:'Playfair Display', serif;">Annual Activity Reports</h4>
+            <div id="annualList" style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Sponsors Management Tab Content -->
+    <div id="sponsorsTabContent" style="display: none;">
+      <div class="admin-two-cols">
+        
+        <!-- Add Sponsor Form Card -->
+        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02);">
+          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">🤝 Add New Sponsor</h3>
+          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">Add a new partner organization or sponsor logo to the public Partners page.</p>
+          
+          <form onsubmit="addSponsorItem(event)" style="display: flex; flex-direction: column; gap: 15px;">
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor/Partner Name:</label>
+              <input type="text" id="sponsName" required placeholder="e.g. NABARD Foundation" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor Description / Profile:</label>
+              <textarea id="sponsDescription" placeholder="Provide details about the sponsor's contribution..." style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box; min-height:80px; resize:vertical;"></textarea>
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor Logo Image:</label>
+              <input type="file" id="sponsLogo" accept="image/*" required style="font-size: 0.85rem;" />
+            </div>
+            <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px;">Add Sponsor</button>
+          </form>
+        </div>
+
+        <!-- Sponsor List Card -->
+        <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px;">
+          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">👥 Current Sponsors & Partners</h3>
+          <div id="sponsorsList" style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Donors Management Tab Content -->
+    <div id="donorsTabContent" style="display: none;">
+      <!-- Donation Settings Card -->
+      <div class="admin-card" style="background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); margin-bottom: 20px;">
+        <h4 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.1rem; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;"><svg style="width: 18px; height: 18px; fill: var(--purple);" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> Donation Settings</h4>
+        <p style="color: var(--muted); font-size: 0.85rem; margin: 0 0 15px 0;">Configure the default donation suggestion and the threshold amount above which the 80G tax saving receipt option is shown to donors.</p>
+        
+        <form onsubmit="saveDonationAmountSetting(event)" style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 200px;">
+            <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; color: var(--dark);">Default Suggestion (&#8377;):</label>
+            <input type="number" id="defaultDonationAmountInput" min="1" required style="width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-family:'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box;" />
+          </div>
+          <div style="flex: 1; min-width: 200px;">
+            <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; color: var(--dark);">80G Receipt Threshold (&#8377;):</label>
+            <input type="number" id="threshold80GInput" min="1" required style="width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-family:'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box;" />
+          </div>
+          <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 11px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 0;">Save Settings</button>
+        </form>
+      </div>
+
+      <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin: 0; display: flex; align-items: center; gap: 8px;">💳 Donor Registrations</h3>
+          
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <label for="donorFilterCause" style="font-size: 0.85rem; font-weight: 600; color: var(--dark);">Filter by Cause:</label>
+            <select class="admin-select" id="donorFilterCause" onchange="renderDonors()" style="padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; min-width: 150px; border: 1px solid #ddd; background: white; outline: none;">
+              <option value="all">All Purposes</option>
+              <option value="akshara">Akshara Dhaathree</option>
+              <option value="ananda">Ananda Nilayam</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="admin-table-wrapper" style="overflow-x: auto;">
+          <table class="admin-table" style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="background: #fdfaf6; border-bottom: 2px solid #f2e9fc;">
+                <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Date</th>
+                <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Donor Details</th>
+                <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Location</th>
+                <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Amount (&#8377;)</th>
+                <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Donation Purpose</th>
+                <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Occasion Details</th>
+                <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark); text-align: center;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="donorsTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  <!-- 80G Receipts Tab Content -->
+  <div id="receiptsTabContent" style="display: none;">
+    <div class="admin-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+        <div>
+          <h3 style="margin: 0 0 5px 0; font-family: 'Playfair Display', serif; color: var(--dark); font-size: 1.3rem;">80G Tax Exemption Receipts</h3>
+          <p style="margin: 0; color: var(--muted); font-size: 0.85rem;">Approve, reject, and number official 80G receipts for eligible donations (&#8377;1000+).</p>
+        </div>
+        <div>
+          <button onclick="resetReceiptNumbers()" style="background:#dc3545; color:white; border:none; padding: 8px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#bd2130';" onmouseout="this.style.background='#dc3545';">
+            Reset Receipt Numbers ⚡
+          </button>
+        </div>
+      </div>
+      
+      <div class="admin-table-wrapper" style="overflow-x: auto;">
+        <table class="admin-table" style="width: 100%; border-collapse: collapse; text-align: left;">
+          <thead>
+            <tr style="background: #fdfaf6; border-bottom: 2px solid #f2e9fc;">
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Date</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Donor Details</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Location</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Amount (&#8377;)</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Purpose</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">Cheque/NEFT</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark);">80G Status</th>
+              <th style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--dark); text-align: center;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="receiptsTableBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Photos Management Tab Content -->
+  <div id="featuredTabContent" style="display: none;">
+    <div class="admin-two-cols">
+      
+      <!-- Upload Featured Photo Card -->
+      <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02);">
+        <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">📷 Upload Featured Photo</h3>
+        <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">Add a new photo to the homepage featured marquee slider.</p>
+        
+        <form onsubmit="uploadFeaturedPhotoItem(event)" style="display: flex; flex-direction: column; gap: 15px;">
+          <div>
+            <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Select Image File:</label>
+            <input type="file" id="featuredPhotoFile" accept="image/*" required style="font-size: 0.85rem;" />
+          </div>
+          <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px;">Upload Photo</button>
+        </form>
+      </div>
+
+      <!-- Featured Photos List Card -->
+      <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px;">
+        <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">🎞️ Currently Featured Photos</h3>
+        <div id="featuredPhotosList" style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div> <!-- Close dashboardContainer -->
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="images/logo.jpeg" alt="Logo" onerror="this.style.display='none';" />
+      <div>
+        <div class="fn">Dhaathree Foundation</div>
+        
+      </div>
+    </div>
+    </div>
+    <div class="footer-social-icons">
+      <a href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" class="footer-social-icon" aria-label="YouTube" title="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/dhaatreefoundation?utm_source=qr&igsh=MTNkbmZnbm8wbjVzMw==" target="_blank" class="footer-social-icon" aria-label="Instagram" title="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/share/17oWQKUg4a/" target="_blank" class="footer-social-icon" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+      <a href="https://whatsapp.com/channel/0029VbCc2KSH5JLySeJeJc3v" target="_blank" class="footer-social-icon" aria-label="WhatsApp" title="WhatsApp Channel">
+        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.167 1.45 4.823 1.452 5.53 0 10.029-4.5 10.032-10.03.001-2.679-1.04-5.198-2.934-7.094C16.619 1.588 14.107.545 11.43.545 5.9 5.545 1.401 10.043 1.4 15.572c-.001 1.733.457 3.42 1.32 4.935L1.7 22.3l1.895-1.616zM17.487 14.4c-.299-.149-1.765-.87-2.04-.97-.274-.1-.475-.149-.675.15-.199.3-.773.97-.948 1.171-.174.199-.348.224-.648.075-.3-.15-1.266-.467-2.41-1.485-.89-.793-1.49-1.773-1.665-2.07-.174-.3-.019-.462.13-.611.135-.134.3-.349.45-.523.15-.174.199-.299.299-.498.1-.2.05-.375-.025-.524-.075-.15-.675-1.625-.925-2.225-.244-.589-.493-.51-.675-.52-.172-.007-.368-.009-.565-.009-.199 0-.523.075-.797.374-.275.3-1.047 1.022-1.047 2.492 0 1.47 1.07 2.89 1.22 3.09.149.2 2.105 3.2 5.097 4.49.712.308 1.268.491 1.701.628.718.228 1.37.196 1.885.119.574-.087 1.765-.72 2.015-1.42.25-.7.25-1.3.175-1.42-.075-.125-.275-.199-.575-.349z"/></svg>
+      </a>
+    </div>
+  <div class="footer-credentials">
+    Dhaathree Foundation | Regd. No. 103/2019 (A.P. Societies Registration Act, 35 of 2001)<br/>
+    12AB: AAEAD6853B25HY01 | 80G: AAEAD6853B25HY02 (both dated 20-12-2025)<br/>
+    FCRA: 010140481 | CSR: CSR00014950 | NGO Darpan: AP/2020/0254144<br/>
+    4-115/1, Balaji Nagar, C.T.M. Road, Madanapalle - 517325, Andhra Pradesh
+  </div>
+  <div class="footer-copy">&copy; 2026 Dhaathree Foundation &bull; Regd. No. 103/2019 &bull; All rights reserved &bull; <a href="privacy-policy.html" style="color: inherit; text-decoration: underline; white-space: nowrap; margin-left: 5px;">Privacy Policy</a> &bull; <a href="terms-and-conditions.html" style="color: inherit; text-decoration: underline; white-space: nowrap; margin-left: 5px;">Terms & Conditions</a> &bull; <a href="refund-policy.html" style="color: inherit; text-decoration: underline; white-space: nowrap; margin-left: 5px;">Refund & Cancellation Policy</a></div>
+</footer>
+
+<script>
+  let activeUser = null;
+  const ALLOWED_EMAIL = "dhaathreefoundation99@gmail.com";
+
+  function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Decode JWT Payload for Google authentication token
+  function decodeJwtResponse(token) {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      return JSON.parse(jsonPayload);
+    } catch (e) {
+      console.error("JWT decoding failed", e);
+      return null;
+    }
+  }
+
+  // Fetch Google Client ID and initialize dynamically
+  async function loadConfigAndInitGoogle() {
+    try {
+      const res = await fetch('/api/config');
+      if (!res.ok) throw new Error("Server configuration error");
+      const config = await res.json();
+      
+      if (config.googleClientId) {
+        let attempts = 0;
+        const initInterval = setInterval(() => {
+          if (window.google && window.google.accounts && window.google.accounts.id) {
+            clearInterval(initInterval);
+            google.accounts.id.initialize({
+              client_id: config.googleClientId,
+              callback: handleCredentialResponse
+            });
+            
+            google.accounts.id.renderButton(
+              document.getElementById("googleBtnContainer"),
+              { theme: "outline", size: "large", text: "signin_with", shape: "rectangular", logo_alignment: "left" }
+            );
+          } else {
+            attempts++;
+            if (attempts > 100) { // 10 seconds timeout
+              clearInterval(initInterval);
+              console.error("Failed to load Google Identity Services SDK: timeout.");
+            }
+          }
+        }, 100);
+      } else {
+        console.warn("?? Google Client ID is missing in backend .env configuration.");
+      }
+    } catch (err) {
+      console.error("Failed to load Google client credentials dynamically:", err);
+    }
+  }
+
+  // Initialize page on load
+  document.addEventListener('DOMContentLoaded', () => {
+    loadConfigAndInitGoogle();
+    
+    // Bind dropdown selection change
+    document.getElementById('wingSelect').addEventListener('change', (e) => {
+      const selectedWing = e.target.value;
+      const galleryGrid = document.getElementById('photoGallery');
+      if (galleryGrid) {
+        galleryGrid.setAttribute('data-wing-id', selectedWing);
+        if (typeof galleryGrid.refreshGallery === 'function') {
+          galleryGrid.refreshGallery();
+        }
+      }
+    });
+
+    // Scroll animation for uploader card
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.admin-card, .admin-dashboard').forEach(el => {
+      if (el.id === 'loginCard') return; // Skip login card fade-in
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  });
+
+  // Google Sign-In callback
+  function handleCredentialResponse(response) {
+    const payload = decodeJwtResponse(response.credential);
+    if (payload) {
+      // Validate email
+      if (payload.email !== ALLOWED_EMAIL) {
+        alert("Unauthorized Access!\nOnly " + ALLOWED_EMAIL + " is permitted to access this panel.");
+        return;
+      }
+      
+      activeUser = {
+        name: payload.name,
+        email: payload.email,
+        picture: payload.picture
+      };
+      localStorage.setItem('dhaathree_admin_user', JSON.stringify(activeUser));
+      showDashboard();
+    }
+  }
+
+  // Switch panels and setup uploader
+  function showDashboard() {
+    if (!activeUser) return;
+    
+    // Update profile views
+    document.getElementById('profilePic').src = activeUser.picture;
+    document.getElementById('profilePic').onerror = function() {
+      this.src = 'images/logo.jpeg';
+    };
+    document.getElementById('profileName').textContent = activeUser.name;
+    document.getElementById('profileEmail').textContent = activeUser.email;
+    
+    // Swap panels
+    document.getElementById('loginCard').style.display = 'none';
+    document.getElementById('dashboardContainer').style.display = 'block';
+    
+    // Trigger gallery initial load
+    const wingSelect = document.getElementById('wingSelect');
+    const galleryGrid = document.getElementById('photoGallery');
+    if (galleryGrid) {
+      galleryGrid.setAttribute('data-wing-id', wingSelect.value);
+      if (typeof galleryGrid.refreshGallery === 'function') {
+        galleryGrid.refreshGallery();
+      }
+    }
+
+    // Load initial counts
+    updateVolunteerCount();
+    updateConnectionCount();
+    updateResourceCount();
+    updateSponsorCount();
+    updateDonorCount();
+    updateReceiptsCount();
+    updateFeaturedCount();
+  }
+
+  // Sign out function
+  function signOutAdmin() {
+    activeUser = null;
+    localStorage.removeItem('dhaathree_admin_user');
+    
+    // Switch panels
+    document.getElementById('loginCard').style.display = 'block';
+    document.getElementById('dashboardContainer').style.display = 'none';
+  }
+
+  // Switch tabs in admin console
+  function switchTab(tabName) {
+    const tabPhotosBtn = document.getElementById('tabPhotosBtn');
+    const tabVolunteersBtn = document.getElementById('tabVolunteersBtn');
+    const tabConnectionsBtn = document.getElementById('tabConnectionsBtn');
+    const tabResourcesBtn = document.getElementById('tabResourcesBtn');
+    const tabSponsorsBtn = document.getElementById('tabSponsorsBtn');
+    const tabDonorsBtn = document.getElementById('tabDonorsBtn');
+    const tabReceiptsBtn = document.getElementById('tabReceiptsBtn');
+    const tabFeaturedBtn = document.getElementById('tabFeaturedBtn');
+    const photosContent = document.getElementById('photosTabContent');
+    const volunteersContent = document.getElementById('volunteersTabContent');
+    const connectionsContent = document.getElementById('connectionsTabContent');
+    const resourcesContent = document.getElementById('resourcesTabContent');
+    const sponsorsContent = document.getElementById('sponsorsTabContent');
+    const donorsContent = document.getElementById('donorsTabContent');
+    const receiptsContent = document.getElementById('receiptsTabContent');
+    const featuredContent = document.getElementById('featuredTabContent');
+    
+    // Reset all tabs
+    tabPhotosBtn.classList.remove('active');
+    tabVolunteersBtn.classList.remove('active');
+    tabConnectionsBtn.classList.remove('active');
+    tabResourcesBtn.classList.remove('active');
+    tabSponsorsBtn.classList.remove('active');
+    if (tabDonorsBtn) tabDonorsBtn.classList.remove('active');
+    if (tabReceiptsBtn) tabReceiptsBtn.classList.remove('active');
+    if (tabFeaturedBtn) tabFeaturedBtn.classList.remove('active');
+    photosContent.style.display = 'none';
+    volunteersContent.style.display = 'none';
+    connectionsContent.style.display = 'none';
+    resourcesContent.style.display = 'none';
+    sponsorsContent.style.display = 'none';
+    if (donorsContent) donorsContent.style.display = 'none';
+    if (receiptsContent) receiptsContent.style.display = 'none';
+    if (featuredContent) featuredContent.style.display = 'none';
+
+    if (tabName === 'photos') {
+      tabPhotosBtn.classList.add('active');
+      photosContent.style.display = 'block';
+    } else if (tabName === 'volunteers') {
+      tabVolunteersBtn.classList.add('active');
+      volunteersContent.style.display = 'block';
+      loadVolunteers();
+    } else if (tabName === 'connections') {
+      tabConnectionsBtn.classList.add('active');
+      connectionsContent.style.display = 'block';
+      loadConnections();
+    } else if (tabName === 'resources') {
+      tabResourcesBtn.classList.add('active');
+      resourcesContent.style.display = 'block';
+      loadResources();
+    } else if (tabName === 'sponsors') {
+      tabSponsorsBtn.classList.add('active');
+      sponsorsContent.style.display = 'block';
+      loadSponsorsAdmin();
+    } else if (tabName === 'donors') {
+      if (tabDonorsBtn) tabDonorsBtn.classList.add('active');
+      if (donorsContent) donorsContent.style.display = 'block';
+      loadDonors();
+    } else if (tabName === 'receipts') {
+      if (tabReceiptsBtn) tabReceiptsBtn.classList.add('active');
+      if (receiptsContent) receiptsContent.style.display = 'block';
+      loadReceiptRequests();
+    } else if (tabName === 'featured') {
+      if (tabFeaturedBtn) tabFeaturedBtn.classList.add('active');
+      if (featuredContent) featuredContent.style.display = 'block';
+      loadFeaturedPhotosAdmin();
+    }
+  }
+
+  // Update volunteer applications count badge
+  async function updateVolunteerCount() {
+    try {
+      const res = await fetch('/api/volunteers');
+      if (res.ok) {
+        const volunteers = await res.json();
+        document.getElementById('volCount').textContent = volunteers.length || 0;
+      }
+    } catch (err) {
+      console.error('Failed to load initial volunteer count:', err);
+    }
+  }
+
+  // Load volunteer applications from database
+  async function loadVolunteers() {
+    const tableBody = document.getElementById('volunteersTableBody');
+    if (!tableBody) return;
+    
+    tableBody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 30px;">Loading volunteer applications...</td></tr>';
+    
+    try {
+      const res = await fetch('/api/volunteers');
+      if (!res.ok) {
+        throw new Error('Failed to fetch volunteer data from server');
+      }
+      const volunteers = await res.json();
+      
+      // Update badge count
+      document.getElementById('volCount').textContent = volunteers.length;
+      
+      tableBody.innerHTML = '';
+      if (volunteers.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="10" style="text-align: center; color: var(--muted); font-style: italic; padding: 40px 0;">No volunteer applications found.</td></tr>';
+        return;
+      }
+      
+      volunteers.forEach(v => {
+        const formattedDate = new Date(v.timestamp).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
+        const statusVal = v.status || 'Pending';
+        const statusBadge = statusVal === 'Approved' 
+          ? `<span style="background: rgba(5,107,50,0.1); color: #056b32; padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">Approved</span>`
+          : `<span style="background: rgba(245,166,35,0.1); color: #c47d1a; padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">Pending</span>`;
+
+        const actionHtml = statusVal === 'Approved'
+          ? `<button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')" title="Remove Application">🗑️</button>`
+          : `<button class="admin-approve-btn" style="background:#056b32; color:white; border:none; padding: 6px 12px; border-radius: 20px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-right:6px; transition: background 0.2s;" onclick="approveVolunteer('${v._id}', '${v.name.replace(/'/g, "\\'")}', event)">Approve</button>
+             <button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')" title="Remove Application">🗑️</button>`;
+        
+        const photoHtml = v.photoUrl
+          ? `<a href="${v.photoUrl}" target="_blank"><img src="${v.photoUrl}" alt="Photo" style="width:45px; height:45px; border-radius:50%; object-fit:cover; border:1px solid #ddd; display:block; margin:0 auto;" /></a>`
+          : `<span style="color:#aaa; font-style:italic; font-size:0.8rem;">No Photo</span>`;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${formattedDate}</strong></td>
+          <td style="text-align: center;">${photoHtml}</td>
+          <td>${v.name}</td>
+          <td>${v.dob}</td>
+          <td>
+            <div>✉️ <a href="mailto:${v.email}">${v.email}</a></div>
+            <div style="margin-top: 4px;">📞 <a href="tel:${v.phone}">${v.phone}</a></div>
+          </td>
+          <td><span style="background: rgba(91,45,142,0.08); color: var(--purple); padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">${v.occupation}</span></td>
+          <td>
+            <div>${v.city}</div>
+            <div style="font-size: 0.8rem; color: var(--muted);">${v.district}, ${v.state}</div>
+          </td>
+          <td style="max-width: 180px; word-wrap: break-word;">${v.message || '<span style="color: #aaa; font-style: italic;">No message</span>'}</td>
+          <td>${statusBadge}</td>
+          <td style="text-align: center; white-space: nowrap;">
+            ${actionHtml}
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    } catch (err) {
+      console.error(err);
+      tableBody.innerHTML = `<tr><td colspan="10" style="text-align: center; color: var(--magenta); padding: 30px;">Error loading applications: ${err.message}</td></tr>`;
+    }
+  }
+
+  // Delete volunteer application
+  async function deleteVolunteer(id) {
+    if (!confirm('Are you sure you want to remove this volunteer application?')) return;
+    
+    try {
+      const res = await fetch(`/api/volunteers/${id}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) {
+        throw new Error('Failed to delete application');
+      }
+      loadVolunteers();
+    } catch (err) {
+      alert('Error removing application: ' + err.message);
+    }
+  }
+
+  // Approve volunteer application
+  async function approveVolunteer(id, name, event) {
+    if (!confirm(`Are you sure you want to approve ${name} and send their Volunteer ID card email?`)) return;
+    
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = 'Approving...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`/api/volunteers/${id}/approve`, {
+        method: 'POST'
+      });
+      if (!res.ok) {
+        throw new Error('Failed to approve volunteer');
+      }
+      const data = await res.json();
+      if (data.emailSent) {
+        alert(`Volunteer approved successfully! Notification email with ID Card link has been sent.`);
+      } else {
+        alert(`Volunteer approved, but email notification failed. Please verify your Brevo API key configuration in .env.`);
+      }
+      loadVolunteers();
+    } catch (err) {
+      alert('Error approving volunteer: ' + err.message);
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  }
+
+  // Update newsletter connections count badge
+  async function updateConnectionCount() {
+    try {
+      const res = await fetch('/api/connections');
+      if (res.ok) {
+        const connections = await res.json();
+        document.getElementById('connCount').textContent = connections.length || 0;
+      }
+    } catch (err) {
+      console.error('Failed to load initial connections count:', err);
+    }
+  }
+
+  // Load connections from database
+  async function loadConnections() {
+    const tableBody = document.getElementById('connectionsTableBody');
+    if (!tableBody) return;
+    
+    tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 30px;">Loading connections...</td></tr>';
+    
+    try {
+      const res = await fetch('/api/connections');
+      if (!res.ok) {
+        throw new Error('Failed to fetch connections from server');
+      }
+      const connections = await res.json();
+      
+      // Update badge count
+      document.getElementById('connCount').textContent = connections.length;
+      
+      tableBody.innerHTML = '';
+      if (connections.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--muted); font-style: italic; padding: 40px 0;">No connections found.</td></tr>';
+        return;
+      }
+      
+      connections.forEach(c => {
+        const formattedDate = new Date(c.timestamp).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${formattedDate}</strong></td>
+          <td>${c.name}</td>
+          <td>✉️ <a href="mailto:${c.email}">${c.email}</a></td>
+          <td>📞 <a href="tel:${c.phone}">${c.phone}</a></td>
+          <td style="text-align: center;">
+            <button class="admin-delete-app-btn" title="Remove Connection" onclick="deleteConnection('${c._id}')" title="Remove Connection">🗑️</button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    } catch (err) {
+      console.error(err);
+      tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--magenta); padding: 30px;">Error loading connections: ${err.message}</td></tr>`;
+    }
+  }
+
+  // Delete connection
+  async function deleteConnection(id) {
+    if (!confirm('Are you sure you want to remove this connection?')) return;
+    
+    try {
+      const res = await fetch(`/api/connections/${id}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) {
+        throw new Error('Failed to delete connection');
+      }
+      loadConnections();
+    } catch (err) {
+      alert('Error removing connection: ' + err.message);
+    }
+  }
+
+  // Update resources count badge
+  async function updateResourceCount() {
+    try {
+      const res = await fetch('/api/resources');
+      if (res.ok) {
+        const resources = await res.json();
+        document.getElementById('resCount').textContent = resources.length || 0;
+      }
+    } catch (err) {
+      console.error('Failed to load resource count:', err);
+    }
+  }
+
+  // Load resources from database and populate both lists
+  async function loadResources() {
+    const regList = document.getElementById('regList');
+    const annualList = document.getElementById('annualList');
+
+    if (!regList || !annualList) return;
+
+    regList.innerHTML = '<div style="color: var(--muted); font-size: 0.9rem;">Loading...</div>';
+    annualList.innerHTML = '<div style="color: var(--muted); font-size: 0.9rem;">Loading...</div>';
+
+    try {
+      const res = await fetch('/api/resources');
+      if (!res.ok) throw new Error('Failed to fetch resources');
+      const resources = await res.json();
+
+      // Update badge count
+      document.getElementById('resCount').textContent = resources.length;
+
+      regList.innerHTML = '';
+      annualList.innerHTML = '';
+
+      let regCount = 0;
+      let annualCount = 0;
+
+      resources.forEach(r => {
+        const formattedDate = new Date(r.timestamp).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        const itemHtml = `
+          <div style="background: #faf9fc; padding: 16px; border-radius: 12px; border: 1px solid #eee; display: flex; justify-content: space-between; align-items: start; gap: 15px;">
+            <div style="flex: 1;">
+              <h5 style="margin: 0 0 6px 0; font-size: 0.95rem; color: var(--dark); font-weight: 700;">${r.title}</h5>
+              ${r.certNumber ? `<div style="font-size: 0.8rem; font-weight: 600; color: var(--purple); margin: -2px 0 6px 0;">Number: ${r.certNumber}</div>` : ''}
+              <p style="margin: 0 0 8px 0; font-size: 0.85rem; color: var(--muted); line-height: 1.4;">${r.description || 'No description provided.'}</p>
+              <div style="font-size: 0.78rem; color: #888; display: flex; gap: 12px; align-items: center;">
+                <span>File: <code>${r.name}</code></span>
+                <span>&bull;</span>
+                <span>${formattedDate}</span>
+                <span>&bull;</span>
+                <a href="${r.url}" target="_blank" style="color: var(--purple); font-weight: 600; text-decoration: none;">View File</a>
+              </div>
+            </div>
+            <button onclick="deleteResourceItem('${r._id}')" class="admin-delete-app-btn" style="border: 1px solid rgba(220,53,69,0.2); background: rgba(220,53,69,0.05); color: #dc3545; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.background='#dc3545'; this.style.color='white';" onmouseout="this.style.background='rgba(220,53,69,0.05)'; this.style.color='#dc3545';">Delete</button>
+          </div>
+        `;
+
+        if (r.type === 'registration') {
+          regList.innerHTML += itemHtml;
+          regCount++;
+        } else if (r.type === 'annual_report') {
+          annualList.innerHTML += itemHtml;
+          annualCount++;
+        }
+      });
+
+      if (regCount === 0) {
+        regList.innerHTML = '<div style="color: var(--muted); font-size: 0.85rem; font-style: italic;">No registration certificates uploaded yet.</div>';
+      }
+      if (annualCount === 0) {
+        annualList.innerHTML = '<div style="color: var(--muted); font-size: 0.85rem; font-style: italic;">No annual activity reports uploaded yet.</div>';
+      }
+
+    } catch (err) {
+      console.error(err);
+      regList.innerHTML = `<div style="color: #dc3545; font-size: 0.85rem;">Error: ${err.message}</div>`;
+      annualList.innerHTML = `<div style="color: #dc3545; font-size: 0.85rem;">Error: ${err.message}</div>`;
+    }
+  }
+
+  // Upload resource item
+  async function uploadResourceItem(e) {
+    e.preventDefault();
+    const type = document.getElementById('resCategory').value;
+    const title = document.getElementById('resTitle').value;
+    const certNumber = document.getElementById('resCertNumber').value;
+    const description = document.getElementById('resDescription').value;
+    const fileInput = document.getElementById('resFile');
+
+    if (!fileInput.files[0]) {
+      alert('Please select a certificate image.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+    formData.append('title', title);
+    formData.append('certNumber', certNumber);
+    formData.append('description', description);
+
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Uploading...';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch(`/api/resources/${type}`, {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Upload failed');
+
+      alert('Document uploaded and saved successfully!');
+      
+      // Reset form fields
+      document.getElementById('resTitle').value = '';
+      document.getElementById('resCertNumber').value = '';
+      document.getElementById('resDescription').value = '';
+      fileInput.value = '';
+      
+      loadResources();
+    } catch (err) {
+      alert('Upload error: ' + err.message);
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  }
+
+  // Delete resource item by ID
+  async function deleteResourceItem(id) {
+    if (!confirm('Are you sure you want to delete this document?')) return;
+
+    try {
+      const res = await fetch(`/api/resources/${id}`, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to delete');
+
+      alert('Document deleted successfully!');
+      loadResources();
+    } catch (err) {
+      alert('Delete error: ' + err.message);
+    }
+  }
+
+  // Update sponsors count badge
+  async function updateSponsorCount() {
+    try {
+      const res = await fetch('/api/sponsors');
+      if (res.ok) {
+        const sponsors = await res.json();
+        document.getElementById('sponsCount').textContent = sponsors.length || 0;
+      }
+    } catch (err) {
+      console.error('Failed to load sponsor count:', err);
+    }
+  }
+
+  // Update donors count badge
+  async function updateDonorCount() {
+    try {
+      const res = await fetch('/api/donors');
+      if (res.ok) {
+        const donors = await res.json();
+        const badge = document.getElementById('donorCount');
+        if (badge) badge.textContent = donors.length || 0;
+      }
+    } catch (err) {
+      console.error('Failed to load donor count:', err);
+    }
+  }
+
+  // Load sponsors in Admin list
+  async function loadSponsorsAdmin() {
+    const list = document.getElementById('sponsorsList');
+    if (!list) return;
+
+    list.innerHTML = '<div style="color: var(--muted); font-size: 0.9rem;">Loading...</div>';
+
+    try {
+      const res = await fetch('/api/sponsors');
+      if (!res.ok) throw new Error('Failed to fetch sponsors');
+      
+      const text = await res.text();
+      let sponsors;
+      try {
+        sponsors = JSON.parse(text);
+      } catch (e) {
+        if (text.trim().startsWith('<') || window.location.protocol === 'file:') {
+          throw new Error('Server offline or local file protocol detected. Please make sure you are running the backend server with "node server.js" and accessing the page via "http://localhost:8000/admin.html" instead of opening the file directly.');
+        }
+        throw e;
+      }
+
+      // Update badge count
+      document.getElementById('sponsCount').textContent = sponsors.length;
+
+      list.innerHTML = '';
+      if (sponsors.length === 0) {
+        list.innerHTML = '<div style="color: var(--muted); font-size: 0.85rem; font-style: italic; padding: 20px 0;">No sponsors added yet. Displaying default fallback sponsors on public page.</div>';
+        return;
+      }
+
+      sponsors.forEach(s => {
+        const itemHtml = `
+          <div style="background: #faf9fc; padding: 16px; border-radius: 12px; border: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+            <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
+              <img src="${s.logoUrl}" alt="${s.name}" style="width: 60px; height: 60px; border-radius: 10px; object-fit: contain; border: 1px solid #ddd; background: #fff; padding: 2px;" />
+              <div>
+                <h5 style="margin: 0 0 4px 0; font-size: 0.95rem; color: var(--dark); font-weight: 700;">${s.name}</h5>
+                <p style="margin: 0; font-size: 0.82rem; color: var(--muted); line-height: 1.4;">${s.description || 'No description'}</p>
+              </div>
+            </div>
+            <button onclick="deleteSponsorItem('${s._id}')" class="admin-delete-app-btn" style="border: 1px solid rgba(220,53,69,0.2); background: rgba(220,53,69,0.05); color: #dc3545; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.background='#dc3545'; this.style.color='white';" onmouseout="this.style.background='rgba(220,53,69,0.05)'; this.style.color='#dc3545';">Delete</button>
+          </div>
+        `;
+        list.innerHTML += itemHtml;
+      });
+    } catch (err) {
+      console.error(err);
+      list.innerHTML = `<div style="color: #dc3545; font-size: 0.85rem; line-height: 1.5; padding: 10px 0;">Error: ${err.message}</div>`;
+    }
+  }
+
+  // Add sponsor item
+  async function addSponsorItem(e) {
+    e.preventDefault();
+    const name = document.getElementById('sponsName').value.trim();
+    const description = document.getElementById('sponsDescription').value.trim();
+    const fileInput = document.getElementById('sponsLogo');
+
+    if (!fileInput.files[0]) {
+      alert('Please select a sponsor logo image.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('logo', fileInput.files[0]);
+
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Adding...';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('/api/sponsors', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to add sponsor');
+
+      alert('Sponsor added successfully!');
+      
+      // Reset form
+      document.getElementById('sponsName').value = '';
+      document.getElementById('sponsDescription').value = '';
+      fileInput.value = '';
+      
+      loadSponsorsAdmin();
+    } catch (err) {
+      alert('Error adding sponsor: ' + err.message);
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  }
+
+  // Delete sponsor item
+  async function deleteSponsorItem(id) {
+    if (!confirm('Are you sure you want to delete this sponsor?')) return;
+
+    try {
+      const res = await fetch(`/api/sponsors/${id}`, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to delete');
+
+      alert('Sponsor deleted successfully!');
+      loadSponsorsAdmin();
+    } catch (err) {
+      alert('Delete error: ' + err.message);
+    }
+  }
+
+  // Update featured photos count badge
+  async function updateFeaturedCount() {
+    try {
+      const res = await fetch('/api/featured-photos');
+      if (res.ok) {
+        const photos = await res.json();
+        const badge = document.getElementById('featuredCount');
+        if (badge) badge.textContent = photos.length || 0;
+      }
+    } catch (err) {
+      console.error('Failed to load featured photos count:', err);
+    }
+  }
+
+  // Load featured photos in Admin list
+  async function loadFeaturedPhotosAdmin() {
+    const list = document.getElementById('featuredPhotosList');
+    if (!list) return;
+
+    list.innerHTML = '<div style="color: var(--muted); font-size: 0.9rem;">Loading...</div>';
+
+    try {
+      const res = await fetch('/api/featured-photos');
+      if (!res.ok) throw new Error('Failed to fetch featured photos');
+      
+      const photos = await res.json();
+
+      // Update badge count
+      const badge = document.getElementById('featuredCount');
+      if (badge) badge.textContent = photos.length;
+
+      list.innerHTML = '';
+      if (photos.length === 0) {
+        list.innerHTML = '<div style="color: var(--muted); font-size: 0.85rem; font-style: italic; padding: 20px 0;">No featured photos added yet. Displaying fallback marquee on public homepage.</div>';
+        return;
+      }
+
+      photos.forEach(p => {
+        const itemHtml = `
+          <div style="background: #faf9fc; padding: 16px; border-radius: 12px; border: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+            <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
+              <img src="${p.url}" alt="${p.name}" style="width: 80px; height: 60px; border-radius: 10px; object-fit: cover; border: 1px solid #ddd; background: #fff; padding: 2px;" />
+              <div>
+                <h5 style="margin: 0 0 4px 0; font-size: 0.95rem; color: var(--dark); font-weight: 700;">${p.name || 'Featured Photo'}</h5>
+              </div>
+            </div>
+            <button onclick="deleteFeaturedPhotoItem('${p._id}')" class="admin-delete-app-btn" style="border: 1px solid rgba(220,53,69,0.2); background: rgba(220,53,69,0.05); color: #dc3545; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.background='#dc3545'; this.style.color='white';" onmouseout="this.style.background='rgba(220,53,69,0.05)'; this.style.color='#dc3545';">Delete</button>
+          </div>
+        `;
+        list.innerHTML += itemHtml;
+      });
+    } catch (err) {
+      console.error(err);
+      list.innerHTML = `<div style="color: #dc3545; font-size: 0.85rem; line-height: 1.5; padding: 10px 0;">Error: ${err.message}</div>`;
+    }
+  }
+
+  // Add featured photo item
+  async function uploadFeaturedPhotoItem(e) {
+    e.preventDefault();
+    const fileInput = document.getElementById('featuredPhotoFile');
+
+    if (!fileInput.files[0]) {
+      alert('Please select an image file to upload.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Uploading...';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('/api/featured-photos', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to upload photo');
+
+      alert('Featured photo uploaded successfully!');
+      fileInput.value = '';
+      
+      loadFeaturedPhotosAdmin();
+    } catch (err) {
+      alert('Error uploading photo: ' + err.message);
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  }
+
+  // Delete featured photo item
+  async function deleteFeaturedPhotoItem(id) {
+    if (!confirm('Are you sure you want to delete this featured photo?')) return;
+
+    try {
+      const res = await fetch(`/api/featured-photos/${id}`, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to delete');
+
+      alert('Featured photo deleted successfully!');
+      loadFeaturedPhotosAdmin();
+    } catch (err) {
+      alert('Delete error: ' + err.message);
+    }
+  }
+
+  let donorsList = [];
+
+  // Fetch all donors from database
+  async function loadDonors() {
+    const tbody = document.getElementById('donorsTableBody');
+    if (!tbody) return;
+
+    tbody.innerHTML = '<tr><td colspan="7" style="padding: 20px; text-align: center; color: var(--muted); font-size: 0.9rem;">Loading donor records...</td></tr>';
+
+    try {
+      const res = await fetch('/api/donors');
+      if (!res.ok) throw new Error('Failed to fetch donor records');
+      
+      const text = await res.text();
+      try {
+        donorsList = JSON.parse(text);
+      } catch (e) {
+        if (text.trim().startsWith('<') || window.location.protocol === 'file:') {
+          throw new Error('Server offline or local file protocol detected.');
+        }
+        throw e;
+      }
+
+      // Update badge counts
+      const badge = document.getElementById('donorCount');
+      if (badge) badge.textContent = donorsList.length;
+
+      // Fetch donation settings
+      try {
+        const settingsRes = await fetch('/api/settings/donation_amount');
+        if (settingsRes.ok) {
+          const setting = await settingsRes.json();
+          const amtInput = document.getElementById('defaultDonationAmountInput');
+          if (amtInput && setting && setting.value) {
+            amtInput.value = setting.value;
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to load donation settings amount in admin:', e);
+      }
+
+      try {
+        const thresholdRes = await fetch('/api/settings/threshold_80g');
+        if (thresholdRes.ok) {
+          const setting = await thresholdRes.json();
+          const thresholdInput = document.getElementById('threshold80GInput');
+          if (thresholdInput && setting && setting.value) {
+            thresholdInput.value = setting.value;
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to load 80G threshold setting in admin:', e);
+      }
+
+      renderDonors();
+    } catch (err) {
+      console.error(err);
+      tbody.innerHTML = `<tr><td colspan="7" style="padding: 20px; text-align: center; color: #dc3545; font-size: 0.9rem;">Error: ${err.message}</td></tr>`;
+    }
+  }
+
+  // Render donor rows with filtering support
+  function renderDonors() {
+    const tbody = document.getElementById('donorsTableBody');
+    if (!tbody) return;
+
+    const filterVal = document.getElementById('donorFilterCause').value;
+    
+    // Filter donors
+    const filtered = donorsList.filter(d => {
+      if (filterVal === 'all') return true;
+      return d.donationCause === filterVal;
+    });
+
+    tbody.innerHTML = '';
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" style="padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.85rem; font-style: italic;">No donation records match the filter criteria.</td></tr>';
+      return;
+    }
+
+    filtered.forEach(d => {
+      // Format Date
+      let dateStr = 'N/A';
+      if (d.timestamp) {
+        const dateObj = new Date(d.timestamp);
+        dateStr = dateObj.toLocaleDateString('en-IN', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric'
+        });
+      }
+
+      // Format Cause tag
+      let causeText = 'General Fund';
+      let causeColor = '#5B2D8E'; // Dhaathree purple
+      if (d.donationCause === 'akshara') {
+        causeText = 'Akshara Dhaathree';
+        causeColor = '#8DC63F'; // Dhaathree green
+      } else if (d.donationCause === 'ananda') {
+        causeText = 'Ananda Nilayam';
+        causeColor = '#f05a28'; // Orange/Red
+      }
+
+      const causeBadge = `<span style="background: ${causeColor}10; color: ${causeColor}; padding: 4px 8px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; border: 1px solid ${causeColor}25;">${causeText}</span>`;
+
+      // Format Occasion
+      let occasionHtml = '<span style="color: var(--muted); font-style: italic; font-size: 0.82rem;">None</span>';
+      if (d.occasionName || d.occasionType || d.occasionDate) {
+        occasionHtml = `
+          <div style="font-size: 0.85rem; line-height: 1.4;">
+            <strong>${d.occasionType || 'Special Occasion'}</strong><br/>
+            <span style="color: var(--dark); font-weight: 500;">${d.occasionName || 'N/A'}</span><br/>
+            <span style="color: var(--muted); font-size: 0.78rem;">Date: ${d.occasionDate || 'N/A'}</span>
+            ${d.occasionPhone ? `<br/><span style="color: var(--muted); font-size: 0.78rem;">📞 ${d.occasionPhone}</span>` : ''}
+          </div>
+        `;
+      }
+
+      // Format Location
+      const locParts = [];
+      if (d.city) locParts.push(d.city);
+      if (d.district) locParts.push(d.district);
+      if (d.state) locParts.push(d.state);
+      const locText = locParts.length > 0 ? `<br/><span style="color: var(--muted); font-weight: 500;">📍 ${locParts.join(', ')}</span>` : '';
+
+      const row = `
+        <tr style="border-bottom: 1px solid #f0edf5; vertical-align: top; transition: background 0.15s;" onmouseover="this.style.background='rgba(91,45,142,0.01)';" onmouseout="this.style.background='none';">
+          <td style="padding: 12px; font-size: 0.85rem; color: var(--muted); font-weight: 500; white-space: nowrap;">${dateStr}</td>
+          <td style="padding: 12px; font-size: 0.88rem;">
+            <strong style="color: var(--dark);">${d.donorName}</strong><br/>
+            <span style="color: var(--muted); font-size: 0.8rem;">✉️ ${d.email}</span><br/>
+            <span style="color: var(--muted); font-size: 0.8rem;">📞 ${d.phone}</span>
+            ${d.pan ? `<br/><span style="color: var(--muted); font-size: 0.8rem;">💳 PAN: ${d.pan}</span>` : ''}
+          </td>
+          <td style="padding: 12px; font-size: 0.83rem; color: var(--dark); line-height: 1.4;">
+            ${d.address || 'N/A'}${locText}
+          </td>
+          <td style="padding: 12px; font-size: 0.88rem; font-weight: 700; color: var(--purple);">&#8377;${d.amount || 'N/A'}</td>
+          <td style="padding: 12px; font-size: 0.85rem;">${causeBadge}</td>
+          <td style="padding: 12px;">${occasionHtml}</td>
+          <td style="padding: 12px; text-align: center;">
+            <button onclick="deleteDonorItem('${d._id}')" class="admin-delete-app-btn" style="border: 1px solid rgba(220,53,69,0.2); background: rgba(220,53,69,0.05); color: #dc3545; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 0.78rem; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.background='#dc3545'; this.style.color='white';" onmouseout="this.style.background='rgba(220,53,69,0.05)'; this.style.color='#dc3545';">Delete</button>
+          </td>
+        </tr>
+      `;
+      tbody.innerHTML += row;
+    });
+  }
+
+  // Delete a donor record from database
+  async function deleteDonorItem(id) {
+    if (!confirm('Are you sure you want to delete this donation record?')) return;
+
+    try {
+      const res = await fetch(`/api/donors/${id}`, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to delete record');
+
+      alert('Donation record deleted successfully!');
+      loadDonors();
+      updateDonorCount();
+    } catch (err) {
+      alert('Delete error: ' + err.message);
+    }
+  }
+
+  // Save donation settings
+  async function saveDonationAmountSetting(e) {
+    e.preventDefault();
+    const amt = document.getElementById('defaultDonationAmountInput').value;
+    const threshold = document.getElementById('threshold80GInput').value;
+    if (!amt || parseFloat(amt) < 1 || !threshold || parseFloat(threshold) < 1) {
+      alert('Please enter valid amounts of 1 rupee or more.');
+      return;
+    }
+
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Saving...';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('/api/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'donation_amount', value: amt })
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || 'Failed to save donation amount');
+      }
+
+      const res2 = await fetch('/api/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'threshold_80g', value: threshold })
+      });
+      if (!res2.ok) {
+        const data = await res2.json();
+        throw new Error(data.error || 'Failed to save 80G receipt threshold');
+      }
+
+      alert('Donation settings saved successfully!');
+    } catch (err) {
+      alert('Error saving settings: ' + err.message);
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  }
+
+  // Update 80G Receipts Count Badge
+  async function updateReceiptsCount() {
+    try {
+      const res = await fetch('/api/donors/requests-80g');
+      if (res.ok) {
+        const requests = await res.json();
+        const pendingCount = requests.filter(r => r.status80G === 'pending').length;
+        const badge = document.getElementById('receiptsCount');
+        if (badge) badge.textContent = pendingCount || 0;
+      }
+    } catch (err) {
+      console.error('Failed to load initial receipts count:', err);
+    }
+  }
+
+  // Load 80G Receipt Requests List
+  async function loadReceiptRequests() {
+    const tbody = document.getElementById('receiptsTableBody');
+    if (!tbody) return;
+
+    tbody.innerHTML = '<tr><td colspan="8" style="padding: 20px; text-align: center; color: var(--muted); font-size: 0.9rem;">Loading 80G receipt requests...</td></tr>';
+
+    try {
+      const res = await fetch('/api/donors/requests-80g');
+      if (!res.ok) throw new Error('Failed to fetch 80G receipt requests');
+      const requests = await res.json();
+
+      tbody.innerHTML = '';
+      if (requests.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="padding: 40px 20px; text-align: center; color: var(--muted); font-size: 0.85rem; font-style: italic;">No 80G receipt requests found.</td></tr>';
+        return;
+      }
+
+      // Update badge count with only pending ones
+      const pendingCount = requests.filter(r => r.status80G === 'pending').length;
+      const badge = document.getElementById('receiptsCount');
+      if (badge) badge.textContent = pendingCount || 0;
+
+      requests.forEach(r => {
+        let dateStr = 'N/A';
+        if (r.timestamp) {
+          const dateObj = new Date(r.timestamp);
+          dateStr = dateObj.toLocaleDateString('en-IN', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+          });
+        }
+
+        let statusText = 'Pending';
+        let statusStyle = 'background: rgba(245,166,35,0.1); color: #c47d1a;';
+        if (r.status80G === 'approved') {
+          statusText = `Approved (No. ${r.receiptNo80G})`;
+          statusStyle = 'background: rgba(5,107,50,0.1); color: #056b32;';
+        } else if (r.status80G === 'rejected') {
+          statusText = 'Rejected';
+          statusStyle = 'background: rgba(220,53,69,0.1); color: #dc3545;';
+        }
+
+        let actionHtml = '';
+        if (r.status80G === 'pending') {
+          actionHtml = `
+            <button onclick="approveReceipt('${r._id}', '${r.donorName.replace(/'/g, "\\'")}', event)" style="background:#056b32; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-right:6px; transition: all 0.2s;">Approve</button>
+            <button onclick="rejectReceipt('${r._id}', '${r.donorName.replace(/'/g, "\\'")}', event)" style="background:#dc3545; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; transition: all 0.2s;">Reject ?</button>
+          `;
+        } else if (r.status80G === 'approved') {
+          actionHtml = `
+            <a href="download-receipt.html?id=${r._id}" target="_blank" style="background:#5B2D8E; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; transition: all 0.2s;">Download Receipt 📥</a>
+          `;
+        } else {
+          actionHtml = '<span style="color:var(--muted); font-size:0.8rem; font-style:italic;">No Actions</span>';
+        }
+
+        const row = `
+          <tr style="border-bottom: 1px solid #f0edf5; vertical-align: top; transition: background 0.15s;" onmouseover="this.style.background='rgba(91,45,142,0.01)';" onmouseout="this.style.background='none';">
+            <td style="padding: 12px; font-size: 0.85rem; color: var(--muted); font-weight: 500; white-space: nowrap;">${dateStr}</td>
+            <td style="padding: 12px; font-size: 0.88rem;">
+              <strong style="color: var(--dark);">${r.donorName}</strong><br/>
+              <span style="color: var(--muted); font-size: 0.8rem;">✉️ ${r.email}</span><br/>
+              <span style="color: var(--muted); font-size: 0.8rem;">📞 ${r.phone}</span>
+            </td>
+            <td style="padding: 12px; font-size: 0.83rem; color: var(--dark); line-height: 1.4;">
+              ${r.address}<br/>
+              <span style="color: var(--muted); font-weight: 500;">${r.city}, ${r.district}, ${r.state}</span>
+            </td>
+            <td style="padding: 12px; font-size: 0.88rem; font-weight: 700; color: var(--purple);">&#8377;${r.amount || 'N/A'}</td>
+            <td style="padding: 12px; font-size: 0.85rem; text-transform: capitalize;">${r.donationCause}</td>
+            <td style="padding: 12px; font-size: 0.85rem; font-weight: 600; color: var(--muted);">E Cash</td>
+            <td style="padding: 12px; font-size: 0.85rem;">
+              <span style="${statusStyle} padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">${statusText}</span>
+            </td>
+            <td style="padding: 12px; text-align: center; white-space: nowrap;">
+              ${actionHtml}
+            </td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    } catch (err) {
+      console.error(err);
+      tbody.innerHTML = `<tr><td colspan="8" style="padding: 20px; text-align: center; color: #dc3545; font-size: 0.9rem;">Error: ${err.message}</td></tr>`;
+    }
+  }
+
+  // Approve 80G Receipt
+  async function approveReceipt(id, name, event) {
+    if (!confirm(`Are you sure you want to approve the 80G Tax Exemption Receipt for ${name}?`)) return;
+
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = 'Approving...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`/api/donors/${id}/approve-80g`, {
+        method: 'POST'
+      });
+      if (!res.ok) throw new Error('Failed to approve receipt');
+      const data = await res.json();
+      
+      if (data.emailSent) {
+        alert(`Receipt approved successfully as No. ${data.receiptNo80G}! Notification email with the download link has been sent.`);
+      } else {
+        alert(`Receipt approved as No. ${data.receiptNo80G}, but email notification failed. Please verify your Brevo API key configuration in .env.`);
+      }
+      loadReceiptRequests();
+    } catch (err) {
+      alert('Error approving receipt: ' + err.message);
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  }
+
+  // Reject 80G Receipt
+  async function rejectReceipt(id, name, event) {
+    if (!confirm(`Are you sure you want to reject the 80G Tax Exemption Receipt for ${name}?`)) return;
+
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = 'Rejecting...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`/api/donors/${id}/reject-80g`, {
+        method: 'POST'
+      });
+      if (!res.ok) throw new Error('Failed to reject receipt');
+      alert(`Receipt request for ${name} rejected.`);
+      loadReceiptRequests();
+    } catch (err) {
+      alert('Error rejecting receipt: ' + err.message);
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  }
+
+  // Reset all approved receipt numbers to start numbering from 1
+  async function resetReceiptNumbers() {
+    if (!confirm('Are you sure you want to reset all approved receipt numbers? This will set all approved 80G receipts back to pending status and clear their receipt numbers so you can start numbering from 1 again. Donor records will NOT be deleted.')) return;
+
+    try {
+      const res = await fetch('/api/donors/reset-receipt-numbers', {
+        method: 'POST'
+      });
+      if (!res.ok) throw new Error('Reset failed');
+      const data = await res.json();
+      alert('Success! All approved receipt numbers have been cleared. You can now start approving requests from number 1.');
+      loadReceiptRequests();
+    } catch (err) {
+      alert('Error resetting receipt numbers: ' + err.message);
+    }
+  }
+</script>
+</body>
+</html>
+
+
+
+
+

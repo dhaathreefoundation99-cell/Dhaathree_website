@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve frontend static files
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Configure Cloudinary
 cloudinary.config({
@@ -137,8 +137,15 @@ const photoSchema = new mongoose.Schema({
   name: { type: String, required: true },
   url: { type: String, required: true },
   cloudinaryId: { type: String, required: true },
+  // Caption shown under the image (e.g. newspaper clippings on the Media page)
+  publication: { type: String, default: '' },
+  publishedDate: { type: String, default: '' },
+  headline: { type: String, default: '' },
+  summary: { type: String, default: '' },
   timestamp: { type: Date, default: Date.now }
 });
+
+const PHOTO_CAPTION_FIELDS = ['publication', 'publishedDate', 'headline', 'summary'];
 
 const Photo = mongoose.model('Photo', photoSchema);
 
@@ -249,6 +256,10 @@ app.get('/api/photos/:wingId', async (req, res) => {
       wingId: p.wingId,
       name: p.name,
       data: p.url, // Map secure URL to 'data' field to fit current frontend rendering
+      publication: p.publication || '',
+      publishedDate: p.publishedDate || '',
+      headline: p.headline || '',
+      summary: p.summary || '',
       timestamp: p.timestamp
     }));
     res.json(formatted);
@@ -298,6 +309,40 @@ app.post('/api/photos', upload.single('file'), async (req, res) => {
     });
   } catch (err) {
     console.error('File upload error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 2.5. UPDATE A PHOTO CAPTION
+app.patch('/api/photos/:id', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'Database connection offline. Please check your MONGODB_URI in the .env file.' });
+    }
+    const updates = {};
+    PHOTO_CAPTION_FIELDS.forEach(field => {
+      if (typeof req.body[field] === 'string') {
+        updates[field] = req.body[field].trim();
+      }
+    });
+
+    const photo = await Photo.findByIdAndUpdate(req.params.id, { $set: updates }, { new: true });
+    if (!photo) {
+      return res.status(404).json({ error: 'Photo not found.' });
+    }
+
+    res.json({
+      id: photo._id,
+      wingId: photo.wingId,
+      name: photo.name,
+      data: photo.url,
+      publication: photo.publication,
+      publishedDate: photo.publishedDate,
+      headline: photo.headline,
+      summary: photo.summary,
+      timestamp: photo.timestamp
+    });
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
@@ -1296,7 +1341,7 @@ app.post('/api/donors/reset-receipt-numbers', async (req, res) => {
 
 // Fallback to serve index.html for undefined frontend routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Start listening
