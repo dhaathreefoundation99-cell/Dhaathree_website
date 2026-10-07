@@ -58,11 +58,21 @@ function escapeHtml(value) {
 }
 
 // Alt text built from the caption, e.g. "Eenadu (Telugu Daily), 24 February 2026 — Headline"
-function buildAltText(photo) {
+function buildAltText(photo, fallback) {
   const source = [photo.publication, photo.publishedDate].filter(Boolean).join(', ');
-  if (photo.headline) return source ? `${source} — ${photo.headline}` : photo.headline;
+  if (photo.headline) return source ? `${source}: ${photo.headline}` : photo.headline;
   if (photo.summary) return photo.summary;
-  return source || photo.name;
+  return source || fallback || 'Photograph from a Dhaathree Foundation programme';
+}
+
+// Card-sized image from Cloudinary instead of the full upload
+function thumbUrl(url) {
+  return String(url || '').replace('/image/upload/', '/image/upload/w_640,q_auto,f_auto/');
+}
+
+// Clippings on the Media page are only shown publicly once they have a caption
+function isPublishable(photo, wingId) {
+  return wingId !== 'media' || !!(photo.headline || photo.publication);
 }
 
 // Caption block shown under the image: "[Publication] — [Date]", "[Headline]", [Summary]
@@ -103,22 +113,24 @@ function initGallery() {
   const wingId = galleryEl.getAttribute('data-wing-id');
   const isAdminMode = !!(uploadZone && fileInput);
 
-  // IntersectionObserver for cards animation
-  const galleryObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
+  const section = galleryEl.closest('[data-gallery-section]');
+  const pageTitle = (document.querySelector('h1') || {}).textContent || '';
+  const fallbackAlt = pageTitle ? `Photograph from ${pageTitle.trim()}` : '';
 
   // Render function
   const render = async () => {
     try {
       const currentWingId = galleryEl.getAttribute('data-wing-id') || wingId;
-      const photos = await getPhotos(currentWingId);
+      let photos = await getPhotos(currentWingId);
+      if (!isAdminMode) photos = photos.filter(p => isPublishable(p, currentWingId));
       galleryEl.innerHTML = '';
+
+      // On public pages an empty gallery hides its whole section instead of showing an empty heading
+      if (photos.length === 0 && !isAdminMode && section) {
+        section.hidden = true;
+        return;
+      }
+      if (section) section.hidden = false;
       
       if (photos.length === 0) {
         galleryEl.innerHTML = `
@@ -154,19 +166,12 @@ function initGallery() {
         }
 
         card.innerHTML = `
-          <img src="${photo.data}" alt="${escapeHtml(buildAltText(photo))}" />
+          <img src="${isAdminMode ? photo.data : thumbUrl(photo.data)}" alt="${escapeHtml(buildAltText(photo, fallbackAlt))}" loading="lazy" />
           ${deleteBtnHtml}
           ${captionHtml}
           ${captionFormHtml}
         `;
-        
-        // Initial style for fade/slide animation
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(24px)';
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        
         galleryEl.appendChild(card);
-        galleryObserver.observe(card);
         
         if (isAdminMode) {
           // Delete handler
@@ -197,7 +202,7 @@ function initGallery() {
                 headline: captionForm.headline.value,
                 summary: captionForm.summary.value
               });
-              card.querySelector('img').alt = buildAltText(updated);
+              card.querySelector('img').alt = buildAltText(updated, fallbackAlt);
               saveBtn.textContent = 'Saved ✓';
             } catch (err) {
               alert('Failed to save caption: ' + err.message);
@@ -324,8 +329,8 @@ function initGallery() {
     });
   }
 
-  // Initial load
-  render();
+  // Initial load. Public pages arrive with photos already rendered by the server.
+  if (isAdminMode || galleryEl.dataset.ssr !== '1') render();
 
   // Expose render function for dynamic updates (e.g. in Admin Panel)
   galleryEl.refreshGallery = render;

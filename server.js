@@ -19,6 +19,100 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ── SERVER-RENDERED CONTENT ──
+// Featured photos, wing galleries and sponsors are written into the HTML here, so the content is
+// in the page itself for visitors, search engines and link checkers that do not run JavaScript.
+// If the database is unavailable the static file is served unchanged and the page scripts load it.
+const fs = require('fs');
+const PUBLIC_DIR = path.join(__dirname, 'public');
+
+const escapeHtml = (value) => String(value || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const cloudinaryResize = (url, transform) => String(url || '').replace('/image/upload/', `/image/upload/${transform}/`);
+
+const GALLERY_PAGES = {
+  'akshara-dhaathree.html': 'akshara', 'ananda-nilayam.html': 'ananda', 'aahara-dhaathree.html': 'aahara',
+  'arogya-dhaathree.html': 'arogya', 'vidya-dhaathree.html': 'vidya', 'vikasa-dhaathree.html': 'vikasa',
+  'vana-dhaathree.html': 'vana', 'mahila-dhaathree.html': 'mahila', 'sramika-dhaathree.html': 'sramika',
+  'general-services.html': 'general', 'media.html': 'media'
+};
+
+const fillSlot = (html, name, inner) =>
+  html.replace(new RegExp(`<!--ssr:${name}-->[\\s\\S]*?<!--/ssr:${name}-->`), () => `<!--ssr:${name}-->${inner}<!--/ssr:${name}-->`);
+// An empty section is hidden rather than left as a heading with nothing under it
+const hideSection = (html) => html.replace('data-gallery-section>', 'data-gallery-section hidden>');
+
+function renderGalleryCard(photo, pageTitle) {
+  const source = [photo.publication, photo.publishedDate].filter(Boolean).map(escapeHtml).join(' &mdash; ');
+  const altSource = [photo.publication, photo.publishedDate].filter(Boolean).join(', ');
+  const alt = photo.headline ? (altSource ? `${altSource}: ${photo.headline}` : photo.headline)
+    : (photo.summary || altSource || `Photograph from ${pageTitle}`);
+  const hasCaption = !!(source || photo.headline || photo.summary);
+  const caption = hasCaption ? `
+        <div class="gallery-caption">
+          ${source ? `<div class="gallery-caption-source">${source}</div>` : ''}
+          ${photo.headline ? `<div class="gallery-caption-headline">&ldquo;${escapeHtml(photo.headline)}&rdquo;</div>` : ''}
+          ${photo.summary ? `<p class="gallery-caption-summary">${escapeHtml(photo.summary)}</p>` : ''}
+        </div>` : '';
+  return `
+      <div class="gallery-card${hasCaption ? ' has-caption' : ''}">
+        <img src="${escapeHtml(cloudinaryResize(photo.url, 'w_640,q_auto,f_auto'))}" alt="${escapeHtml(alt)}" loading="lazy" />${caption}
+      </div>`;
+}
+
+const pageCache = new Map();
+async function readPage(file) {
+  if (!pageCache.has(file)) pageCache.set(file, await fs.promises.readFile(path.join(PUBLIC_DIR, file), 'utf8'));
+  return pageCache.get(file);
+}
+
+async function renderPage(file) {
+  let html = await readPage(file);
+
+  if (file === 'index.html') {
+    let photos = await FeaturedPhoto.find().sort({ timestamp: -1 }).maxTimeMS(4000).lean();
+    if (!photos.length) photos = await Photo.aggregate([{ $sample: { size: 15 } }]);
+    if (!photos.length) return hideSection(html);
+    return fillSlot(html, 'featured', photos.map((p) => `
+    <figure class="moment"><img src="${escapeHtml(cloudinaryResize(p.url, 'w_640,h_480,c_fill,q_auto,f_auto'))}" width="320" height="240" loading="lazy" alt="Photograph from a Dhaathree Foundation programme"></figure>`).join(''));
+  }
+
+  if (file === 'partners.html') {
+    const sponsors = await Sponsor.find().sort({ timestamp: 1 }).maxTimeMS(4000).lean();
+    if (!sponsors.length) return hideSection(html);
+    return fillSlot(html, 'sponsors', sponsors.map((s) => `
+      <li class="partner">
+        <div class="partner-logo"><img src="${escapeHtml(cloudinaryResize(s.logoUrl, 'w_240,q_auto,f_auto'))}" alt="${escapeHtml(s.name)} logo" loading="lazy"></div>
+        <div><h3>${escapeHtml(s.name)}</h3><p>${escapeHtml(s.description)}</p></div>
+      </li>`).join(''));
+  }
+
+  const wingId = GALLERY_PAGES[file];
+  if (wingId) {
+    let photos = await Photo.find({ wingId }).sort({ timestamp: -1 }).maxTimeMS(4000).lean();
+    // Media-page clippings are only published once the admin has added a caption
+    if (wingId === 'media') photos = photos.filter((p) => p.headline || p.publication);
+    html = html.replace(`id="photoGallery" data-wing-id="${wingId}"`, `id="photoGallery" data-wing-id="${wingId}" data-ssr="1"`);
+    if (!photos.length) return hideSection(html);
+    const pageTitle = ((html.match(/<h1>([^<]*)<\/h1>/) || [])[1] || 'Dhaathree Foundation').trim();
+    return fillSlot(html, 'gallery', photos.map((p) => renderGalleryCard(p, pageTitle)).join(''));
+  }
+
+  return html;
+}
+
+const RENDERED_PAGES = ['index.html', 'partners.html', ...Object.keys(GALLERY_PAGES)];
+app.get(['/', ...RENDERED_PAGES.map((f) => `/${f}`)], async (req, res, next) => {
+  if (mongoose.connection.readyState !== 1) return next();
+  const file = req.path === '/' ? 'index.html' : req.path.slice(1);
+  try {
+    const html = await renderPage(file);
+    res.type('html').send(html);
+  } catch (err) {
+    console.error(`Server render failed for ${file}:`, err.message);
+    next();
+  }
+});
+
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, 'public')));
 
