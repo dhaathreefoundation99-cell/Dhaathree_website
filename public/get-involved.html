@@ -48,7 +48,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="index.html">
-      <img src="images/logo-small.jpeg" width="48" height="48" alt="Dhaathree Foundation logo">
+      <img src="images/logo-small.jpeg" width="60" height="60" alt="Dhaathree Foundation logo">
       <span class="brand-text"><span class="brand-name">Dhaathree Foundation</span><span class="brand-tagline">Madanapalle, Andhra Pradesh</span></span>
     </a>
     <nav class="main-nav" aria-label="Main">
@@ -57,7 +57,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="has-sub"><a href="about.html">About <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
             <ul class="sub-menu"><li><a href="about.html">About Us</a></li><li><a href="partners.html">Partners &amp; Sponsors</a></li></ul></li>
           <li><a href="impact.html">Impact</a></li>
-          <li><a href="projects.html">Projects</a></li>
+          <li class="has-sub"><a href="projects.html">Our Work <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
+            <ul class="sub-menu"><li><a href="akshara-dhaathree.html">Akshara Dhaathree</a></li><li><a href="ananda-nilayam.html">Ananda Nilayam</a></li><li><a href="aahara-dhaathree.html">Aahara Dhaathree</a></li><li><a href="arogya-dhaathree.html">Arogya Dhaathree</a></li><li><a href="vidya-dhaathree.html">Vidya Dhaathree</a></li><li><a href="vikasa-dhaathree.html">Vikasa Dhaathree</a></li><li><a href="vana-dhaathree.html">Vana Dhaathree</a></li><li><a href="mahila-dhaathree.html">Mahila Dhaathree</a></li><li><a href="sramika-dhaathree.html">Sramika Dhaathree</a></li><li><a href="general-services.html">General Services</a></li></ul></li>
           <li class="is-current"><a href="get-involved.html" aria-current="page">Get Involved</a></li>
           <li><a href="media.html">Media</a></li>
           <li class="has-sub"><a href="resource-center.html">Resource Center <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
@@ -65,16 +66,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <a class="btn btn-primary header-donate" href="get-involved.html#donate">Donate Now</a>
+    <a class="btn btn-donate header-donate" href="get-involved.html#donate"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#heart"/></svg>Donate Now</a>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg class="icon icon-open" aria-hidden="true" focusable="false"><use href="images/icons.svg#menu"/></svg><svg class="icon icon-close" aria-hidden="true" focusable="false"><use href="images/icons.svg#x"/></svg></button>
   </div>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li class="mobile-sub"><a href="partners.html">Partners &amp; Sponsors</a></li><li><a href="impact.html">Impact</a></li><li><a href="projects.html">Projects</a></li><li><a href="get-involved.html" aria-current="page">Get Involved</a></li><li><a href="media.html">Media</a></li><li><a href="resource-center.html">Resource Center</a></li><li class="mobile-sub"><a href="resource-center.html?doc=registration">Registration Certificate</a></li><li class="mobile-sub"><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li><li><a href="contact.html">Contact</a></li></ul>
-    <div class="container"><a class="btn btn-primary" href="get-involved.html#donate">Donate Now</a></div>
+    <ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li class="mobile-sub"><a href="partners.html">Partners &amp; Sponsors</a></li><li><a href="impact.html">Impact</a></li><li><a href="projects.html">Our Work</a></li><li><a href="get-involved.html" aria-current="page">Get Involved</a></li><li><a href="media.html">Media</a></li><li><a href="resource-center.html">Resource Center</a></li><li class="mobile-sub"><a href="resource-center.html?doc=registration">Registration Certificate</a></li><li class="mobile-sub"><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li><li><a href="contact.html">Contact</a></li></ul>
+    <div class="container"><a class="btn btn-donate" href="get-involved.html#donate">Donate Now</a></div>
   </nav>
 </header>
 <main id="main">
-<section class="page-header">
+<section class="page-header" style="--banner: url('/images/photos/banner-involved.jpg'); --banner-sm: url('/images/photos/banner-involved-sm.jpg')">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Get Involved</li></ol></nav>
     
@@ -84,39 +85,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="section" aria-label="Ways to get involved">
+<section class="section section-mist" aria-label="Ways to get involved">
   <div class="container">
-    <ul class="ways-list">
-      <li class="way" onclick="switchForm('volunteer'); document.getElementById('volunteer').scrollIntoView({ behavior: 'smooth' });">
-        <span class="feature-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#hand-heart"/></svg></span>
-        <h3>Volunteer</h3>
-        <p>Give your time and skills to support our on-ground programs.</p>
-        <a href="#volunteer" class="text-link" onclick="event.stopPropagation(); switchForm('volunteer');">Sign Up</a>
+    <div class="section-head"><h2>Choose How You Help</h2><p>Give your time, your support, or your voice.</p></div>
+    <ul class="ways-grid">
+      <li class="way-card" onclick="switchForm('volunteer'); document.getElementById('volunteer').scrollIntoView({ behavior: 'smooth' });">
+        <img src="images/photos/way-volunteer.jpg" width="800" height="600" loading="lazy" alt="Foundation volunteers distributing supplies">
+        <div class="way-body">
+          <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#hand-heart"/></svg>Volunteer</h3>
+          <p>Give your time and skills to support our on-ground programs.</p>
+          <a href="#volunteer" class="btn btn-primary" onclick="event.stopPropagation(); switchForm('volunteer');">Sign Up</a>
+        </div>
       </li>
-      <li class="way" onclick="switchForm('donate'); document.getElementById('donate').scrollIntoView({ behavior: 'smooth' });">
-        <span class="feature-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#indian-rupee"/></svg></span>
-        <h3>Donate</h3>
-        <p>Your contribution directly funds education, nutrition, and care.</p>
-        <a href="#donate" class="text-link" onclick="event.stopPropagation(); switchForm('donate');">Give Now</a>
+      <li class="way-card" onclick="switchForm('donate'); document.getElementById('donate').scrollIntoView({ behavior: 'smooth' });">
+        <img src="images/photos/way-donate.jpg" width="800" height="600" loading="lazy" alt="Volunteers serving food to families">
+        <div class="way-body">
+          <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#indian-rupee"/></svg>Donate</h3>
+          <p>Your contribution directly funds education, nutrition, and care.</p>
+          <a href="#donate" class="btn btn-donate" onclick="event.stopPropagation(); switchForm('donate');">Give Now</a>
+        </div>
       </li>
-      <li class="way" onclick="window.location.href='contact.html';">
-        <span class="feature-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#handshake"/></svg></span>
-        <h3>Partner With Us</h3>
-        <p>CSR collaborations and institutional partnerships welcome.</p>
-        <a href="contact.html" class="text-link" onclick="event.stopPropagation();">Connect</a>
+      <li class="way-card" onclick="window.location.href='contact.html';">
+        <img src="images/photos/way-partner.jpg" width="800" height="600" loading="lazy" alt="Handing over a scholarship cheque with a sponsor">
+        <div class="way-body">
+          <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#handshake"/></svg>Partner With Us</h3>
+          <p>CSR collaborations and institutional partnerships welcome.</p>
+          <a href="contact.html" class="btn btn-primary" onclick="event.stopPropagation();">Connect</a>
+        </div>
       </li>
-      <li class="way" onclick="document.getElementById('spreadWordBtn').click();">
-        <span class="feature-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#megaphone"/></svg></span>
-        <h3>Spread the Word</h3>
-        <p>Follow, share, and amplify our work in your own community.</p>
-        <a href="#socialDrawer" class="text-link" id="spreadWordBtn" aria-controls="socialDrawer" onclick="event.stopPropagation();">Follow Us</a>
-        <div id="socialDrawer" class="social-drawer" onclick="event.stopPropagation();" style="display: none;">
-          <a href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#youtube"/></svg>YouTube</a>
-          <a href="https://www.instagram.com/dhaatreefoundation?utm_source=qr&amp;igsh=MTNkbmZnbm8wbjVzMw==" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#instagram"/></svg>Instagram</a>
-          <a href="https://www.facebook.com/share/17oWQKUg4a/" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#facebook"/></svg>Facebook</a>
-          <a href="https://www.threads.net/@dhaatreefoundation" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#threads"/></svg>Threads</a>
-          <a href="https://www.linkedin.com/in/dhaathree-foundation-99716b426?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#linkedin"/></svg>LinkedIn</a>
-          <a href="https://whatsapp.com/channel/0029VbCc2KSH5JLySeJeJc3v" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#whatsapp"/></svg>WhatsApp channel</a>
+      <li class="way-card" onclick="document.getElementById('spreadWordBtn').click();">
+        <img src="images/photos/way-spread.jpg" width="800" height="600" loading="lazy" alt="Women at a Dhaathree Foundation craft workshop">
+        <div class="way-body">
+          <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#megaphone"/></svg>Spread the Word</h3>
+          <p>Follow, share, and amplify our work in your own community.</p>
+          <a href="#socialDrawer" class="btn btn-primary" id="spreadWordBtn" aria-controls="socialDrawer" onclick="event.stopPropagation();">Follow Us</a>
+          <div id="socialDrawer" class="social-drawer" onclick="event.stopPropagation();" style="display: none;">
+            <a href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#youtube"/></svg>YouTube</a>
+            <a href="https://www.instagram.com/dhaatreefoundation?utm_source=qr&amp;igsh=MTNkbmZnbm8wbjVzMw==" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#instagram"/></svg>Instagram</a>
+            <a href="https://www.facebook.com/share/17oWQKUg4a/" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#facebook"/></svg>Facebook</a>
+            <a href="https://www.threads.net/@dhaatreefoundation" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#threads"/></svg>Threads</a>
+            <a href="https://www.linkedin.com/in/dhaathree-foundation-99716b426?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#linkedin"/></svg>LinkedIn</a>
+            <a href="https://whatsapp.com/channel/0029VbCc2KSH5JLySeJeJc3v" target="_blank" rel="noopener" class="social-drawer-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#whatsapp"/></svg>WhatsApp channel</a>
+          </div>
         </div>
       </li>
     </ul>
@@ -124,19 +134,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- DONATION IMPACT TIERS (amounts from the Website Action Plan, section 5.6: to be confirmed by the client) -->
-<section class="section section-mist" aria-labelledby="tiers-title">
+<section class="section" aria-labelledby="tiers-title">
   <div class="container">
     <div class="section-head">
       <h2 id="tiers-title">What Your Donation Does</h2>
       <p>See your contribution at work.</p>
     </div>
     <ul class="tiers">
-      <li><span class="tier-amt">&#8377;500</span><span class="tier-desc">Educational materials for one child for a term</span></li>
-      <li><span class="tier-amt">&#8377;1,000</span><span class="tier-desc">Nutritious meals for one elder at Ananda Nilayam for a month</span></li>
-      <li><span class="tier-amt">&#8377;2,500</span><span class="tier-desc">After-school support for one child for a month</span></li>
-      <li><span class="tier-amt">&#8377;5,000</span><span class="tier-desc">Vocational training kit for one woman</span></li>
-      <li><span class="tier-amt">&#8377;12,000</span><span class="tier-desc">Sponsors one child through Akshara Dhaathree for a full year</span></li>
-      <li><span class="tier-amt">&#8377;25,000</span><span class="tier-desc">Supports one Akshara Dhaathree centre for a month</span></li>
+      <li><span class="tier-amt">&#8377;500</span><span class="tier-desc">Educational materials for one child for a term</span><a class="btn btn-donate btn-sm tier-give" href="?amount=500#donate">Give &#8377;500</a></li>
+      <li><span class="tier-amt">&#8377;1,000</span><span class="tier-desc">Nutritious meals for one elder at Ananda Nilayam for a month</span><a class="btn btn-donate btn-sm tier-give" href="?amount=1000#donate">Give &#8377;1,000</a></li>
+      <li><span class="tier-amt">&#8377;2,500</span><span class="tier-desc">After-school support for one child for a month</span><a class="btn btn-donate btn-sm tier-give" href="?amount=2500#donate">Give &#8377;2,500</a></li>
+      <li><span class="tier-amt">&#8377;5,000</span><span class="tier-desc">Vocational training kit for one woman</span><a class="btn btn-donate btn-sm tier-give" href="?amount=5000#donate">Give &#8377;5,000</a></li>
+      <li><span class="tier-amt">&#8377;12,000</span><span class="tier-desc">Sponsors one child through Akshara Dhaathree for a full year</span><a class="btn btn-donate btn-sm tier-give" href="?amount=12000#donate">Give &#8377;12,000</a></li>
+      <li><span class="tier-amt">&#8377;25,000</span><span class="tier-desc">Supports one Akshara Dhaathree centre for a month</span><a class="btn btn-donate btn-sm tier-give" href="?amount=25000#donate">Give &#8377;25,000</a></li>
     </ul>
   </div>
 </section>
@@ -255,6 +265,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <label for="donorAmount">Amount (&#8377;)</label>
             <input type="number" id="donorAmount" min="1" placeholder="Your Donation" inputmode="numeric" required>
           </div>
+          <div class="form-field full-width">
+            <span class="visually-hidden" id="chipsLabel">Choose an amount</span>
+            <div class="amount-chips" role="group" aria-labelledby="chipsLabel">
+              <button type="button" class="amount-chip" data-amount="500" aria-pressed="false">&#8377;500</button>
+              <button type="button" class="amount-chip" data-amount="1000" aria-pressed="false">&#8377;1,000</button>
+              <button type="button" class="amount-chip" data-amount="2500" aria-pressed="false">&#8377;2,500</button>
+              <button type="button" class="amount-chip" data-amount="5000" aria-pressed="false">&#8377;5,000</button>
+              <button type="button" class="amount-chip" data-amount="12000" aria-pressed="false">&#8377;12,000</button>
+              <button type="button" class="amount-chip" data-amount="25000" aria-pressed="false">&#8377;25,000</button>
+            </div>
+          </div>
           <div class="form-field">
             <label for="donorPan">PAN</label>
             <input type="text" id="donorPan" placeholder="Pan Number" autocapitalize="characters">
@@ -286,12 +307,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="cta-band">
-  <div class="container cta-inner">
-    <div>
-      <h2>Ready to Help Today?</h2>
+<section class="cta-band" style="--cta-photo: url('/images/photos/hero-education-sm.jpg')">
+  <div class="container">
+    <h2>Ready to Help Today?</h2>
       <p>Whichever way you choose, your involvement creates real change.</p>
-    </div>
     <div class="cta-actions">
       <a href="#donate" class="btn btn-turmeric" onclick="switchForm('donate'); document.getElementById('donate').scrollIntoView({ behavior: 'smooth' });">Help Today</a>
     </div>
@@ -299,9 +318,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 </main>
 <footer class="site-footer">
+  <div class="footer-subscribe">
+    <div class="container subscribe-inner">
+      <div>
+        <h2>Stay Connected With Us</h2>
+        <p>Get news of our programmes and events in Madanapalle.</p>
+      </div>
+      <form class="subscribe-form" id="subscribeForm" novalidate>
+        <label class="visually-hidden" for="subName">Your name</label>
+        <input id="subName" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+        <label class="visually-hidden" for="subEmail">Email</label>
+        <input id="subEmail" name="email" type="email" placeholder="Email" autocomplete="email" required>
+        <label class="visually-hidden" for="subPhone">Phone</label>
+        <input id="subPhone" name="phone" type="tel" placeholder="Phone" autocomplete="tel" required>
+        <button class="btn btn-donate" type="submit">Subscribe</button>
+        <p class="subscribe-status" id="subscribeStatus" role="status"></p>
+      </form>
+    </div>
+  </div>
   <div class="container footer-main">
     <div class="footer-about">
-      <a class="brand" href="index.html"><img src="images/logo-small.jpeg" width="44" height="44" alt=""><span class="brand-name">Dhaathree Foundation</span></a>
+      <a class="brand" href="index.html"><img src="images/logo-small.jpeg" width="52" height="52" alt=""><span class="brand-name">Dhaathree Foundation</span></a>
       <p>A registered charitable society in Madanapalle, Andhra Pradesh, working with children, women, elders and families since 2019.</p>
       <div class="footer-social"><a class="social-link" href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#youtube"/></svg></a><a class="social-link" href="https://www.instagram.com/dhaatreefoundation?utm_source=qr&amp;igsh=MTNkbmZnbm8wbjVzMw==" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#instagram"/></svg></a><a class="social-link" href="https://www.facebook.com/share/17oWQKUg4a/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#facebook"/></svg></a><a class="social-link" href="https://www.threads.net/@dhaatreefoundation" target="_blank" rel="noopener" aria-label="Threads"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#threads"/></svg></a><a class="social-link" href="https://www.linkedin.com/in/dhaathree-foundation-99716b426?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#linkedin"/></svg></a><a class="social-link" href="https://whatsapp.com/channel/0029VbCc2KSH5JLySeJeJc3v" target="_blank" rel="noopener" aria-label="WhatsApp channel"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#whatsapp"/></svg></a></div>
     </div>
@@ -311,13 +348,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="about.html">About Us</a></li>
         <li><a href="partners.html">Partners &amp; Sponsors</a></li>
         <li><a href="impact.html">Impact</a></li>
-        <li><a href="projects.html">Projects</a></li>
         <li><a href="media.html">Media</a></li>
         <li><a href="resource-center.html">Resource Center</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h2>Get involved</h2>
+      <h2>Our Work</h2>
+      <ul>
+        <li><a href="akshara-dhaathree.html">Akshara Dhaathree</a></li>
+        <li><a href="ananda-nilayam.html">Ananda Nilayam</a></li>
+        <li><a href="aahara-dhaathree.html">Aahara Dhaathree</a></li>
+        <li><a href="arogya-dhaathree.html">Arogya Dhaathree</a></li>
+        <li><a href="vidya-dhaathree.html">Vidya Dhaathree</a></li>
+        <li><a href="vikasa-dhaathree.html">Vikasa Dhaathree</a></li>
+        <li><a href="projects.html">All programmes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2>Get Involved</h2>
       <ul>
         <li><a href="get-involved.html#donate">Donate</a></li>
         <li><a href="get-involved.html#volunteer">Volunteer</a></li>
@@ -403,14 +451,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const setting = await res.json();
         const amtInput = document.getElementById('donorAmount');
         if (amtInput && setting && setting.value) {
-          amtInput.value = setting.value;
+          amtInput.value = amtInput.dataset.preset || setting.value;
           amtInput.min = "1";
         }
       }
     } catch (e) {
       console.warn("Failed to load dynamic donation amount:", e);
       const amtInput = document.getElementById('donorAmount');
-      if (amtInput) amtInput.value = "500";
+      if (amtInput) amtInput.value = amtInput.dataset.preset || "500";
     }
 
     try {

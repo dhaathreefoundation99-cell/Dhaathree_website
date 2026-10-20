@@ -39,7 +39,7 @@ const GALLERY_PAGES = {
 const fillSlot = (html, name, inner) =>
   html.replace(new RegExp(`<!--ssr:${name}-->[\\s\\S]*?<!--/ssr:${name}-->`), () => `<!--ssr:${name}-->${inner}<!--/ssr:${name}-->`);
 // An empty section is hidden rather than left as a heading with nothing under it
-const hideSection = (html) => html.replace('data-gallery-section>', 'data-gallery-section hidden>');
+const hideSection = (html, name) => html.replace(`data-ssr-section="${name}"`, `data-ssr-section="${name}" hidden`);
 
 function renderGalleryCard(photo, pageTitle) {
   const source = [photo.publication, photo.publishedDate].filter(Boolean).map(escapeHtml).join(' &mdash; ');
@@ -69,16 +69,24 @@ async function renderPage(file) {
   let html = await readPage(file);
 
   if (file === 'index.html') {
-    let photos = await FeaturedPhoto.find().sort({ timestamp: -1 }).maxTimeMS(4000).lean();
+    const [featured, sponsors] = await Promise.all([
+      FeaturedPhoto.find().sort({ timestamp: -1 }).maxTimeMS(4000).lean(),
+      Sponsor.find().sort({ timestamp: 1 }).maxTimeMS(4000).lean(),
+    ]);
+    html = sponsors.length
+      ? fillSlot(html, 'partners', sponsors.map((s) => `
+        <li><img src="${escapeHtml(cloudinaryResize(s.logoUrl, 'w_360,q_auto,f_auto'))}" alt="${escapeHtml(s.name)}" loading="lazy"></li>`).join(''))
+      : hideSection(html, 'partners');
+    let photos = featured;
     if (!photos.length) photos = await Photo.aggregate([{ $sample: { size: 15 } }]);
-    if (!photos.length) return hideSection(html);
+    if (!photos.length) return hideSection(html, 'featured');
     return fillSlot(html, 'featured', photos.map((p) => `
     <figure class="moment"><img src="${escapeHtml(cloudinaryResize(p.url, 'w_640,h_480,c_fill,q_auto,f_auto'))}" width="320" height="240" loading="lazy" alt="Photograph from a Dhaathree Foundation programme"></figure>`).join(''));
   }
 
   if (file === 'partners.html') {
     const sponsors = await Sponsor.find().sort({ timestamp: 1 }).maxTimeMS(4000).lean();
-    if (!sponsors.length) return hideSection(html);
+    if (!sponsors.length) return hideSection(html, 'sponsors');
     return fillSlot(html, 'sponsors', sponsors.map((s) => `
       <li class="partner">
         <div class="partner-logo"><img src="${escapeHtml(cloudinaryResize(s.logoUrl, 'w_240,q_auto,f_auto'))}" alt="${escapeHtml(s.name)} logo" loading="lazy"></div>
@@ -92,7 +100,7 @@ async function renderPage(file) {
     // Media-page clippings are only published once the admin has added a caption
     if (wingId === 'media') photos = photos.filter((p) => p.headline || p.publication);
     html = html.replace(`id="photoGallery" data-wing-id="${wingId}"`, `id="photoGallery" data-wing-id="${wingId}" data-ssr="1"`);
-    if (!photos.length) return hideSection(html);
+    if (!photos.length) return hideSection(html, 'gallery');
     const pageTitle = ((html.match(/<h1>([^<]*)<\/h1>/) || [])[1] || 'Dhaathree Foundation').trim();
     return fillSlot(html, 'gallery', photos.map((p) => renderGalleryCard(p, pageTitle)).join(''));
   }

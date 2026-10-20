@@ -47,7 +47,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="index.html">
-      <img src="images/logo-small.jpeg" width="48" height="48" alt="Dhaathree Foundation logo">
+      <img src="images/logo-small.jpeg" width="60" height="60" alt="Dhaathree Foundation logo">
       <span class="brand-text"><span class="brand-name">Dhaathree Foundation</span><span class="brand-tagline">Madanapalle, Andhra Pradesh</span></span>
     </a>
     <nav class="main-nav" aria-label="Main">
@@ -56,7 +56,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="has-sub"><a href="about.html">About <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
             <ul class="sub-menu"><li><a href="about.html">About Us</a></li><li><a href="partners.html">Partners &amp; Sponsors</a></li></ul></li>
           <li><a href="impact.html">Impact</a></li>
-          <li><a href="projects.html">Projects</a></li>
+          <li class="has-sub"><a href="projects.html">Our Work <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
+            <ul class="sub-menu"><li><a href="akshara-dhaathree.html">Akshara Dhaathree</a></li><li><a href="ananda-nilayam.html">Ananda Nilayam</a></li><li><a href="aahara-dhaathree.html">Aahara Dhaathree</a></li><li><a href="arogya-dhaathree.html">Arogya Dhaathree</a></li><li><a href="vidya-dhaathree.html">Vidya Dhaathree</a></li><li><a href="vikasa-dhaathree.html">Vikasa Dhaathree</a></li><li><a href="vana-dhaathree.html">Vana Dhaathree</a></li><li><a href="mahila-dhaathree.html">Mahila Dhaathree</a></li><li><a href="sramika-dhaathree.html">Sramika Dhaathree</a></li><li><a href="general-services.html">General Services</a></li></ul></li>
           <li><a href="get-involved.html">Get Involved</a></li>
           <li><a href="media.html">Media</a></li>
           <li class="has-sub"><a href="resource-center.html">Resource Center <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
@@ -64,16 +65,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="is-current"><a href="contact.html" aria-current="page">Contact</a></li>
       </ul>
     </nav>
-    <a class="btn btn-primary header-donate" href="get-involved.html#donate">Donate Now</a>
+    <a class="btn btn-donate header-donate" href="get-involved.html#donate"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#heart"/></svg>Donate Now</a>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg class="icon icon-open" aria-hidden="true" focusable="false"><use href="images/icons.svg#menu"/></svg><svg class="icon icon-close" aria-hidden="true" focusable="false"><use href="images/icons.svg#x"/></svg></button>
   </div>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li class="mobile-sub"><a href="partners.html">Partners &amp; Sponsors</a></li><li><a href="impact.html">Impact</a></li><li><a href="projects.html">Projects</a></li><li><a href="get-involved.html">Get Involved</a></li><li><a href="media.html">Media</a></li><li><a href="resource-center.html">Resource Center</a></li><li class="mobile-sub"><a href="resource-center.html?doc=registration">Registration Certificate</a></li><li class="mobile-sub"><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li><li><a href="contact.html" aria-current="page">Contact</a></li></ul>
-    <div class="container"><a class="btn btn-primary" href="get-involved.html#donate">Donate Now</a></div>
+    <ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li class="mobile-sub"><a href="partners.html">Partners &amp; Sponsors</a></li><li><a href="impact.html">Impact</a></li><li><a href="projects.html">Our Work</a></li><li><a href="get-involved.html">Get Involved</a></li><li><a href="media.html">Media</a></li><li><a href="resource-center.html">Resource Center</a></li><li class="mobile-sub"><a href="resource-center.html?doc=registration">Registration Certificate</a></li><li class="mobile-sub"><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li><li><a href="contact.html" aria-current="page">Contact</a></li></ul>
+    <div class="container"><a class="btn btn-donate" href="get-involved.html#donate">Donate Now</a></div>
   </nav>
 </header>
 <main id="main">
-<section class="page-header">
+<section class="page-header" style="--banner: url('/images/photos/banner-contact.jpg'); --banner-sm: url('/images/photos/banner-contact-sm.jpg')">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Contact</li></ol></nav>
     
@@ -122,9 +123,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 </main>
 <footer class="site-footer">
+  <div class="footer-subscribe">
+    <div class="container subscribe-inner">
+      <div>
+        <h2>Stay Connected With Us</h2>
+        <p>Get news of our programmes and events in Madanapalle.</p>
+      </div>
+      <form class="subscribe-form" id="subscribeForm" novalidate>
+        <label class="visually-hidden" for="subName">Your name</label>
+        <input id="subName" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+        <label class="visually-hidden" for="subEmail">Email</label>
+        <input id="subEmail" name="email" type="email" placeholder="Email" autocomplete="email" required>
+        <label class="visually-hidden" for="subPhone">Phone</label>
+        <input id="subPhone" name="phone" type="tel" placeholder="Phone" autocomplete="tel" required>
+        <button class="btn btn-donate" type="submit">Subscribe</button>
+        <p class="subscribe-status" id="subscribeStatus" role="status"></p>
+      </form>
+    </div>
+  </div>
   <div class="container footer-main">
     <div class="footer-about">
-      <a class="brand" href="index.html"><img src="images/logo-small.jpeg" width="44" height="44" alt=""><span class="brand-name">Dhaathree Foundation</span></a>
+      <a class="brand" href="index.html"><img src="images/logo-small.jpeg" width="52" height="52" alt=""><span class="brand-name">Dhaathree Foundation</span></a>
       <p>A registered charitable society in Madanapalle, Andhra Pradesh, working with children, women, elders and families since 2019.</p>
       <div class="footer-social"><a class="social-link" href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#youtube"/></svg></a><a class="social-link" href="https://www.instagram.com/dhaatreefoundation?utm_source=qr&amp;igsh=MTNkbmZnbm8wbjVzMw==" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#instagram"/></svg></a><a class="social-link" href="https://www.facebook.com/share/17oWQKUg4a/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#facebook"/></svg></a><a class="social-link" href="https://www.threads.net/@dhaatreefoundation" target="_blank" rel="noopener" aria-label="Threads"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#threads"/></svg></a><a class="social-link" href="https://www.linkedin.com/in/dhaathree-foundation-99716b426?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#linkedin"/></svg></a><a class="social-link" href="https://whatsapp.com/channel/0029VbCc2KSH5JLySeJeJc3v" target="_blank" rel="noopener" aria-label="WhatsApp channel"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#whatsapp"/></svg></a></div>
     </div>
@@ -134,13 +153,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="about.html">About Us</a></li>
         <li><a href="partners.html">Partners &amp; Sponsors</a></li>
         <li><a href="impact.html">Impact</a></li>
-        <li><a href="projects.html">Projects</a></li>
         <li><a href="media.html">Media</a></li>
         <li><a href="resource-center.html">Resource Center</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h2>Get involved</h2>
+      <h2>Our Work</h2>
+      <ul>
+        <li><a href="akshara-dhaathree.html">Akshara Dhaathree</a></li>
+        <li><a href="ananda-nilayam.html">Ananda Nilayam</a></li>
+        <li><a href="aahara-dhaathree.html">Aahara Dhaathree</a></li>
+        <li><a href="arogya-dhaathree.html">Arogya Dhaathree</a></li>
+        <li><a href="vidya-dhaathree.html">Vidya Dhaathree</a></li>
+        <li><a href="vikasa-dhaathree.html">Vikasa Dhaathree</a></li>
+        <li><a href="projects.html">All programmes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2>Get Involved</h2>
       <ul>
         <li><a href="get-involved.html#donate">Donate</a></li>
         <li><a href="get-involved.html#volunteer">Volunteer</a></li>

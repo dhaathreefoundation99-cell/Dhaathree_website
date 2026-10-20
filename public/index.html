@@ -49,7 +49,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="index.html">
-      <img src="images/logo-small.jpeg" width="48" height="48" alt="Dhaathree Foundation logo">
+      <img src="images/logo-small.jpeg" width="60" height="60" alt="Dhaathree Foundation logo">
       <span class="brand-text"><span class="brand-name">Dhaathree Foundation</span><span class="brand-tagline">Madanapalle, Andhra Pradesh</span></span>
     </a>
     <nav class="main-nav" aria-label="Main">
@@ -58,7 +58,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li class="has-sub"><a href="about.html">About <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
             <ul class="sub-menu"><li><a href="about.html">About Us</a></li><li><a href="partners.html">Partners &amp; Sponsors</a></li></ul></li>
           <li><a href="impact.html">Impact</a></li>
-          <li><a href="projects.html">Projects</a></li>
+          <li class="has-sub"><a href="projects.html">Our Work <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
+            <ul class="sub-menu"><li><a href="akshara-dhaathree.html">Akshara Dhaathree</a></li><li><a href="ananda-nilayam.html">Ananda Nilayam</a></li><li><a href="aahara-dhaathree.html">Aahara Dhaathree</a></li><li><a href="arogya-dhaathree.html">Arogya Dhaathree</a></li><li><a href="vidya-dhaathree.html">Vidya Dhaathree</a></li><li><a href="vikasa-dhaathree.html">Vikasa Dhaathree</a></li><li><a href="vana-dhaathree.html">Vana Dhaathree</a></li><li><a href="mahila-dhaathree.html">Mahila Dhaathree</a></li><li><a href="sramika-dhaathree.html">Sramika Dhaathree</a></li><li><a href="general-services.html">General Services</a></li></ul></li>
           <li><a href="get-involved.html">Get Involved</a></li>
           <li><a href="media.html">Media</a></li>
           <li class="has-sub"><a href="resource-center.html">Resource Center <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
@@ -66,176 +67,316 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <a class="btn btn-primary header-donate" href="get-involved.html#donate">Donate Now</a>
+    <a class="btn btn-donate header-donate" href="get-involved.html#donate"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#heart"/></svg>Donate Now</a>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg class="icon icon-open" aria-hidden="true" focusable="false"><use href="images/icons.svg#menu"/></svg><svg class="icon icon-close" aria-hidden="true" focusable="false"><use href="images/icons.svg#x"/></svg></button>
   </div>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <ul><li><a href="index.html" aria-current="page">Home</a></li><li><a href="about.html">About</a></li><li class="mobile-sub"><a href="partners.html">Partners &amp; Sponsors</a></li><li><a href="impact.html">Impact</a></li><li><a href="projects.html">Projects</a></li><li><a href="get-involved.html">Get Involved</a></li><li><a href="media.html">Media</a></li><li><a href="resource-center.html">Resource Center</a></li><li class="mobile-sub"><a href="resource-center.html?doc=registration">Registration Certificate</a></li><li class="mobile-sub"><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li><li><a href="contact.html">Contact</a></li></ul>
-    <div class="container"><a class="btn btn-primary" href="get-involved.html#donate">Donate Now</a></div>
+    <ul><li><a href="index.html" aria-current="page">Home</a></li><li><a href="about.html">About</a></li><li class="mobile-sub"><a href="partners.html">Partners &amp; Sponsors</a></li><li><a href="impact.html">Impact</a></li><li><a href="projects.html">Our Work</a></li><li><a href="get-involved.html">Get Involved</a></li><li><a href="media.html">Media</a></li><li><a href="resource-center.html">Resource Center</a></li><li class="mobile-sub"><a href="resource-center.html?doc=registration">Registration Certificate</a></li><li class="mobile-sub"><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li><li><a href="contact.html">Contact</a></li></ul>
+    <div class="container"><a class="btn btn-donate" href="get-involved.html#donate">Donate Now</a></div>
   </nav>
 </header>
 <main id="main">
-<section class="home-hero">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <p class="hero-since">Empowering communities since 2019</p>
-      <h1>Nurturing Lives, Building Futures</h1>
-      <p class="hero-lede">Dhaathree Foundation works at the grassroots of Andhra Pradesh &mdash; uplifting women, tribal communities, the elderly, and children through education, nutrition, and sustainable livelihoods.</p>
-      <div class="hero-actions">
-        <a href="projects.html" class="btn btn-primary">Explore Our Work</a>
-        <a href="get-involved.html#donate" class="btn btn-secondary">Donate Now</a>
+<section class="hero-slider" aria-roledescription="carousel" aria-label="Highlights of our work" data-slider>
+  <div class="hero-slides">
+    <div class="hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3">
+      <img src="images/photos/hero-education.jpg" srcset="images/photos/hero-education-sm.jpg 800w, images/photos/hero-education.jpg 1600w" sizes="100vw" width="1600" height="900" alt="Children cheering at an Akshara Dhaathree study centre" fetchpriority="high">
+      <div class="container hero-content">
+        <span class="hero-kicker">Empowering communities since 2019</span>
+        <h1>Nurturing Lives, Building Futures</h1>
+        <p>Dhaathree Foundation works at the grassroots of Andhra Pradesh &mdash; uplifting women, tribal communities, the elderly, and children through education, nutrition, and sustainable livelihoods.</p>
+        <div class="hero-actions"><a class="btn btn-donate" href="get-involved.html#donate">Donate Now</a><a class="btn btn-light" href="projects.html">Explore Our Work</a></div>
       </div>
-      <p class="hero-regd"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#badge-check"/></svg>Registered NGO, Regd. No. 103/2019</p>
     </div>
-    <figure class="hero-figure">
-      <img src="images/akshara-dhathree-1-web.jpeg" width="900" height="506" fetchpriority="high" alt="Children studying at an Akshara Dhaathree after-school study centre">
-      <div class="hero-seal"><span class="seal-word" lang="te">ధాత్రి</span><span class="seal-meaning">Dhaathree means Earth</span></div>
-      <figcaption>Children at an Akshara Dhaathree after-school study centre</figcaption>
-    </figure>
+    <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true">
+      <img src="images/photos/hero-elders.jpg" srcset="images/photos/hero-elders-sm.jpg 800w, images/photos/hero-elders.jpg 1600w" sizes="100vw" width="1600" height="900" alt="Elders sharing a meal at Ananda Nilayam" loading="lazy">
+      <div class="container hero-content">
+        <span class="hero-kicker">Ananda Nilayam</span>
+        <h2>Care and Dignity for Our Elders</h2>
+        <p>A safe, loving, and dignified shelter for the elderly, homeless, and vulnerable, with proper nutrition, healthcare, and community care in a family environment.</p>
+        <div class="hero-actions"><a class="btn btn-donate" href="get-involved.html?amount=1000#donate" tabindex="-1">Support Ananda Nilayam</a><a class="btn btn-light" href="ananda-nilayam.html" tabindex="-1">Learn More</a></div>
+      </div>
+    </div>
+    <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true">
+      <img src="images/photos/hero-women.jpg" srcset="images/photos/hero-women-sm.jpg 800w, images/photos/hero-women.jpg 1600w" sizes="100vw" width="1600" height="900" alt="Women learning tailoring at a Dhaathree Foundation training centre" loading="lazy">
+      <div class="container hero-content">
+        <span class="hero-kicker">Mahila Dhaathree</span>
+        <h2>Skills That Build Self-Reliance</h2>
+        <p>Empowering women through education, skills, and leadership programs that build confidence, dignity, and self-reliance.</p>
+        <div class="hero-actions"><a class="btn btn-donate" href="get-involved.html?amount=5000#donate" tabindex="-1">Sponsor a Training Kit</a><a class="btn btn-light" href="mahila-dhaathree.html" tabindex="-1">Learn More</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-controls" hidden>
+    <div class="container">
+      <button class="hero-arrow prev" type="button" aria-label="Previous slide"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg></button>
+      <div class="hero-dots"><button class="hero-dot" type="button" aria-label="Show slide 1: Nurturing Lives, Building Futures" aria-current="true"></button><button class="hero-dot" type="button" aria-label="Show slide 2: Care and Dignity for Our Elders"></button><button class="hero-dot" type="button" aria-label="Show slide 3: Skills That Build Self-Reliance"></button></div>
+      <button class="hero-arrow next" type="button" aria-label="Next slide"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg></button>
+      <button class="hero-pause" type="button" aria-pressed="false">Pause</button>
+    </div>
   </div>
 </section>
 
-<section class="trust-ledger" aria-label="Registrations and certifications">
+<section class="trust-band" aria-label="Registrations and certifications">
   <div class="container">
     <ul class="trust-list">
-      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#badge-check"/></svg><span><strong>Registered NGO since 2019</strong>Regd. No. 103/2019</span></li>
-      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#receipt"/></svg><span><strong>12A &amp; 80G registered</strong>Donations are tax deductible</span></li>
-      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#landmark"/></svg><span><strong>FCRA registered</strong>Ministry of Home Affairs</span></li>
-      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#building-2"/></svg><span><strong>CSR-1 registered</strong>Eligible for corporate CSR funding</span></li>
-      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#file-text"/></svg><span><strong>Listed on NGO Darpan</strong>AP/2020/0254144</span></li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#check"/></svg>Registered NGO since 2019</li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#check"/></svg>80G tax-deductible donations</li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#check"/></svg>FCRA registered</li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#check"/></svg>CSR-1 registered</li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#check"/></svg>Listed on NGO Darpan</li>
     </ul>
   </div>
 </section>
 
-<section class="section moments" id="featuredMoments" aria-labelledby="moments-title" data-gallery-section>
-  <div class="container section-head section-head-row">
-    <div>
-      <h2 id="moments-title">Featured Moments</h2>
-      <p>Recent photographs from Dhaathree Foundation's programmes and community activities.</p>
+<section class="section" aria-labelledby="work-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="work-title">How We Work</h2>
+      <p>Ten dedicated wings, each carrying forward a distinct mission under the Dhaathree Foundation umbrella.</p>
     </div>
-    <a class="text-link" href="media.html">Media and press coverage <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg></a>
+    <ul class="wing-circles">
+      <li class="wing-circle"><a href="akshara-dhaathree.html"><span class="photo"><img src="images/photos/wing-akshara.jpg" width="480" height="480" loading="lazy" alt="Children at an Akshara Dhaathree study centre"></span><span class="name">Akshara Dhaathree</span><span class="sub">Education &amp; Literacy Wing</span></a></li>
+      <li class="wing-circle"><a href="ananda-nilayam.html"><span class="photo"><img src="images/photos/wing-ananda.jpg" width="480" height="480" loading="lazy" alt="Elders sharing a meal at Ananda Nilayam"></span><span class="name">Ananda Nilayam</span><span class="sub">Day Care Centre for the Aged Wing</span></a></li>
+      <li class="wing-circle"><a href="aahara-dhaathree.html"><span class="photo"><img src="images/photos/wing-aahara.jpg" width="480" height="480" loading="lazy" alt="Children eating a meal served by Aahara Dhaathree"></span><span class="name">Aahara Dhaathree</span><span class="sub">Food Support Wing</span></a></li>
+      <li class="wing-circle"><a href="arogya-dhaathree.html"><span class="photo"><img src="images/photos/wing-arogya.jpg" width="480" height="480" loading="lazy" alt="An eye check-up for an elderly woman at a health camp"></span><span class="name">Arogya Dhaathree</span><span class="sub">Health Awareness &amp; Community Wellbeing Wing</span></a></li>
+      <li class="wing-circle"><a href="vidya-dhaathree.html"><span class="photo"><img src="images/photos/wing-vidya.jpg" width="480" height="480" loading="lazy" alt="Distribution of books and study material to girl students"></span><span class="name">Vidya Dhaathree</span><span class="sub">Knowledge &amp; Skill Wing</span></a></li>
+      <li class="wing-circle"><a href="vikasa-dhaathree.html"><span class="photo"><img src="images/photos/wing-vikasa.jpg" width="480" height="480" loading="lazy" alt="Community members at a Vikasa Dhaathree programme"></span><span class="name">Vikasa Dhaathree</span><span class="sub">Development Wing</span></a></li>
+      <li class="wing-circle"><a href="vana-dhaathree.html"><span class="photo"><img src="images/photos/wing-vana.jpg" width="480" height="480" loading="lazy" alt="Planting a sapling under Vana Dhaathree"></span><span class="name">Vana Dhaathree</span><span class="sub">Environment Wing</span></a></li>
+      <li class="wing-circle"><a href="mahila-dhaathree.html"><span class="photo"><img src="images/photos/wing-mahila.jpg" width="480" height="480" loading="lazy" alt="Women at a Mahila Dhaathree programme"></span><span class="name">Mahila Dhaathree</span><span class="sub">Women Empowerment Wing</span></a></li>
+      <li class="wing-circle"><a href="sramika-dhaathree.html"><span class="photo"><img src="images/photos/wing-sramika.jpg" width="480" height="480" loading="lazy" alt="Masons receiving PM Vishwakarma Yojana certificates"></span><span class="name">Sramika Dhaathree</span><span class="sub">Workers Support Wing</span></a></li>
+      <li class="wing-circle"><a href="general-services.html"><span class="photo"><img src="images/photos/wing-general.jpg" width="480" height="480" loading="lazy" alt="Women receiving relief kits"></span><span class="name">General Services</span><span class="sub">Community Support Wing</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section-purple" aria-labelledby="impact-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="impact-title">Our Impact</h2>
+      <p>Numbers tell only part of the story &mdash; but they show the scale of change we&rsquo;re building together.</p>
+    </div>
+    <ul class="counters">
+      <li><span class="counter-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#graduation-cap"/></svg></span><span class="counter-num" data-count="1025">1,025</span><span class="counter-label">Children in our study centres</span></li>
+      <li><span class="counter-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#book-open"/></svg></span><span class="counter-num" data-count="23">23</span><span class="counter-label">Akshara Dhaathree study centres</span></li>
+      <li><span class="counter-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#house-heart"/></svg></span><span class="counter-num" data-count="50">50</span><span class="counter-label">Elders cared for at Ananda Nilayam</span></li>
+      <li><span class="counter-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#hand-heart"/></svg></span><span class="counter-num" data-count="10">10</span><span class="counter-label">Programme wings since 2019</span></li>
+    </ul>
+    <p class="section-foot"><a class="btn btn-light" href="impact.html">See our impact</a></p>
+  </div>
+</section>
+
+<section class="section section-mist" aria-labelledby="causes-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="causes-title">Support a Cause</h2>
+      <p>Choose a cause close to your heart and see your contribution at work.</p>
+    </div>
+    <div class="cause-grid">
+      <article class="cause-card">
+        <img src="images/photos/cause-education.jpg" width="800" height="600" loading="lazy" alt="Children at an Akshara Utsav celebration">
+        <div class="cause-body">
+          <span class="cause-tag">Akshara Dhaathree</span>
+          <h3>Sponsor a Child&rsquo;s Education</h3>
+          <p>Help a child from a poor family study every evening at an Akshara Dhaathree after-school study centre.</p>
+          <p class="cause-amount">&#8377;12,000 sponsors one child for a full year</p>
+          <a class="btn btn-donate" href="get-involved.html?amount=12000#donate">Donate</a>
+        </div>
+      </article>
+      <article class="cause-card">
+        <img src="images/photos/cause-elders.jpg" width="800" height="600" loading="lazy" alt="Elders eating together at Ananda Nilayam">
+        <div class="cause-body">
+          <span class="cause-tag">Ananda Nilayam</span>
+          <h3>Meals for Elders</h3>
+          <p>Elders at Ananda Nilayam receive nutritious meals, daily care and companionship in a family environment.</p>
+          <p class="cause-amount">&#8377;1,000 feeds one elder for a month</p>
+          <a class="btn btn-donate" href="get-involved.html?amount=1000#donate">Donate</a>
+        </div>
+      </article>
+      <article class="cause-card">
+        <img src="images/photos/cause-tb.jpg" width="800" height="600" loading="lazy" alt="Nutrition kits for TB patients at a government hospital">
+        <div class="cause-body">
+          <span class="cause-tag">Arogya Dhaathree</span>
+          <h3>Nutrition for TB Patients</h3>
+          <p>Monthly nutrition kits with eggs, groceries and vegetables help TB patients recover during treatment.</p>
+          <p class="cause-amount">Every contribution adds to the monthly kits</p>
+          <a class="btn btn-donate" href="get-involved.html#donate">Donate</a>
+        </div>
+      </article>
+      <article class="cause-card">
+        <img src="images/photos/cause-women.jpg" width="800" height="600" loading="lazy" alt="Women at sewing machines in a tailoring class">
+        <div class="cause-body">
+          <span class="cause-tag">Mahila Dhaathree</span>
+          <h3>Vocational Training for Women</h3>
+          <p>Free tailoring and skill training helps women earn and support their families.</p>
+          <p class="cause-amount">&#8377;5,000 provides a training kit for one woman</p>
+          <a class="btn btn-donate" href="get-involved.html?amount=5000#donate">Donate</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="about-title">
+  <div class="container about-block">
+    <figure class="about-photo">
+      <img src="images/photos/about-children.jpg" width="800" height="600" loading="lazy" alt="A teacher with children at an Akshara Dhaathree study centre">
+      <div class="since"><strong>2019</strong><span>Serving since</span></div>
+    </figure>
+    <div>
+      <h2 id="about-title">About Dhaathree Foundation</h2>
+      <p>Dhaathree Foundation was born from a simple but powerful conviction: every person deserves the chance to flourish. Founded in 2019 and registered under Regd. No. 103/2019, we began our journey in Madanapalle, Andhra Pradesh.</p>
+      <div class="mini-cols">
+        <div><h3>What Dhaathree means</h3><p>The word <em>Dhaathree</em> (<span lang="te">ధాత్రి</span>) means Earth &mdash; the sustainer of all life. Like the earth, we strive to nourish without discrimination.</p></div>
+        <div><h3>Our symbol</h3><p>Cupped hands cradling a world of birds, grain, and open sky &mdash; to hold communities gently and help them grow.</p></div>
+      </div>
+      <a class="btn btn-primary" href="about.html">Read Our Full Story</a>
+    </div>
+  </div>
+</section>
+
+<section class="section recognition" aria-labelledby="recognition-title">
+  <div class="container recognition-inner">
+    <div>
+      <h2 id="recognition-title">Recognised for Our Service</h2>
+      <p>In February 2026, Dhaathree Foundation&rsquo;s founder Dr. Swathi Chakrapani received the Sir C.V. Raman Ugadi Award in Vijayawada and was honoured as &lsquo;Mahila Samrat&rsquo;, in recognition of the Foundation&rsquo;s work with elders and poor students.</p>
+      <p>In March 2026, the District Collector and MLA presented her with an award at the International Women&rsquo;s Day celebration in Madanapalle.</p>
+      <a class="btn btn-donate" href="media.html">See the press coverage</a>
+    </div>
+    <figure>
+      <img src="images/photos/award-swathi.jpg" width="600" height="800" loading="lazy" alt="Dr. Swathi Chakrapani with the Sir C.V. Raman Ugadi Award, February 2026">
+      <figcaption>Dr. Swathi Chakrapani with the Sir C.V. Raman Ugadi Award, February 2026</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section section-mist" aria-labelledby="news-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="news-title">Latest News</h2>
+      <p>Recent newspaper coverage of the Foundation&rsquo;s work.</p>
+    </div>
+    <div class="news-grid">
+      <a class="news-card" href="media.html">
+        <img src="images/media/2026-03-08-radhe-sindhooram-award.jpeg" width="800" height="500" loading="lazy" alt="Radhe Sindhooram newspaper report, 8 March 2026">
+        <div class="news-body">
+          <span class="news-date">Radhe Sindhooram &mdash; 8 March 2026</span>
+          <h3>District Collector and MLA present award to Swathi Chakrapani for her service</h3>
+          <p>An award at the International Women&rsquo;s Day celebration in Madanapalle, recognising Ananda Nilayam, COVID-19 relief and free tailoring training for women.</p>
+          <span class="text-link">Read more <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg></span>
+        </div>
+      </a>
+      <a class="news-card" href="media.html">
+        <img src="images/media/2026-03-07-nigha-surya-womens-day-profile.jpeg" width="800" height="500" loading="lazy" alt="Nigha Surya newspaper report, 7 March 2026">
+        <div class="news-body">
+          <span class="news-date">Nigha Surya &mdash; 7 March 2026</span>
+          <h3>A role model woman in Madanapalle</h3>
+          <p>A Women&rsquo;s Day profile of Ananda Nilayam, scholarships for poor students, and support for needy families.</p>
+          <span class="text-link">Read more <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg></span>
+        </div>
+      </a>
+      <a class="news-card" href="media.html">
+        <img src="images/media/2026-02-24-tharanam-special-recognition.jpeg" width="800" height="500" loading="lazy" alt="Tharanam newspaper report, 24 February 2026">
+        <div class="news-body">
+          <span class="news-date">Tharanam &mdash; 24 February 2026</span>
+          <h3>Special recognition for Dhaathree Foundation&rsquo;s services</h3>
+          <p>Dr. Swathi Chakrapani was honoured as &lsquo;Mahila Samrat&rsquo; at the Sir C.V. Raman Ugadi Awards in Vijayawada.</p>
+          <span class="text-link">Read more <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg></span>
+        </div>
+      </a>
+    </div>
+    <p class="section-foot"><a class="btn btn-secondary" href="media.html">All news and press coverage</a></p>
+  </div>
+</section>
+
+<section class="section" id="featuredMoments" aria-labelledby="moments-title" data-ssr-section="featured">
+  <div class="container section-head">
+    <h2 id="moments-title">Moments From Our Work</h2>
+    <p>Recent photographs from Dhaathree Foundation&rsquo;s programmes and community activities.</p>
   </div>
   <div class="moments-strip" id="featuredMarqueeTrack" tabindex="0" role="region" aria-label="Featured photographs, scrolls sideways">
 <!--ssr:featured--><!--/ssr:featured-->
   </div>
 </section>
 
-<section class="section section-mist" aria-labelledby="wings-title">
+<section class="section section-leaf" aria-labelledby="sdg-title">
   <div class="container">
     <div class="section-head">
-      <h2 id="wings-title">Dhaathree Wings</h2>
-      <p>Ten dedicated wings, each carrying forward a distinct mission under the Dhaathree Foundation umbrella.</p>
+      <h2 id="sdg-title">Towards the Sustainable Development Goals</h2>
+      <p>Our programme wings contribute to these United Nations Sustainable Development Goals.</p>
     </div>
-    <ul class="wing-index">
-      <li><a class="wing-link" href="akshara-dhaathree.html">
-        <span class="wing-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#book-open"/></svg></span>
-        <span><span class="wing-name">Akshara Dhaathree</span><span class="wing-sub">Education &amp; Literacy Wing</span></span>
-        <svg class="icon wing-go" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg>
-      </a></li>
-      <li><a class="wing-link" href="ananda-nilayam.html">
-        <span class="wing-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#house-heart"/></svg></span>
-        <span><span class="wing-name">Ananda Nilayam</span><span class="wing-sub">Day Care Centre for the Aged Wing</span></span>
-        <svg class="icon wing-go" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg>
-      </a></li>
-      <li><a class="wing-link" href="aahara-dhaathree.html">
-        <span class="wing-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#soup"/></svg></span>
-        <span><span class="wing-name">Aahara Dhaathree</span><span class="wing-sub">Food Support Wing</span></span>
-        <svg class="icon wing-go" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg>
-      </a></li>
-      <li><a class="wing-link" href="arogya-dhaathree.html">
-        <span class="wing-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#heart-pulse"/></svg></span>
-        <span><span class="wing-name">Arogya Dhaathree</span><span class="wing-sub">Health Awareness &amp; Community Wellbeing Wing</span></span>
-        <svg class="icon wing-go" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg>
-      </a></li>
-      <li><a class="wing-link" href="vidya-dhaathree.html">
-        <span class="wing-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#graduation-cap"/></svg></span>
-        <span><span class="wing-name">Vidya Dhaathree</span><span class="wing-sub">Knowledge &amp; Skill Wing</span></span>
-        <svg class="icon wing-go" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg>
-      </a></li>
-      <li><a class="wing-link" href="vikasa-dhaathree.html">
-        <span class="wing-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#trending-up"/></svg></span>
-        <span><span class="wing-name">Vikasa Dhaathree</span><span class="wing-sub">Development Wing</span></span>
-        <svg class="icon wing-go" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg>
-      </a></li>
-      <li><a class="wing-link" href="vana-dhaathree.html">
-        <span class="wing-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#trees"/></svg></span>
-        <span><span class="wing-name">Vana Dhaathree</span><span class="wing-sub">Environment Wing</span></span>
-        <svg class="icon wing-go" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg>
-      </a></li>
-      <li><a class="wing-link" href="mahila-dhaathree.html">
-        <span class="wing-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#hand-heart"/></svg></span>
-        <span><span class="wing-name">Mahila Dhaathree</span><span class="wing-sub">Women Empowerment Wing</span></span>
-        <svg class="icon wing-go" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg>
-      </a></li>
-      <li><a class="wing-link" href="sramika-dhaathree.html">
-        <span class="wing-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#hammer"/></svg></span>
-        <span><span class="wing-name">Sramika Dhaathree</span><span class="wing-sub">Workers Support Wing</span></span>
-        <svg class="icon wing-go" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg>
-      </a></li>
-      <li><a class="wing-link" href="general-services.html">
-        <span class="wing-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#hand-helping"/></svg></span>
-        <span><span class="wing-name">General Services</span><span class="wing-sub">Community Support Wing</span></span>
-        <svg class="icon wing-go" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-right"/></svg>
-      </a></li>
+    <ul class="sdg-grid">
+      <li class="sdg"><span class="sdg-tile" style="background:#E5243B" aria-hidden="true"><span class="num">1</span><span class="goal">GOAL</span></span><span class="sdg-name">Goal 1: No Poverty</span><span class="sdg-wings">General Services, Sramika Dhaathree</span></li>
+      <li class="sdg"><span class="sdg-tile" style="background:#DDA63A" aria-hidden="true"><span class="num">2</span><span class="goal">GOAL</span></span><span class="sdg-name">Goal 2: Zero Hunger</span><span class="sdg-wings">Aahara Dhaathree, Ananda Nilayam</span></li>
+      <li class="sdg"><span class="sdg-tile" style="background:#4C9F38" aria-hidden="true"><span class="num">3</span><span class="goal">GOAL</span></span><span class="sdg-name">Goal 3: Good Health and Well-being</span><span class="sdg-wings">Arogya Dhaathree</span></li>
+      <li class="sdg"><span class="sdg-tile" style="background:#C5192D" aria-hidden="true"><span class="num">4</span><span class="goal">GOAL</span></span><span class="sdg-name">Goal 4: Quality Education</span><span class="sdg-wings">Akshara Dhaathree, Vidya Dhaathree</span></li>
+      <li class="sdg"><span class="sdg-tile" style="background:#FF3A21" aria-hidden="true"><span class="num">5</span><span class="goal">GOAL</span></span><span class="sdg-name">Goal 5: Gender Equality</span><span class="sdg-wings">Mahila Dhaathree</span></li>
+      <li class="sdg"><span class="sdg-tile" style="background:#A21942" aria-hidden="true"><span class="num">8</span><span class="goal">GOAL</span></span><span class="sdg-name">Goal 8: Decent Work and Economic Growth</span><span class="sdg-wings">Sramika Dhaathree, women&rsquo;s skill training</span></li>
+      <li class="sdg"><span class="sdg-tile" style="background:#DD1367" aria-hidden="true"><span class="num">10</span><span class="goal">GOAL</span></span><span class="sdg-name">Goal 10: Reduced Inequalities</span><span class="sdg-wings">Vikasa Dhaathree</span></li>
+      <li class="sdg"><span class="sdg-tile" style="background:#3F7E44" aria-hidden="true"><span class="num">13</span><span class="goal">GOAL</span></span><span class="sdg-name">Goal 13: Climate Action</span><span class="sdg-wings">Vana Dhaathree</span></li>
     </ul>
   </div>
 </section>
 
-<section class="section" aria-labelledby="story-title">
+<section class="section section-mist" aria-labelledby="partners-title">
   <div class="container">
-    <dl class="figures">
-      <div><dt>Children in 23 Study Centres</dt><dd>1,025</dd></div>
-      <div><dt>Elders at Ananda Nilayam</dt><dd>50</dd></div>
-      <div><dt>Programme Wings</dt><dd>10</dd></div>
-      <div><dt>Years of Service</dt><dd>7+</dd></div>
-    </dl>
-    <div class="split split-spaced">
-      <figure class="split-media">
-        <img src="images/vana-dhathree-1-web.jpeg" width="900" height="506" loading="lazy" alt="Dhaathree Foundation Climate Change Program, supported by AMMACTS, V. Kota">
-        <figcaption>Climate Change Program, supported by AMMACTS, V. Kota</figcaption>
-      </figure>
-      <div>
-        <h2 id="story-title">Rooted in Seva, Driven by Purpose</h2>
-        <p>Dhaathree Foundation was born from a simple but powerful conviction: every person deserves the chance to flourish. Founded in 2019 and registered under Regd. No. 103/2019, we began our journey in Madanapalle, Andhra Pradesh.</p>
-        <p>The word <em>Dhaathree</em> (<span lang="te">ధాత్రి</span>) means Earth &mdash; the sustainer of all life. Like the earth, we strive to nourish without discrimination.</p>
-        <div class="regd-note"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#badge-check"/></svg><div><strong>Regd. No. 103/2019</strong><span>Registered NGO, Andhra Pradesh, India</span></div></div>
-        <p class="actions-line"><a href="about.html" class="btn btn-secondary">Read Our Full Story</a></p>
+    <div data-ssr-section="partners">
+      <div class="section-head">
+        <h2 id="partners-title">Our Partners in Change</h2>
+        <p>Organisations and individuals who fund our programmes.</p>
       </div>
+      <ul class="logo-row" id="partnerLogos">
+<!--ssr:partners--><!--/ssr:partners-->
+      </ul>
+      <p class="section-foot"><a class="btn btn-secondary" href="partners.html">Meet our partners</a></p>
     </div>
+    <div class="section-head" style="margin-top: clamp(48px, 7vw, 80px)">
+      <h2>Registrations &amp; Accreditations</h2>
+      <p>All statutory registrations are available for public inspection in our Resource Center.</p>
+    </div>
+    <ul class="accred-grid">
+      <li class="accred"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#badge-check"/></svg><h3>Registered Society</h3><p>A.P. Societies Registration Act, 35 of 2001</p><span class="num">Regd. No. 103/2019</span></li>
+      <li class="accred"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#landmark"/></svg><h3>12AB Registered</h3><p>Income Tax Act, 1961</p><span class="num">AAEAD6853B25HY01</span></li>
+      <li class="accred"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#receipt"/></svg><h3>80G Registered</h3><p>Donations are tax deductible</p><span class="num">AAEAD6853B25HY02</span></li>
+      <li class="accred"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#shield-check"/></svg><h3>FCRA Registered</h3><p>Ministry of Home Affairs</p><span class="num">010140481</span></li>
+      <li class="accred"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#building-2"/></svg><h3>CSR-1 Registered</h3><p>Ministry of Corporate Affairs</p><span class="num">CSR00014950</span></li>
+    </ul>
+    <p class="section-foot"><a class="btn btn-primary" href="resource-center.html">View certificates</a></p>
   </div>
 </section>
 
-<section class="cta-band">
-  <div class="container cta-inner">
-    <div>
-      <h2>Your Generosity Transforms Lives</h2>
-      <p>Every rupee you give goes directly to feeding a child, educating a girl, or supporting an elder.</p>
-    </div>
-    <div class="cta-actions">
-      <a class="btn btn-turmeric" href="get-involved.html#donate">Donate Now</a>
-      <a class="btn btn-light" href="get-involved.html">Join Our Movement</a>
-    </div>
-  </div>
-</section>
-
-<section class="section section-tight" aria-labelledby="map-title">
+<section class="cta-band" style="--cta-photo: url('/images/photos/hero-education-sm.jpg')">
   <div class="container">
-    <h2 id="map-title">Find Us on Google Maps</h2>
-    <p class="muted-line">4-115/1, Balaji Nagar, C.T.M. Road, Madanapalle - 517325, Andhra Pradesh</p>
-    <div class="map-block">
-      <button class="btn btn-secondary" type="button" id="mapToggle" aria-expanded="false" aria-controls="googleMapContainer"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#map-pin"/></svg><span id="mapTriggerText">Show Google Map</span></button>
-      <a class="text-link" href="https://maps.app.goo.gl/BVu9vYRNBZL4ie5aA?g_st=aw" target="_blank" rel="noopener">Open Map App <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#external-link"/></svg></a>
-    </div>
-    <div class="map-frame" id="googleMapContainer" hidden>
-      <iframe title="Map showing Dhaathree Foundation in Madanapalle" data-src="https://maps.google.com/maps?q=Dhaathree%20Foundation,%20Madanapalle,%20Andhra%20Pradesh&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    <h2>Your Generosity Transforms Lives</h2>
+    <p>Every rupee you give goes directly to feeding a child, educating a girl, or supporting an elder.</p>
+    <div class="cta-actions">
+      <a class="btn btn-donate" href="get-involved.html#donate">Donate Now</a>
+      <a class="btn btn-light" href="get-involved.html">Join Our Movement</a>
     </div>
   </div>
 </section>
 </main>
 <footer class="site-footer">
+  <div class="footer-subscribe">
+    <div class="container subscribe-inner">
+      <div>
+        <h2>Stay Connected With Us</h2>
+        <p>Get news of our programmes and events in Madanapalle.</p>
+      </div>
+      <form class="subscribe-form" id="subscribeForm" novalidate>
+        <label class="visually-hidden" for="subName">Your name</label>
+        <input id="subName" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+        <label class="visually-hidden" for="subEmail">Email</label>
+        <input id="subEmail" name="email" type="email" placeholder="Email" autocomplete="email" required>
+        <label class="visually-hidden" for="subPhone">Phone</label>
+        <input id="subPhone" name="phone" type="tel" placeholder="Phone" autocomplete="tel" required>
+        <button class="btn btn-donate" type="submit">Subscribe</button>
+        <p class="subscribe-status" id="subscribeStatus" role="status"></p>
+      </form>
+    </div>
+  </div>
   <div class="container footer-main">
     <div class="footer-about">
-      <a class="brand" href="index.html"><img src="images/logo-small.jpeg" width="44" height="44" alt=""><span class="brand-name">Dhaathree Foundation</span></a>
+      <a class="brand" href="index.html"><img src="images/logo-small.jpeg" width="52" height="52" alt=""><span class="brand-name">Dhaathree Foundation</span></a>
       <p>A registered charitable society in Madanapalle, Andhra Pradesh, working with children, women, elders and families since 2019.</p>
       <div class="footer-social"><a class="social-link" href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#youtube"/></svg></a><a class="social-link" href="https://www.instagram.com/dhaatreefoundation?utm_source=qr&amp;igsh=MTNkbmZnbm8wbjVzMw==" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#instagram"/></svg></a><a class="social-link" href="https://www.facebook.com/share/17oWQKUg4a/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#facebook"/></svg></a><a class="social-link" href="https://www.threads.net/@dhaatreefoundation" target="_blank" rel="noopener" aria-label="Threads"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#threads"/></svg></a><a class="social-link" href="https://www.linkedin.com/in/dhaathree-foundation-99716b426?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#linkedin"/></svg></a><a class="social-link" href="https://whatsapp.com/channel/0029VbCc2KSH5JLySeJeJc3v" target="_blank" rel="noopener" aria-label="WhatsApp channel"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#whatsapp"/></svg></a></div>
     </div>
@@ -245,13 +386,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="about.html">About Us</a></li>
         <li><a href="partners.html">Partners &amp; Sponsors</a></li>
         <li><a href="impact.html">Impact</a></li>
-        <li><a href="projects.html">Projects</a></li>
         <li><a href="media.html">Media</a></li>
         <li><a href="resource-center.html">Resource Center</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h2>Get involved</h2>
+      <h2>Our Work</h2>
+      <ul>
+        <li><a href="akshara-dhaathree.html">Akshara Dhaathree</a></li>
+        <li><a href="ananda-nilayam.html">Ananda Nilayam</a></li>
+        <li><a href="aahara-dhaathree.html">Aahara Dhaathree</a></li>
+        <li><a href="arogya-dhaathree.html">Arogya Dhaathree</a></li>
+        <li><a href="vidya-dhaathree.html">Vidya Dhaathree</a></li>
+        <li><a href="vikasa-dhaathree.html">Vikasa Dhaathree</a></li>
+        <li><a href="projects.html">All programmes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2>Get Involved</h2>
       <ul>
         <li><a href="get-involved.html#donate">Donate</a></li>
         <li><a href="get-involved.html#volunteer">Volunteer</a></li>
@@ -284,21 +436,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 <script>
-// Featured Moments: the server renders the photos into the page. This only runs if it could not.
-(async function () {
-  const section = document.getElementById('featuredMoments');
+// Featured photos and partner logos are rendered by the server. This only runs if it could not.
+(function () {
+  const esc = (v) => String(v || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const resize = (url, t) => String(url || '').replace('/image/upload/', '/image/upload/' + t + '/');
+  const hide = (name) => { const el = document.querySelector('[data-ssr-section="' + name + '"]'); if (el) el.hidden = true; };
+
   const strip = document.getElementById('featuredMarqueeTrack');
-  if (!section || !strip || strip.querySelector('.moment')) return;
-  const cardSize = (url) => url.replace('/image/upload/', '/image/upload/w_640,h_480,c_fill,q_auto,f_auto/');
-  try {
-    const res = await fetch('/api/featured-photos');
-    if (!res.ok) throw new Error('Failed to load featured photos');
-    const photos = await res.json();
-    if (!photos.length) { section.remove(); return; }
-    strip.innerHTML = photos.map((p) => '<figure class="moment"><img src="' + cardSize(p.url || p.data) + '" width="320" height="240" loading="lazy" alt="Photograph from a Dhaathree Foundation programme"></figure>').join('');
-  } catch (err) {
-    console.error(err);
-    section.remove();
+  if (strip && !strip.querySelector('.moment')) {
+    fetch('/api/featured-photos').then((r) => (r.ok ? r.json() : Promise.reject(r.status))).then((photos) => {
+      if (!photos.length) return hide('featured');
+      strip.innerHTML = photos.map((p) => '<figure class="moment"><img src="' + esc(resize(p.url || p.data, 'w_640,h_480,c_fill,q_auto,f_auto')) + '" width="320" height="240" loading="lazy" alt="Photograph from a Dhaathree Foundation programme"></figure>').join('');
+    }).catch(() => hide('featured'));
+  }
+
+  const logos = document.getElementById('partnerLogos');
+  if (logos && !logos.querySelector('li')) {
+    fetch('/api/sponsors').then((r) => (r.ok ? r.json() : Promise.reject(r.status))).then((sponsors) => {
+      if (!sponsors.length) return hide('partners');
+      logos.innerHTML = sponsors.map((s) => '<li><img src="' + esc(resize(s.logoUrl, 'w_360,q_auto,f_auto')) + '" alt="' + esc(s.name) + '" loading="lazy"></li>').join('');
+    }).catch(() => hide('partners'));
   }
 })();
 </script>
