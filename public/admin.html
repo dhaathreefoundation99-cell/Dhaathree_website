@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Google Tag Manager -->
@@ -19,91 +19,75 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Admin Dashboard | Dhaathree Foundation</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&family=Noto+Sans+Telugu:wght@400;700&display=swap" rel="stylesheet"/>
+<meta name="robots" content="noindex"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@400..700&family=Tiro+Telugu:ital@0;1&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
 <!-- Google Identity Services client script -->
 <script src="https://accounts.google.com/gsi/client" defer></script>
 <script src="js/gallery.js" defer></script>
+<script src="js/site.js" defer></script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NMVKPSRG"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
-      <img src="images/logo-small.jpeg" alt="Dhaathree Foundation Logo"
-           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-           id="navLogoImg"/>
-      <div style="display:none; width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#8DC63F,#5B2D8E); align-items:center; justify-content:center; color:#fff; font-weight:900; font-size:1.1rem;" id="navLogoFallback">D</div>
-      <div class="nav-brand">
-        <span class="en">Dhaathree Foundation</span>
-      </div>
-    </a>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="utility-bar">
+  <div class="container utility-inner">
+    <div class="utility-contact">
+      <a href="tel:+917981885165"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#phone"/></svg><span>+91 7981885165</span></a>
+      <a href="mailto:info@dhaathreefoundation.org"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#mail"/></svg><span>info@dhaathreefoundation.org</span></a>
+    </div>
+    <div class="utility-actions">
+      <div id="google_translate_element"></div>
+      <a class="social-link" href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#youtube"/></svg></a><a class="social-link" href="https://www.instagram.com/dhaatreefoundation?utm_source=qr&amp;igsh=MTNkbmZnbm8wbjVzMw==" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#instagram"/></svg></a><a class="social-link" href="https://www.facebook.com/share/17oWQKUg4a/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#facebook"/></svg></a>
+    </div>
   </div>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li class="nav-dropdown">
-      <a href="about.html" class="dropdown-trigger">About <span class="nav-arrow">&#9662;</span></a>
-      <ul class="nav-dropdown-menu">
-        <li><a href="about.html">About Us</a></li>
-      </ul>
-    </li>
-    <li><a href="impact.html">Impact</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="get-involved.html">Get Involved</a></li>
-    <li><a href="media.html">Media</a></li>
-    <li class="nav-dropdown">
-      <a href="resource-center.html" class="dropdown-trigger">Resource Center <span class="nav-arrow">&#9662;</span></a>
-      <ul class="nav-dropdown-menu">
-        <li><a href="resource-center.html?doc=registration">Registration Certificate</a></li>
-        <li><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li>
-      </ul>
-    </li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <a href="get-involved.html#donate" class="nav-cta">Donate Now</a>
-
-  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">&#9776;</button>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
-    
-    <details class="mobile-menu-dropdown">
-      <summary>About <span class="arrow">&#9662;</span></summary>
-      <div class="dropdown-links">
-        <a href="about.html" onclick="toggleMobileMenu()">About Us</a>
-      </div>
-    </details>
-    
-    <a href="impact.html" onclick="toggleMobileMenu()">Impact</a>
-    <a href="projects.html" onclick="toggleMobileMenu()">Projects</a>
-    <a href="get-involved.html" onclick="toggleMobileMenu()">Get Involved</a>
-    <a href="media.html" onclick="toggleMobileMenu()">Media</a>
-    
-    <details class="mobile-menu-dropdown">
-      <summary>Resource Center <span class="arrow">&#9662;</span></summary>
-      <div class="dropdown-links">
-        <a href="resource-center.html?doc=registration" onclick="toggleMobileMenu()">Registration Certificate</a>
-        <a href="resource-center.html?doc=annual_report" onclick="toggleMobileMenu()">Annual Activity Report</a>
-      </div>
-    </details>
-    
-    <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
-    <a href="get-involved.html#donate" class="mobile-cta" onclick="toggleMobileMenu()">Get Involved</a>
-  </div>
-</nav>
-
-<div class="page-hero">
-  <div class="crumb"><a href="index.html">Home</a> / Admin</div>
-  <h1>Admin Dashboard</h1>
-  <p>Securely upload and manage wing gallery photos across all Dhaathree wings.</p>
 </div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <img src="images/logo-small.jpeg" width="60" height="60" alt="Dhaathree Foundation logo">
+      <span class="brand-text"><span class="brand-name">Dhaathree Foundation</span><span class="brand-tagline">Madanapalle, Andhra Pradesh</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Main">
+      <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li class="has-sub"><a href="about.html">About <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
+            <ul class="sub-menu"><li><a href="about.html">About Us</a></li><li><a href="partners.html">Partners &amp; Sponsors</a></li></ul></li>
+          <li><a href="impact.html">Impact</a></li>
+          <li class="has-sub"><a href="projects.html">Our Work <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
+            <ul class="sub-menu"><li><a href="akshara-dhaathree.html">Akshara Dhaathree</a></li><li><a href="ananda-nilayam.html">Ananda Nilayam</a></li><li><a href="aahara-dhaathree.html">Aahara Dhaathree</a></li><li><a href="arogya-dhaathree.html">Arogya Dhaathree</a></li><li><a href="vidya-dhaathree.html">Vidya Dhaathree</a></li><li><a href="vikasa-dhaathree.html">Vikasa Dhaathree</a></li><li><a href="vana-dhaathree.html">Vana Dhaathree</a></li><li><a href="mahila-dhaathree.html">Mahila Dhaathree</a></li><li><a href="sramika-dhaathree.html">Sramika Dhaathree</a></li><li><a href="general-services.html">General Services</a></li></ul></li>
+          <li><a href="get-involved.html">Get Involved</a></li>
+          <li><a href="media.html">Media</a></li>
+          <li class="has-sub"><a href="resource-center.html">Resource Center <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#chevron-down"/></svg></a>
+            <ul class="sub-menu"><li><a href="resource-center.html?doc=registration">Registration Certificate</a></li><li><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li></ul></li>
+          <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-donate header-donate" href="get-involved.html#donate"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#heart"/></svg>Donate Now</a>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg class="icon icon-open" aria-hidden="true" focusable="false"><use href="images/icons.svg#menu"/></svg><svg class="icon icon-close" aria-hidden="true" focusable="false"><use href="images/icons.svg#x"/></svg></button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+    <ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li class="mobile-sub"><a href="partners.html">Partners &amp; Sponsors</a></li><li><a href="impact.html">Impact</a></li><li><a href="projects.html">Our Work</a></li><li><a href="get-involved.html">Get Involved</a></li><li><a href="media.html">Media</a></li><li><a href="resource-center.html">Resource Center</a></li><li class="mobile-sub"><a href="resource-center.html?doc=registration">Registration Certificate</a></li><li class="mobile-sub"><a href="resource-center.html?doc=annual_report">Annual Activity Report</a></li><li><a href="contact.html">Contact</a></li></ul>
+    <div class="container"><a class="btn btn-donate" href="get-involved.html#donate">Donate Now</a></div>
+  </nav>
+</header>
+<main id="main">
+<section class="page-header plain">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Admin</li></ol></nav>
+    
+    <h1>Admin Dashboard</h1>
+    
+    <p class="lede">Securely upload and manage wing gallery photos across all Dhaathree wings.</p>
+  </div>
+</section>
 
-<section class="admin-section">
+<section class="admin-section container">
 
   <!-- LOGIN CARD -->
   <div class="admin-card" id="loginCard">
@@ -172,7 +156,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <!-- Upload Dropzone (styled by style.css) -->
       <div class="photo-upload-zone" id="uploadZone">
-        <div class="upload-icon">📷</div>
+        <div class="upload-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#camera"/></svg></div>
         <p class="upload-text">Drag & drop photos here or <span class="browse-link">browse</span> to upload</p>
         <p class="upload-subtext">Supported formats: JPG, PNG, WEBP</p>
         <input type="file" id="fileInput" accept="image/*" multiple style="display: none;" />
@@ -236,28 +220,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         <!-- Upload Form Card -->
         <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02);">
-          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">📄 Upload New Document</h3>
+          <h3 style="font-family:var(--font-display); color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#file-text"/></svg> Upload New Document</h3>
           <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">Add a new PDF certificate or activity report to the Resource Center.</p>
           
           <form onsubmit="uploadResourceItem(event)" style="display: flex; flex-direction: column; gap: 15px;">
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Document Category:</label>
-              <select id="resCategory" required style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem;">
+              <select id="resCategory" required style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:var(--font-body); font-size:0.9rem;">
                 <option value="registration">Registration Certificate</option>
                 <option value="annual_report">Annual Activity Report</option>
               </select>
             </div>
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Document Title:</label>
-              <input type="text" id="resTitle" required placeholder="e.g. 12A Registration Certificate" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
+              <input type="text" id="resTitle" required placeholder="e.g. 12A Registration Certificate" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:var(--font-body); font-size:0.9rem; box-sizing:border-box;" />
             </div>
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Certificate / Regd. Number (Optional):</label>
-              <input type="text" id="resCertNumber" placeholder="e.g. AAEAD6853B25HY02 or 103/2019" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
+              <input type="text" id="resCertNumber" placeholder="e.g. AAEAD6853B25HY02 or 103/2019" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:var(--font-body); font-size:0.9rem; box-sizing:border-box;" />
             </div>
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Description:</label>
-              <textarea id="resDescription" placeholder="Provide a brief description of this document..." style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box; min-height:80px; resize:vertical;"></textarea>
+              <textarea id="resDescription" placeholder="Provide a brief description of this document..." style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:var(--font-body); font-size:0.9rem; box-sizing:border-box; min-height:80px; resize:vertical;"></textarea>
             </div>
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Select Certificate Image:</label>
@@ -269,17 +253,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <!-- Document List Card -->
         <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px;">
-          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">📋 Currently Uploaded Documents</h3>
+          <h3 style="font-family:var(--font-display); color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#clipboard-list"/></svg> Currently Uploaded Documents</h3>
           
           <div style="margin-bottom: 30px;">
-            <h4 style="font-size: 1.2rem; color: var(--purple); border-bottom: 2px solid #f2e9fc; padding-bottom: 6px; margin-bottom: 12px; font-family:'Playfair Display', serif;">Registration Certificates</h4>
+            <h4 style="font-size: 1.2rem; color: var(--purple); border-bottom: 2px solid #f2e9fc; padding-bottom: 6px; margin-bottom: 12px; font-family:var(--font-display);">Registration Certificates</h4>
             <div id="regList" style="display: flex; flex-direction: column; gap: 12px;">
               <!-- Dynamically populated -->
             </div>
           </div>
 
           <div>
-            <h4 style="font-size: 1.2rem; color: var(--purple); border-bottom: 2px solid #f2e9fc; padding-bottom: 6px; margin-bottom: 12px; font-family:'Playfair Display', serif;">Annual Activity Reports</h4>
+            <h4 style="font-size: 1.2rem; color: var(--purple); border-bottom: 2px solid #f2e9fc; padding-bottom: 6px; margin-bottom: 12px; font-family:var(--font-display);">Annual Activity Reports</h4>
             <div id="annualList" style="display: flex; flex-direction: column; gap: 12px;">
               <!-- Dynamically populated -->
             </div>
@@ -295,17 +279,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         <!-- Add Sponsor Form Card -->
         <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02);">
-          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">🤝 Add New Sponsor</h3>
+          <h3 style="font-family:var(--font-display); color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#handshake"/></svg> Add New Sponsor</h3>
           <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">Add a new partner organization or sponsor logo to the public Partners page.</p>
           
           <form onsubmit="addSponsorItem(event)" style="display: flex; flex-direction: column; gap: 15px;">
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor/Partner Name:</label>
-              <input type="text" id="sponsName" required placeholder="e.g. NABARD Foundation" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box;" />
+              <input type="text" id="sponsName" required placeholder="e.g. NABARD Foundation" style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:var(--font-body); font-size:0.9rem; box-sizing:border-box;" />
             </div>
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor Description / Profile:</label>
-              <textarea id="sponsDescription" placeholder="Provide details about the sponsor's contribution..." style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:'Inter', sans-serif; font-size:0.9rem; box-sizing:border-box; min-height:80px; resize:vertical;"></textarea>
+              <textarea id="sponsDescription" placeholder="Provide details about the sponsor's contribution..." style="width:100%; padding:10px 14px; border:1.5px solid #ddd; border-radius:8px; font-family:var(--font-body); font-size:0.9rem; box-sizing:border-box; min-height:80px; resize:vertical;"></textarea>
             </div>
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--dark);">Sponsor Logo Image:</label>
@@ -317,7 +301,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <!-- Sponsor List Card -->
         <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px;">
-          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">👥 Current Sponsors & Partners</h3>
+          <h3 style="font-family:var(--font-display); color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#users"/></svg> Current Sponsors & Partners</h3>
           <div id="sponsorsList" style="display: flex; flex-direction: column; gap: 12px;">
             <!-- Dynamically populated -->
           </div>
@@ -330,17 +314,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div id="donorsTabContent" style="display: none;">
       <!-- Donation Settings Card -->
       <div class="admin-card" style="background: white; padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); margin-bottom: 20px;">
-        <h4 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.1rem; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;"><svg style="width: 18px; height: 18px; fill: var(--purple);" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> Donation Settings</h4>
+        <h4 style="font-family:var(--font-display); color: var(--dark); font-size: 1.1rem; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;"><svg style="width: 18px; height: 18px; fill: var(--purple);" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> Donation Settings</h4>
         <p style="color: var(--muted); font-size: 0.85rem; margin: 0 0 15px 0;">Configure the default donation suggestion and the threshold amount above which the 80G tax saving receipt option is shown to donors.</p>
         
         <form onsubmit="saveDonationAmountSetting(event)" style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap;">
           <div style="flex: 1; min-width: 200px;">
             <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; color: var(--dark);">Default Suggestion (&#8377;):</label>
-            <input type="number" id="defaultDonationAmountInput" min="1" required style="width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-family:'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box;" />
+            <input type="number" id="defaultDonationAmountInput" min="1" required style="width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-family:var(--font-body); font-size: 0.9rem; box-sizing: border-box;" />
           </div>
           <div style="flex: 1; min-width: 200px;">
             <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; color: var(--dark);">80G Receipt Threshold (&#8377;):</label>
-            <input type="number" id="threshold80GInput" min="1" required style="width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-family:'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box;" />
+            <input type="number" id="threshold80GInput" min="1" required style="width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-family:var(--font-body); font-size: 0.9rem; box-sizing: border-box;" />
           </div>
           <button type="submit" class="admin-logout-btn" style="background: linear-gradient(135deg, var(--purple), var(--magenta)); color: white; border: none; padding: 11px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 0;">Save Settings</button>
         </form>
@@ -348,7 +332,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px; margin-bottom: 20px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
-          <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin: 0; display: flex; align-items: center; gap: 8px;">💳 Donor Registrations</h3>
+          <h3 style="font-family:var(--font-display); color: var(--dark); font-size: 1.3rem; margin: 0; display: flex; align-items: center; gap: 8px;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#receipt"/></svg> Donor Registrations</h3>
           
           <div style="display: flex; gap: 10px; align-items: center;">
             <label for="donorFilterCause" style="font-size: 0.85rem; font-weight: 600; color: var(--dark);">Filter by Cause:</label>
@@ -386,12 +370,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="admin-card">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
         <div>
-          <h3 style="margin: 0 0 5px 0; font-family: 'Playfair Display', serif; color: var(--dark); font-size: 1.3rem;">80G Tax Exemption Receipts</h3>
+          <h3 style="margin: 0 0 5px 0; font-family: var(--font-display); color: var(--dark); font-size: 1.3rem;">80G Tax Exemption Receipts</h3>
           <p style="margin: 0; color: var(--muted); font-size: 0.85rem;">Approve, reject, and number official 80G receipts for eligible donations (&#8377;1000+).</p>
         </div>
         <div>
           <button onclick="resetReceiptNumbers()" style="background:#dc3545; color:white; border:none; padding: 8px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#bd2130';" onmouseout="this.style.background='#dc3545';">
-            Reset Receipt Numbers ⚡
+            Reset Receipt Numbers
           </button>
         </div>
       </div>
@@ -424,7 +408,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
       <!-- Upload Featured Photo Card -->
       <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02);">
-        <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">📷 Upload Featured Photo</h3>
+        <h3 style="font-family:var(--font-display); color: var(--dark); font-size: 1.3rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#camera"/></svg> Upload Featured Photo</h3>
         <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">Add a new photo to the homepage featured marquee slider.</p>
         
         <form onsubmit="uploadFeaturedPhotoItem(event)" style="display: flex; flex-direction: column; gap: 15px;">
@@ -438,7 +422,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <!-- Featured Photos List Card -->
       <div class="admin-card" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); min-height: 400px;">
-        <h3 style="font-family:'Playfair Display', serif; color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">🎞️ Currently Featured Photos</h3>
+        <h3 style="font-family:var(--font-display); color: var(--dark); font-size: 1.3rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#film"/></svg> Currently Featured Photos</h3>
         <div id="featuredPhotosList" style="display: flex; flex-direction: column; gap: 12px;">
           <!-- Dynamically populated -->
         </div>
@@ -449,46 +433,90 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div> <!-- Close dashboardContainer -->
 
 </section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <img src="images/logo-small.jpeg" alt="Logo" onerror="this.style.display='none';" />
+</main>
+<footer class="site-footer">
+  <div class="footer-subscribe">
+    <div class="container subscribe-inner">
       <div>
-        <div class="fn">Dhaathree Foundation</div>
-        
+        <h2>Stay Connected With Us</h2>
+        <p>Get news of our programmes and events in Madanapalle.</p>
       </div>
+      <form class="subscribe-form" id="subscribeForm" novalidate>
+        <label class="visually-hidden" for="subName">Your name</label>
+        <input id="subName" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+        <label class="visually-hidden" for="subEmail">Email</label>
+        <input id="subEmail" name="email" type="email" placeholder="Email" autocomplete="email" required>
+        <label class="visually-hidden" for="subPhone">Phone</label>
+        <input id="subPhone" name="phone" type="tel" placeholder="Phone" autocomplete="tel" required>
+        <button class="btn btn-donate" type="submit">Subscribe</button>
+        <p class="subscribe-status" id="subscribeStatus" role="status"></p>
+      </form>
     </div>
+  </div>
+  <div class="container footer-main">
+    <div class="footer-about">
+      <a class="brand" href="index.html"><img src="images/logo-small.jpeg" width="52" height="52" alt=""><span class="brand-name">Dhaathree Foundation</span></a>
+      <p>A registered charitable society in Madanapalle, Andhra Pradesh, working with children, women, elders and families since 2019.</p>
+      <div class="footer-social"><a class="social-link" href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#youtube"/></svg></a><a class="social-link" href="https://www.instagram.com/dhaatreefoundation?utm_source=qr&amp;igsh=MTNkbmZnbm8wbjVzMw==" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#instagram"/></svg></a><a class="social-link" href="https://www.facebook.com/share/17oWQKUg4a/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#facebook"/></svg></a><a class="social-link" href="https://www.threads.net/@dhaatreefoundation" target="_blank" rel="noopener" aria-label="Threads"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#threads"/></svg></a><a class="social-link" href="https://www.linkedin.com/in/dhaathree-foundation-99716b426?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#linkedin"/></svg></a><a class="social-link" href="https://whatsapp.com/channel/0029VbCc2KSH5JLySeJeJc3v" target="_blank" rel="noopener" aria-label="WhatsApp channel"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#whatsapp"/></svg></a></div>
     </div>
-    <div class="footer-social-icons">
-      <a href="https://youtube.com/@dhaathree?si=tPsPeXDugK7N84UE" target="_blank" class="footer-social-icon" aria-label="YouTube" title="YouTube">
-        <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/dhaatreefoundation?utm_source=qr&igsh=MTNkbmZnbm8wbjVzMw==" target="_blank" class="footer-social-icon" aria-label="Instagram" title="Instagram">
-        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-      </a>
-      <a href="https://www.facebook.com/share/17oWQKUg4a/" target="_blank" class="footer-social-icon" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
-      <a href="https://whatsapp.com/channel/0029VbCc2KSH5JLySeJeJc3v" target="_blank" class="footer-social-icon" aria-label="WhatsApp" title="WhatsApp Channel">
-        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.167 1.45 4.823 1.452 5.53 0 10.029-4.5 10.032-10.03.001-2.679-1.04-5.198-2.934-7.094C16.619 1.588 14.107.545 11.43.545 5.9 5.545 1.401 10.043 1.4 15.572c-.001 1.733.457 3.42 1.32 4.935L1.7 22.3l1.895-1.616zM17.487 14.4c-.299-.149-1.765-.87-2.04-.97-.274-.1-.475-.149-.675.15-.199.3-.773.97-.948 1.171-.174.199-.348.224-.648.075-.3-.15-1.266-.467-2.41-1.485-.89-.793-1.49-1.773-1.665-2.07-.174-.3-.019-.462.13-.611.135-.134.3-.349.45-.523.15-.174.199-.299.299-.498.1-.2.05-.375-.025-.524-.075-.15-.675-1.625-.925-2.225-.244-.589-.493-.51-.675-.52-.172-.007-.368-.009-.565-.009-.199 0-.523.075-.797.374-.275.3-1.047 1.022-1.047 2.492 0 1.47 1.07 2.89 1.22 3.09.149.2 2.105 3.2 5.097 4.49.712.308 1.268.491 1.701.628.718.228 1.37.196 1.885.119.574-.087 1.765-.72 2.015-1.42.25-.7.25-1.3.175-1.42-.075-.125-.275-.199-.575-.349z"/></svg>
-      </a>
+    <div class="footer-col">
+      <h2>About</h2>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="partners.html">Partners &amp; Sponsors</a></li>
+        <li><a href="impact.html">Impact</a></li>
+        <li><a href="media.html">Media</a></li>
+        <li><a href="resource-center.html">Resource Center</a></li>
+      </ul>
     </div>
-  <div class="footer-credentials">
-    Dhaathree Foundation | Regd. No. 103/2019 (A.P. Societies Registration Act, 35 of 2001)<br/>
-    12AB: AAEAD6853B25HY01 | 80G: AAEAD6853B25HY02 (both dated 20-12-2025)<br/>
-    FCRA: 010140481 | CSR: CSR00014950 | NGO Darpan: AP/2020/0254144<br/>
+    <div class="footer-col">
+      <h2>Our Work</h2>
+      <ul>
+        <li><a href="akshara-dhaathree.html">Akshara Dhaathree</a></li>
+        <li><a href="ananda-nilayam.html">Ananda Nilayam</a></li>
+        <li><a href="aahara-dhaathree.html">Aahara Dhaathree</a></li>
+        <li><a href="arogya-dhaathree.html">Arogya Dhaathree</a></li>
+        <li><a href="vidya-dhaathree.html">Vidya Dhaathree</a></li>
+        <li><a href="vikasa-dhaathree.html">Vikasa Dhaathree</a></li>
+        <li><a href="projects.html">All programmes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2>Get Involved</h2>
+      <ul>
+        <li><a href="get-involved.html#donate">Donate</a></li>
+        <li><a href="get-involved.html#volunteer">Volunteer</a></li>
+        <li><a href="contact.html">Partner with us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2>Contact</h2>
+      <address>
+        4-115/1, Balaji Nagar, C.T.M. Road,<br>Madanapalle - 517325,<br>Andhra Pradesh, India<br>
+        <a href="tel:+917981885165">+91 7981885165</a><br>
+        <a href="mailto:info@dhaathreefoundation.org">info@dhaathreefoundation.org</a>
+      </address>
+    </div>
+  </div>
+  <div class="container footer-credentials">
+    Dhaathree Foundation | Regd. No. 103/2019 (A.P. Societies Registration Act, 35 of 2001)<br>
+    12AB: AAEAD6853B25HY01 | 80G: AAEAD6853B25HY02 (both dated 20-12-2025)<br>
+    FCRA: 010140481 | CSR: CSR00014950 | NGO Darpan: AP/2020/0254144<br>
     4-115/1, Balaji Nagar, C.T.M. Road, Madanapalle - 517325, Andhra Pradesh
   </div>
-  <div class="footer-copy">&copy; 2026 Dhaathree Foundation &bull; Regd. No. 103/2019 &bull; All rights reserved &bull; <a href="privacy-policy.html" style="color: inherit; text-decoration: underline; white-space: nowrap; margin-left: 5px;">Privacy Policy</a> &bull; <a href="terms-and-conditions.html" style="color: inherit; text-decoration: underline; white-space: nowrap; margin-left: 5px;">Terms & Conditions</a> &bull; <a href="refund-policy.html" style="color: inherit; text-decoration: underline; white-space: nowrap; margin-left: 5px;">Refund & Cancellation Policy</a></div>
+  <div class="container footer-legal">
+    <span>&copy; 2026 Dhaathree Foundation. Regd. No. 103/2019. All rights reserved.</span>
+    <ul>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+      <li><a href="refund-policy.html">Refund &amp; Cancellation Policy</a></li>
+    </ul>
+  </div>
 </footer>
-
 <script>
   let activeUser = null;
   const ALLOWED_EMAIL = "dhaathreefoundation99@gmail.com";
-
-  function toggleMobileMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
 
   // Decode JWT Payload for Google authentication token
   function decodeJwtResponse(token) {
@@ -559,23 +587,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
 
     // Scroll animation for uploader card
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.admin-card, .admin-dashboard').forEach(el => {
-      if (el.id === 'loginCard') return; // Skip login card fade-in
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(24px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(el);
     });
-  });
 
   // Google Sign-In callback
   function handleCredentialResponse(response) {
@@ -765,9 +777,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           : `<span style="background: rgba(245,166,35,0.1); color: #c47d1a; padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">Pending</span>`;
 
         const actionHtml = statusVal === 'Approved'
-          ? `<button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')" title="Remove Application">🗑️</button>`
+          ? `<button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')" title="Remove Application"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#trash-2"/></svg></button>`
           : `<button class="admin-approve-btn" style="background:#056b32; color:white; border:none; padding: 6px 12px; border-radius: 20px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-right:6px; transition: background 0.2s;" onclick="approveVolunteer('${v._id}', '${v.name.replace(/'/g, "\\'")}', event)">Approve</button>
-             <button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')" title="Remove Application">🗑️</button>`;
+             <button class="admin-delete-app-btn" title="Remove Application" onclick="deleteVolunteer('${v._id}')" title="Remove Application"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#trash-2"/></svg></button>`;
         
         const photoHtml = v.photoUrl
           ? `<a href="${v.photoUrl}" target="_blank"><img src="${v.photoUrl}" alt="Photo" style="width:45px; height:45px; border-radius:50%; object-fit:cover; border:1px solid #ddd; display:block; margin:0 auto;" /></a>`
@@ -780,8 +792,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <td>${v.name}</td>
           <td>${v.dob}</td>
           <td>
-            <div>✉️ <a href="mailto:${v.email}">${v.email}</a></div>
-            <div style="margin-top: 4px;">📞 <a href="tel:${v.phone}">${v.phone}</a></div>
+            <div><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#mail"/></svg> <a href="mailto:${v.email}">${v.email}</a></div>
+            <div style="margin-top: 4px;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#phone"/></svg> <a href="tel:${v.phone}">${v.phone}</a></div>
           </td>
           <td><span style="background: rgba(91,45,142,0.08); color: var(--purple); padding: 4px 10px; border-radius: 12px; font-weight: 600; font-size: 0.78rem;">${v.occupation}</span></td>
           <td>
@@ -898,10 +910,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         tr.innerHTML = `
           <td><strong>${formattedDate}</strong></td>
           <td>${c.name}</td>
-          <td>✉️ <a href="mailto:${c.email}">${c.email}</a></td>
-          <td>📞 <a href="tel:${c.phone}">${c.phone}</a></td>
+          <td><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#mail"/></svg> <a href="mailto:${c.email}">${c.email}</a></td>
+          <td><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#phone"/></svg> <a href="tel:${c.phone}">${c.phone}</a></td>
           <td style="text-align: center;">
-            <button class="admin-delete-app-btn" title="Remove Connection" onclick="deleteConnection('${c._id}')" title="Remove Connection">🗑️</button>
+            <button class="admin-delete-app-btn" title="Remove Connection" onclick="deleteConnection('${c._id}')" title="Remove Connection"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#trash-2"/></svg></button>
           </td>
         `;
         tableBody.appendChild(tr);
@@ -1447,7 +1459,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <strong>${d.occasionType || 'Special Occasion'}</strong><br/>
             <span style="color: var(--dark); font-weight: 500;">${d.occasionName || 'N/A'}</span><br/>
             <span style="color: var(--muted); font-size: 0.78rem;">Date: ${d.occasionDate || 'N/A'}</span>
-            ${d.occasionPhone ? `<br/><span style="color: var(--muted); font-size: 0.78rem;">📞 ${d.occasionPhone}</span>` : ''}
+            ${d.occasionPhone ? `<br/><span style="color: var(--muted); font-size: 0.78rem;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#phone"/></svg> ${d.occasionPhone}</span>` : ''}
           </div>
         `;
       }
@@ -1457,16 +1469,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (d.city) locParts.push(d.city);
       if (d.district) locParts.push(d.district);
       if (d.state) locParts.push(d.state);
-      const locText = locParts.length > 0 ? `<br/><span style="color: var(--muted); font-weight: 500;">📍 ${locParts.join(', ')}</span>` : '';
+      const locText = locParts.length > 0 ? `<br/><span style="color: var(--muted); font-weight: 500;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#map-pin"/></svg> ${locParts.join(', ')}</span>` : '';
 
       const row = `
         <tr style="border-bottom: 1px solid #f0edf5; vertical-align: top; transition: background 0.15s;" onmouseover="this.style.background='rgba(91,45,142,0.01)';" onmouseout="this.style.background='none';">
           <td style="padding: 12px; font-size: 0.85rem; color: var(--muted); font-weight: 500; white-space: nowrap;">${dateStr}</td>
           <td style="padding: 12px; font-size: 0.88rem;">
             <strong style="color: var(--dark);">${d.donorName}</strong><br/>
-            <span style="color: var(--muted); font-size: 0.8rem;">✉️ ${d.email}</span><br/>
-            <span style="color: var(--muted); font-size: 0.8rem;">📞 ${d.phone}</span>
-            ${d.pan ? `<br/><span style="color: var(--muted); font-size: 0.8rem;">💳 PAN: ${d.pan}</span>` : ''}
+            <span style="color: var(--muted); font-size: 0.8rem;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#mail"/></svg> ${d.email}</span><br/>
+            <span style="color: var(--muted); font-size: 0.8rem;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#phone"/></svg> ${d.phone}</span>
+            ${d.pan ? `<br/><span style="color: var(--muted); font-size: 0.8rem;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#receipt"/></svg> PAN: ${d.pan}</span>` : ''}
           </td>
           <td style="padding: 12px; font-size: 0.83rem; color: var(--dark); line-height: 1.4;">
             ${d.address || 'N/A'}${locText}
@@ -1614,7 +1626,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           `;
         } else if (r.status80G === 'approved') {
           actionHtml = `
-            <a href="download-receipt.html?id=${r._id}" target="_blank" style="background:#5B2D8E; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; transition: all 0.2s;">Download Receipt 📥</a>
+            <a href="download-receipt.html?id=${r._id}" target="_blank" style="background:#5B2D8E; color:white; border:none; padding: 6px 12px; border-radius: 6px; font-size:0.75rem; font-weight:700; cursor:pointer; text-decoration:none; display:inline-block; transition: all 0.2s;">Download Receipt <svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#download"/></svg></a>
           `;
         } else {
           actionHtml = '<span style="color:var(--muted); font-size:0.8rem; font-style:italic;">No Actions</span>';
@@ -1625,8 +1637,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <td style="padding: 12px; font-size: 0.85rem; color: var(--muted); font-weight: 500; white-space: nowrap;">${dateStr}</td>
             <td style="padding: 12px; font-size: 0.88rem;">
               <strong style="color: var(--dark);">${r.donorName}</strong><br/>
-              <span style="color: var(--muted); font-size: 0.8rem;">✉️ ${r.email}</span><br/>
-              <span style="color: var(--muted); font-size: 0.8rem;">📞 ${r.phone}</span>
+              <span style="color: var(--muted); font-size: 0.8rem;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#mail"/></svg> ${r.email}</span><br/>
+              <span style="color: var(--muted); font-size: 0.8rem;"><svg class="icon" aria-hidden="true" focusable="false"><use href="images/icons.svg#phone"/></svg> ${r.phone}</span>
             </td>
             <td style="padding: 12px; font-size: 0.83rem; color: var(--dark); line-height: 1.4;">
               ${r.address}<br/>
@@ -1722,8 +1734,3 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 </body>
 </html>
-
-
-
-
-
